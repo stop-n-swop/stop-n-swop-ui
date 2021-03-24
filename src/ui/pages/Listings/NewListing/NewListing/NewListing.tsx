@@ -9,7 +9,7 @@ import { FormattedMessage } from 'react-intl';
 import { ids } from 'ui/messages';
 import Item from '../Item';
 
-export default function Browse({
+export default function NewListing({
   productIds,
   platforms,
   manufacturers,
@@ -27,7 +27,7 @@ export default function Browse({
   return (
     <div className="flex-grow flex flex-col">
       <PageTitle>
-        <FormattedMessage id={ids.products.title} />
+        <FormattedMessage id={ids.listings.new.title} />
       </PageTitle>
       <Search value={search} onChange={onSearch} />
       <div className="flex-grow flex flex-col lg:flex-row">

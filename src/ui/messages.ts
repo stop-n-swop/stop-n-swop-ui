@@ -28,6 +28,7 @@ const enMessages = {
     list: 'Sell stuff',
   },
   products: {
+    title: 'Browse products',
     actions: {
       favourite: 'Favourite',
       list: 'List this game',
@@ -89,6 +90,9 @@ const enMessages = {
       rating: {
         label: 'Seller Rating',
       },
+    },
+    new: {
+      title: 'Create a listing',
     },
   },
   error: {

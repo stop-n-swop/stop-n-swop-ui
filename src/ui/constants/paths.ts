@@ -3,6 +3,13 @@ export const HOME = '/';
 // PRODUCTS
 export const PRODUCTS = '/products';
 export const PRODUCT = '/products/:productId';
+
+// COLLECTIONS
+export const MY_COLLECTIONS = '/my/collections';
+
+// LISTINGS
+export const MY_LISTINGS = '/my/listings';
+export const NEW_LISTING = '/list';
 export const PRODUCT_LISTING = '/products/:productId/listings/:listingId';
 export const PRODUCT_NEW_LISTING = '/products/:productId/list';
 export const makeProductPath = ({ productId }: { productId: string }) =>
@@ -19,13 +26,6 @@ export const makeProductNewListingPath = ({
 }: {
   productId: string;
 }) => `/products/${encodeURIComponent(productId)}/list`;
-
-// COLLECTIONS
-export const MY_COLLECTIONS = '/my/collections';
-
-// LISTINGS
-export const MY_LISTINGS = '/my/listings';
-export const NEW_LISTING = '/list';
 
 // USERS
 export const USERS = '/users';
