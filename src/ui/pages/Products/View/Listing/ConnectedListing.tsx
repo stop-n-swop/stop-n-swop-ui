@@ -1,6 +1,6 @@
-import React, { CSSProperties, useState } from 'react';
+import React, { CSSProperties } from 'react';
 import cartridge from 'ui/assets/s-l640.jpg';
-import { Condition, Region, Status } from 'core/constants/listings';
+import { Condition, Region } from 'core/constants/listings';
 import { Listing as IListing } from 'core/entity/listings';
 import Listing from './Listing';
 
@@ -15,13 +15,6 @@ export default function ConnectedListing({
   productId,
   style,
 }: Props) {
-  const [status, setStatus] = useState(Status.NONE);
-  const handleAddToBasket = () => {
-    setStatus(Status.ADDING_TO_BASKET);
-    setTimeout(() => {
-      setStatus(Status.IN_BASKET);
-    }, 1000);
-  };
   const listing: IListing = {
     productId,
     listingId,
@@ -29,6 +22,8 @@ export default function ConnectedListing({
     location: 'London, UK',
     price: 50,
     rating: 3.5,
+    description: '',
+    username: 'seller1337',
     stats: {
       boxed: true,
       condition: Condition.GOOD,
@@ -41,14 +36,13 @@ export default function ConnectedListing({
     <Listing
       productId={productId}
       listingId={listingId}
+      username={listing.username}
       image={listing.images[0]}
       location={listing.location}
       price={listing.price}
       rating={listing.rating}
       stats={listing.stats}
       style={style}
-      status={status}
-      onAddToBasket={handleAddToBasket}
     />
   );
 }

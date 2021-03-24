@@ -3,10 +3,7 @@ import { FaQuestionCircle } from 'react-icons/fa';
 import Button from 'ui/elements/Button';
 import { makeUserPath } from 'ui/constants/paths';
 import { Link } from 'react-router-dom';
-import { useBoop } from 'ui/hooks';
-import StarRating from './StarRating';
-
-const Question = FaQuestionCircle;
+import StarRating from '../StarRating';
 
 export default function SellerInfo({
   username,
@@ -28,7 +25,7 @@ export default function SellerInfo({
       </div>
       <StarRating rating={rating} />
       <Button kind="tertiary">
-        <Question className="text-sm" />
+        <FaQuestionCircle className="text-sm" />
       </Button>
     </div>
   );

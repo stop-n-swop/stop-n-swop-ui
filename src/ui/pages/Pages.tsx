@@ -1,8 +1,9 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import { HOME, PRODUCTS } from 'ui/constants/paths';
-import HomePage from 'ui/pages/Home';
-import ProductsPage from 'ui/pages/Products';
+import { HOME } from 'ui/constants/paths';
+import HomePage from './Home';
+import ProductPages from './Products';
+import ListingPages from './Listings';
 
 export default function Pages() {
   return (
@@ -10,9 +11,8 @@ export default function Pages() {
       <Route path={HOME} exact>
         <HomePage />
       </Route>
-      <Route path={PRODUCTS}>
-        <ProductsPage />
-      </Route>
+      <ProductPages />
+      <ListingPages />
     </>
   );
 }

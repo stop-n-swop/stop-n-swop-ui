@@ -1,1 +1,1 @@
-export { default } from './ConnectedBrowse';
+export { default } from './Browse';

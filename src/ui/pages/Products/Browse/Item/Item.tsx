@@ -1,4 +1,4 @@
-import React, { CSSProperties, useState } from 'react';
+import React, { CSSProperties } from 'react';
 import { ProductItem } from 'ui/modules/product/products';
 import { ImageUrl } from 'core/types';
 

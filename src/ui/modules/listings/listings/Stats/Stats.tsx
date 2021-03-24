@@ -8,7 +8,7 @@ const noop = () => null;
 
 export default function Statistics({ stats }: { stats: Stats }) {
   return (
-    <div className="hidden md:flex w-80 xl:w-full flex-wrap text-xs italic text-gray-300">
+    <div className="flex flex-wrap text-xs italic text-gray-300">
       <Checkbox
         label={
           <FormattedMessage

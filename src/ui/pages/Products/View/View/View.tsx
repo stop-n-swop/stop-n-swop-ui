@@ -1,19 +1,30 @@
 import React from 'react';
-import banner from 'ui/assets/sc8e2l.jpg';
-import cover from 'ui/assets/Super_Mario_64_Boxart.png';
 import { useCascade } from 'ui/hooks';
 import { ListingsList } from 'ui/modules/listings/listings';
 import Overview from 'ui/modules/product/view/Overview';
 import QuickActions from 'ui/modules/product/view/QuickActions';
 import Filters from 'ui/modules/listings/browse/Filters';
-import Listing from './ConnectedListing';
+import { ImageUrl } from 'core/types';
+import Listing from '../Listing';
 
 export default function View({
+  name,
+  developer,
+  publisher,
+  releaseDate,
+  cover,
+  banner,
   productId,
   listingIds,
   favourite,
   toggleFavourite,
 }: {
+  name: string;
+  cover: ImageUrl;
+  banner: ImageUrl;
+  developer: string;
+  publisher: string;
+  releaseDate: Date;
   productId: string;
   listingIds: string[];
   favourite: boolean;
@@ -26,10 +37,10 @@ export default function View({
       <Overview
         banner={banner}
         cover={cover}
-        developer="Nintendo"
-        publisher="Nintendo"
-        name="Super Mario 64"
-        releaseDate={new Date('1996-06-23')}
+        developer={developer}
+        publisher={publisher}
+        name={name}
+        releaseDate={releaseDate}
       />
       <QuickActions
         favourite={favourite}

@@ -16,4 +16,6 @@ export interface Listing {
   rating: number;
   location: string;
   stats: Stats;
+  description: string;
+  username: string;
 }

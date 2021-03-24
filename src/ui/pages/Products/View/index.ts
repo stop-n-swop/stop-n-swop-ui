@@ -1,1 +1,1 @@
-export { default } from './ConnectedView';
+export { default } from './View';

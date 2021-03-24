@@ -58,6 +58,8 @@ const enMessages = {
     listing: {
       addToBasket: 'Add to basket',
       details: 'More details',
+      seller: 'Seller',
+      description: 'Description',
     },
     filters: {
       features: {

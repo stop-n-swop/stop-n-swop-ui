@@ -4,7 +4,7 @@ import Search from 'ui/modules/product/browse/Search';
 import { ProductList } from 'ui/modules/product/products';
 import Filters from 'ui/modules/product/browse/Filters';
 import { Manufacturer, Platform } from 'core/entity/products';
-import Item from './ConnectedItem';
+import Item from '../Item';
 
 export default function Browse({
   productIds,

@@ -22,7 +22,7 @@ export default function App() {
         <IntlProvider locale={navigator.language} messages={en}>
           <BrowserRouter basename="/">
             <div
-              className="flex-grow flex flex-col text-white bg-gray-400 font-display z-0"
+              className="flex-grow flex flex-col text-white bg-gray-700 font-display z-0"
               style={{ zIndex: 0, fontSize: 20 }}
             >
               <div
