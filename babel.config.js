@@ -9,13 +9,13 @@ module.exports = {
         onlyRemoveTypeImports: true,
       },
     ],
-    [
-      '@babel/preset-env',
-      {
-        modules: process.env.NODE_ENV === 'test' ? 'commonjs' : false,
-        useBuiltIns: false,
-      },
-    ],
+    // [
+    //   '@babel/preset-env',
+    //   {
+    //     modules: process.env.NODE_ENV === 'test' ? 'commonjs' : false,
+    //     useBuiltIns: false,
+    //   },
+    // ],
   ],
   plugins: [
     [

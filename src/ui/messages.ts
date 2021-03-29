@@ -1,3 +1,4 @@
+import { Condition, Region } from 'core/constants/listings';
 import { flatten, unflatten } from 'flat';
 
 const enMessages = {
@@ -17,6 +18,11 @@ const enMessages = {
     checkbox: {
       expand: 'Show more',
       collapse: 'Show less',
+    },
+    upload: {
+      placeholder: 'Drop your photo here',
+      remove: 'Remove',
+      close: 'Close',
     },
   },
   home: {
@@ -71,28 +77,67 @@ const enMessages = {
       },
       condition: {
         label: 'Condition',
-        new: 'New',
-        likeNew: 'Like new',
-        veryGood: 'Very good',
-        good: 'Good',
-        poor: 'Poor',
       },
       price: {
         label: 'Price',
       },
       region: {
         label: 'Region',
-        pal: 'PAL',
-        ntscu: 'NTSC-U',
-        ntscj: 'NTSC-J',
-        unknown: 'Unknown region',
       },
       rating: {
         label: 'Seller Rating',
       },
     },
     new: {
+      pageTitle: 'New listing',
+      productPageTitle: 'New listing for {name}',
       title: 'Create a listing',
+      buttons: {
+        back: 'Back',
+        next: 'Next',
+      },
+      condition: {
+        title: 'What condition is your game in?',
+      },
+      description: {
+        title: "You can add a description if you'd like",
+        label: 'Description',
+      },
+      done: {
+        title: "That's it, you're listed!",
+        description:
+          'It can take up to 30 minutes to finish checking and verifying your listing before it goes live',
+        listings: 'View my listings',
+        newListing: 'List something else',
+      },
+      features: {
+        title: 'Tell us more about your game!',
+        boxed: 'Boxed',
+        instructions: 'Instructions',
+      },
+      intro: {
+        label: "Find a game you want to sell and let's get listing...",
+        button: 'List',
+      },
+      photos: {
+        required: 'Please upload a main photo',
+        title: 'Upload some pictures of your game',
+        description:
+          "We automatically verify photos for authenticity. The more photos you add, the higher your listing's rating!",
+      },
+      price: {
+        title: 'How much do you want to list this for?',
+        link: 'Check listing prices for this game',
+        required: 'Please enter an amount',
+        label: 'Price',
+      },
+      region: {
+        title: 'What region is your listing?',
+      },
+      review: {
+        title: "Nearly there! Let's just check everything's correct:",
+        submit: 'Looks good!',
+      },
     },
   },
   error: {
@@ -103,6 +148,20 @@ const enMessages = {
     conflict: 'Conflict in the current resource state',
     unavailable: 'The service is currently unavailable, please try again',
     gatewayTimeout: 'The service is currently unavailable, please try again',
+  },
+  regions: {
+    [Region.PAL]: 'PAL',
+    [Region.NTSCU]: 'NTSC-U',
+    [Region.NTSCC]: 'NTSC-C',
+    [Region.NTSCJ]: 'NTSC-J',
+    unknown: 'Unknown region',
+  },
+  conditions: {
+    [Condition.MINT]: 'Mint',
+    [Condition.LIKE_NEW]: 'Like new',
+    [Condition.USED]: 'Used',
+    [Condition.POOR]: 'Poor',
+    unknown: 'Unknown condition',
   },
 };
 

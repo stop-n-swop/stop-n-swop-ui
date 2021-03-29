@@ -26,7 +26,7 @@ export default function ConnectedListing({
     username: 'seller1337',
     stats: {
       boxed: true,
-      condition: Condition.GOOD,
+      condition: Condition.USED,
       instructions: true,
       region: Region.PAL,
     },

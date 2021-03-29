@@ -1,15 +1,15 @@
 export enum Condition {
-  NEW = 'new',
+  MINT = 'mint',
   LIKE_NEW = 'likeNew',
-  VERY_GOOD = 'veryGood',
-  GOOD = 'good',
+  USED = 'used',
   POOR = 'poor',
 }
 
 export enum Region {
-  PAL = 'PAL',
-  NTSCU = 'NTSC-U',
-  NTSCJ = 'NTSC-J',
+  PAL = 'pal',
+  NTSCU = 'ntscu',
+  NTSCC = 'ntscc',
+  NTSCJ = 'ntscj',
 }
 
 export enum Status {

@@ -15,11 +15,15 @@ export default function Cover({ image }: { image: ImageUrl }) {
       style={
         {
           '--aspect-ratio': 16 / 9,
-          backgroundImage: `url('${image}')`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
         } as any
       }
-    />
+    >
+      <img
+        src={image}
+        alt={image}
+        loading="lazy"
+        className="object-cover object-center"
+      />
+    </div>
   );
 }

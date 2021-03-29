@@ -25,7 +25,7 @@ export default function ConnectedListingPage() {
     username: 'seller1337',
     stats: {
       boxed: true,
-      condition: Condition.GOOD,
+      condition: Condition.LIKE_NEW,
       instructions: true,
       region: Region.PAL,
     },

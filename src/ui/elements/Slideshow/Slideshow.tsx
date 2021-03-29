@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { useTransition, animated } from 'react-spring';
 import { useSwipeable } from 'react-swipeable';
-import { FaCircle } from 'react-icons/fa';
-import Button from 'ui/elements/Button';
 import { ImageUrl } from 'core/types';
 
 enum Direction {
@@ -95,25 +93,26 @@ export default function Slideshow({ images, initial = 0, className }: Props) {
       >
         {transitions.map(({ item: image, key, props: style }) => (
           <animated.div className="absolute inset-0" key={key} style={style}>
-            <div
-              className="bg-center bg-contain bg-no-repeat w-full h-full"
-              style={
-                {
-                  backgroundImage: `url('${image}')`,
-                } as any
-              }
+            <img
+              src={image}
+              className="object-contain h-full w-full"
+              alt={image}
+              loading="lazy"
             />
           </animated.div>
         ))}
       </div>
-      <div className="flex justify-center">
-        {images.map((_, index) => (
-          <Button
-            kind={index === current ? 'tertiary' : 'none'}
-            onClick={() => setCurrent(index)}
-          >
-            <FaCircle size="0.75em" />
-          </Button>
+      <div className="flex justify-center mt-4">
+        {images.map((image, index) => (
+          <button type="button" onClick={() => setCurrent(index)}>
+            {/* <FaCircle size="0.75em" /> */}
+            <img
+              src={image}
+              loading="lazy"
+              className="object-contain h-20"
+              alt={image}
+            />
+          </button>
         ))}
       </div>
     </div>

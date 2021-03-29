@@ -18,6 +18,7 @@ interface Props {
   stats: Stats;
   rating: number;
   location: string;
+  readonly?: boolean;
 }
 
 export default function ListingsListItem({
@@ -30,6 +31,7 @@ export default function ListingsListItem({
   stats,
   rating,
   location,
+  readonly,
 }: Props) {
   return (
     <ListItem style={style}>
@@ -46,7 +48,12 @@ export default function ListingsListItem({
               <Statistics stats={stats} />
             </div>
           </div>
-          <Actions productId={productId} listingId={listingId} price={price} />
+          <Actions
+            productId={productId}
+            listingId={listingId}
+            price={price}
+            readonly={readonly}
+          />
         </div>
       </div>
     </ListItem>

@@ -2,7 +2,7 @@ import React, { forwardRef, ReactNode } from 'react';
 import cx from 'classnames';
 
 interface Props {
-  padding?: string;
+  padding?: string | boolean;
   className?: string;
   children: ReactNode;
 }

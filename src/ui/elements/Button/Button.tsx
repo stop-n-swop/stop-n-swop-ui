@@ -5,11 +5,17 @@ import { FaCheck } from 'react-icons/fa';
 import { Kind, ButtonComponent, Props, State } from './types';
 
 const getColorClassNames = ({ state, kind }: { state: State; kind: Kind }) => {
+  // @TODO: add error states for all kinds
+  if (state === 'error') {
+    return { 'bg-red-500': true, 'hover:bg-red-400': true, 'text-white': true };
+  }
   if (kind === 'primary') {
     if (state === 'disabled') {
       return {
         'bg-green-400': true,
         'text-white': true,
+        'bg-opacity-50': true,
+        'text-opacity-50': true,
       };
     }
     return {
@@ -34,12 +40,6 @@ const getColorClassNames = ({ state, kind }: { state: State; kind: Kind }) => {
       return { 'text-gray-300': true };
     }
     return { 'text-green-500': true, 'hover:text-green-300': true };
-  }
-  if (kind === 'danger') {
-    if (state === 'disabled') {
-      return { 'bg-gray-400': true, 'text-white': true };
-    }
-    return { 'bg-red-500': true, 'hover:bg-red-400': true, 'text-white': true };
   }
   if (state === 'disabled') {
     return { 'text-300': true };
@@ -79,6 +79,7 @@ const Button: ButtonComponent = forwardRef<HTMLButtonElement, Props>(
       className,
       styles,
       padding = true,
+      onClick,
       ...props
     },
     ref,
@@ -94,6 +95,14 @@ const Button: ButtonComponent = forwardRef<HTMLButtonElement, Props>(
       disabled={
         state === 'disabled' || state === 'pending' || state === 'success'
       }
+      onClick={(e) => {
+        if (state === 'disabled' || state === 'pending' || props.disabled) {
+          e.preventDefault(e);
+          e.stopPropagation(e);
+          return;
+        }
+        onClick?.(e);
+      }}
       {...props}
     >
       <Choose>

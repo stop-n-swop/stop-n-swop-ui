@@ -39,8 +39,8 @@ export default function AddToBasket({ className }: Props) {
       state={getButtonStatus(status)}
       onClick={handleAddToBasket}
     >
-      <FaShoppingBasket className="md:hidden" />
-      <span className="hidden sm:block sm:ml-2 md:ml-0">
+      <FaShoppingBasket className="hidden md:block mr-3" />
+      <span className="flex-shrink-0">
         <FormattedMessage id={ids.listings.listing.addToBasket} />
       </span>
     </Button>

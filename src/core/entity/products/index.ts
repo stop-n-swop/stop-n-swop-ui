@@ -5,6 +5,11 @@ export interface Manufacturer {
   name: string;
 }
 
+export interface ShortProduct {
+  productId: string;
+  name: string;
+}
+
 export interface Product {
   productId: string;
   platformId: string;

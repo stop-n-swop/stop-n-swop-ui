@@ -3,6 +3,7 @@ import { Provider as Jpex } from 'react-jpex';
 import { IntlProvider } from 'react-intl';
 import { BrowserRouter } from 'react-router-dom';
 import { ErrorBoundary } from 'react-error-boundary';
+import { Provider as Respite } from '@respite/core';
 import { en } from 'ui/messages';
 import background from 'ui/assets/bg-1.jpg';
 import ErrorPage from 'ui/pages/Error';
@@ -17,12 +18,12 @@ import Nav from './Nav';
 
 export default function App() {
   return (
-    <>
-      <Jpex>
-        <IntlProvider locale={navigator.language} messages={en}>
+    <Jpex>
+      <IntlProvider locale={navigator.language} messages={en}>
+        <Respite>
           <BrowserRouter basename="/">
             <div
-              className="flex-grow flex flex-col text-white bg-gray-700 font-display z-0"
+              className="flex-grow flex flex-col text-white bg-gray-700 font-display"
               style={{ zIndex: 0, fontSize: 20 }}
             >
               <div
@@ -45,8 +46,8 @@ export default function App() {
               </div>
             </div>
           </BrowserRouter>
-        </IntlProvider>
-      </Jpex>
-    </>
+        </Respite>
+      </IntlProvider>
+    </Jpex>
   );
 }

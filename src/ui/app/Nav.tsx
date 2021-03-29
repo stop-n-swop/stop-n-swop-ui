@@ -163,7 +163,7 @@ export default function Nav() {
 
   return (
     <nav
-      className="md:flex lg:px-4 border-b-2 border-gray-800 font-title z-10 bg-black"
+      className="md:flex lg:px-4 border-b-2 border-gray-800 font-title bg-black"
       style={{ fontSize: 12 }}
     >
       <div className="flex items-center pl-3 md:flex-grow">

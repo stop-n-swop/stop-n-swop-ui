@@ -1,3 +1,4 @@
+import { Condition, Region } from 'core/constants/listings';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { CheckboxGroup, CheckboxGroupItem } from 'ui/elements/check';
@@ -45,32 +46,20 @@ export default function ListingsFilters() {
       >
         <CheckboxGroup value={[]} onChange={() => null} limit={5}>
           <CheckboxGroupItem
-            label={<FormattedMessage id={ids.listings.filters.condition.new} />}
-            value="new"
+            label={<FormattedMessage id={ids.conditions.mint} />}
+            value={Condition.MINT}
           />
           <CheckboxGroupItem
-            label={
-              <FormattedMessage id={ids.listings.filters.condition.likeNew} />
-            }
-            value="like_new"
+            label={<FormattedMessage id={ids.conditions.likeNew} />}
+            value={Condition.LIKE_NEW}
           />
           <CheckboxGroupItem
-            label={
-              <FormattedMessage id={ids.listings.filters.condition.veryGood} />
-            }
-            value="very_good"
+            label={<FormattedMessage id={ids.conditions.used} />}
+            value={Condition.USED}
           />
           <CheckboxGroupItem
-            label={
-              <FormattedMessage id={ids.listings.filters.condition.good} />
-            }
-            value="good"
-          />
-          <CheckboxGroupItem
-            label={
-              <FormattedMessage id={ids.listings.filters.condition.poor} />
-            }
-            value="poor"
+            label={<FormattedMessage id={ids.conditions.poor} />}
+            value={Condition.POOR}
           />
         </CheckboxGroup>
       </Filter>
@@ -88,16 +77,20 @@ export default function ListingsFilters() {
       >
         <CheckboxGroup value={[]} onChange={() => null}>
           <CheckboxGroupItem
-            label={<FormattedMessage id={ids.listings.filters.region.pal} />}
-            value="pal"
+            label={<FormattedMessage id={ids.regions.pal} />}
+            value={Region.PAL}
           />
           <CheckboxGroupItem
-            label={<FormattedMessage id={ids.listings.filters.region.ntscu} />}
-            value="ntsc-u"
+            label={<FormattedMessage id={ids.regions.ntscu} />}
+            value={Region.NTSCU}
           />
           <CheckboxGroupItem
-            label={<FormattedMessage id={ids.listings.filters.region.ntscj} />}
-            value="ntsc-j"
+            label={<FormattedMessage id={ids.regions.ntscc} />}
+            value={Region.NTSCC}
+          />
+          <CheckboxGroupItem
+            label={<FormattedMessage id={ids.regions.ntscj} />}
+            value={Region.NTSCJ}
           />
         </CheckboxGroup>
       </Filter>

@@ -5,13 +5,11 @@ import { FormattedMessage, FormattedNumber } from 'react-intl';
 import { Link } from 'react-router-dom';
 import { makeUserPath } from 'ui/constants/paths';
 import StarRating from 'ui/modules/listings/listings/StarRating';
-import Card from 'ui/elements/Card';
 import { ids } from 'ui/messages';
 import AddToBasket from '../AddToBasket';
 
 export default function Overview({
   className,
-  name,
   productId,
   listingId,
   username,
@@ -19,21 +17,14 @@ export default function Overview({
   description,
 }: {
   className: string;
-  name: string;
   productId: string;
   listingId: string;
   username: string;
   location: string;
   description: string;
 }) {
-  const listingText = `(${listingId})`;
-
   return (
-    <Card className={className}>
-      <h2 className="text-center">
-        <span className="font-logo pr-3">{name}</span>
-        <span className="text-sm text-gray-300">{listingText}</span>
-      </h2>
+    <div className={className}>
       <div className="flex justify-between items-center">
         <span className="text-lg">
           <FormattedNumber value={50} style="currency" currency="GBP" />
@@ -70,6 +61,6 @@ export default function Overview({
           {description}
         </pre>
       </div>
-    </Card>
+    </div>
   );
 }

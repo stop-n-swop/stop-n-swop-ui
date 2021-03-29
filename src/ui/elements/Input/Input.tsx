@@ -2,7 +2,10 @@ import React, { InputHTMLAttributes, ReactNode } from 'react';
 import cx from 'classnames';
 import './input.css';
 
-interface Props extends Omit<InputHTMLAttributes<HTMLInputElement>, 'prefix'> {
+type State = 'success' | 'error' | 'none';
+
+export interface Props
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'prefix'> {
   id: string;
   label: ReactNode;
   prefix?: ReactNode;
@@ -10,6 +13,7 @@ interface Props extends Omit<InputHTMLAttributes<HTMLInputElement>, 'prefix'> {
   containerStyles?: Record<string, boolean>;
   styles?: Record<string, boolean>;
   labelStyles?: Record<string, boolean>;
+  state?: State;
 }
 
 export default function Input({
@@ -21,17 +25,22 @@ export default function Input({
   labelStyles,
   label,
   id,
+  state = 'none',
   ...props
 }: Props) {
   return (
     <div
       className={cx(
-        'flex items-end border-b focus-within:border-green-500 flex-grow',
+        'flex items-end border-b flex-grow',
+        {
+          'focus-within:border-green-500': state === 'none',
+          'border-red-400 focus-within:border-red-600': state === 'error',
+        },
         containerStyles,
       )}
     >
       {prefix}
-      <div className="flex-grow relative">
+      <div className="flex-grow relative mt-6">
         <input
           id={id}
           className={cx(
@@ -45,7 +54,11 @@ export default function Input({
         <label
           htmlFor={id}
           className={cx(
-            'absolute left-0 top-0 text-sm text-gray-200 transition-all',
+            'absolute left-0 top-0 text-sm transition-all',
+            {
+              'text-gray-200': state === 'none',
+              'text-red-100': state === 'error',
+            },
             labelStyles,
           )}
         >

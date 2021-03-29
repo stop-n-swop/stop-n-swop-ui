@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import { NEW_LISTING, PRODUCT_LISTING } from 'ui/constants/paths';
+import { PRODUCT_LISTING } from 'ui/constants/paths';
 import ListingPage from './Listing';
-import NewListingPage from './NewListing';
+import NewListingPages from './New';
 
 export default function ProductsPage() {
   return (
@@ -10,9 +10,7 @@ export default function ProductsPage() {
       <Route path={PRODUCT_LISTING} exact>
         <ListingPage />
       </Route>
-      <Route path={NEW_LISTING} exact>
-        <NewListingPage />
-      </Route>
+      <NewListingPages />
     </>
   );
 }

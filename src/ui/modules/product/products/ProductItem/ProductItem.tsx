@@ -36,9 +36,11 @@ export default function ProductItem({
       style={style}
     >
       <div className="w-1/4 md:w-full flex-shrink-0 relative md:pb-2/3">
-        <div
-          className="bg-cover w-full h-full md:absolute hover:bg-opacity-50"
-          style={{ backgroundImage: `url(${image})` }}
+        <img
+          className="object-cover w-full h-full md:absolute hover:bg-opacity-50"
+          src={image}
+          alt={image}
+          loading="lazy"
         />
       </div>
       <div className="hidden md:block px-2">{name}</div>

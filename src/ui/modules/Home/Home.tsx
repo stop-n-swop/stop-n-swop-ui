@@ -22,7 +22,7 @@ export default function Home() {
       />
       <div
         className={cx(
-          'flex-grow z-10 flex flex-col',
+          'flex-grow flex flex-col',
           'md:max-w-3/4 md:justify-center md:mx-auto',
           'lg:max-w-1/2',
           'xl:justify-end xl:mx-0',

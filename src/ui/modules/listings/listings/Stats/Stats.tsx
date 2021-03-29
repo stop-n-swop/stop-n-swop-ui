@@ -12,7 +12,7 @@ export default function Statistics({ stats }: { stats: Stats }) {
       <Checkbox
         label={
           <FormattedMessage
-            id={ids.listings.filters.condition[stats.condition]}
+            id={ids.conditions[stats.condition] ?? ids.conditions.unknown}
           />
         }
         value
@@ -39,10 +39,7 @@ export default function Statistics({ stats }: { stats: Stats }) {
       <Checkbox
         label={
           <FormattedMessage
-            id={
-              ids.listings.filters.region[stats.region.toLowerCase()] ??
-              ids.listings.filters.region.unknown
-            }
+            id={ids.regions[stats.region] ?? ids.regions.unknown}
           />
         }
         value
