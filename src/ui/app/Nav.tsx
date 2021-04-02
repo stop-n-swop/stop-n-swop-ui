@@ -76,7 +76,7 @@ const Account = ({
   const [style, boop] = useBoop({ x: 3, rotation: 3 });
 
   return (
-    <li style={style} onMouseEnter={boop}>
+    <li onMouseEnter={boop}>
       <Button
         title="account"
         styles={{
@@ -95,7 +95,7 @@ const Account = ({
       <ul
         className={cx(
           open ? '' : 'md:hidden',
-          'md:absolute md:w-52 md:right-0 md:bg-gray-700 md:hover:bg-gray-600',
+          'md:absolute md:w-52 md:right-0 md:bg-gray-700 md:hover:bg-gray-600 md:z-10 md:top-full',
         )}
       >
         <NavItem to={LOGOUT} Icon={FaUserCircle}>
@@ -116,7 +116,9 @@ const NavItems = ({
   setAccountOpen: (v: boolean) => void;
 }) => {
   return (
-    <ul className={cx(open ? '' : 'hidden', 'md:flex', 'items-center')}>
+    <ul
+      className={cx(open ? '' : 'hidden', 'md:flex', 'items-center relative')}
+    >
       <NavItem to={PRODUCTS} Icon={FaSearch}>
         <FormattedMessage id={ids.nav.browse} />
       </NavItem>

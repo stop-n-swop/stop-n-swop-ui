@@ -4,6 +4,7 @@ import { HOME } from 'ui/constants/paths';
 import HomePage from './Home';
 import ProductPages from './Products';
 import ListingPages from './Listings';
+import AuthPages from './Auth';
 
 export default function Pages() {
   return (
@@ -13,6 +14,7 @@ export default function Pages() {
       </Route>
       <ProductPages />
       <ListingPages />
+      <AuthPages />
     </>
   );
 }

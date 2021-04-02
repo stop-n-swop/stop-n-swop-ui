@@ -163,6 +163,24 @@ const enMessages = {
     [Condition.POOR]: 'Poor',
     unknown: 'Unknown condition',
   },
+  auth: {
+    login: {
+      title: 'Log in',
+      username: {
+        label: 'Email',
+        required: 'Please enter your email address',
+      },
+      password: {
+        label: 'Password',
+        required: 'Please enter your password',
+      },
+      buttons: {
+        submit: 'Sign in',
+        register: 'Register',
+        forgot: 'Forgot your password?',
+      },
+    },
+  },
 };
 
 // this just creates us a deeply nested object of ids
