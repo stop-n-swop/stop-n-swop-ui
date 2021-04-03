@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaKey } from 'react-icons/fa';
+import { FaLockOpen } from 'react-icons/fa';
 import Button from 'ui/elements/Button';
 import Input from 'ui/elements/Input';
 import Card from 'ui/elements/Card';
@@ -20,7 +20,7 @@ export default function LoginForm({ status }: { status: Status }) {
     <Card className="flex-grow md:flex-grow-0 md:w-3/4 lg:w-1/2 xl:w-1/4 xl:mx-40">
       <div className="space-y-6 sm:w-3/4 sm:mx-auto md:space-y-12 md:w-full xl:space-y-12">
         <h1 className="text-2xl flex space-x-6 items-center justify-center">
-          <FaKey />
+          <FaLockOpen />
           <span>
             <FormattedMessage id={ids.auth.login.title} />
           </span>
@@ -38,7 +38,6 @@ export default function LoginForm({ status }: { status: Status }) {
               <Input
                 id="username"
                 label={<FormattedMessage id={ids.auth.login.username.label} />}
-                type="email"
                 autoFocus
                 autoComplete="username"
                 {...input}

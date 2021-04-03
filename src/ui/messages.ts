@@ -167,8 +167,8 @@ const enMessages = {
     login: {
       title: 'Log in',
       username: {
-        label: 'Email',
-        required: 'Please enter your email address',
+        label: 'Username / Email',
+        required: 'Please enter your username or email address',
       },
       password: {
         label: 'Password',
@@ -178,6 +178,28 @@ const enMessages = {
         submit: 'Sign in',
         register: 'Register',
         forgot: 'Forgot your password?',
+      },
+    },
+    register: {
+      title: 'Register',
+      buttons: {
+        submit: 'Register',
+      },
+      email: {
+        label: 'Email',
+        required: 'Please enter your email address',
+      },
+      name: {
+        label: 'Name',
+        required: 'Please enter your name',
+      },
+      password: {
+        label: 'Password',
+        required: 'Create a password',
+      },
+      username: {
+        label: 'Username',
+        required: 'Enter a username',
       },
     },
   },
