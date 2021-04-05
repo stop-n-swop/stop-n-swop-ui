@@ -22,6 +22,7 @@ export default function Home() {
       />
       <div
         className={cx(
+          'relative',
           'flex-grow flex flex-col',
           'md:max-w-3/4 md:justify-center md:mx-auto',
           'lg:max-w-1/2',

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { makeProductNewListingPath } from 'ui/constants/paths';
 import Button from 'ui/elements/Button';
-import Select from 'ui/elements/Select';
+import Typeahead from 'ui/elements/Typeahead';
 import { FaRocket } from 'react-icons/fa';
 import { ShortProduct } from 'core/entity/products';
 import { FormattedMessage } from 'react-intl';
@@ -31,7 +31,7 @@ export default function Intro({
       <h2 className="text-lg">
         <FormattedMessage id={ids.listings.new.title} />
       </h2>
-      <Select
+      <Typeahead
         id="product_search"
         options={options}
         value={productId}

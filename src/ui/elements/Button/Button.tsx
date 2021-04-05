@@ -6,10 +6,14 @@ import { Kind, ButtonComponent, Props, State } from './types';
 
 const getColorClassNames = ({ state, kind }: { state: State; kind: Kind }) => {
   // @TODO: add error states for all kinds
-  if (state === 'error') {
-    return { 'bg-red-500': true, 'hover:bg-red-400': true, 'text-white': true };
-  }
   if (kind === 'primary') {
+    if (state === 'error') {
+      return {
+        'bg-red-500': true,
+        'hover:bg-red-400': true,
+        'text-white': true,
+      };
+    }
     if (state === 'disabled') {
       return {
         'bg-green-400': true,
@@ -38,6 +42,12 @@ const getColorClassNames = ({ state, kind }: { state: State; kind: Kind }) => {
   if (kind === 'tertiary') {
     if (state === 'disabled') {
       return { 'text-gray-300': true };
+    }
+    if (state === 'error') {
+      return { 'text-red-300': true, 'hover:text-red-200': true };
+    }
+    if (state === 'pending' || state === 'success') {
+      return { 'text-transparent': true };
     }
     return { 'text-green-500': true, 'hover:text-green-300': true };
   }
@@ -120,7 +130,7 @@ const Button: ButtonComponent = forwardRef<HTMLButtonElement, Props>(
           <div
             className={cx(
               'absolute inset-0 flex justify-center items-center',
-              getColorClassNames({ kind, state }),
+              getColorClassNames({ kind, state: null }),
             )}
           >
             <FaCheck />

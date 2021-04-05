@@ -3,7 +3,7 @@ import { useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 import Button from 'ui/elements/Button';
 import { ids } from 'ui/messages';
-import { ListingsItem } from 'ui/modules/listings/listings';
+import { Actions, ListingsItem } from 'ui/modules/listings/listings';
 import Buttons from '../Buttons';
 import { Values } from '../types';
 
@@ -24,12 +24,8 @@ export default function Review({ username, location, previous }: Props) {
       </h3>
       <div className="my-12">
         <ListingsItem
-          readonly
           image={images[0]}
-          listingId=""
           location={location}
-          price={price}
-          productId=""
           rating={2.5}
           username={username}
           style={{}}
@@ -39,7 +35,9 @@ export default function Review({ username, location, previous }: Props) {
             instructions,
             region,
           }}
-        />
+        >
+          <Actions listingId="" price={price} productId="" readonly />
+        </ListingsItem>
       </div>
       <Buttons previous={previous} showNext={false}>
         <Button kind="primary" type="submit">

@@ -1,5 +1,5 @@
 import React, { CSSProperties } from 'react';
-import { ListingsItem } from 'ui/modules/listings/listings';
+import { ListingsItem, Actions } from 'ui/modules/listings/listings';
 import { Stats } from 'core/entity/listings';
 
 interface Props {
@@ -27,15 +27,14 @@ export default function Listing({
 }: Props) {
   return (
     <ListingsItem
-      productId={productId}
-      listingId={listingId}
       username={username}
       image={image}
-      price={price}
       rating={rating}
       location={location}
       stats={stats}
       style={style}
-    />
+    >
+      <Actions listingId={listingId} price={price} productId={productId} />
+    </ListingsItem>
   );
 }

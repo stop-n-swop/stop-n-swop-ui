@@ -1,0 +1,32 @@
+import React from 'react';
+import { Listing as IListing } from 'core/entity/listings';
+import Button from 'ui/elements/Button';
+import { Link } from 'react-router-dom';
+import { NEW_LISTING } from 'ui/constants/paths';
+import PageTitle from 'ui/elements/PageTitle';
+import { List } from 'ui/elements/list';
+import { FormattedMessage } from 'react-intl';
+import { ids } from 'ui/messages';
+import Listing from './ConnectedListing';
+
+export default function MyListings({ listings }: { listings: IListing[] }) {
+  return (
+    <div>
+      <PageTitle>
+        <FormattedMessage id={ids.listings.my.title} />
+      </PageTitle>
+      <div className="xl:w-4/5 xl:mx-auto">
+        <div className="flex justify-end my-6">
+          <Button kind="primary" component={Link} to={NEW_LISTING}>
+            <FormattedMessage id={ids.listings.my.listButton} />
+          </Button>
+        </div>
+        <List>
+          {listings.map((listing) => (
+            <Listing key={listing.listingId} listing={listing} />
+          ))}
+        </List>
+      </div>
+    </div>
+  );
+}

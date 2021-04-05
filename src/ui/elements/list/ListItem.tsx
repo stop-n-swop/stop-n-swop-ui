@@ -9,10 +9,7 @@ interface Props {
 
 export default function ListItem({ style, children, className }: Props) {
   return (
-    <li
-      className={cx('mb-2 flex justify-center bg-black', className)}
-      style={style}
-    >
+    <li className={cx('mb-4 flex bg-black', className)} style={style}>
       {children}
     </li>
   );

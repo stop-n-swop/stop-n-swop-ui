@@ -11,9 +11,3 @@ export enum Region {
   NTSCC = 'ntscc',
   NTSCJ = 'ntscj',
 }
-
-export enum Status {
-  NONE,
-  ADDING_TO_BASKET,
-  IN_BASKET,
-}

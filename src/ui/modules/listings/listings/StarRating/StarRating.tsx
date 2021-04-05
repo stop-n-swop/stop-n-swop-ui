@@ -7,11 +7,11 @@ export default function StarRating({ rating }: { rating: number }) {
     // eslint-disable-next-line no-plusplus
     for (let x = 1; x <= 5; x++) {
       if (x <= rating) {
-        stars.push(<FaStar />);
+        stars.push(<FaStar key={x} />);
       } else if (x === Math.ceil(rating)) {
-        stars.push(<FaStarHalfAlt />);
+        stars.push(<FaStarHalfAlt key={x} />);
       } else {
-        stars.push(<FaRegStar />);
+        stars.push(<FaRegStar key={x} />);
       }
     }
     return stars;

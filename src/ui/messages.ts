@@ -1,4 +1,5 @@
 import { Condition, Region } from 'core/constants/listings';
+import { Status } from 'core/constants/order';
 import { flatten, unflatten } from 'flat';
 
 const enMessages = {
@@ -139,6 +140,15 @@ const enMessages = {
         submit: 'Looks good!',
       },
     },
+    my: {
+      title: 'My listings',
+      listButton: 'Create a new listing',
+      actions: {
+        edit: 'Edit',
+        cancel: 'Cancel',
+        post: 'Posted',
+      },
+    },
   },
   error: {
     unknown: 'An unknown error has ocurred',
@@ -201,6 +211,16 @@ const enMessages = {
         label: 'Username',
         required: 'Enter a username',
       },
+    },
+  },
+  order: {
+    status: {
+      [Status.NONE]: 'Listed',
+      [Status.CREATED]: 'Order started',
+      [Status.SOLD]: 'Sold',
+      [Status.POSTED]: 'Posted',
+      [Status.RECEIVED]: 'Received',
+      [Status.CANCELLED]: 'Cancelled',
     },
   },
 };
