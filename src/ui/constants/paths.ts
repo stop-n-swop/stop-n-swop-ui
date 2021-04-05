@@ -15,7 +15,7 @@ export const VIEW_MY_LISTING = '/my/listings/:listingId';
 export const makeViewMyListingPath = ({ listingId }: { listingId: string }) =>
   `${MY_LISTINGS}/${encodeURIComponent(listingId)}`;
 export const NEW_LISTING = '/list';
-export const PRODUCT_LISTING = `products/:productId/listings/:listingId`;
+export const PRODUCT_LISTING = `/products/:productId/listings/:listingId`;
 export const makeProductListingPath = ({
   productId,
   listingId,

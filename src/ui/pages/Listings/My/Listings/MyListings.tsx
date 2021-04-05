@@ -13,12 +13,12 @@ export default function MyListings({ listings }: { listings: IListing[] }) {
   return (
     <div>
       <PageTitle>
-        <FormattedMessage id={ids.listings.my.title} />
+        <FormattedMessage id={ids.listings.myListings.title} />
       </PageTitle>
       <div className="xl:w-4/5 xl:mx-auto">
         <div className="flex justify-end my-6">
           <Button kind="primary" component={Link} to={NEW_LISTING}>
-            <FormattedMessage id={ids.listings.my.listButton} />
+            <FormattedMessage id={ids.listings.myListings.listButton} />
           </Button>
         </div>
         <List>

@@ -12,6 +12,7 @@ import Pages from 'ui/pages/Pages';
 import Content from './Content';
 import Footer from './Footer';
 import Nav from './Nav';
+import Core from './Core';
 
 // TODO: get this
 // https://www.dreamstime.com/taipei-taiwan-february-studio-shot-pile-different-nintendo-games-shot-above-large-pile-retro-nintendo-games-image113236003#_
@@ -33,17 +34,7 @@ export default function App() {
                 }}
                 className="h-screen w-screen top-0 left-0 absolute md:fixed bg-center pointer-events-none bg-cover"
               />
-              <div className="relative flex-grow flex flex-col">
-                <Nav />
-                <Content>
-                  <ErrorBoundary FallbackComponent={ErrorPage}>
-                    <Suspense fallback={<LoadingPage />}>
-                      <Pages />
-                    </Suspense>
-                  </ErrorBoundary>
-                </Content>
-                <Footer />
-              </div>
+              <Core />
             </div>
           </BrowserRouter>
         </Respite>

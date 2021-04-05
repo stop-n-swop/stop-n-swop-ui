@@ -140,13 +140,30 @@ const enMessages = {
         submit: 'Looks good!',
       },
     },
-    my: {
+    myListings: {
       title: 'My listings',
       listButton: 'Create a new listing',
       actions: {
         edit: 'Edit',
         cancel: 'Cancel',
         post: 'Posted',
+      },
+    },
+    myListing: {
+      buyer: {
+        label: 'Buyer',
+      },
+      status: {
+        label: 'Status',
+      },
+      link: 'View listing',
+      history: {
+        label: 'Order history',
+        headers: {
+          date: 'Date/Time',
+          username: 'User',
+          status: 'Status',
+        },
       },
     },
   },

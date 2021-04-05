@@ -26,7 +26,7 @@ export default function ListingPage({
   username: string;
   stats: Stats;
 }) {
-  const listingText = `(l9${listingId})`;
+  const listingText = `(${listingId})`;
 
   return (
     <div>

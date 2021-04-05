@@ -55,14 +55,14 @@ export default function Actions({
           to={makeEditListingPath({ productId, listingId })}
           kind="tertiary"
         >
-          <FormattedMessage id={ids.listings.my.actions.edit} />
+          <FormattedMessage id={ids.listings.myListings.actions.edit} />
         </Button>
         <Button
           kind="tertiary"
           state={getButtonState(Status.CANCELLED, 'error')}
           onClick={handleClick(Status.CANCELLED)}
         >
-          <FormattedMessage id={ids.listings.my.actions.cancel} />
+          <FormattedMessage id={ids.listings.myListings.actions.cancel} />
         </Button>
       </>
     );
@@ -78,14 +78,14 @@ export default function Actions({
           state={getButtonState(Status.POSTED)}
           onClick={handleClick(Status.POSTED)}
         >
-          <FormattedMessage id={ids.listings.my.actions.post} />
+          <FormattedMessage id={ids.listings.myListings.actions.post} />
         </Button>
         <Button
           kind="tertiary"
           state={getButtonState(Status.CANCELLED, 'error')}
           onClick={handleClick(Status.CANCELLED)}
         >
-          <FormattedMessage id={ids.listings.my.actions.cancel} />
+          <FormattedMessage id={ids.listings.myListings.actions.cancel} />
         </Button>
       </>
     );
