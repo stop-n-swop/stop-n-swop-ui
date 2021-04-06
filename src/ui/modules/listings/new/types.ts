@@ -1,4 +1,4 @@
-import { Condition, Region } from 'core/constants/listings';
+import { Condition, Region } from '@sns/contracts/listing';
 import { ImageUrl } from 'core/types';
 
 export interface Values {

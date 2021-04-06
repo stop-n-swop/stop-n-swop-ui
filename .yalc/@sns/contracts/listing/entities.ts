@@ -1,6 +1,5 @@
-import { Condition, Region } from 'core/constants/listings';
-import { Status } from 'core/constants/order';
-import { ImageUrl } from 'core/types';
+import { Condition, Region } from "./enums";
+import { Status } from "../order";
 
 export interface Stats {
   condition: Condition;
@@ -12,7 +11,7 @@ export interface Stats {
 export interface Listing {
   productId: string;
   listingId: string;
-  images: ImageUrl[];
+  images: string[];
   price: number;
   rating: number;
   location: string;
@@ -28,5 +27,3 @@ export interface AuditItem {
   username: string;
   status: Status;
 }
-
-export type Audit = AuditItem[];

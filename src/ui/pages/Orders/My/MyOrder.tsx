@@ -1,17 +1,15 @@
 import React, { useState } from 'react';
 import { Status as RStatus } from '@respite/core';
 import cartridge from 'ui/assets/s-l640.jpg';
-import { Condition, Region } from 'core/constants/listings';
-import { Listing as IListing } from 'core/entity/listings';
+import { Condition, Region, Listing as IListing } from '@sns/contracts/listing';
 import Actions from 'ui/modules/orders/my/Actions';
 import Order from 'ui/modules/orders/my/Order';
 import OrderStatus from 'ui/modules/orders/my/OrderStatus';
-import { Product } from 'core/entity/products';
-import { Status } from 'core/constants/order';
-import { Order as IOrder } from 'core/entity/orders';
+import { Game, Type } from '@sns/contracts/product';
+import { Status, Order as IOrder } from '@sns/contracts/order';
 import { makeProductListingPath } from 'ui/constants/paths';
 
-const product: Product = {
+const product: Game = {
   banner: '',
   cover: '',
   developer: '',
@@ -19,7 +17,7 @@ const product: Product = {
   productId: 'super_mario_64',
   publisher: '',
   releaseDate: new Date(),
-  type: '',
+  type: Type.GAME,
   name: 'Super Mario 64',
 };
 

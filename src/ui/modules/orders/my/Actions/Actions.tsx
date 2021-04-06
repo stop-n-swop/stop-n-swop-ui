@@ -1,7 +1,6 @@
 import React, { useState, MouseEvent } from 'react';
 import { Status as RStatus } from '@respite/core';
-import { Order } from 'core/entity/orders';
-import { Status } from 'core/constants/order';
+import { Order, Status } from '@sns/contracts/order';
 import Button from 'ui/elements/Button';
 import { FormattedMessage } from 'react-intl';
 import { ids } from 'ui/messages';

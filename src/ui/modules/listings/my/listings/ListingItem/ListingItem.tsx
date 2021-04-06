@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
-import { Listing } from 'core/entity/listings';
+import type { Listing } from '@sns/contracts/listing';
 import { ListItem } from 'ui/elements/list';
-import { Product } from 'core/entity/products';
+import type { Product } from '@sns/contracts/product';
 import { FormattedNumber } from 'react-intl';
 import StarRating from 'ui/modules/listings/listings/StarRating';
 import { Link } from 'react-router-dom';

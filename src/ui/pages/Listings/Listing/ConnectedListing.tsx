@@ -2,9 +2,8 @@ import React from 'react';
 import cartridge from 'ui/assets/s-l640.jpg';
 import cartridge2 from 'ui/assets/cartridge-back.jpg';
 import cartridge3 from 'ui/assets/Super_Mario_64_Boxart.png';
-import { Condition, Region } from 'core/constants/listings';
-import { Listing as IListing } from 'core/entity/listings';
-import { Product } from 'core/entity/products';
+import { Condition, Region, Listing as IListing } from '@sns/contracts/listing';
+import { Game, Type } from '@sns/contracts/product';
 import { useParams } from 'react-router-dom';
 import Listing from './Listing';
 
@@ -31,7 +30,7 @@ export default function ConnectedListingPage() {
     },
     createdDate: new Date(),
   };
-  const product: Product = {
+  const product: Game = {
     productId,
     banner: '',
     cover: '',
@@ -39,7 +38,7 @@ export default function ConnectedListingPage() {
     publisher: 'Nintendo',
     name: 'Super Mario 64',
     platformId: 'n64',
-    type: 'game',
+    type: Type.GAME,
     releaseDate: new Date(new Date('1996-06-23')),
   };
 

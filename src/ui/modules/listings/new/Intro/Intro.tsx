@@ -4,7 +4,7 @@ import { makeProductNewListingPath } from 'ui/constants/paths';
 import Button from 'ui/elements/Button';
 import Typeahead from 'ui/elements/Typeahead';
 import { FaRocket } from 'react-icons/fa';
-import { ShortProduct } from 'core/entity/products';
+import type { ShortProduct } from '@sns/contracts/product';
 import { FormattedMessage } from 'react-intl';
 import { ids } from 'ui/messages';
 

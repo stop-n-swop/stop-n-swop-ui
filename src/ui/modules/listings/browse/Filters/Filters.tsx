@@ -1,4 +1,4 @@
-import { Condition, Region } from 'core/constants/listings';
+import { Condition, Region } from '@sns/contracts/listing';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { CheckboxGroup, CheckboxGroupItem } from 'ui/elements/check';

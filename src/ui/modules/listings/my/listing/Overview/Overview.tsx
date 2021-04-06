@@ -1,5 +1,5 @@
-import { Status as IStatus } from 'core/constants/order';
-import { Audit } from 'core/entity/listings';
+import type { Status as IStatus } from '@sns/contracts/order';
+import type { Audit } from '@sns/contracts/listing';
 import React from 'react';
 import Buyer from '../Buyer';
 import History from '../History';

@@ -1,7 +1,6 @@
 import React from 'react';
 import cartridge from 'ui/assets/s-l640.jpg';
-import { Condition, Region } from 'core/constants/listings';
-import { Listing as IListing } from 'core/entity/listings';
+import { Condition, Region, Listing as IListing } from '@sns/contracts/listing';
 import MyListings from './MyListings';
 
 const listings: IListing[] = [

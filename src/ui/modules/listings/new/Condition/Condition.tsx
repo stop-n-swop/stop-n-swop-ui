@@ -1,6 +1,6 @@
 import React from 'react';
 import cx from 'classnames';
-import { Condition } from 'core/constants/listings';
+import { Condition } from '@sns/contracts/listing';
 import { FaGrinBeam, FaGrinStars, FaMeh, FaSmile } from 'react-icons/fa';
 import { Controller } from 'react-hook-form';
 import OptionBox from 'ui/elements/OptionBox';

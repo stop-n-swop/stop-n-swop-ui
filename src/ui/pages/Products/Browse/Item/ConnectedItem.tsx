@@ -1,7 +1,7 @@
 import React, { CSSProperties, useState } from 'react';
 import cover from 'ui/assets/Super_Mario_64_Boxart.png';
 import banner from 'ui/assets/sc8e2l.jpg';
-import { Platform, Product } from 'core/entity/products';
+import { Platform, Game, Type } from '@sns/contracts/product';
 import Item from './Item';
 
 export default function ConnectedItem({
@@ -12,7 +12,7 @@ export default function ConnectedItem({
   style?: CSSProperties;
 }) {
   const [favourite, setFavourite] = useState(false);
-  const product: Product = {
+  const product: Game = {
     productId,
     banner,
     cover,
@@ -20,19 +20,16 @@ export default function ConnectedItem({
     publisher: 'Nintendo',
     name: 'Super Mario 64',
     platformId: 'n64',
-    type: 'game',
+    type: Type.GAME,
     releaseDate: new Date(new Date('1996-06-23')),
   };
   const platform: Platform = {
     productId: 'n64',
-    platformId: 'n64',
     name: 'Nintendo 64',
     banner: '',
     cover: '',
-    developer: '',
-    publisher: '',
     releaseDate: new Date(),
-    type: 'platform',
+    type: Type.PLATFORM,
   };
   const totalListings = 6;
 

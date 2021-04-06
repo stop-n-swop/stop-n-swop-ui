@@ -1,5 +1,4 @@
-import { Condition, Region } from 'core/constants/listings';
-import { Listing } from 'core/entity/listings';
+import { Condition, Region, Listing } from '@sns/contracts/listing';
 import React, { useEffect } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { useHistory, useParams } from 'react-router-dom';

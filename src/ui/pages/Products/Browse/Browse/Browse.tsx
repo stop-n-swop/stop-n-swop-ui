@@ -3,7 +3,7 @@ import { useCascade } from 'ui/hooks';
 import Search from 'ui/modules/product/browse/Search';
 import { ProductList } from 'ui/modules/product/products';
 import Filters from 'ui/modules/product/browse/Filters';
-import { Manufacturer, Platform } from 'core/entity/products';
+import type { Manufacturer, Platform } from '@sns/contracts/product';
 import PageTitle from 'ui/elements/PageTitle';
 import { FormattedMessage } from 'react-intl';
 import { ids } from 'ui/messages';

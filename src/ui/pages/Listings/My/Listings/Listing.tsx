@@ -1,12 +1,12 @@
 import React from 'react';
 import { Status as RStatus } from '@respite/core';
-import { Listing } from 'core/entity/listings';
-import { Order } from 'core/entity/orders';
-import { Product } from 'core/entity/products';
+import type { Listing } from '@sns/contracts/listing';
+import { Order, Status } from '@sns/contracts/order';
+import type { Product } from '@sns/contracts/product';
 import ListingItem from 'ui/modules/listings/my/listings/ListingItem';
 import OrderStatus from 'ui/modules/listings/my/listings/OrderStatus';
 import Actions from 'ui/modules/listings/my/listings/Actions';
-import { Status } from 'core/constants/order';
+
 import { makeViewMyListingPath } from 'ui/constants/paths';
 
 export default function MyListing({

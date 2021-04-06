@@ -1,6 +1,5 @@
 import React, { ReactNode } from 'react';
-import { Order } from 'core/entity/orders';
-import { Status } from 'core/constants/order';
+import { Order, Status } from '@sns/contracts/order';
 import { FormattedMessage } from 'react-intl';
 import { ids } from 'ui/messages';
 

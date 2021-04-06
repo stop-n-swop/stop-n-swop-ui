@@ -1,6 +1,6 @@
 import React from 'react';
 import Statistics from 'ui/modules/listings/listings/Stats';
-import { Stats } from 'core/entity/listings';
+import type { Stats } from '@sns/contracts/listing';
 
 export default function Features({ stats }: { stats: Stats }) {
   return (

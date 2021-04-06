@@ -1,0 +1,9 @@
+{
+  "version": "v1",
+  "packages": {
+    "@sns/contracts": {
+      "signature": "105f08a74e0bc23ffef588362df95162",
+      "file": true
+    }
+  }
+}

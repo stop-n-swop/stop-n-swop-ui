@@ -1,6 +1,5 @@
-import { Status } from 'core/constants/order';
-import { Audit, Listing } from 'core/entity/listings';
-import { Order } from 'core/entity/orders';
+import { Status, Order } from '@sns/contracts/order';
+import type { Audit, Listing } from '@sns/contracts/listing';
 import React from 'react';
 import Card from 'ui/elements/Card';
 import PageTitle from 'ui/elements/PageTitle';

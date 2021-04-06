@@ -1,6 +1,6 @@
 import React from 'react';
 import cx from 'classnames';
-import { Region } from 'core/constants/listings';
+import { Region } from '@sns/contracts/listing';
 import {
   GiEuropeanFlag,
   GiUsaFlag,

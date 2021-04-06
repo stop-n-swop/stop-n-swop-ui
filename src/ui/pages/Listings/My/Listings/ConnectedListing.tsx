@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { Status as RStatus } from '@respite/core';
-import { Listing as IListing } from 'core/entity/listings';
-import { Order } from 'core/entity/orders';
-import { Status } from 'core/constants/order';
-import { Product } from 'core/entity/products';
+import type { Listing as IListing } from '@sns/contracts/listing';
+import { Order, Status } from '@sns/contracts/order';
+import { Game, Type } from '@sns/contracts/product';
 import Listing from './Listing';
 
 const orders: Order[] = [
@@ -18,7 +17,7 @@ const orders: Order[] = [
     status: Status.POSTED,
   },
 ];
-const product: Product = {
+const product: Game = {
   banner: '',
   cover: '',
   developer: '',
@@ -26,7 +25,7 @@ const product: Product = {
   productId: 'super_mario_64',
   publisher: '',
   releaseDate: new Date(),
-  type: '',
+  type: Type.GAME,
   name: 'Super Mario 64',
 };
 

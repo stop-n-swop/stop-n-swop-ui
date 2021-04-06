@@ -1,4 +1,5 @@
-import { Product } from 'core/entity/products';
+import { Type, Game } from '@sns/contracts/product';
+
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import banner from 'ui/assets/sc8e2l.jpg';
@@ -10,7 +11,7 @@ export default function ConectedViewPage() {
   const { productId } = useParams<{ productId: string }>();
   const listingIds = new Array(10).fill(null).map((_, i) => `${i}`);
 
-  const product: Product = {
+  const product: Game = {
     productId,
     banner,
     cover,
@@ -18,7 +19,7 @@ export default function ConectedViewPage() {
     publisher: 'Nintendo',
     name: 'Super Mario 64',
     platformId: 'n64',
-    type: 'game',
+    type: Type.GAME,
     releaseDate: new Date(new Date('1996-06-23')),
   };
 

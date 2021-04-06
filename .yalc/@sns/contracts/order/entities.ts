@@ -1,4 +1,4 @@
-import { Status } from 'core/constants/order';
+import { Status } from "./enums";
 
 export interface Order {
   listingId: string;

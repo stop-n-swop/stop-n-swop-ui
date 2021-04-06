@@ -1,5 +1,5 @@
 import React from 'react';
-import { Listing as IListing } from 'core/entity/listings';
+import type { Listing as IListing } from '@sns/contracts/listing';
 import Button from 'ui/elements/Button';
 import { Link } from 'react-router-dom';
 import { NEW_LISTING } from 'ui/constants/paths';

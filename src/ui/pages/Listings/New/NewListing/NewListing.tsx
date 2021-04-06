@@ -1,4 +1,4 @@
-import { ShortProduct } from 'core/entity/products';
+import type { ShortProduct } from '@sns/contracts/product';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import Card from 'ui/elements/Card';

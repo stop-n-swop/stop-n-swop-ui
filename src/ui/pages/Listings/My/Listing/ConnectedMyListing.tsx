@@ -1,11 +1,9 @@
 import React from 'react';
-import { Condition, Region } from 'core/constants/listings';
-import { Audit, Listing } from 'core/entity/listings';
+import { Condition, Region, Audit, Listing } from '@sns/contracts/listing';
 import cartridge from 'ui/assets/s-l640.jpg';
 import cartridge2 from 'ui/assets/cartridge-back.jpg';
 import cartridge3 from 'ui/assets/Super_Mario_64_Boxart.png';
-import { Order } from 'core/entity/orders';
-import { Status } from 'core/constants/order';
+import { Order, Status } from '@sns/contracts/order';
 import MyListing from './MyListing';
 
 const listing: Listing = {

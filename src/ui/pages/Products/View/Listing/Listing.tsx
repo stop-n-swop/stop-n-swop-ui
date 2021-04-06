@@ -1,6 +1,6 @@
 import React, { CSSProperties } from 'react';
 import { ListingsItem, Actions } from 'ui/modules/listings/listings';
-import { Stats } from 'core/entity/listings';
+import type { Stats } from '@sns/contracts/listing';
 
 interface Props {
   productId: string;

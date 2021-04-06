@@ -1,11 +1,10 @@
 import React, { useState, MouseEvent } from 'react';
 import { Status as RStatus } from '@respite/core';
-import { Order } from 'core/entity/orders';
-import { Status } from 'core/constants/order';
+import { Order, Status } from '@sns/contracts/order';
 import Button, { State } from 'ui/elements/Button';
 import { Link } from 'react-router-dom';
 import { makeEditListingPath } from 'ui/constants/paths';
-import { Listing } from 'core/entity/listings';
+import { Listing } from '@sns/contracts/listing';
 import { FormattedMessage } from 'react-intl';
 import { ids } from 'ui/messages';
 

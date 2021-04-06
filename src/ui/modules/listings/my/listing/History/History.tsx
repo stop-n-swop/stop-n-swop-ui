@@ -1,5 +1,5 @@
-import { Status } from 'core/constants/order';
-import { Audit } from 'core/entity/listings';
+import { Status } from '@sns/contracts/order';
+import type { Audit } from '@sns/contracts/listing';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { ids } from 'ui/messages';

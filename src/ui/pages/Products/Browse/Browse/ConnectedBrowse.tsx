@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Platform } from 'core/entity/products';
+import { Platform, Type } from '@sns/contracts/product';
 import Browse from './Browse';
 
 const productIds = [
@@ -30,13 +30,10 @@ const platforms: Platform[] = [
   'Wii U',
 ].map((name) => ({
   productId: name,
-  platformId: name,
   name,
-  type: 'platform',
+  type: Type.PLATFORM,
   banner: '',
   cover: '',
-  developer: '',
-  publisher: '',
   releaseDate: new Date(),
 }));
 

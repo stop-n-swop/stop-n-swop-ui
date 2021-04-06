@@ -21,6 +21,7 @@
     "@respite/action": "^3.0.4",
     "@respite/core": "^3.0.3",
     "@respite/query": "^3.0.4",
+    "@sns/contracts": "file:.yalc/@sns/contracts",
     "classnames": "^2.2.6",
     "date-fns": "^2.19.0",
     "flat": "^5.0.2",

@@ -1,5 +1,5 @@
-import { Condition, Region } from 'core/constants/listings';
-import { Status } from 'core/constants/order';
+import { Condition, Region } from '@sns/contracts/listing';
+import { Status } from '@sns/contracts/order';
 import { flatten, unflatten } from 'flat';
 
 const enMessages = {

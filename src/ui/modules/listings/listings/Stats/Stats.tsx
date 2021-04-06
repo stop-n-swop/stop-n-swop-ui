@@ -2,7 +2,7 @@ import React from 'react';
 import { Checkbox } from 'ui/elements/check';
 import { FormattedMessage } from 'react-intl';
 import { ids } from 'ui/messages';
-import { Stats } from 'core/entity/listings';
+import type { Stats } from '@sns/contracts/listing';
 
 const noop = () => null;
 

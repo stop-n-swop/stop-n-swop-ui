@@ -1,4 +1,4 @@
-import { Manufacturer, Platform } from 'core/entity/products';
+import type { Manufacturer, Platform } from '@sns/contracts/product';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Checkbox, CheckboxGroup, CheckboxGroupItem } from 'ui/elements/check';
@@ -52,7 +52,7 @@ export default function BrowseFilters({ manufacturers, platforms }: Props) {
         label={<FormattedMessage id={ids.products.filters.platform.label} />}
       >
         <CheckboxGroup value={[]} onChange={() => null} limit={5}>
-          {platforms.map(({ platformId: id, name }) => (
+          {platforms.map(({ name, productId: id }) => (
             <CheckboxGroupItem key={id} label={name} value={id} />
           ))}
         </CheckboxGroup>

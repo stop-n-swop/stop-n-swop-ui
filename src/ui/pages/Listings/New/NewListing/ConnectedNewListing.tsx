@@ -1,4 +1,4 @@
-import { ShortProduct } from 'core/entity/products';
+import type { ShortProduct } from '@sns/contracts/product';
 import React, { useState } from 'react';
 import NewListing from './NewListing';
 

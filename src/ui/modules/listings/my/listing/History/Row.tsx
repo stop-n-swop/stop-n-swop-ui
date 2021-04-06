@@ -1,4 +1,4 @@
-import { Status } from 'core/constants/order';
+import { Status } from '@sns/contracts/order';
 import React from 'react';
 import { FormattedDate, FormattedMessage } from 'react-intl';
 import { ids } from 'ui/messages';
