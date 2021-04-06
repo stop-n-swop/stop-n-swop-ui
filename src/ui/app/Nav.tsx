@@ -7,6 +7,7 @@ import {
   FaListAlt,
   FaBoxOpen,
   FaUserCircle,
+  FaShippingFast,
 } from 'react-icons/fa';
 import type { IconType } from 'react-icons';
 import cx from 'classnames';
@@ -23,6 +24,7 @@ import {
   LOGOUT,
   MY_COLLECTIONS,
   MY_LISTINGS,
+  MY_ORDERS,
   PRODUCTS,
 } from 'ui/constants/paths';
 
@@ -127,6 +129,9 @@ const NavItems = ({
       </NavItem>
       <NavItem to={MY_LISTINGS} Icon={FaListAlt}>
         <FormattedMessage id={ids.nav.listings} />
+      </NavItem>
+      <NavItem to={MY_ORDERS} Icon={FaShippingFast}>
+        <FormattedMessage id={ids.nav.orders} />
       </NavItem>
       <NavItem
         to={CHECKOUT}

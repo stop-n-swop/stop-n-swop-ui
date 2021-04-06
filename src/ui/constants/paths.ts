@@ -37,6 +37,7 @@ export const makeProductNewListingPath = ({
 }: {
   productId: string;
 }) => `${makeProductPath({ productId })}/list`;
+export const MY_ORDERS = '/my/orders';
 
 // USERS
 export const USERS = '/users';

@@ -5,13 +5,14 @@ import { Product } from 'core/entity/products';
 import { FormattedNumber } from 'react-intl';
 import StarRating from 'ui/modules/listings/listings/StarRating';
 import { Link } from 'react-router-dom';
-import { makeViewMyListingPath } from 'ui/constants/paths';
 
 export default function MyListingItem({
   product,
   listing,
   orderStatus,
+  to,
 }: {
+  to: string;
   product: Product;
   listing: Listing;
   orderStatus: ReactNode;
@@ -25,10 +26,7 @@ export default function MyListingItem({
   const { name } = product;
   return (
     <ListItem>
-      <Link
-        to={makeViewMyListingPath({ listingId })}
-        className="w-full flex items-center"
-      >
+      <Link to={to} className="w-full flex items-center">
         <div
           className="relative hidden sm:block w-1/3 lg:w-1/4 xl:w-1/5"
           style={{ '--aspect-ratio': 16 / 9 } as any}

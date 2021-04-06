@@ -9,7 +9,8 @@ const enMessages = {
     basket: 'basket',
     browse: 'browse',
     collections: 'collections',
-    listings: 'listings',
+    listings: 'my listings',
+    orders: 'my orders',
     account: {
       login: 'log in',
       logout: 'log out',
@@ -234,6 +235,11 @@ const enMessages = {
     },
   },
   order: {
+    title: 'My Orders',
+    actions: {
+      received: 'Received',
+      feedback: 'Leave feedback?',
+    },
     status: {
       [Status.NONE]: 'Listed',
       [Status.CREATED]: 'Order started',

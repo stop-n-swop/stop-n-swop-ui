@@ -7,6 +7,7 @@ import ListingItem from 'ui/modules/listings/my/listings/ListingItem';
 import OrderStatus from 'ui/modules/listings/my/listings/OrderStatus';
 import Actions from 'ui/modules/listings/my/listings/Actions';
 import { Status } from 'core/constants/order';
+import { makeViewMyListingPath } from 'ui/constants/paths';
 
 export default function MyListing({
   listing,
@@ -21,8 +22,11 @@ export default function MyListing({
   status: RStatus;
   onClick(status: Status): void;
 }) {
+  const { listingId } = listing;
+
   return (
     <ListingItem
+      to={makeViewMyListingPath({ listingId })}
       listing={listing}
       product={product}
       orderStatus={

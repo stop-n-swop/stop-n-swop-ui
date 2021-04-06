@@ -5,6 +5,7 @@ import HomePage from './Home';
 import ProductPages from './Products';
 import ListingPages from './Listings';
 import AuthPages from './Auth';
+import OrdersPages from './Orders';
 
 export default function Pages() {
   return (
@@ -15,6 +16,7 @@ export default function Pages() {
       <ProductPages />
       <ListingPages />
       <AuthPages />
+      <OrdersPages />
     </>
   );
 }

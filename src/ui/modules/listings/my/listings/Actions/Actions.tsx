@@ -9,7 +9,7 @@ import { Listing } from 'core/entity/listings';
 import { FormattedMessage } from 'react-intl';
 import { ids } from 'ui/messages';
 
-const makeGetButtonState = (active: Status, mutationStatus: RStatus) => (
+export const makeGetButtonState = (active: Status, mutationStatus: RStatus) => (
   buttonStatus: Status,
   defaultState: State = 'none',
 ): State => {
@@ -25,17 +25,14 @@ const makeGetButtonState = (active: Status, mutationStatus: RStatus) => (
   return defaultState;
 };
 
-export default function Actions({
-  listing,
-  order,
-  status,
-  onClick,
-}: {
+interface Props {
   listing: Listing;
   order: Order;
   status: RStatus;
   onClick(status: Status): void;
-}) {
+}
+
+export default function Actions({ listing, order, status, onClick }: Props) {
   const [active, setActive] = useState<Status>();
   const handleClick = (status: Status) => (
     e: MouseEvent<HTMLButtonElement>,
