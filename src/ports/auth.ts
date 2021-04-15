@@ -3,6 +3,8 @@ export type LogIn = (args: {
   password: string;
 }) => Promise<{ authToken: string; refreshToken: string }>;
 
+export type LogOut = () => Promise<void>;
+
 export type RefreshTokens = () => Promise<{
   authToken: string;
   refreshToken: string;

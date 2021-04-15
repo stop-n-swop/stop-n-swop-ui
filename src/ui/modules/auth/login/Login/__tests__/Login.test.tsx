@@ -1,5 +1,5 @@
 import React from 'react';
-import { render as renderComponent, screen, act } from '@testing-library/react';
+import { render as renderComponent, screen } from '@testing-library/react';
 import { Status } from '@respite/core';
 import createWrapper from '__tests__/createWrapper';
 import { FormProvider, useForm, UseFormReturn } from 'react-hook-form';

@@ -1,5 +1,5 @@
 import { useAction } from '@respite/action';
-import type { ClearTokens, RefreshTokens, SaveTokens } from 'ports/auth';
+import type { LogOut, RefreshTokens, SaveTokens } from 'ports/auth';
 import { encase } from 'react-jpex';
 import { AuthKey } from 'usecases/keys';
 import { useCallback, useEffect } from 'react';
@@ -11,7 +11,7 @@ export const useAuth = encase(
   (
     refreshTokens: RefreshTokens,
     saveTokens: SaveTokens,
-    clearTokens: ClearTokens,
+    logOut: LogOut,
     navigate: Navigate,
     console: Console,
   ) => () => {
@@ -28,7 +28,7 @@ export const useAuth = encase(
       if (tokens.refreshToken != null && tokens.authToken == null) {
         action().catch(async (e) => {
           console.error(e);
-          await clearTokens();
+          await logOut();
           await navigate(LOGIN);
         });
       }

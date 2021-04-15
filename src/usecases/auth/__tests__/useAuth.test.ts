@@ -1,10 +1,5 @@
 import { renderHook, act } from '@testing-library/react-hooks';
-import type {
-  ClearTokens,
-  GetTokens,
-  RefreshTokens,
-  SaveTokens,
-} from 'ports/auth';
+import type { LogOut, GetTokens, RefreshTokens, SaveTokens } from 'ports/auth';
 import type { Navigate } from 'ports/navigation';
 import { LOGIN } from 'ui/constants/paths';
 import createWrapper from '__tests__/createWrapper';
@@ -22,7 +17,7 @@ const setup = ({
     .mockResolvedValue({ authToken: 'new-auth', refreshToken: 'new-refresh' });
   const saveTokens = jest.fn();
   const getTokens = jest.fn().mockResolvedValue({ authToken, refreshToken });
-  const clearTokens = jest.fn();
+  const logOut = jest.fn();
   const navigate = jest.fn();
 
   const wrapper = createWrapper({
@@ -30,7 +25,7 @@ const setup = ({
       jpex.constant<RefreshTokens>(refreshTokens);
       jpex.constant<SaveTokens>(saveTokens);
       jpex.constant<GetTokens>(getTokens);
-      jpex.constant<ClearTokens>(clearTokens);
+      jpex.constant<LogOut>(logOut);
       jpex.constant<Navigate>(navigate);
       jpex.constant<Console>({
         ...console,
@@ -52,7 +47,7 @@ const setup = ({
     refreshTokens,
     saveTokens,
     getTokens,
-    clearTokens,
+    logOut,
     navigate,
     render,
   };
@@ -68,12 +63,14 @@ describe('when there is no auth token', () => {
   });
   describe('when refreshing the auth tokens fails', () => {
     it('clears the tokens', async () => {
-      const { render, refreshTokens, clearTokens } = setup({ authToken: null });
+      const { render, refreshTokens, logOut } = setup({
+        authToken: null,
+      });
       refreshTokens.mockRejectedValue(new Error('failed to refresh tokens'));
 
       await render();
 
-      expect(clearTokens).toBeCalled();
+      expect(logOut).toBeCalled();
     });
     it('redirects to the login page', async () => {
       const { render, refreshTokens, navigate } = setup({ authToken: null });
