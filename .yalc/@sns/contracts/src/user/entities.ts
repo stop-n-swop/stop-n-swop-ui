@@ -1,6 +1,6 @@
 export interface User {
-  username: string;
   email: string;
+  username: string;
   name: string;
   phoneNumber: string;
   address: Record<string, unknown>;

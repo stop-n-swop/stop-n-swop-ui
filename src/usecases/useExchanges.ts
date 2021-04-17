@@ -1,6 +1,6 @@
 import { useExchange } from '@respite/exchange';
-import { LogInKey, TokensKey, AuthKey, LogOutKey } from './keys';
+import { LogInKey, TokensKey, AuthKey, LogOutKey, RegisterKey } from './keys';
 
 export default function useExchanges() {
-  useExchange([TokensKey, [LogInKey, AuthKey, LogOutKey]]);
+  useExchange([TokensKey, [LogInKey, AuthKey, LogOutKey, RegisterKey]]);
 }

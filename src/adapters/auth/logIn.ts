@@ -3,18 +3,18 @@ import type { LogIn } from 'ports/auth';
 import type { Driver } from 'ports/io';
 import type { LoginRequest, LoginResponse } from '@sns/contracts/user';
 
-const logIn = (driver: Driver): LogIn => async ({ password, username }) => {
+const logIn = (driver: Driver): LogIn => async ({ password, email }) => {
   const response = await driver<LoginRequest, LoginResponse>({
     url: '/api/auth/sessions',
     method: 'POST',
-    data: { password, username },
+    data: { password, email },
   });
 
   const {
-    data: { authToken, refreshToken },
+    data: { authToken, refreshToken, userId },
   } = response;
 
-  return { authToken, refreshToken };
+  return { authToken, refreshToken, userId };
 };
 
 jpex.factory<LogIn>(logIn);

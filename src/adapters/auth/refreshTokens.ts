@@ -19,10 +19,10 @@ const refreshTokens = (
   });
 
   const {
-    data: { authToken, refreshToken },
+    data: { authToken, refreshToken, userId },
   } = response;
 
-  return { authToken, refreshToken };
+  return { authToken, refreshToken, userId };
 };
 
 jpex.factory<RefreshTokens>(refreshTokens);

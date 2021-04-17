@@ -1,1 +1,1 @@
-export { default } from './ConnectedRegister';
+export { default } from './Register';

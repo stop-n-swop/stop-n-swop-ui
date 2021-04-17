@@ -1,9 +1,8 @@
-import React, { EventHandler, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import {
   FaShoppingCart,
   FaSearch,
   FaListAlt,
-  FaBoxOpen,
   FaUserCircle,
   FaShippingFast,
 } from 'react-icons/fa';
@@ -13,7 +12,6 @@ import { ids } from 'ui/messages';
 import {
   CHECKOUT,
   LOGIN,
-  MY_COLLECTIONS,
   MY_LISTINGS,
   MY_ORDERS,
   NEW_LISTING,

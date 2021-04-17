@@ -4,10 +4,11 @@ export interface RefreshTokenRequest {
 export interface RefreshTokenResponse {
   authToken: string;
   refreshToken: string;
+  userId: string;
 }
 
 export interface LoginRequest {
-  username: string;
+  email: string;
   password: string;
 }
 export type LoginResponse = RefreshTokenResponse;
@@ -15,6 +16,5 @@ export type LoginResponse = RefreshTokenResponse;
 export interface CreateUserRequest {
   email: string;
   password: string;
-  username: string;
 }
 export type CreateUserResponse = void;

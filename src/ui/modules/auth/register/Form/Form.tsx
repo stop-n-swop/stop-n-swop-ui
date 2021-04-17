@@ -1,18 +1,28 @@
+import { getErrorMessage } from 'domain/selectors/common';
 import React, { ReactNode } from 'react';
 import { FormProvider, UseFormReturn } from 'react-hook-form';
 import { FaKey } from 'react-icons/fa';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import background from 'ui/assets/bg-1.jpg';
 import Card from 'ui/elements/Card';
+import FormError from 'ui/elements/FormError';
 import { ids } from 'ui/messages';
+import type { Values } from '../types';
 
-interface Props extends UseFormReturn {
-  onSubmit(values: unknown): Promise<unknown>;
+interface Props extends UseFormReturn<Values> {
+  onSubmit(values: Values): Promise<unknown>;
+  error: any;
   children: ReactNode;
 }
 
-export default function Form({ onSubmit, children, ...formProps }: Props) {
+export default function Form({
+  onSubmit,
+  children,
+  error,
+  ...formProps
+}: Props) {
   const { handleSubmit } = formProps;
+  const intl = useIntl();
 
   return (
     <FormProvider {...formProps}>
@@ -38,6 +48,11 @@ export default function Form({ onSubmit, children, ...formProps }: Props) {
                 <FormattedMessage id={ids.auth.register.title} />
               </span>
             </h1>
+            <If condition={Boolean(error)}>
+              <div className="lg:px-12 xl:px-0">
+                <FormError error={getErrorMessage(error, intl)} />
+              </div>
+            </If>
             {children}
           </div>
         </Card>

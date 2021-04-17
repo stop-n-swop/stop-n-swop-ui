@@ -1,13 +1,14 @@
 export type LogIn = (args: {
-  username: string;
+  email: string;
   password: string;
-}) => Promise<{ authToken: string; refreshToken: string }>;
+}) => Promise<{ authToken: string; refreshToken: string; userId: string }>;
 
 export type LogOut = () => Promise<void>;
 
 export type RefreshTokens = () => Promise<{
   authToken: string;
   refreshToken: string;
+  userId: string;
 }>;
 
 export type SaveTokens = (args: {

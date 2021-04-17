@@ -42,7 +42,7 @@ export default function LoginForm({
         </If>
         <div className="lg:px-12 xl:px-0">
           <Controller
-            name="username"
+            name="email"
             defaultValue=""
             rules={{
               required: intl.formatMessage({
@@ -51,11 +51,12 @@ export default function LoginForm({
             }}
             render={({ field: { ref, ...input } }) => (
               <Input
-                id="username"
+                id="email"
+                type="email"
                 label={<FormattedMessage id={ids.auth.login.username.label} />}
                 autoFocus
                 autoComplete="username"
-                error={errors.username}
+                error={errors.email}
                 {...input}
               />
             )}

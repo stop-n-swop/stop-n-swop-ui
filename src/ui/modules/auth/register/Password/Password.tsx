@@ -19,6 +19,12 @@ export default function Password() {
           required: intl.formatMessage({
             id: ids.auth.register.password.required,
           }),
+          pattern: {
+            value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/,
+            message: intl.formatMessage({
+              id: ids.auth.register.password.pattern,
+            }),
+          },
         }}
         render={({ field: { ref, ...input } }) => (
           <Input

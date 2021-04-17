@@ -1,4 +1,4 @@
-import { UserInputError, ConflictError, NotAuthorisedError, NotFoundError } from "../common";
+import { UserInputError, ConflictError, NotAuthorisedError, NotFoundError } from "@sns/contracts/common";
 export declare enum UserCode {
     NOT_UNIQUE = 200,
     INVALID_LOGIN = 201,

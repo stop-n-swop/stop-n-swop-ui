@@ -24,7 +24,7 @@ export default function Email() {
           <Input
             id="email"
             type="email"
-            autoComplete="email"
+            autoComplete="username"
             label={<FormattedMessage id={ids.auth.register.email.label} />}
             error={errors.email}
             {...input}

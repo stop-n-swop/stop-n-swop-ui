@@ -20,6 +20,7 @@ let storage: {
 beforeEach(() => {
   driver = jest.fn<ReturnType<Driver>, []>(async () => {
     const data: LoginResponse = {
+      userId: '',
       authToken: 'auth-token',
       refreshToken: 'refresh-token',
     };

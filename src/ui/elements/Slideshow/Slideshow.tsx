@@ -54,14 +54,14 @@ const useAnimations = (image: ImageUrl, direction: Direction) => {
     from: {
       opacity: 0,
       transform: `translateX(${
-        direction === Direction.FORWARD ? 100 : -100
+        direction === Direction.FORWARD ? 400 : -400
       }px)`,
     },
     enter: { opacity: 1, transform: 'translateX(0px)' },
     leave: {
       opacity: 0,
       transform: `translateX(${
-        direction === Direction.FORWARD ? -100 : 100
+        direction === Direction.FORWARD ? -400 : 400
       }px)`,
     },
   });

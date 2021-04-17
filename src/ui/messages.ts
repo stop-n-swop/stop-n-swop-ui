@@ -175,7 +175,8 @@ const enMessages = {
     },
   },
   error: {
-    [UserCode.INVALID_LOGIN]: 'Username or Password are incorrect',
+    [UserCode.INVALID_LOGIN]: 'Email or Password are incorrect',
+    [UserCode.NOT_UNIQUE]: 'This email address has already been registered',
     [CommonCode.BAD_REQUEST]: 'Malformed request syntax',
     [CommonCode.NOT_FOUND]:
       'The requested resource could not be found or does not exist',
@@ -203,8 +204,8 @@ const enMessages = {
     login: {
       title: 'Log in',
       username: {
-        label: 'Username / Email',
-        required: 'Please enter your username',
+        label: 'Email',
+        required: 'Please enter your email',
       },
       password: {
         label: 'Password',
@@ -232,10 +233,8 @@ const enMessages = {
       password: {
         label: 'Password',
         required: 'Create a password',
-      },
-      username: {
-        label: 'Username',
-        required: 'Enter a username',
+        pattern:
+          'Your password should contain 1 lowercase, 1 uppercase, 1 number, and 1 special character',
       },
     },
   },
