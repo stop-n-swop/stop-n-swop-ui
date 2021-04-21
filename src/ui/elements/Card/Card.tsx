@@ -8,7 +8,7 @@ interface Props {
 }
 
 export default forwardRef<HTMLDivElement, Props>(function Card(
-  { padding = 'p-10', className, children },
+  { padding = 'p-3 md:p-10', className, children },
   ref,
 ) {
   return (

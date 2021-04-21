@@ -17,6 +17,7 @@ const enMessages = {
     account: {
       login: 'log in',
       logout: 'log out',
+      dashboard: 'my account',
     },
   },
   elements: {

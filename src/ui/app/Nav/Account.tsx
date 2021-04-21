@@ -1,12 +1,12 @@
 import React from 'react';
-import { FaUserCircle } from 'react-icons/fa';
+import { FaUserCheck, FaUserCircle } from 'react-icons/fa';
 import cx from 'classnames';
 import { useBoop } from 'ui/hooks';
 import Button from 'ui/elements/Button';
 import { FormattedMessage } from 'react-intl';
 import { animated } from 'react-spring';
 import { ids } from 'ui/messages';
-import { LOGOUT } from 'ui/constants/paths';
+import { LOGOUT, makeDashboardPath } from 'ui/constants/paths';
 import NavItem from './NavItem';
 
 interface Props {
@@ -40,6 +40,13 @@ export default function Account({ open, setOpen }: Props) {
           'md:absolute md:w-52 md:right-0 md:bg-gray-700 md:hover:bg-gray-600 md:z-10 md:top-full',
         )}
       >
+        <NavItem
+          to={makeDashboardPath()}
+          Icon={FaUserCheck}
+          onClose={() => setOpen(false)}
+        >
+          <FormattedMessage id={ids.nav.account.dashboard} />
+        </NavItem>
         <NavItem to={LOGOUT} Icon={FaUserCircle} onClose={() => setOpen(false)}>
           <FormattedMessage id={ids.nav.account.logout} />
         </NavItem>

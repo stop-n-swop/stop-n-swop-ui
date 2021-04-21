@@ -39,6 +39,23 @@ export const makeProductNewListingPath = ({
 }) => `${makeProductPath({ productId })}/list`;
 export const MY_ORDERS = '/my/orders';
 
+// Account dashboard
+export const DASHBOARD = '/my/dashboard/:section?/:subSection?';
+export const makeDashboardPath = ({
+  section,
+  subSection,
+}: { section?: string; subSection?: string } = {}) => {
+  if (subSection && section) {
+    return `/my/dashboard/${encodeURIComponent(section)}/${encodeURIComponent(
+      subSection,
+    )}`;
+  }
+  if (section) {
+    return `/my/dashboard/${encodeURIComponent(section)}`;
+  }
+  return '/my/dashboard';
+};
+
 // USERS
 export const USERS = '/users';
 export const USER = '/users/:userId';

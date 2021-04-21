@@ -5,14 +5,14 @@ import Email from 'ui/modules/auth/register/Email';
 import Form from 'ui/modules/auth/register/Form';
 import Password from 'ui/modules/auth/register/Password';
 import { useQueryParam } from 'ui/hooks';
-import { HOME } from 'ui/constants/paths';
+import { makeDashboardPath } from 'ui/constants/paths';
 import { useHistory } from 'react-router-dom';
 import { useRegister } from 'usecases/user';
 import type { Values } from 'ui/modules/auth/register/types';
 import { CommonCode } from '@sns/contracts/common';
 
 export default function Register() {
-  const redirect = useQueryParam('redirect') || HOME;
+  const redirect = useQueryParam('redirect') || makeDashboardPath();
   const { push } = useHistory();
   const { action: register, status, error } = useRegister();
 
