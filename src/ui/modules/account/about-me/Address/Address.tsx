@@ -3,7 +3,7 @@ import cx from 'classnames';
 import { InputController } from 'ui/elements/Input';
 import { useForm } from 'react-hook-form';
 import { useUpdateUser, useUser } from 'usecases/user';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { useGetMessage, useIntl } from 'ui/intl';
 import { ids } from 'ui/messages';
 import { getErrorMessage } from 'domain/selectors/common';
 import FormError from 'ui/elements/FormError';
@@ -14,17 +14,18 @@ export default function Address() {
   const intl = useIntl();
   const { data: user } = useUser();
   const { action: handleSubmit, error, reset, status } = useUpdateUser();
-  const required = intl.formatMessage({ id: ids.error.required });
+  const getMessage = useGetMessage();
+  const required = getMessage(ids.error.required);
 
   const formProps = useForm();
 
   return (
     <Form formProps={formProps} onSubmit={handleSubmit}>
       <h3 className="text-lg font-bold">
-        <FormattedMessage id={ids.account.aboutMe.address.title} />
+        {getMessage(ids.account.aboutMe.address.title)}
       </h3>
       <p className="text-sm text-gray-100 italic">
-        <FormattedMessage id={ids.account.aboutMe.address.description} />
+        {getMessage(ids.account.aboutMe.address.description)}
       </p>
       <FormError error={getErrorMessage(error, intl)} />
       <div
@@ -37,9 +38,7 @@ export default function Address() {
           <InputController
             id="address.line1"
             name="address.line1"
-            label={
-              <FormattedMessage id={ids.account.aboutMe.address.line1.label} />
-            }
+            label={getMessage(ids.account.aboutMe.address.line1.label)}
             defaultValue={user.address.line1 ?? ''}
             rules={{ required }}
           />
@@ -48,9 +47,7 @@ export default function Address() {
           <InputController
             id="address.line2"
             name="address.line2"
-            label={
-              <FormattedMessage id={ids.account.aboutMe.address.line2.label} />
-            }
+            label={getMessage(ids.account.aboutMe.address.line2.label)}
             defaultValue={user.address.line2 ?? ''}
           />
         </div>
@@ -58,9 +55,7 @@ export default function Address() {
           <InputController
             id="address.city"
             name="address.city"
-            label={
-              <FormattedMessage id={ids.account.aboutMe.address.city.label} />
-            }
+            label={getMessage(ids.account.aboutMe.address.city.label)}
             defaultValue={user.address.city ?? ''}
             rules={{ required }}
           />
@@ -69,11 +64,7 @@ export default function Address() {
           <InputController
             id="address.postcode"
             name="address.postcode"
-            label={
-              <FormattedMessage
-                id={ids.account.aboutMe.address.postcode.label}
-              />
-            }
+            label={getMessage(ids.account.aboutMe.address.postcode.label)}
             defaultValue={user.address.postcode ?? ''}
             rules={{ required }}
           />
@@ -82,11 +73,7 @@ export default function Address() {
           <InputController
             id="address.country"
             name="address.country"
-            label={
-              <FormattedMessage
-                id={ids.account.aboutMe.address.country.label}
-              />
-            }
+            label={getMessage(ids.account.aboutMe.address.country.label)}
             defaultValue={user.address.country ?? ''}
             rules={{ required }}
           />
@@ -94,7 +81,7 @@ export default function Address() {
       </div>
       <div>
         <Submit status={status} reset={reset}>
-          <FormattedMessage id={ids.account.saveButton} />
+          {getMessage(ids.account.saveButton)}
         </Submit>
       </div>
     </Form>

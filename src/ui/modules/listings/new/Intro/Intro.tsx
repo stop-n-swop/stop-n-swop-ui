@@ -5,7 +5,7 @@ import Button from 'ui/elements/Button';
 import Typeahead from 'ui/elements/Typeahead';
 import { FaRocket } from 'react-icons/fa';
 import type { ShortProduct } from '@sns/contracts/product';
-import { FormattedMessage } from 'react-intl';
+import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 
 interface Props {
@@ -25,12 +25,11 @@ export default function Intro({
     value: product.productId,
     label: product.name,
   }));
+  const getMessage = useGetMessage();
 
   return (
     <div>
-      <h2 className="text-lg">
-        <FormattedMessage id={ids.listings.new.title} />
-      </h2>
+      <h2 className="text-lg">{getMessage(ids.listings.new.title)}</h2>
       <Typeahead
         id="product_search"
         options={options}
@@ -38,7 +37,7 @@ export default function Intro({
         onChange={setProductId}
         onSearch={onSearch}
         autoFocus
-        label={<FormattedMessage id={ids.listings.new.intro.label} />}
+        label={getMessage(ids.listings.new.intro.label)}
       />
       <If condition={Boolean(productId)}>
         <div className="mt-10 flex justify-center">
@@ -48,7 +47,7 @@ export default function Intro({
             to={makeProductNewListingPath({ productId })}
           >
             <span className="pr-3">
-              <FormattedMessage id={ids.listings.new.intro.button} />
+              {getMessage(ids.listings.new.intro.button)}
             </span>
             <FaRocket />
           </Button>

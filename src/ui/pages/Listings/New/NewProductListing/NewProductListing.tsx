@@ -1,7 +1,7 @@
 import React from 'react';
 import PageTitle from 'ui/elements/PageTitle';
 import type useMachine from 'ui/modules/listings/new/machine';
-import { FormattedMessage } from 'react-intl';
+import { useMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 import Form from 'ui/modules/listings/new/Form';
 import { NEW_LISTING } from 'ui/constants/paths';
@@ -29,10 +29,7 @@ export default function NewProductListing({
   return (
     <div className="flex-grow flex flex-col relative">
       <PageTitle>
-        <FormattedMessage
-          id={ids.listings.new.productPageTitle}
-          values={{ name }}
-        />
+        {useMessage(ids.listings.new.productPageTitle, { name })}
       </PageTitle>
       <Form
         dispatch={dispatch}

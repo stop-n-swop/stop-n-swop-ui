@@ -1,6 +1,6 @@
 import type { Status } from '@sns/contracts/order';
 import React from 'react';
-import { FormattedDate, FormattedMessage } from 'react-intl';
+import { useDate, useMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 
 export default function HistoryRow({
@@ -14,14 +14,10 @@ export default function HistoryRow({
 }) {
   return (
     <tr className="border-b border-gray-600">
-      <td className="py-3">
-        <FormattedDate value={date} />
-      </td>
+      <td className="py-3">{useDate(date)}</td>
       <td>{username}</td>
       <td className="text-right">
-        <FormattedMessage
-          id={ids.order.status[status] ?? ids.order.status.none}
-        />
+        {useMessage(ids.order.status[status] ?? ids.order.status.none)}
       </td>
     </tr>
   );

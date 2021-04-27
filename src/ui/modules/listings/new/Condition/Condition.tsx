@@ -4,7 +4,7 @@ import { Condition } from '@sns/contracts/listing';
 import { FaGrinBeam, FaGrinStars, FaMeh, FaSmile } from 'react-icons/fa';
 import { Controller } from 'react-hook-form';
 import OptionBox from 'ui/elements/OptionBox';
-import { FormattedMessage } from 'react-intl';
+import { useMessage, useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 import Button from 'ui/elements/Button';
 import { Link } from 'react-router-dom';
@@ -32,9 +32,7 @@ function Option({
       onClick={() => onChange(id)}
     >
       <Icon size="2em" />
-      <span>
-        <FormattedMessage id={ids.conditions[id]} />
-      </span>
+      <span>{useMessage(ids.conditions[id])}</span>
     </OptionBox>
   );
 }
@@ -44,10 +42,12 @@ export default function ConditionStep({
 }: {
   previousUrl: string;
 }) {
+  const getMessage = useGetMessage();
+
   return (
     <div>
       <h2 className="text-lg">
-        <FormattedMessage id={ids.listings.new.condition.title} />
+        {getMessage(ids.listings.new.condition.title)}
       </h2>
       <Controller
         name="condition"
@@ -72,7 +72,7 @@ export default function ConditionStep({
       />
       <Buttons first showNext previous={() => null}>
         <Button kind="secondary" component={Link} to={previousUrl}>
-          <FormattedMessage id={ids.listings.new.buttons.back} />
+          {getMessage(ids.listings.new.buttons.back)}
         </Button>
       </Buttons>
     </div>

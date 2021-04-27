@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import cx from 'classnames';
-import { FormattedMessage } from 'react-intl';
+import { useGetMessage } from 'ui/intl';
 import type { Section } from '../types';
 
 export default function SectionList({
@@ -15,6 +15,7 @@ export default function SectionList({
   const current =
     options.find((option) => option.key === currentKey) ?? options[0];
   const [expanded, setExpanded] = useState(false);
+  const getMessage = useGetMessage();
 
   useEffect(() => {
     setExpanded(false);
@@ -65,7 +66,7 @@ export default function SectionList({
                     )}
                     style={{ minWidth: '14rem' }}
                   >
-                    <FormattedMessage id={option.label} />
+                    {getMessage(option.label)}
                   </div>
                 </When>
                 <Otherwise>
@@ -77,7 +78,7 @@ export default function SectionList({
                     )}
                     style={{ minWidth: '14rem' }}
                   >
-                    <FormattedMessage id={option.label} />
+                    {getMessage(option.label)}
                   </Link>
                 </Otherwise>
               </Choose>

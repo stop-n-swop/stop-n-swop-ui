@@ -1,6 +1,6 @@
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
-import { FormattedMessage } from 'react-intl';
+import { useGetMessage } from 'ui/intl';
 import Button from 'ui/elements/Button';
 import { ids } from 'ui/messages';
 import { Actions, ListingsItem } from 'ui/modules/listings/listings';
@@ -16,12 +16,11 @@ interface Props {
 export default function Review({ username, location, previous }: Props) {
   const { getValues } = useFormContext<Values>();
   const { boxed, condition, instructions, price, region, images } = getValues();
+  const getMessage = useGetMessage();
 
   return (
     <div>
-      <h3 className="text-lg">
-        <FormattedMessage id={ids.listings.new.review.title} />
-      </h3>
+      <h3 className="text-lg">{getMessage(ids.listings.new.review.title)}</h3>
       <div className="my-12">
         <ListingsItem
           image={images[0]}
@@ -41,7 +40,7 @@ export default function Review({ username, location, previous }: Props) {
       </div>
       <Buttons previous={previous} showNext={false}>
         <Button kind="primary" type="submit">
-          <FormattedMessage id={ids.listings.new.review.submit} />
+          {getMessage(ids.listings.new.review.submit)}
         </Button>
       </Buttons>
     </div>

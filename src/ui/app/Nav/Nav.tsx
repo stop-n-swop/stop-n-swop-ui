@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { FaChevronDown, FaShoppingCart } from 'react-icons/fa';
 import cx from 'classnames';
 import Button from 'ui/elements/Button';
-import { useIntl } from 'react-intl';
+import { useMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 import { CHECKOUT } from 'ui/constants/paths';
 import { useIsLoggedIn } from 'usecases/auth';
@@ -14,7 +14,6 @@ export default function Nav() {
   const loggedIn = useIsLoggedIn();
   const [open, setOpen] = useState(false);
   const [accountOpen, setAccountOpen] = useState(false);
-  const intl = useIntl();
   const close = useCallback(() => setOpen(false), []);
 
   return (
@@ -26,7 +25,7 @@ export default function Nav() {
         <Title />
         <div className="flex-grow" />
         <Button
-          title={intl.formatMessage({ id: ids.nav.basket })}
+          title={useMessage(ids.nav.basket)}
           component={Link}
           to={CHECKOUT}
           className="md:hidden"
@@ -34,7 +33,7 @@ export default function Nav() {
           <FaShoppingCart />
         </Button>
         <Button
-          title={intl.formatMessage({ id: ids.nav.menu })}
+          title={useMessage(ids.nav.menu)}
           className="md:hidden"
           onClick={() => setOpen(!open)}
         >

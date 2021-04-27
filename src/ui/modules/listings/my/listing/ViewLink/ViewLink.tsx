@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { useMessage } from 'ui/intl';
 import { Link } from 'react-router-dom';
 import { makeProductListingPath } from 'ui/constants/paths';
 import Button from 'ui/elements/Button';
@@ -14,7 +14,7 @@ export default function ViewLink({ productId, listingId }) {
         to={makeProductListingPath({ productId, listingId })}
         kind="tertiary"
       >
-        <FormattedMessage id={ids.listings.myListing.link} />
+        {useMessage(ids.listings.myListing.link)}
       </Button>
     </div>
   );

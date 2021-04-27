@@ -1,6 +1,6 @@
 import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
-import { FormattedMessage } from 'react-intl';
+import { useGetMessage } from 'ui/intl';
 import { Textarea } from 'ui/elements/Input';
 import { ids } from 'ui/messages';
 import Buttons from '../Buttons';
@@ -11,11 +11,12 @@ export default function DescriptionStep({ previous }: { previous(): void }) {
       errors: { description: error },
     },
   } = useFormContext();
+  const getMessage = useGetMessage();
 
   return (
     <div>
       <h2 className="text-lg">
-        <FormattedMessage id={ids.listings.new.description.title} />
+        {getMessage(ids.listings.new.description.title)}
       </h2>
       <div className="sm:w-3/4 lg:w-1/2 sm:mx-auto">
         <Controller
@@ -30,9 +31,7 @@ export default function DescriptionStep({ previous }: { previous(): void }) {
           render={({ field: { ref, ...input } }) => (
             <Textarea
               id="description"
-              label={
-                <FormattedMessage id={ids.listings.new.description.label} />
-              }
+              label={getMessage(ids.listings.new.description.label)}
               height={200}
               error={error}
               {...input}

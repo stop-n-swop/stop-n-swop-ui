@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 import { FaLockOpen } from 'react-icons/fa';
 import Card from 'ui/elements/Card';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { useMessage, useIntl } from 'ui/intl';
 import { ids } from 'ui/messages';
 import FormError from 'ui/elements/FormError';
 import { getErrorMessage } from 'domain/selectors/common';
@@ -20,9 +20,7 @@ export default function LoginForm({
       <div className="space-y-6 sm:w-3/4 sm:mx-auto md:space-y-12 md:w-full xl:space-y-12">
         <h1 className="text-2xl flex space-x-6 items-center justify-center">
           <FaLockOpen />
-          <span>
-            <FormattedMessage id={ids.auth.login.title} />
-          </span>
+          <span>{useMessage(ids.auth.login.title)}</span>
         </h1>
         <If condition={Boolean(error)}>
           <div className="lg:px-12 xl:px-0">

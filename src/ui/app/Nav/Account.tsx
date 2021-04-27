@@ -3,7 +3,7 @@ import { FaUserCheck, FaUserCircle } from 'react-icons/fa';
 import cx from 'classnames';
 import { useBoop } from 'ui/hooks';
 import Button from 'ui/elements/Button';
-import { FormattedMessage } from 'react-intl';
+import { useMessage } from 'ui/intl';
 import { animated } from 'react-spring';
 import { ids } from 'ui/messages';
 import { LOGOUT, makeDashboardPath } from 'ui/constants/paths';
@@ -45,10 +45,10 @@ export default function Account({ open, setOpen }: Props) {
           Icon={FaUserCheck}
           onClose={() => setOpen(false)}
         >
-          <FormattedMessage id={ids.nav.account.dashboard} />
+          {useMessage(ids.nav.account.dashboard)}
         </NavItem>
         <NavItem to={LOGOUT} Icon={FaUserCircle} onClose={() => setOpen(false)}>
-          <FormattedMessage id={ids.nav.account.logout} />
+          {useMessage(ids.nav.account.logout)}
         </NavItem>
       </ul>
     </li>

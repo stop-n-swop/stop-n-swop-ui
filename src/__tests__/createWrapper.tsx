@@ -4,7 +4,7 @@ import { Provider as Respite } from '@respite/core';
 import { Router, Route } from 'react-router-dom';
 import type { JpexInstance } from 'jpex';
 import { createMemoryHistory, History } from 'history';
-import { IntlProvider } from 'react-intl';
+import { Provider as Intl } from 'ui/intl';
 import type { Driver, Storage } from 'ports/io';
 
 interface Props {
@@ -30,6 +30,7 @@ export default function createWrapper({
           // if you want to use the "real" version you'll have to manually re-register them
           jpex.constant<Console>({
             ...console,
+            warn: () => null,
             error: () => null,
           });
           jpex.factory<Driver>(() => {
@@ -42,7 +43,7 @@ export default function createWrapper({
         }}
       >
         <Respite>
-          <IntlProvider locale="en" onError={() => null}>
+          <Intl locale="en">
             <Router history={history}>
               <Suspense fallback={null}>
                 <Choose>
@@ -57,7 +58,7 @@ export default function createWrapper({
                 </Choose>
               </Suspense>
             </Router>
-          </IntlProvider>
+          </Intl>
         </Respite>
       </Jpex>
     );

@@ -5,7 +5,7 @@ import { ProductList } from 'ui/modules/product/products';
 import Filters from 'ui/modules/product/browse/Filters';
 import type { Manufacturer, Platform } from '@sns/contracts/product';
 import PageTitle from 'ui/elements/PageTitle';
-import { FormattedMessage } from 'react-intl';
+import { useMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 import Item from '../Item';
 
@@ -26,9 +26,7 @@ export default function Browse({
 
   return (
     <div className="flex-grow flex flex-col">
-      <PageTitle>
-        <FormattedMessage id={ids.products.title} />
-      </PageTitle>
+      <PageTitle>{useMessage(ids.products.title)}</PageTitle>
       <Search value={search} onChange={onSearch} />
       <div className="flex-grow flex flex-col lg:flex-row">
         <Filters manufacturers={manufacturers} platforms={platforms} />

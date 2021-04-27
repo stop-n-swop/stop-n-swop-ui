@@ -8,7 +8,7 @@ import { useHistory } from 'react-router-dom';
 import OAuth2Login from 'react-simple-oauth2-login';
 import { OauthProvider } from '@sns/contracts/user';
 import G from 'ui/assets/g-logo.png';
-import { FormattedMessage } from 'react-intl';
+import { useMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 import { useResolve } from 'react-jpex';
 import type { Config } from 'ports/io';
@@ -55,9 +55,7 @@ export default function LoginPage() {
             <span className="p-3 bg-white">
               <img src={G} width={24} height={24} aria-label="Google" />
             </span>
-            <span className="px-4">
-              <FormattedMessage id={ids.auth.login.google} />
-            </span>
+            <span className="px-4">{useMessage(ids.auth.login.google)}</span>
           </div>
         </OAuth2Login>
       </Login>

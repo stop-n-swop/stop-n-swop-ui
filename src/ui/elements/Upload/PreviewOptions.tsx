@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaTimes } from 'react-icons/fa';
-import { FormattedMessage } from 'react-intl';
+import { useMessage } from 'ui/intl';
 import Button from 'ui/elements/Button';
 import { ids } from 'ui/messages';
 
@@ -28,12 +28,10 @@ export default function PreviewOptions({
         }}
       >
         <FaTimes />
-        <span className="pl-4">
-          <FormattedMessage id={ids.elements.upload.remove} />
-        </span>
+        <span className="pl-4">{useMessage(ids.elements.upload.remove)}</span>
       </Button>
       <Button className="w-1/2 xl:hidden" kind="secondary" onClick={onClose}>
-        <FormattedMessage id={ids.elements.upload.close} />
+        {useMessage(ids.elements.upload.close)}
       </Button>
     </div>
   );

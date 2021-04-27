@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaMoneyBillWave, FaPlus } from 'react-icons/fa';
-import { FormattedMessage } from 'react-intl';
+import { useGetMessage } from 'ui/intl';
 import { Link } from 'react-router-dom';
 import { animated } from 'react-spring';
 import { makeProductNewListingPath } from 'ui/constants/paths';
@@ -25,6 +25,7 @@ export default function QuickActions({
 }: Props) {
   const [listStyle, listBoop] = useBoop({ rotation: 20, x: 4 });
   const [collectionStyle, collectionBoop] = useBoop({ rotation: 90 });
+  const getMessage = useGetMessage();
 
   return (
     <div
@@ -37,7 +38,7 @@ export default function QuickActions({
         className="w-full justify-center"
       >
         <span className="hidden md:block text-xs ml-3">
-          <FormattedMessage id={ids.products.actions.favourite} />
+          {getMessage(ids.products.actions.favourite)}
         </span>
       </Favourite>
       <Button
@@ -48,7 +49,7 @@ export default function QuickActions({
       >
         <ListIcon style={listStyle} size="1em" />
         <span className="hidden md:block text-xs ml-3">
-          <FormattedMessage id={ids.products.actions.list} />
+          {getMessage(ids.products.actions.list)}
         </span>
       </Button>
       <Button
@@ -58,7 +59,7 @@ export default function QuickActions({
       >
         <CollectionIcon style={collectionStyle} size="1em" />
         <span className="hidden md:block text-xs ml-3">
-          <FormattedMessage id={ids.products.actions.collect} />
+          {getMessage(ids.products.actions.collect)}
         </span>
       </Button>
     </div>

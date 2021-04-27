@@ -4,7 +4,7 @@ import { FaBookOpen, FaBox } from 'react-icons/fa';
 import { Checkbox } from 'ui/elements/check';
 import { Controller } from 'react-hook-form';
 import OptionBox from 'ui/elements/OptionBox';
-import { FormattedMessage } from 'react-intl';
+import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 import Buttons from '../Buttons';
 
@@ -40,18 +40,18 @@ function Option({
 }
 
 export default function FeaturesStep({ previous }: { previous(): void }) {
+  const getMessage = useGetMessage();
+
   return (
     <div>
-      <h3 className="text-lg">
-        <FormattedMessage id={ids.listings.new.features.title} />
-      </h3>
+      <h3 className="text-lg">{getMessage(ids.listings.new.features.title)}</h3>
       <div className="my-8 flex flex-wrap justify-center md:space-x-12">
         <Controller
           name="boxed"
           defaultValue={false}
           render={({ field: { name, value, onChange } }) => (
             <Option name={name} value={value} onChange={onChange}>
-              <FormattedMessage id={ids.listings.new.features.boxed} />
+              {getMessage(ids.listings.new.features.boxed)}
             </Option>
           )}
         />
@@ -60,7 +60,7 @@ export default function FeaturesStep({ previous }: { previous(): void }) {
           defaultValue={false}
           render={({ field: { name, value, onChange } }) => (
             <Option name={name} value={value} onChange={onChange}>
-              <FormattedMessage id={ids.listings.new.features.instructions} />
+              {getMessage(ids.listings.new.features.instructions)}
             </Option>
           )}
         />

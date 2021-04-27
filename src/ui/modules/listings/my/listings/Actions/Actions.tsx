@@ -5,7 +5,7 @@ import Button, { State } from 'ui/elements/Button';
 import { Link } from 'react-router-dom';
 import { makeEditListingPath } from 'ui/constants/paths';
 import type { Listing } from '@sns/contracts/listing';
-import { FormattedMessage } from 'react-intl';
+import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 
 export const makeGetButtonState = (active: Status, mutationStatus: RStatus) => (
@@ -41,6 +41,7 @@ export default function Actions({ listing, order, status, onClick }: Props) {
     onClick(status);
   };
   const getButtonState = makeGetButtonState(active, status);
+  const getMessage = useGetMessage();
 
   const { listingId, productId } = listing;
   if (order == null) {
@@ -51,14 +52,14 @@ export default function Actions({ listing, order, status, onClick }: Props) {
           to={makeEditListingPath({ productId, listingId })}
           kind="tertiary"
         >
-          <FormattedMessage id={ids.listings.myListings.actions.edit} />
+          {getMessage(ids.listings.myListings.actions.edit)}
         </Button>
         <Button
           kind="tertiary"
           state={getButtonState(Status.CANCELLED, 'error')}
           onClick={handleClick(Status.CANCELLED)}
         >
-          <FormattedMessage id={ids.listings.myListings.actions.cancel} />
+          {getMessage(ids.listings.myListings.actions.cancel)}
         </Button>
       </>
     );
@@ -74,14 +75,14 @@ export default function Actions({ listing, order, status, onClick }: Props) {
           state={getButtonState(Status.POSTED)}
           onClick={handleClick(Status.POSTED)}
         >
-          <FormattedMessage id={ids.listings.myListings.actions.post} />
+          {getMessage(ids.listings.myListings.actions.post)}
         </Button>
         <Button
           kind="tertiary"
           state={getButtonState(Status.CANCELLED, 'error')}
           onClick={handleClick(Status.CANCELLED)}
         >
-          <FormattedMessage id={ids.listings.myListings.actions.cancel} />
+          {getMessage(ids.listings.myListings.actions.cancel)}
         </Button>
       </>
     );

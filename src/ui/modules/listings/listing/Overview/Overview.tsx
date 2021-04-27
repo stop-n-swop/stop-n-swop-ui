@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaQuestionCircle } from 'react-icons/fa';
 import Button from 'ui/elements/Button';
-import { FormattedMessage, FormattedNumber } from 'react-intl';
+import { useCurrency, useGetMessage } from 'ui/intl';
 import { Link } from 'react-router-dom';
 import { makeUserPath } from 'ui/constants/paths';
 import StarRating from 'ui/modules/listings/listings/StarRating';
@@ -23,18 +23,16 @@ export default function Overview({
   location: string;
   description: string;
 }) {
+  const getMessage = useGetMessage();
+
   return (
     <div className={className}>
       <div className="flex justify-between items-center">
-        <span className="text-lg">
-          <FormattedNumber value={50} style="currency" currency="GBP" />
-        </span>
+        <span className="text-lg">{useCurrency(50)}</span>
         <AddToBasket productId={productId} listingId={listingId} />
       </div>
       <div>
-        <h3>
-          <FormattedMessage id={ids.listings.listing.seller} />
-        </h3>
+        <h3>{getMessage(ids.listings.listing.seller)}</h3>
         <div className="flex flex-col sm:flex-row sm:space-x-6 sm:items-center">
           <div className="flex items-center text-sm">
             <Button
@@ -54,9 +52,7 @@ export default function Overview({
         </div>
       </div>
       <div>
-        <h3>
-          <FormattedMessage id={ids.listings.listing.description} />
-        </h3>
+        <h3>{getMessage(ids.listings.listing.description)}</h3>
         <pre className="font-display whitespace-pre-wrap my-4">
           {description}
         </pre>

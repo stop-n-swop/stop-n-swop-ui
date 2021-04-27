@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 import { Provider as Jpex } from 'react-jpex';
-import { IntlProvider } from 'react-intl';
+import { Provider as Intl } from 'ui/intl';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider as Respite } from '@respite/core';
 import { en } from 'ui/messages';
@@ -14,7 +14,7 @@ import Core from './Core';
 export default function App() {
   return (
     <Jpex>
-      <IntlProvider locale={navigator.language} messages={en}>
+      <Intl locale={navigator.language} messages={en} currency="GBP">
         <Respite>
           <BrowserRouter basename="/">
             <div
@@ -34,7 +34,7 @@ export default function App() {
             </div>
           </BrowserRouter>
         </Respite>
-      </IntlProvider>
+      </Intl>
     </Jpex>
   );
 }

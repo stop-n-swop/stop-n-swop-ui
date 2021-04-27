@@ -1,6 +1,6 @@
 import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { useGetMessage } from 'ui/intl';
 import Upload from 'ui/elements/Upload';
 import { ids } from 'ui/messages';
 import Buttons from '../Buttons';
@@ -16,7 +16,7 @@ const Row = ({
 }) => {
   const name = `images[${index}]`;
   const error = errors.images?.[index];
-  const intl = useIntl();
+  const getMessage = useGetMessage();
 
   return (
     <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 sm:px-3 pb-3">
@@ -24,9 +24,7 @@ const Row = ({
       <Controller
         name={name}
         rules={{
-          required:
-            index === 0 &&
-            intl.formatMessage({ id: ids.listings.new.photos.required }),
+          required: index === 0 && getMessage(ids.listings.new.photos.required),
         }}
         defaultValue=""
         render={({ field: { value, onChange } }) => (
@@ -42,14 +40,13 @@ export default function PhotosStep({ previous }: { previous(): void }) {
     formState: { errors },
   } = useFormContext();
   const labels = ['Main photo', 'Cartridge (front)', 'Cartridge (back)'];
+  const getMessage = useGetMessage();
 
   return (
     <div>
-      <h3 className="text-lg">
-        <FormattedMessage id={ids.listings.new.photos.title} />
-      </h3>
+      <h3 className="text-lg">{getMessage(ids.listings.new.photos.title)}</h3>
       <div className="italic text-gray-200 text-sm mb-6">
-        <FormattedMessage id={ids.listings.new.photos.description} />
+        {getMessage(ids.listings.new.photos.description)}
       </div>
       <div className="flex flex-wrap">
         {labels.map((label, i) => (

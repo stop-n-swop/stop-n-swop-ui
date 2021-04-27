@@ -4,7 +4,7 @@ import Favourite from 'ui/modules/product/Favourite';
 import cx from 'classnames';
 import { makeProductPath } from 'ui/constants/paths';
 import { GridItem } from 'ui/elements/grid';
-import { FormattedMessage } from 'react-intl';
+import { useMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 import type { ImageUrl } from 'domain/types';
 
@@ -54,10 +54,9 @@ export default function ProductItem({
               totalListings > 0 ? 'text-green-50' : 'text-gray-500',
             )}
           >
-            <FormattedMessage
-              id={ids.products.search.results.available}
-              values={{ count: totalListings }}
-            />
+            {useMessage(ids.products.search.results.available, {
+              count: totalListings,
+            })}
           </div>
         </div>
         <div className="flex flex-col justify-center">

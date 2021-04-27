@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import { Order, Status } from '@sns/contracts/order';
-import { FormattedMessage } from 'react-intl';
+import { useMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 
 export default function OrderStatus({
@@ -15,9 +15,7 @@ export default function OrderStatus({
   return (
     <>
       <span className="px-4 py-3 font-medium w-full lg:w-1/2 text-center lg:text-left">
-        <FormattedMessage
-          id={ids.order.status[status] ?? ids.order.status.none}
-        />
+        {useMessage(ids.order.status[status] ?? ids.order.status.none)}
       </span>
       <div className="w-full lg:w-1/2 flex flex-col">{actions}</div>
     </>

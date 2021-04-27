@@ -2,13 +2,15 @@ import React from 'react';
 import background from 'ui/assets/bg-1.jpg';
 import Button from 'ui/elements/Button';
 import { Link } from 'react-router-dom';
-import { FormattedMessage } from 'react-intl';
+import { useGetMessage } from 'ui/intl';
 import cx from 'classnames';
 import { ids } from 'ui/messages';
 import Card from 'ui/elements/Card';
 import { PRODUCTS, NEW_LISTING } from 'ui/constants/paths';
 
 export default function Home() {
+  const getMessage = useGetMessage();
+
   return (
     <div className="flex-grow flex flex-col relative overflow-y-hidden">
       <div
@@ -36,12 +38,8 @@ export default function Home() {
             'xl:mb-40 xl:ml-40',
           )}
         >
-          <h1 className="text-2xl">
-            <FormattedMessage id={ids.home.title} />
-          </h1>
-          <p>
-            <FormattedMessage id={ids.home.text} />
-          </p>
+          <h1 className="text-2xl">{getMessage(ids.home.title)}</h1>
+          <p>{getMessage(ids.home.text)}</p>
           <div
             className={cx(
               'pt-12 text-lg space-x-6 flex justify-center',
@@ -51,14 +49,10 @@ export default function Home() {
             )}
           >
             <Button component={Link} kind="primary" to={PRODUCTS}>
-              <span>
-                <FormattedMessage id={ids.home.browse} />
-              </span>
+              <span>{getMessage(ids.home.browse)}</span>
             </Button>
             <Button component={Link} kind="secondary" to={NEW_LISTING}>
-              <span>
-                <FormattedMessage id={ids.home.list} />
-              </span>
+              <span>{getMessage(ids.home.list)}</span>
             </Button>
           </div>
         </Card>

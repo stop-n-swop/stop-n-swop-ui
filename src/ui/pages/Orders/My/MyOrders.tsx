@@ -1,6 +1,6 @@
 import { Status, Order } from '@sns/contracts/order';
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { useMessage } from 'ui/intl';
 import { List } from 'ui/elements/list';
 import PageTitle from 'ui/elements/PageTitle';
 import { ids } from 'ui/messages';
@@ -22,9 +22,7 @@ const orders: Order[] = [
 export default function MyOrders() {
   return (
     <div>
-      <PageTitle>
-        <FormattedMessage id={ids.order.title} />
-      </PageTitle>
+      <PageTitle>{useMessage(ids.order.title)}</PageTitle>
       <div className="xl:w-4/5 xl:mx-auto mt-6">
         <List>
           {orders.map((order) => (

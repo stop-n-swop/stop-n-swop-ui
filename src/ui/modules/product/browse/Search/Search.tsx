@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import { FaSearch } from 'react-icons/fa';
-import { FormattedMessage } from 'react-intl';
+import { useMessage } from 'ui/intl';
 import Button from 'ui/elements/Button';
 import Input from 'ui/elements/Input';
 import { ids } from 'ui/messages';
@@ -19,7 +19,7 @@ export default function Search({ onChange, value, children }: Props) {
         type="search"
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        label={<FormattedMessage id={ids.products.search.label} />}
+        label={useMessage(ids.products.search.label)}
         suffix={
           <Button aria-label="Search">
             <FaSearch />

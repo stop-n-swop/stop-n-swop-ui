@@ -9,7 +9,7 @@ import {
 } from 'react-icons/gi';
 import { Controller } from 'react-hook-form';
 import OptionBox from 'ui/elements/OptionBox';
-import { FormattedMessage } from 'react-intl';
+import { useMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 import Buttons from '../Buttons';
 
@@ -38,9 +38,7 @@ function Option({
       onClick={() => onChange(id)}
     >
       <Icon size="2em" />
-      <span>
-        <FormattedMessage id={ids.regions[id]} />
-      </span>
+      <span>{useMessage(ids.regions[id])}</span>
     </OptionBox>
   );
 }
@@ -48,9 +46,7 @@ function Option({
 export default function RegionStep({ previous }: { previous(): void }) {
   return (
     <div>
-      <h3 className="text-lg">
-        <FormattedMessage id={ids.listings.new.region.title} />
-      </h3>
+      <h3 className="text-lg">{useMessage(ids.listings.new.region.title)}</h3>
       <Controller
         name="region"
         defaultValue=""

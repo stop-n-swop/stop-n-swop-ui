@@ -1,7 +1,7 @@
 import { Status } from 'domain/constants/basket';
 import React, { useState } from 'react';
 import { FaShoppingBasket } from 'react-icons/fa';
-import { FormattedMessage } from 'react-intl';
+import { useGetMessage } from 'ui/intl';
 import Button from 'ui/elements/Button';
 import { ids } from 'ui/messages';
 
@@ -31,6 +31,7 @@ export default function AddToBasket({ className }: Props) {
       setStatus(Status.IN_BASKET);
     }, 1000);
   };
+  const getMessage = useGetMessage();
 
   return (
     <Button
@@ -41,7 +42,7 @@ export default function AddToBasket({ className }: Props) {
     >
       <FaShoppingBasket className="hidden md:block mr-3" />
       <span className="flex-shrink-0">
-        <FormattedMessage id={ids.listings.listing.addToBasket} />
+        {getMessage(ids.listings.listing.addToBasket)}
       </span>
     </Button>
   );

@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { useIntl } from 'react-intl';
+import { useGetCurrency } from 'ui/intl';
 import cx from 'classnames';
 import Input, { Props } from './Input';
 
@@ -12,7 +12,7 @@ export default function CurrencyInput({
   ...props
 }: Props) {
   const [focused, setFocused] = useState(false);
-  const intl = useIntl();
+  const getCurrency = useGetCurrency();
   const type = focused ? 'number' : 'text';
   const value = useMemo(() => {
     if (focused) {
@@ -21,11 +21,8 @@ export default function CurrencyInput({
     if (actual == null || actual === '') {
       return '';
     }
-    return intl.formatNumber(Number(actual), {
-      style: 'currency',
-      currency: 'GBP',
-    });
-  }, [actual, focused, intl]);
+    return getCurrency(Number(actual));
+  }, [actual, focused, getCurrency]);
 
   return (
     <Input

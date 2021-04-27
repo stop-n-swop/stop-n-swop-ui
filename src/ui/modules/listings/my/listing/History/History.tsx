@@ -1,7 +1,7 @@
 import { Status } from '@sns/contracts/order';
 import type { Audit } from '@sns/contracts/listing';
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 import HistoryRow from './Row';
 
@@ -14,29 +14,21 @@ export default function History({
   createdDate: Date;
   username: string;
 }) {
+  const getMessage = useGetMessage();
+
   return (
     <div>
       <h3 className="mb-4">
-        <FormattedMessage id={ids.listings.myListing.history.label} />
+        {getMessage(ids.listings.myListing.history.label)}
       </h3>
       <table className="w-full">
         <thead className="sr-only">
           <tr>
+            <th>{getMessage(ids.listings.myListing.history.headers.date)}</th>
             <th>
-              <FormattedMessage
-                id={ids.listings.myListing.history.headers.date}
-              />
+              {getMessage(ids.listings.myListing.history.headers.username)}
             </th>
-            <th>
-              <FormattedMessage
-                id={ids.listings.myListing.history.headers.username}
-              />
-            </th>
-            <th>
-              <FormattedMessage
-                id={ids.listings.myListing.history.headers.status}
-              />
-            </th>
+            <th>{getMessage(ids.listings.myListing.history.headers.status)}</th>
           </tr>
         </thead>
         <tbody>

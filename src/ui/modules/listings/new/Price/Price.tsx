@@ -1,6 +1,6 @@
 import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { useGetMessage } from 'ui/intl';
 import { makeProductPath } from 'ui/constants/paths';
 import Button from 'ui/elements/Button';
 import { CurrencyInput } from 'ui/elements/Input';
@@ -18,13 +18,11 @@ export default function PriceStep({
     formState: { errors },
   } = useFormContext();
   const error = errors.price;
-  const intl = useIntl();
+  const getMessage = useGetMessage();
 
   return (
     <div>
-      <h3 className="text-lg">
-        <FormattedMessage id={ids.listings.new.price.title} />
-      </h3>
+      <h3 className="text-lg">{getMessage(ids.listings.new.price.title)}</h3>
       <div className="flex">
         <Button
           kind="tertiary"
@@ -34,22 +32,20 @@ export default function PriceStep({
           padding={false}
           className="text-xs"
         >
-          <FormattedMessage id={ids.listings.new.price.link} />
+          {getMessage(ids.listings.new.price.link)}
         </Button>
       </div>
       <div className="mt-10 sm:w-2/3 lg:w-1/2 xl:w-1/3 mx-auto">
         <Controller
           name="price"
           rules={{
-            required: intl.formatMessage({
-              id: ids.listings.new.price.required,
-            }),
+            required: getMessage(ids.listings.new.price.required),
           }}
           defaultValue=""
           render={({ field: { value, onChange } }) => (
             <CurrencyInput
               id="price"
-              label={<FormattedMessage id={ids.listings.new.price.label} />}
+              label={getMessage(ids.listings.new.price.label)}
               value={value ?? ''}
               state={error == null ? undefined : 'error'}
               onChange={onChange}

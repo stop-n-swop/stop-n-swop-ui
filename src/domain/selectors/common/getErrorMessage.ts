@@ -1,5 +1,5 @@
 import { CommonCode } from '@sns/contracts/common';
-import type { IntlShape } from 'react-intl';
+import type { IntlShape } from 'ui/intl';
 import { ids } from 'ui/messages';
 
 const hasMessage = (e: any): e is { message: string } => {
@@ -24,7 +24,7 @@ export default function getErrorMessage(error: any, intl: IntlShape) {
     }
     const id = ids.error[error.error.code];
     if (id) {
-      return intl.formatMessage({ id });
+      return intl.message(id);
     }
   }
   if (hasMessage(error)) {
@@ -33,20 +33,20 @@ export default function getErrorMessage(error: any, intl: IntlShape) {
   if (hasStatus(error)) {
     switch (error?.status) {
       case 400:
-        return intl.formatMessage({ id: ids.error[CommonCode.BAD_REQUEST] });
+        return intl.message(ids.error[CommonCode.BAD_REQUEST]);
       case 403:
-        return intl.formatMessage({ id: ids.error.forbidden });
+        return intl.message(ids.error.forbidden);
       case 404:
-        return intl.formatMessage({ id: ids.error[CommonCode.NOT_FOUND] });
+        return intl.message(ids.error[CommonCode.NOT_FOUND]);
       case 409:
-        return intl.formatMessage({ id: ids.error[CommonCode.CONFLICT] });
+        return intl.message(ids.error[CommonCode.CONFLICT]);
       case 503:
-        return intl.formatMessage({ id: ids.error.unavailable });
+        return intl.message(ids.error.unavailable);
       case 504:
-        return intl.formatMessage({ id: ids.error.gatewayTimeout });
+        return intl.message(ids.error.gatewayTimeout);
       default:
     }
   }
 
-  return intl.formatMessage({ id: ids.error.unknown });
+  return intl.message(ids.error.unknown);
 }

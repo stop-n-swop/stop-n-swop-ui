@@ -1,6 +1,6 @@
 import React from 'react';
 import cx from 'classnames';
-import { FormattedDate, FormattedMessage } from 'react-intl';
+import { useDate, useMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 
 interface Props {
@@ -31,13 +31,13 @@ export default function Meta({
         {name}
       </h1>
       <div className="hidden md:block text-gray-200">
-        <FormattedDate value={releaseDate} />
+        {useDate(releaseDate)}
       </div>
       <div className="hidden md:block text-gray-300">
-        <FormattedMessage
-          id={ids.products.search.results.owner}
-          values={{ developer, publisher }}
-        />
+        {useMessage(ids.products.search.results.owner, {
+          developer,
+          publisher,
+        })}
       </div>
     </div>
   );

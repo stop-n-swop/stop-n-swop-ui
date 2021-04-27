@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react';
 import type { Listing } from '@sns/contracts/listing';
 import { ListItem } from 'ui/elements/list';
 import type { Product } from '@sns/contracts/product';
-import { FormattedNumber } from 'react-intl';
+import { useCurrency } from 'ui/intl';
 import StarRating from 'ui/modules/listings/listings/StarRating';
 import { Link } from 'react-router-dom';
 
@@ -24,6 +24,7 @@ export default function MyListingItem({
     images: [image],
   } = listing;
   const { name } = product;
+
   return (
     <ListItem>
       <Link to={to} className="w-full flex items-center">
@@ -37,9 +38,7 @@ export default function MyListingItem({
           <span className="block">{name}</span>
           <span className="text-sm text-gray-200">{listingId}</span>
         </div>
-        <div className="hidden xl:block w-1/5">
-          <FormattedNumber value={price} style="currency" currency="GBP" />
-        </div>
+        <div className="hidden xl:block w-1/5">{useCurrency(price)}</div>
         <div className="hidden lg:block w-1/4 xl:w-1/4">
           <StarRating rating={rating} />
         </div>

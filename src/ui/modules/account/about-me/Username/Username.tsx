@@ -2,7 +2,7 @@ import React from 'react';
 import { InputController } from 'ui/elements/Input';
 import { useForm } from 'react-hook-form';
 import { useUpdateUser, useUser } from 'usecases/user';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { useIntl } from 'ui/intl';
 import { ids } from 'ui/messages';
 import FormError from 'ui/elements/FormError';
 import { getErrorMessage } from 'domain/selectors/common';
@@ -13,15 +13,16 @@ export default function Username() {
   const { data: user } = useUser();
   const formProps = useForm();
   const intl = useIntl();
+  const getMessage = intl.message;
   const { action: handleSubmit, error, status, reset } = useUpdateUser();
 
   return (
     <Form formProps={formProps} onSubmit={handleSubmit}>
       <h3 className="text-lg font-bold">
-        <FormattedMessage id={ids.account.aboutMe.username.title} />
+        {getMessage(ids.account.aboutMe.username.title)}
       </h3>
       <p className="text-sm text-gray-100 italic">
-        <FormattedMessage id={ids.account.aboutMe.username.description} />
+        {getMessage(ids.account.aboutMe.username.description)}
       </p>
       <FormError error={getErrorMessage(error, intl)} />
       <div className="flex flex-col flex-grow">
@@ -30,19 +31,15 @@ export default function Username() {
             id="username"
             name="username"
             defaultValue={user.username ?? ''}
-            label={
-              <FormattedMessage
-                id={ids.account.aboutMe.username.username.label}
-              />
-            }
+            label={getMessage(ids.account.aboutMe.username.username.label)}
             rules={{
-              required: intl.formatMessage({
-                id: ids.account.aboutMe.username.username.required,
-              }),
+              required: getMessage(
+                ids.account.aboutMe.username.username.required,
+              ),
               maxLength: {
                 value: 20,
-                message: intl.formatMessage(
-                  { id: ids.account.aboutMe.username.username.maxLength },
+                message: getMessage(
+                  ids.account.aboutMe.username.username.maxLength,
                   { maxLength: 20 },
                 ),
               },
@@ -51,7 +48,7 @@ export default function Username() {
         </div>
         <div>
           <Submit kind="primary" reset={reset} status={status}>
-            <FormattedMessage id={ids.account.saveButton} />
+            {getMessage(ids.account.saveButton)}
           </Submit>
         </div>
       </div>

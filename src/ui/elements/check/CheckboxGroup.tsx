@@ -1,5 +1,5 @@
 import React, { Children, ReactNode, useMemo, useState } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 import Button from '../Button';
 import FieldError from '../FieldError';
@@ -20,6 +20,7 @@ export default function CheckboxGroup({
   error,
   children,
 }: Props) {
+  const getMessage = useGetMessage();
   const [showMore, setShowMore] = useState(false);
   const total = Children.count(children);
 
@@ -61,11 +62,9 @@ export default function CheckboxGroup({
           >
             <Choose>
               <When condition={showMore}>
-                <FormattedMessage id={ids.elements.checkbox.collapse} />
+                {getMessage(ids.elements.checkbox.collapse)}
               </When>
-              <Otherwise>
-                <FormattedMessage id={ids.elements.checkbox.expand} />
-              </Otherwise>
+              <Otherwise>{getMessage(ids.elements.checkbox.expand)}</Otherwise>
             </Choose>
           </Button>
         </If>

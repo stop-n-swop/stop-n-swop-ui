@@ -8,7 +8,7 @@ import { makeDashboardPath } from 'ui/constants/paths';
 import Username from 'ui/modules/account/about-me/Username';
 import Email from 'ui/modules/account/about-me/Email';
 import Address from 'ui/modules/account/about-me/Address';
-import { FormattedMessage } from 'react-intl';
+import { useMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 
 export default function Dashboard() {
@@ -20,9 +20,7 @@ export default function Dashboard() {
 
   return (
     <>
-      <PageTitle>
-        <FormattedMessage id={ids.account.dashboard.title} />
-      </PageTitle>
+      <PageTitle>{useMessage(ids.account.dashboard.title)}</PageTitle>
       <Container name={name}>
         <Sections section={section} subSection={subSection} sections={sections}>
           <Route

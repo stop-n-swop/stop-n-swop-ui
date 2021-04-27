@@ -7,7 +7,7 @@ import {
   FaShippingFast,
 } from 'react-icons/fa';
 import cx from 'classnames';
-import { FormattedMessage } from 'react-intl';
+import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 import {
   CHECKOUT,
@@ -46,6 +46,7 @@ export default function NavItems({
 
     return () => window.removeEventListener('click', fn);
   }, [close, open]);
+  const getMessage = useGetMessage();
 
   return (
     <ul
@@ -57,7 +58,7 @@ export default function NavItems({
       )}
     >
       <NavItem to={PRODUCTS} Icon={FaSearch} onClose={close}>
-        <FormattedMessage id={ids.nav.browse} />
+        {getMessage(ids.nav.browse)}
       </NavItem>
       <Choose>
         <When condition={loggedIn}>
@@ -65,15 +66,15 @@ export default function NavItems({
             <FormattedMessage id={ids.nav.collections} />
           </NavItem> */}
           <NavItem to={MY_LISTINGS} Icon={FaListAlt} onClose={close}>
-            <FormattedMessage id={ids.nav.listings} />
+            {getMessage(ids.nav.listings)}
           </NavItem>
           <NavItem to={MY_ORDERS} Icon={FaShippingFast} onClose={close}>
-            <FormattedMessage id={ids.nav.orders} />
+            {getMessage(ids.nav.orders)}
           </NavItem>
         </When>
         <Otherwise>
           <NavItem Icon={FaListAlt} to={NEW_LISTING} onClose={close}>
-            <FormattedMessage id={ids.nav.list} />
+            {getMessage(ids.nav.list)}
           </NavItem>
         </Otherwise>
       </Choose>
@@ -83,7 +84,7 @@ export default function NavItems({
         Icon={FaShoppingCart}
         onClose={close}
       >
-        <FormattedMessage id={ids.nav.basket} />
+        {getMessage(ids.nav.basket)}
       </NavItem>
       <Choose>
         <When condition={loggedIn}>
@@ -91,7 +92,7 @@ export default function NavItems({
         </When>
         <Otherwise>
           <NavItem to={LOGIN} Icon={FaUserCircle} onClose={close}>
-            <FormattedMessage id={ids.nav.account.login} />
+            {getMessage(ids.nav.account.login)}
           </NavItem>
         </Otherwise>
       </Choose>

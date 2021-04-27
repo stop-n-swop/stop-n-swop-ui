@@ -2,7 +2,7 @@ import React, { useState, MouseEvent } from 'react';
 import type { Status as RStatus } from '@respite/core';
 import { Order, Status } from '@sns/contracts/order';
 import Button from 'ui/elements/Button';
-import { FormattedMessage } from 'react-intl';
+import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 import { makeGetButtonState } from 'ui/modules/listings/my/listings/Actions';
 
@@ -21,6 +21,7 @@ export default function Actions({ order, status, onClick }: Props) {
     setActive(status);
     onClick(status);
   };
+  const getMessage = useGetMessage();
   const getButtonState = makeGetButtonState(active, status);
 
   if (order.status === Status.CREATED) {
@@ -36,15 +37,13 @@ export default function Actions({ order, status, onClick }: Props) {
         state={getButtonState(Status.RECEIVED)}
         onClick={handleClick(Status.RECEIVED)}
       >
-        <FormattedMessage id={ids.order.actions.received} />
+        {getMessage(ids.order.actions.received)}
       </Button>
     );
   }
   if (order.status === Status.RECEIVED) {
     return (
-      <Button kind="primary">
-        <FormattedMessage id={ids.order.actions.feedback} />
-      </Button>
+      <Button kind="primary">{getMessage(ids.order.actions.feedback)}</Button>
     );
   }
   return null;

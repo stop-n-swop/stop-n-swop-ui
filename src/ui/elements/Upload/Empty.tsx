@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaImage } from 'react-icons/fa';
-import { FormattedMessage } from 'react-intl';
+import { useMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 
 export default function Empty({
@@ -28,9 +28,7 @@ export default function Empty({
       }}
     >
       <FaImage size="4em" />
-      <div>
-        <FormattedMessage id={ids.elements.upload.placeholder} />
-      </div>
+      <div>{useMessage(ids.elements.upload.placeholder)}</div>
       <input
         type="file"
         className="sr-only"
