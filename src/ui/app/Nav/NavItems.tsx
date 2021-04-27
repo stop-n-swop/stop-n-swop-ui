@@ -38,14 +38,15 @@ export default function NavItems({
   const ref = useRef<HTMLUListElement>(null);
   useEffect(() => {
     const fn = (e: any) => {
-      if (open && !ref.current.contains(e.target)) {
+      if ((open || accountOpen) && !ref.current.contains(e.target)) {
         close();
+        setAccountOpen(false);
       }
     };
     window.addEventListener('click', fn);
 
     return () => window.removeEventListener('click', fn);
-  }, [close, open]);
+  }, [accountOpen, close, open, setAccountOpen]);
   const getMessage = useGetMessage();
 
   return (

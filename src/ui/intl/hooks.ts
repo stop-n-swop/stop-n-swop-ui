@@ -7,6 +7,7 @@ import { context } from './context';
 export const useGetMessage = () => {
   const { warn } = useResolve<Console>();
   const { messages } = useContext(context);
+
   return (id: string, values?: Record<string, any>) => {
     let message = messages[id];
     if (message && values && message.includes('{')) {
