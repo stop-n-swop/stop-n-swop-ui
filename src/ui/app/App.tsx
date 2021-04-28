@@ -24,9 +24,8 @@ export default function App() {
               <div
                 style={{
                   backgroundImage: `url(${background})`,
-                  filter: 'grayscale(1) blur(2px) brightness(0.5)',
                 }}
-                className="h-screen w-screen top-0 left-0 absolute md:fixed bg-center pointer-events-none bg-cover"
+                className="h-screen w-screen top-0 left-0 absolute md:fixed bg-center pointer-events-none bg-cover filter grayscale blur-sm brightness-50"
               />
               <Suspense fallback={<LoadingPage />}>
                 <Core />

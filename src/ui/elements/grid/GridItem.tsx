@@ -30,7 +30,7 @@ export default function GridItem({
       <Component
         to={to}
         className={cx(
-          'flex bg-black space-x-4 w-full h-full hover:bg-gray-800 hover:filter-contrast',
+          'flex bg-black space-x-4 w-full h-full hover:bg-gray-800 hover:filter hover:contrast-125',
           'md:space-x-0 md:flex-col md:w-3/4',
           'lg:w-5/6',
         )}

@@ -28,10 +28,7 @@ export default function QuickActions({
   const getMessage = useGetMessage();
 
   return (
-    <div
-      className="flex justify-around"
-      style={{ backdropFilter: 'brightness(0.5)' }}
-    >
+    <div className="flex justify-around backdrop-filter backdrop-brightness-50">
       <Favourite
         value={favourite}
         onClick={onFavouriteClick}

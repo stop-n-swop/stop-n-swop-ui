@@ -87,7 +87,7 @@ export default function Slideshow({ images, initial = 0, className }: Props) {
   return (
     <div className={className}>
       <div
-        className="w-full sm:w-3/4 sm:mx-auto lg:mx-0 lg:w-full relative"
+        className="w-full sm:w-3/4 sm:mx-auto lg:mx-0 lg:w-full relative overflow-x-hidden"
         style={{ '--aspect-ratio': 16 / 9 } as any}
         {...handlers}
       >

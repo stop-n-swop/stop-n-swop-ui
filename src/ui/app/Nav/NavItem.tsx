@@ -25,7 +25,6 @@ export default function NavItem({
   return (
     <animated.li style={style} onMouseEnter={boop}>
       <Link
-        component={Link}
         to={to}
         className={cx({
           flex: true,

@@ -4,12 +4,9 @@ import React from 'react';
 export default function Banner({ image }: { image: ImageUrl }) {
   return (
     <img
-      className="absolute w-full h-full object-center object-cover"
+      className="absolute w-full h-full object-center object-cover filter blur-sm brightness-50"
       src={image}
       alt={image}
-      style={{
-        filter: 'blur(3px) brightness(0.5)',
-      }}
       loading="lazy"
     />
   );

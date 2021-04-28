@@ -16,11 +16,10 @@ export default function Home() {
       <div
         style={{
           backgroundImage: `url(${background})`,
-          filter: 'blur(3px)',
           zIndex: 0,
           top: -45,
         }}
-        className="h-screen w-screen left-0 absolute bg-center pointer-events-none bg-cover"
+        className="h-screen w-screen left-0 absolute bg-center pointer-events-none bg-cover filter blur-sm"
       />
       <div
         className={cx(

@@ -14,8 +14,12 @@ export default forwardRef<HTMLDivElement, Props>(function Card(
   return (
     <div
       ref={ref}
-      className={cx(className, 'bg-black sm:bg-opacity-75 rounded', padding)}
-      style={{ backdropFilter: 'blur(10px)' }}
+      className={cx(
+        className,
+        'bg-black sm:bg-opacity-75 rounded',
+        'backdrop-filter backdrop-blur',
+        padding,
+      )}
     >
       {children}
     </div>

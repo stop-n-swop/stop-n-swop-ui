@@ -1,9 +1,10 @@
 module.exports = {
+  mode: 'jit',
   purge: ['./src/**/*.ts', './src/**/*.tsx', './index.html'],
   darkMode: false, // or 'media' or 'class'
   variants: {
     extend: {
-      backgroundColor: ['focused-sibling'],
+      filter: ['hover', 'focus'],
     },
   },
   theme: {

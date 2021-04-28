@@ -2,17 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer utilities {
-  @variants hover, responsive {
-    .filter-none {
-      filter: none;
-    }
-    .filter-contrast {
-      filter: contrast(1.25);
-    }
-  }
-}
-
 /* Aspect ratio magic */
 [style*='--aspect-ratio'] > :first-child {
   width: 100%;
