@@ -1,27 +1,28 @@
-import { useContext } from 'react';
+import { useCallback, useContext, useMemo } from 'react';
 import { useResolve } from 'react-jpex';
 import { context } from './context';
-
-// TODO: memoize
 
 export const useGetMessage = () => {
   const { warn } = useResolve<Console>();
   const { messages } = useContext(context);
 
-  return (id: string, values?: Record<string, any>) => {
-    let message = messages[id];
-    if (message && values && message.includes('{')) {
-      message = Object.entries(values).reduce((message, [key, value]) => {
-        return message.replace(`{${key}}`, value);
-      }, message);
-    }
+  return useCallback(
+    (id: string, values?: Record<string, any>) => {
+      let message = messages[id];
+      if (message && values && message.includes('{')) {
+        message = Object.entries(values).reduce((message, [key, value]) => {
+          return message.replace(`{${key}}`, value);
+        }, message);
+      }
 
-    if (process.env.NODE_ENV !== 'production' && message == null) {
-      warn(`Could not find a message for id ${id}`);
-    }
+      if (process.env.NODE_ENV !== 'production' && message == null) {
+        warn(`Could not find a message for id ${id}`);
+      }
 
-    return message ?? id;
-  };
+      return message ?? id;
+    },
+    [messages, warn],
+  );
 };
 
 export const useMessage = (id: string, values?: Record<string, any>) =>
@@ -29,10 +30,13 @@ export const useMessage = (id: string, values?: Record<string, any>) =>
 
 export const useGetNumber = () => {
   const { locale } = useContext(context);
-  return (number: number, opts?: Intl.NumberFormatOptions) => {
-    const intl = new Intl.NumberFormat(locale, opts);
-    return intl.format(number);
-  };
+  return useCallback(
+    (number: number, opts?: Intl.NumberFormatOptions) => {
+      const intl = new Intl.NumberFormat(locale, opts);
+      return intl.format(number);
+    },
+    [locale],
+  );
 };
 
 export const useNumber = (number: number, opts?: Intl.NumberFormatOptions) =>
@@ -41,13 +45,16 @@ export const useNumber = (number: number, opts?: Intl.NumberFormatOptions) =>
 export const useGetCurrency = () => {
   const { currency } = useContext(context);
   const getNumber = useGetNumber();
-  return (number: number, opts?: Intl.NumberFormatOptions) => {
-    return getNumber(number, {
-      style: 'currency',
-      currency,
-      ...opts,
-    });
-  };
+  return useCallback(
+    (number: number, opts?: Intl.NumberFormatOptions) => {
+      return getNumber(number, {
+        style: 'currency',
+        currency,
+        ...opts,
+      });
+    },
+    [currency, getNumber],
+  );
 };
 
 export const useCurrency = (number: number, opts?: Intl.NumberFormatOptions) =>
@@ -55,10 +62,13 @@ export const useCurrency = (number: number, opts?: Intl.NumberFormatOptions) =>
 
 export const useGetDate = () => {
   const { locale } = useContext(context);
-  return (date: Date, opts?: Intl.DateTimeFormatOptions) => {
-    const intl = new Intl.DateTimeFormat(locale, opts);
-    return intl.format(date);
-  };
+  return useCallback(
+    (date: Date, opts?: Intl.DateTimeFormatOptions) => {
+      const intl = new Intl.DateTimeFormat(locale, opts);
+      return intl.format(date);
+    },
+    [locale],
+  );
 };
 
 export const useDate = (date: Date, opts?: Intl.DateTimeFormatOptions) =>
@@ -70,7 +80,12 @@ export const useIntl = () => {
   const number = useGetNumber();
   const date = useGetDate();
 
-  return { message, currency, number, date };
+  return useMemo(() => ({ message, currency, number, date }), [
+    currency,
+    date,
+    message,
+    number,
+  ]);
 };
 
 export type IntlShape = ReturnType<typeof useIntl>;

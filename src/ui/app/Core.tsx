@@ -11,9 +11,6 @@ import Content from './Content';
 import Footer from './Footer';
 import Nav from './Nav';
 
-// TODO: get this
-// https://www.dreamstime.com/taipei-taiwan-february-studio-shot-pile-different-nintendo-games-shot-above-large-pile-retro-nintendo-games-image113236003#_
-
 export default function Core() {
   useExchanges();
   const { pathname } = useLocation();
