@@ -18,7 +18,11 @@ export default function Core() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname, window]);
-  useAuth();
+  const ready = useAuth();
+
+  if (!ready) {
+    return <LoadingPage />;
+  }
 
   return (
     <div className="relative flex-grow flex flex-col">

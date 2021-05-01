@@ -4,6 +4,7 @@ import cartridge from 'ui/assets/s-l640.jpg';
 import cartridge2 from 'ui/assets/cartridge-back.jpg';
 import cartridge3 from 'ui/assets/Super_Mario_64_Boxart.png';
 import { Order, Status } from '@sns/contracts/order';
+import { useAuthGuard } from 'usecases/auth';
 import MyListing from './MyListing';
 
 const listing: Listing = {
@@ -56,6 +57,8 @@ const audit: Audit = [
 ];
 
 export default function ConnectedMyListing() {
+  useAuthGuard();
+
   return (
     <MyListing
       history={audit}

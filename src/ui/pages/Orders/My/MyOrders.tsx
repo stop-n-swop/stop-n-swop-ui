@@ -4,6 +4,7 @@ import { useMessage } from 'ui/intl';
 import { List } from 'ui/elements/list';
 import PageTitle from 'ui/elements/PageTitle';
 import { ids } from 'ui/messages';
+import { useAuthGuard } from 'usecases/auth';
 import MyOrder from './MyOrder';
 
 const orders: Order[] = [
@@ -20,6 +21,8 @@ const orders: Order[] = [
 ];
 
 export default function MyOrders() {
+  useAuthGuard();
+
   return (
     <div>
       <PageTitle>{useMessage(ids.order.title)}</PageTitle>

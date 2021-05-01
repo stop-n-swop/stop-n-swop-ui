@@ -1,6 +1,7 @@
 import React from 'react';
 import cartridge from 'ui/assets/s-l640.jpg';
 import { Condition, Region, Listing as IListing } from '@sns/contracts/listing';
+import { useAuthGuard } from 'usecases/auth';
 import MyListings from './MyListings';
 
 const listings: IListing[] = [
@@ -58,5 +59,7 @@ const listings: IListing[] = [
 ];
 
 export default function ConnectedMyListings() {
+  useAuthGuard();
+
   return <MyListings listings={listings} />;
 }

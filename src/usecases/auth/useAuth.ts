@@ -1,30 +1,16 @@
-import { useAction } from '@respite/action';
-import type { LogOut, RefreshTokens, SaveTokens } from 'ports/auth';
+import type { LogOut } from 'ports/auth';
 import { encase } from 'react-jpex';
-import { AuthKey } from 'usecases/keys';
 import { useEffect } from 'react';
 import type { Navigate } from 'ports/navigation';
 import { LOGIN } from 'ui/constants/paths';
 import { useTokens } from './useTokens';
+import { useRefreshTokens } from './useRefreshTokens';
 
 export const useAuth = encase(
-  (
-    refreshTokens: RefreshTokens,
-    saveTokens: SaveTokens,
-    logOut: LogOut,
-    navigate: Navigate,
-    console: Console,
-  ) => () => {
+  (logOut: LogOut, navigate: Navigate, console: Console) => () => {
     const { data: tokens } = useTokens();
 
-    const { action } = useAction(
-      AuthKey,
-      async () => {
-        const newTokens = await refreshTokens();
-        await saveTokens(newTokens);
-      },
-      [],
-    );
+    const { action } = useRefreshTokens();
 
     useEffect(() => {
       if (tokens.refreshToken != null && tokens.authToken == null) {
@@ -35,5 +21,7 @@ export const useAuth = encase(
         });
       }
     }, [action, tokens.authToken, tokens.refreshToken]);
+
+    return tokens.refreshToken == null || tokens.authToken != null;
   },
 );

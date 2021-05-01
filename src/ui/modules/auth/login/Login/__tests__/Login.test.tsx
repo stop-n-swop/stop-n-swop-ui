@@ -16,7 +16,7 @@ const setup = () => {
 
   const render = ({ error }: { error?: any } = {}) => {
     renderComponent(
-      <Login error={error}>
+      <Login error={error} reason={null}>
         <div />
       </Login>,
       { wrapper },

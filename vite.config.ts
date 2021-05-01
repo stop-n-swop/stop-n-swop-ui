@@ -13,6 +13,7 @@ export default defineConfig({
       domain: '/src/domain',
       usecases: '/src/usecases',
       ui: '/src/ui',
+      crosscutting: '/src/crosscutting',
     },
   },
   server: {

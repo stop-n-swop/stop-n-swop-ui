@@ -8,19 +8,22 @@ import { makeDashboardPath } from 'ui/constants/paths';
 import Username from 'ui/modules/account/about-me/Username';
 import Email from 'ui/modules/account/about-me/Email';
 import Address from 'ui/modules/account/about-me/Address';
-import { useMessage } from 'ui/intl';
+import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
+import { useAuthGuard } from 'usecases/auth';
 
 export default function Dashboard() {
+  useAuthGuard();
   const name = 'jb';
   const { section, subSection } = useParams<{
     section: string;
     subSection: string;
   }>();
+  const getMessage = useGetMessage();
 
   return (
     <>
-      <PageTitle>{useMessage(ids.account.dashboard.title)}</PageTitle>
+      <PageTitle>{getMessage(ids.account.dashboard.title)}</PageTitle>
       <Container name={name}>
         <Sections section={section} subSection={subSection} sections={sections}>
           <Route
@@ -29,7 +32,11 @@ export default function Dashboard() {
               subSection: 'username',
             })}
           >
-            <Username />
+            <Username
+              title={getMessage(ids.account.aboutMe.username.title)}
+              description={getMessage(ids.account.aboutMe.username.description)}
+              submitText={getMessage(ids.account.saveButton)}
+            />
           </Route>
           <Route
             path={makeDashboardPath({
@@ -45,7 +52,11 @@ export default function Dashboard() {
               subSection: 'address',
             })}
           >
-            <Address />
+            <Address
+              title={getMessage(ids.account.aboutMe.address.title)}
+              description={getMessage(ids.account.aboutMe.address.description)}
+              submitText={getMessage(ids.account.saveButton)}
+            />
           </Route>
         </Sections>
       </Container>

@@ -1,8 +1,11 @@
 import type { ShortProduct } from '@sns/contracts/product';
 import React, { useState } from 'react';
+import { useAuthGuard } from 'usecases/auth';
 import NewListing from './NewListing';
 
 export default function ConnectedNewListing() {
+  useAuthGuard({ username: true });
+
   const [, setSearch] = useState('');
   const [productId, setProductId] = useState('');
   const results: ShortProduct[] = [

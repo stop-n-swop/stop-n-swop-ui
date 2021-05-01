@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import cx from 'classnames';
 import { InputController } from 'ui/elements/Input';
 import { useForm } from 'react-hook-form';
@@ -10,27 +10,38 @@ import FormError from 'ui/elements/FormError';
 import Submit from 'ui/elements/Submit';
 import Form from '../../dashboard/Form';
 
-export default function Address() {
+export default function Address({
+  title,
+  description,
+  submitText,
+  onSubmit,
+}: {
+  title: ReactNode;
+  description: ReactNode;
+  submitText: ReactNode;
+  onSubmit?(): any;
+}) {
   const intl = useIntl();
   const { data: user } = useUser();
-  const { action: handleSubmit, error, reset, status } = useUpdateUser();
+  const { action, error, reset, status } = useUpdateUser();
   const getMessage = useGetMessage();
   const required = getMessage(ids.error.required);
+  const handleSubmit = async (values: any) => {
+    await action(values);
+    onSubmit?.();
+  };
 
   const formProps = useForm();
 
   return (
     <Form formProps={formProps} onSubmit={handleSubmit}>
-      <h3 className="text-lg font-bold">
-        {getMessage(ids.account.aboutMe.address.title)}
-      </h3>
-      <p className="text-sm text-gray-100 italic">
-        {getMessage(ids.account.aboutMe.address.description)}
-      </p>
+      <h3 className="text-lg font-bold">{title}</h3>
+      <p className="text-sm text-gray-100 italic">{description}</p>
       <FormError error={getErrorMessage(error, intl)} />
       <div
         className={cx(
-          'sm:w-1/2 sm:mx-auto space-y-4 flex-grow',
+          'space-y-4 flex-grow mt-8',
+          'sm:w-1/2 sm:mx-auto',
           'lg:flex lg:flex-col lg:justify-center',
         )}
       >
@@ -81,7 +92,7 @@ export default function Address() {
       </div>
       <div>
         <Submit status={status} reset={reset}>
-          {getMessage(ids.account.saveButton)}
+          {submitText}
         </Submit>
       </div>
     </Form>

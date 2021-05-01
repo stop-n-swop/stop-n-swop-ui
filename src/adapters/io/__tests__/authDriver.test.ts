@@ -9,6 +9,7 @@ import type {
 import type { Navigate } from 'ports/navigation';
 import { LOGIN } from 'ui/constants/paths';
 import '../authDriver';
+import { Reason } from 'domain/constants/auth';
 
 const setup = () => {
   const jpex = base.extend();
@@ -54,7 +55,7 @@ describe('when not logged in', () => {
     authDriver({ url: '/api' });
     await new Promise((res) => setTimeout(res, 10));
 
-    expect(navigate).toBeCalledWith(LOGIN);
+    expect(navigate).toBeCalledWith(`${LOGIN}?reason=${Reason.LOGIN_REQUIRED}`);
   });
 });
 
@@ -118,7 +119,9 @@ describe('when logged in', () => {
 
           expect(refreshTokens).toBeCalled();
           expect(clearTokens).toBeCalled();
-          expect(navigate).toBeCalledWith(LOGIN);
+          expect(navigate).toBeCalledWith(
+            `${LOGIN}?reason=${Reason.SESSION_EXPRED}`,
+          );
         });
       });
       it('attempts to fetch again', async () => {
@@ -155,7 +158,9 @@ describe('when logged in', () => {
 
           expect(refreshTokens).toBeCalled();
           expect(clearTokens).toBeCalled();
-          expect(navigate).toBeCalledWith(LOGIN);
+          expect(navigate).toBeCalledWith(
+            `${LOGIN}?reason=${Reason.SESSION_EXPRED}`,
+          );
         });
       });
     });

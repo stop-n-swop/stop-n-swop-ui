@@ -3,6 +3,7 @@ import { Status } from '@sns/contracts/order';
 import { CommonCode } from '@sns/contracts/common';
 import { UserCode } from '@sns/contracts/user';
 import { flatten, unflatten } from 'flat';
+import { Reason } from 'domain/constants/auth';
 
 const enMessages = {
   nav: {
@@ -206,6 +207,20 @@ const enMessages = {
     login: {
       title: 'Log in',
       google: 'Continue with Google',
+    },
+    levelUp: {
+      submitText: 'Continue',
+      username: {
+        description: "Before we continue, you'll need to set a username...",
+      },
+      address: {
+        description: 'Youll need to provide your address to continue...',
+      },
+      reason: {
+        [Reason.LOGIN_REQUIRED]: 'Please log in to continue...',
+        [Reason.SESSION_EXPRED]:
+          'Your session has expired, please log in again...',
+      },
     },
   },
   order: {

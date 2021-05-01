@@ -8,6 +8,7 @@ import cartridge3 from 'ui/assets/Super_Mario_64_Boxart.png';
 import useMachine from 'ui/modules/listings/new/machine';
 import type { Values } from 'ui/modules/listings/new/types';
 import { MY_LISTINGS } from 'ui/constants/paths';
+import { useAuthGuard } from 'usecases/auth';
 import EditListing from './EditListing';
 
 const listing: Listing = {
@@ -29,6 +30,7 @@ const listing: Listing = {
 };
 
 export default function ConnectedEditListing() {
+  useAuthGuard();
   const { push } = useHistory();
   const { productId, listingId } = useParams<{
     productId: string;

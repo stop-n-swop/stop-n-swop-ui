@@ -58,6 +58,9 @@ module.exports = {
         },
         warning: {
           DEFAULT: '#FB8B24',
+          light: '#fb973a',
+          lighter: '#fca250',
+          lightest: '#fcae66',
         },
         danger: {
           dark: '#cc1616',

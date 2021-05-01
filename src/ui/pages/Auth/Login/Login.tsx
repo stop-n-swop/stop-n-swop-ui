@@ -12,9 +12,11 @@ import { useMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 import { useResolve } from 'react-jpex';
 import type { Config } from 'ports/io';
+import type { Reason } from 'domain/constants/auth';
 
 export default function LoginPage() {
   const redirect = useQueryParam('redirect') || makeDashboardPath();
+  const reason = useQueryParam<Reason>('reason');
   const { action: logIn, error } = useLogIn();
   const { push } = useHistory();
   const config = useResolve<Config>();
@@ -22,7 +24,7 @@ export default function LoginPage() {
 
   return (
     <LoginForm>
-      <Login error={error}>
+      <Login error={error} reason={reason}>
         <OAuth2Login
           component={OAuth2Login}
           authorizationUrl={config.oauth.google.url}

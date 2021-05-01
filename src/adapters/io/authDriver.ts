@@ -1,3 +1,4 @@
+import { Reason } from 'domain/constants/auth';
 import jpex from 'jpex';
 import type {
   ClearTokens,
@@ -7,7 +8,7 @@ import type {
 } from 'ports/auth';
 import type { AuthDriver, Driver } from 'ports/io';
 import type { Navigate } from 'ports/navigation';
-import { LOGIN } from 'ui/constants/paths';
+import { makeLoginPath } from 'ui/constants/paths';
 
 const authDriver = (
   driver: Driver,
@@ -22,7 +23,7 @@ const authDriver = (
     const { authToken, refreshToken } = await getTokens();
 
     if (authToken == null && refreshToken == null) {
-      return navigate(LOGIN);
+      return navigate(makeLoginPath({ reason: Reason.LOGIN_REQUIRED }));
     }
 
     try {
@@ -51,7 +52,7 @@ const authDriver = (
     }
 
     await clearTokens();
-    return navigate(LOGIN);
+    return navigate(makeLoginPath({ reason: Reason.SESSION_EXPRED }));
   };
 
 jpex.factory<AuthDriver>(authDriver);

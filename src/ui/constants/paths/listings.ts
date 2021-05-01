@@ -1,4 +1,4 @@
-import { makeGamePath } from '../paths';
+import { makeGamePath } from './games';
 
 export const MY_LISTINGS = '/my/listings';
 export const VIEW_MY_LISTING = '/my/listings/:listingId';
