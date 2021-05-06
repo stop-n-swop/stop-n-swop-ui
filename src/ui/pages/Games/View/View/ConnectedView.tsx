@@ -1,40 +1,34 @@
-import { Type, Game } from '@sns/contracts/product';
-
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import banner from 'ui/assets/sc8e2l.jpg';
-import cover from 'ui/assets/Super_Mario_64_Boxart.png';
+import { useGame } from 'usecases/games';
+import { usePlatform } from 'usecases/platforms';
 import View from './View';
 
 export default function ConectedViewPage() {
   const [favourite, setFavourite] = useState(false);
-  const { productId } = useParams<{ productId: string }>();
+  const { productId, platformId } = useParams<{
+    productId: string;
+    platformId: string;
+  }>();
+  const { data: game } = useGame({ id: productId });
+  const { data: platform } = usePlatform({ id: platformId });
+  const { releaseDate } = game.platforms.find(({ id }) => id === platformId);
   const listingIds = new Array(10).fill(null).map((_, i) => `${i}`);
-
-  const product: Game = {
-    productId,
-    banner,
-    cover,
-    developer: 'Nintendo',
-    publisher: 'Nintendo',
-    name: 'Super Mario 64',
-    platformId: 'n64',
-    type: Type.GAME,
-    releaseDate: new Date(new Date('1996-06-23')),
-  };
 
   return (
     <View
-      banner={product.banner}
-      cover={product.cover}
-      developer={product.developer}
-      publisher={product.developer}
-      name={product.name}
-      releaseDate={product.releaseDate}
+      banner={game.banner}
+      cover={game.cover}
+      developer={game.developers[0]}
+      publisher={game.publishers[0]}
+      name={game.name}
+      releaseDate={releaseDate}
       favourite={favourite}
       toggleFavourite={() => setFavourite(!favourite)}
       listingIds={listingIds}
       productId={productId}
+      platformId={platformId}
+      platform={platform.name}
     />
   );
 }

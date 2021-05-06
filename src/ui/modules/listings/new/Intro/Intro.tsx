@@ -4,19 +4,20 @@ import { makeGameNewListingPath } from 'ui/constants/paths';
 import Button from 'ui/elements/Button';
 import Typeahead from 'ui/elements/Typeahead';
 import { FaRocket } from 'react-icons/fa';
-import type { ShortProduct } from '@sns/contracts/product';
 import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 
 interface Props {
   onSearch(value: string): void;
   productId: string;
+  platformId: string;
   setProductId(value: string): void;
-  results: ShortProduct[];
+  results: any[];
 }
 
 export default function Intro({
   onSearch,
+  platformId,
   productId,
   setProductId,
   results,
@@ -44,7 +45,7 @@ export default function Intro({
           <Button
             component={Link}
             kind="primary"
-            to={makeGameNewListingPath({ productId })}
+            to={makeGameNewListingPath({ productId, platformId })}
           >
             <span className="pr-3">
               {getMessage(ids.listings.new.intro.button)}

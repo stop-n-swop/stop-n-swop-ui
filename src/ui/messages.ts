@@ -52,6 +52,7 @@ const enMessages = {
       results: {
         available: '{count} available',
         owner: '{developer} / {publisher}',
+        empty: 'Find a game!',
       },
     },
     filters: {

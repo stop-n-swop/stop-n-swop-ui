@@ -11,10 +11,15 @@ export enum UserCode {
   INVALID_TOKEN = 202,
   OUTDATED_TOKEN = 203,
   NOT_FOUND = 204,
+  EMAIL_NOT_UNIQUE = 205,
 }
 
 export class UsernameNotUniqueError extends ConflictError {
   code: number = UserCode.NOT_UNIQUE;
+}
+
+export class EmailNotUniqueError extends ConflictError {
+  code: number = UserCode.EMAIL_NOT_UNIQUE;
 }
 
 export class InvalidUsernamePassword extends UserInputError {

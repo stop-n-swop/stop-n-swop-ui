@@ -8,7 +8,10 @@ import NewProductListing from './NewProductListing';
 
 export default function ConnectedNewProductListing() {
   useAuthGuard({ username: true });
-  const { productId } = useParams<{ productId: string }>();
+  const { productId, platformId } = useParams<{
+    productId: string;
+    platformId: string;
+  }>();
   const onSubmit = async (values: Values) => {
     // eslint-disable-next-line no-console
     console.log(values);
@@ -24,6 +27,7 @@ export default function ConnectedNewProductListing() {
     <FormProvider {...formProps}>
       <NewProductListing
         productId={productId}
+        platformId={platformId}
         dispatch={dispatch}
         step={step}
         name={name}

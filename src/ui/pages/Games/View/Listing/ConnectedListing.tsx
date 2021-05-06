@@ -6,17 +6,20 @@ import Listing from './Listing';
 interface Props {
   productId: string;
   listingId: string;
+  platformId: string;
   style: CSSProperties;
 }
 
 export default function ConnectedListing({
   listingId,
   productId,
+  platformId,
   style,
 }: Props) {
   const listing: IListing = {
     productId,
     listingId,
+    platformId,
     images: [cartridge],
     location: 'London, UK',
     price: 50,
@@ -36,6 +39,7 @@ export default function ConnectedListing({
     <Listing
       productId={productId}
       listingId={listingId}
+      platformId={platformId}
       username={listing.username}
       image={listing.images[0]}
       location={listing.location}

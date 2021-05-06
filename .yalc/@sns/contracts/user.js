@@ -31,11 +31,18 @@ exports.UserCode = void 0;
   UserCode[UserCode["INVALID_TOKEN"] = 202] = "INVALID_TOKEN";
   UserCode[UserCode["OUTDATED_TOKEN"] = 203] = "OUTDATED_TOKEN";
   UserCode[UserCode["NOT_FOUND"] = 204] = "NOT_FOUND";
+  UserCode[UserCode["EMAIL_NOT_UNIQUE"] = 205] = "EMAIL_NOT_UNIQUE";
 })(exports.UserCode || (exports.UserCode = {}));
 class UsernameNotUniqueError extends common.ConflictError {
   constructor(...args) {
     super(...args);
     _defineProperty(this, "code", exports.UserCode.NOT_UNIQUE);
+  }
+}
+class EmailNotUniqueError extends common.ConflictError {
+  constructor(...args) {
+    super(...args);
+    _defineProperty(this, "code", exports.UserCode.EMAIL_NOT_UNIQUE);
   }
 }
 class InvalidUsernamePassword extends common.UserInputError {
@@ -63,6 +70,7 @@ class UserNotFoundError extends common.NotFoundError {
   }
 }
 
+exports.EmailNotUniqueError = EmailNotUniqueError;
 exports.InvalidTokenError = InvalidTokenError;
 exports.InvalidUsernamePassword = InvalidUsernamePassword;
 exports.OutdatedTokenError = OutdatedTokenError;

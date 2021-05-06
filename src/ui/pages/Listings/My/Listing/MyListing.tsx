@@ -17,7 +17,14 @@ export default function MyListing({
   order: Order | undefined;
   history: Audit;
 }) {
-  const { listingId, productId, username, images, createdDate } = listing;
+  const {
+    listingId,
+    productId,
+    platformId,
+    username,
+    images,
+    createdDate,
+  } = listing;
   const listingText = `(${listingId})`;
   const status = order?.status ?? Status.NONE;
 
@@ -33,6 +40,7 @@ export default function MyListing({
           <Overview
             history={history}
             listingId={listingId}
+            platformId={platformId}
             productId={productId}
             status={status}
             seller={username}

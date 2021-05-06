@@ -1,11 +1,12 @@
 import React from 'react';
 import cx from 'classnames';
-import { useDate, useMessage } from 'ui/intl';
+import { useDate, useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 
 interface Props {
   name: string;
   releaseDate: Date;
+  platform: string;
   developer: string;
   publisher: string;
 }
@@ -15,7 +16,10 @@ export default function Meta({
   releaseDate,
   developer,
   publisher,
+  platform,
 }: Props) {
+  const getMessage = useGetMessage();
+
   return (
     <div
       className={cx(
@@ -30,15 +34,18 @@ export default function Meta({
       >
         {name}
       </h1>
+      <div className="text-gray-100">{platform}</div>
       <div className="hidden md:block text-gray-200">
         {useDate(releaseDate)}
       </div>
-      <div className="hidden md:block text-gray-300">
-        {useMessage(ids.games.search.results.owner, {
-          developer,
-          publisher,
-        })}
-      </div>
+      <If condition={developer && publisher}>
+        <div className="hidden md:block text-gray-300">
+          {getMessage(ids.games.search.results.owner, {
+            developer,
+            publisher,
+          })}
+        </div>
+      </If>
     </div>
   );
 }

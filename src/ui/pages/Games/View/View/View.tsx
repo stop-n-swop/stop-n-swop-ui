@@ -15,8 +15,10 @@ export default function View({
   cover,
   banner,
   productId,
+  platformId,
   listingIds,
   favourite,
+  platform,
   toggleFavourite,
 }: {
   name: string;
@@ -26,11 +28,13 @@ export default function View({
   publisher: string;
   releaseDate: Date;
   productId: string;
+  platformId: string;
   listingIds: string[];
   favourite: boolean;
+  platform: string;
   toggleFavourite(): void;
 }) {
-  const cascade = useCascade(10);
+  const cascade = useCascade(listingIds.length);
 
   return (
     <div className="xl:w-4/5 xl:mx-auto flex-grow flex flex-col">
@@ -41,6 +45,7 @@ export default function View({
         publisher={publisher}
         name={name}
         releaseDate={releaseDate}
+        platform={platform}
       />
       <QuickActions
         favourite={favourite}
@@ -54,6 +59,7 @@ export default function View({
             <Listing
               style={cascade(i)}
               productId={productId}
+              platformId={platformId}
               listingId={listingId}
             />
           ))}

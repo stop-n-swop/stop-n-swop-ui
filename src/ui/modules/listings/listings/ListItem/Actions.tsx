@@ -9,6 +9,7 @@ import AddToBasket from '../../listing/AddToBasket';
 
 interface Props {
   productId: string;
+  platformId: string;
   listingId: string;
   price: number;
   readonly?: boolean;
@@ -18,6 +19,7 @@ export default function Actions({
   readonly,
   price,
   productId,
+  platformId,
   listingId,
 }: Props) {
   return (
@@ -47,6 +49,7 @@ export default function Actions({
           component={Link}
           to={makeGameListingPath({
             productId,
+            platformId,
             listingId,
           })}
         >

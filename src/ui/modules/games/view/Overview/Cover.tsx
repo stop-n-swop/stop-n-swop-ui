@@ -3,6 +3,10 @@ import cx from 'classnames';
 import type { ImageUrl } from 'domain/types';
 
 export default function Cover({ image }: { image: ImageUrl }) {
+  if (!image) {
+    return null;
+  }
+
   return (
     <div
       className={cx(

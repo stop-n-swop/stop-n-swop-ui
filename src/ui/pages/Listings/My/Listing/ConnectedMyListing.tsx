@@ -9,6 +9,7 @@ import MyListing from './MyListing';
 
 const listing: Listing = {
   listingId: 'sm64_001',
+  platformId: 'nintendo-64',
   description: '',
   location: 'London, UK',
   price: 50,

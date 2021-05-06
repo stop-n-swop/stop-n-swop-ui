@@ -8,14 +8,16 @@ import { useParams } from 'react-router-dom';
 import Listing from './Listing';
 
 export default function ConnectedListingPage() {
-  const { listingId, productId } = useParams<{
+  const { listingId, productId, platformId } = useParams<{
     productId: string;
     listingId: string;
+    platformId: string;
   }>();
 
   const listing: IListing = {
     productId,
     listingId,
+    platformId,
     images: [cartridge, cartridge2, cartridge3],
     location: 'London, UK',
     price: 50,
@@ -31,13 +33,14 @@ export default function ConnectedListingPage() {
     createdDate: new Date(),
   };
   const product: Game = {
-    productId,
+    id: productId,
+    rawgId: -1,
     banner: '',
     cover: '',
-    developer: 'Nintendo',
-    publisher: 'Nintendo',
+    developers: ['Nintendo'],
+    publishers: ['Nintendo'],
     name: 'Super Mario 64',
-    platformId: 'n64',
+    platforms: [{ id: 'n64', releaseDate: new Date(new Date('1996-06-23')) }],
     type: Type.GAME,
     releaseDate: new Date(new Date('1996-06-23')),
   };

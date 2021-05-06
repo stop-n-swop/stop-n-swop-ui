@@ -3,22 +3,22 @@ export interface Manufacturer {
     id: string;
     name: string;
 }
-export interface ShortProduct {
-    productId: string;
-    name: string;
-}
-export interface Product extends ShortProduct {
+export interface Product {
     type: Type;
+    id: string;
+    name: string;
     cover: string;
     banner: string;
     releaseDate: Date;
 }
 export interface Game extends Product {
     type: Type.GAME;
-    platformId: string;
-    developer: string;
-    publisher: string;
+    rawgId: number;
+    platforms: string[];
+    developers: string[];
+    publishers: string[];
 }
 export interface Platform extends Product {
     type: Type.PLATFORM;
+    rawgId: number;
 }

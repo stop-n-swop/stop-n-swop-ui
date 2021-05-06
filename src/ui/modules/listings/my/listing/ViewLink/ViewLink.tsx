@@ -5,13 +5,21 @@ import { makeGameListingPath } from 'ui/constants/paths';
 import Button from 'ui/elements/Button';
 import { ids } from 'ui/messages';
 
-export default function ViewLink({ productId, listingId }) {
+export default function ViewLink({
+  productId,
+  platformId,
+  listingId,
+}: {
+  productId: string;
+  platformId: string;
+  listingId: string;
+}) {
   return (
     <div className="flex">
       <Button
         padding={false}
         component={Link}
-        to={makeGameListingPath({ productId, listingId })}
+        to={makeGameListingPath({ productId, platformId, listingId })}
         kind="tertiary"
       >
         {useMessage(ids.listings.myListing.link)}

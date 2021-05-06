@@ -1549,6 +1549,11 @@
   resolved "https://registry.yarnpkg.com/@respite/query/-/query-4.0.0.tgz#caed4b0da9133f11804ab6bcf0b7eafff2e6ffca"
   integrity sha512-QcDOkD5zLGZZY+iyEYZ0GLSgBR3cmm5BLUBtX7SALhkLHb15gagJU+YjSFvaLGFmVqVtpAfzRKcn07bxnlE0Nw==
 
+"@respite/select@^4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@respite/select/-/select-4.0.0.tgz#d6a470b07172ffaa6e7fe00f6fd16772dfa6f6c2"
+  integrity sha512-Qe7bHFPvA4wUBshnfNwHVXkLZOAiwYat6X0QJeV31hGBbX3jRa1174BCOHIaIse4w8pbjOK2KrCvjqP8M6zcGw==
+
 "@sinonjs/commons@^1.7.0":
   version "1.8.3"
   resolved "https://registry.yarnpkg.com/@sinonjs/commons/-/commons-1.8.3.tgz#3802ddd21a50a949b6721ddd72da36e67e7f1b2d"

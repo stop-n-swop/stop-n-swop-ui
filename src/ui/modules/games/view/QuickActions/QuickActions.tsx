@@ -41,7 +41,10 @@ export default function QuickActions({
       <Button
         className="w-full justify-center"
         component={Link}
-        to={makeGameNewListingPath({ productId: 'super_mario_64' })}
+        to={makeGameNewListingPath({
+          platformId: 'nintendo-64',
+          productId: 'super_mario_64',
+        })}
         onMouseEnter={listBoop}
       >
         <ListIcon style={listStyle} size="1em" />

@@ -1,4 +1,3 @@
-import type { ShortProduct } from '@sns/contracts/product';
 import React from 'react';
 import { useMessage } from 'ui/intl';
 import Card from 'ui/elements/Card';
@@ -8,13 +7,15 @@ import Intro from 'ui/modules/listings/new/Intro';
 
 interface Props {
   productId: string;
-  results: ShortProduct[];
+  platformId: string;
+  results: any[];
   onSearch(value: string): void;
   setProductId(value: string): void;
 }
 
 export default function NewListing({
   productId,
+  platformId,
   results,
   onSearch,
   setProductId,
@@ -25,6 +26,7 @@ export default function NewListing({
       <Card className="lg:absolute lg:left-1/2 lg:top-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2 lg:transform w-full xl:w-4/5">
         <Intro
           productId={productId}
+          platformId={platformId}
           results={results}
           onSearch={onSearch}
           setProductId={setProductId}

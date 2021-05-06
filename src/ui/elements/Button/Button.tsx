@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
 import cx from 'classnames';
-import Loader from 'react-spinners/BeatLoader';
+import Loader from 'ui/modules/Loader';
 import { FaCheck } from 'react-icons/fa';
 import type { Kind, ButtonComponent, Props, State } from './types';
 
@@ -113,7 +113,7 @@ const Button: ButtonComponent = forwardRef<HTMLButtonElement, Props>(
               getColorClassNames({ kind, state }),
             )}
           >
-            <Loader color="#FFFFFF" size={8} />
+            <Loader sensible size={8} />
           </div>
         </When>
         <When condition={state === 'success'}>

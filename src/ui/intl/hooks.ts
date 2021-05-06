@@ -63,7 +63,11 @@ export const useCurrency = (number: number, opts?: Intl.NumberFormatOptions) =>
 export const useGetDate = () => {
   const { locale } = useContext(context);
   return useCallback(
-    (date: Date, opts?: Intl.DateTimeFormatOptions) => {
+    (date: Date | string, opts?: Intl.DateTimeFormatOptions) => {
+      if (typeof date === 'string') {
+        // eslint-disable-next-line no-param-reassign
+        date = new Date(date);
+      }
       const intl = new Intl.DateTimeFormat(locale, opts);
       return intl.format(date);
     },
@@ -71,8 +75,10 @@ export const useGetDate = () => {
   );
 };
 
-export const useDate = (date: Date, opts?: Intl.DateTimeFormatOptions) =>
-  useGetDate()(date, opts);
+export const useDate = (
+  date: Date | string,
+  opts?: Intl.DateTimeFormatOptions,
+) => useGetDate()(date, opts);
 
 export const useIntl = () => {
   const message = useGetMessage();

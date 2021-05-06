@@ -25,9 +25,10 @@ export default function Filters({ children }: Props) {
   return (
     <context.Provider value={{ active, setActive }}>
       <Card
+        padding={false}
         ref={ref}
         className={cx(
-          'flex flex-shrink-0 z-10 inset-0 justify-evenly px-0 py-0 flex-wrap',
+          'flex flex-shrink-0 z-10 justify-evenly px-0 py-0 flex-wrap',
           'md:mb-6',
           'lg:space-y-6 lg:block lg:px-6 lg:w-1/4 lg:py-4',
           'xl:w-1/6',

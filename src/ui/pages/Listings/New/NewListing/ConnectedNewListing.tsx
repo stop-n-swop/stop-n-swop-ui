@@ -1,4 +1,3 @@
-import type { ShortProduct } from '@sns/contracts/product';
 import React, { useState } from 'react';
 import { useAuthGuard } from 'usecases/auth';
 import NewListing from './NewListing';
@@ -8,7 +7,7 @@ export default function ConnectedNewListing() {
 
   const [, setSearch] = useState('');
   const [productId, setProductId] = useState('');
-  const results: ShortProduct[] = [
+  const results: unknown[] = [
     {
       productId: 'super_mario_60',
       name: 'Super Mario 60',
@@ -35,6 +34,7 @@ export default function ConnectedNewListing() {
     <NewListing
       onSearch={setSearch}
       productId={productId}
+      platformId="nintendo-64"
       setProductId={setProductId}
       results={results}
     />

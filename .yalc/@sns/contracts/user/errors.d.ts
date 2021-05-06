@@ -4,9 +4,13 @@ export declare enum UserCode {
     INVALID_LOGIN = 201,
     INVALID_TOKEN = 202,
     OUTDATED_TOKEN = 203,
-    NOT_FOUND = 204
+    NOT_FOUND = 204,
+    EMAIL_NOT_UNIQUE = 205
 }
 export declare class UsernameNotUniqueError extends ConflictError {
+    code: number;
+}
+export declare class EmailNotUniqueError extends ConflictError {
     code: number;
 }
 export declare class InvalidUsernamePassword extends UserInputError {

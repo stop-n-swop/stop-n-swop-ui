@@ -5,6 +5,7 @@ import type { Stats } from '@sns/contracts/listing';
 interface Props {
   productId: string;
   listingId: string;
+  platformId: string;
   username: string;
   image: string;
   price: number;
@@ -17,6 +18,7 @@ interface Props {
 export default function Listing({
   productId,
   listingId,
+  platformId,
   username,
   style,
   image,
@@ -34,7 +36,12 @@ export default function Listing({
       stats={stats}
       style={style}
     >
-      <Actions listingId={listingId} price={price} productId={productId} />
+      <Actions
+        listingId={listingId}
+        price={price}
+        productId={productId}
+        platformId={platformId}
+      />
     </ListingsItem>
   );
 }

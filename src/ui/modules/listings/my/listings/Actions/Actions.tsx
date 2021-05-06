@@ -43,13 +43,13 @@ export default function Actions({ listing, order, status, onClick }: Props) {
   const getButtonState = makeGetButtonState(active, status);
   const getMessage = useGetMessage();
 
-  const { listingId, productId } = listing;
+  const { listingId, productId, platformId } = listing;
   if (order == null) {
     return (
       <>
         <Button
           component={Link}
-          to={makeEditListingPath({ productId, listingId })}
+          to={makeEditListingPath({ productId, platformId, listingId })}
           kind="secondary"
         >
           {getMessage(ids.listings.myListings.actions.edit)}

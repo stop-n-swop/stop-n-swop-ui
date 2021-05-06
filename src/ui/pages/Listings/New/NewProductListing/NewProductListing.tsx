@@ -11,6 +11,7 @@ type Dispatch = ReturnType<typeof useMachine>[1];
 
 interface Props {
   productId: string;
+  platformId: string;
   name: string;
   step: Step;
   dispatch: Dispatch;
@@ -20,6 +21,7 @@ interface Props {
 
 export default function NewProductListing({
   productId,
+  platformId,
   name,
   step,
   dispatch,
@@ -36,6 +38,7 @@ export default function NewProductListing({
         location={location}
         previousUrl={NEW_LISTING}
         productId={productId}
+        platformId={platformId}
         step={step}
         username={username}
       />

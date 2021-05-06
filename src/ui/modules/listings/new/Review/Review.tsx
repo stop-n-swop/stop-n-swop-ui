@@ -35,7 +35,13 @@ export default function Review({ username, location, previous }: Props) {
             region,
           }}
         >
-          <Actions listingId="" price={price} productId="" readonly />
+          <Actions
+            listingId=""
+            price={price}
+            productId=""
+            platformId=""
+            readonly
+          />
         </ListingsItem>
       </div>
       <Buttons previous={previous} showNext={false}>

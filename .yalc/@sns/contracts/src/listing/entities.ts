@@ -10,6 +10,7 @@ export interface Stats {
 
 export interface Listing {
   productId: string;
+  platformId: string;
   listingId: string;
   images: string[];
   price: number;

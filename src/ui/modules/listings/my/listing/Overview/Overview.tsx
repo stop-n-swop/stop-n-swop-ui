@@ -9,6 +9,7 @@ import ViewLink from '../ViewLink';
 interface Props {
   productId: string;
   listingId: string;
+  platformId: string;
   status: IStatus;
   buyer: string;
   seller: string;
@@ -19,6 +20,7 @@ interface Props {
 export default function Overview({
   productId,
   listingId,
+  platformId,
   status,
   buyer,
   seller,
@@ -33,7 +35,11 @@ export default function Overview({
         </div>
         <Buyer username={buyer} />
       </div>
-      <ViewLink listingId={listingId} productId={productId} />
+      <ViewLink
+        listingId={listingId}
+        productId={productId}
+        platformId={platformId}
+      />
       <History username={seller} createdDate={createdDate} history={history} />
     </div>
   );

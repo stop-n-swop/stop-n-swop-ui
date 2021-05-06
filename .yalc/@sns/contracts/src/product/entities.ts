@@ -5,13 +5,10 @@ export interface Manufacturer {
   name: string;
 }
 
-export interface ShortProduct {
-  productId: string;
-  name: string;
-}
-
-export interface Product extends ShortProduct {
+export interface Product {
   type: Type;
+  id: string;
+  name: string;
   cover: string;
   banner: string;
   releaseDate: Date;
@@ -19,11 +16,13 @@ export interface Product extends ShortProduct {
 
 export interface Game extends Product {
   type: Type.GAME;
-  platformId: string;
-  developer: string;
-  publisher: string;
+  rawgId: number;
+  platforms: Array<{ releaseDate: Date; id: string }>;
+  developers: string[];
+  publishers: string[];
 }
 
 export interface Platform extends Product {
   type: Type.PLATFORM;
+  rawgId: number;
 }

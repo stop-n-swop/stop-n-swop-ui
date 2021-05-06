@@ -7,3 +7,10 @@ export const LogOutKey = Symbol('log_out');
 // User
 export const UserKey = Symbol('user');
 export const UpdateUserKey = Symbol('update_user');
+
+// Games
+export const GamesKey = Symbol('games');
+export const GameKey = Symbol('game');
+
+// Platforms
+export const PlatformsKey = Symbol('platforms');

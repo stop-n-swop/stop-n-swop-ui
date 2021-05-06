@@ -13,6 +13,7 @@ import EditListing from './EditListing';
 
 const listing: Listing = {
   listingId: 'sm64_001',
+  platformId: 'nintendo-64',
   description: '',
   location: 'London, UK',
   price: 50,
@@ -32,9 +33,10 @@ const listing: Listing = {
 export default function ConnectedEditListing() {
   useAuthGuard();
   const { push } = useHistory();
-  const { productId, listingId } = useParams<{
+  const { productId, listingId, platformId } = useParams<{
     productId: string;
     listingId: string;
+    platformId: string;
   }>();
   const onSubmit = async (values: Values) => {
     // eslint-disable-next-line no-console
@@ -69,6 +71,7 @@ export default function ConnectedEditListing() {
       <EditListing
         listingId={listingId}
         productId={productId}
+        platformId={platformId}
         dispatch={dispatch}
         step={step}
         name={name}

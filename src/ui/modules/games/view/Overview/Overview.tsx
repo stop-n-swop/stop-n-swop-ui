@@ -12,6 +12,7 @@ interface Props {
   publisher: string;
   name: string;
   releaseDate: Date;
+  platform: string;
 }
 
 export default function Overview({
@@ -21,6 +22,7 @@ export default function Overview({
   publisher,
   name,
   releaseDate,
+  platform,
 }: Props) {
   return (
     <div
@@ -36,6 +38,7 @@ export default function Overview({
         developer={developer}
         publisher={publisher}
         name={name}
+        platform={platform}
         releaseDate={releaseDate}
       />
     </div>

@@ -15,20 +15,20 @@ export const useAuthGuard = ({
 }: { username?: boolean; address?: boolean } = {}) => {
   const loggedIn = useIsLoggedIn();
   const { pathname, search } = useLocation();
-  const { push } = useHistory();
+  const { replace } = useHistory();
   const userQuery = useUser();
 
   if (!loggedIn) {
-    push(makeLoginPath({ reason: Reason.LOGIN_REQUIRED, pathname, search }));
+    replace(makeLoginPath({ reason: Reason.LOGIN_REQUIRED, pathname, search }));
     throw never();
   }
 
   if (username && !userQuery.data.username) {
-    push(makeLevelUpUsernamePath({ pathname, search }));
+    replace(makeLevelUpUsernamePath({ pathname, search }));
     throw never();
   }
   if (address && !userQuery.data.address.line1) {
-    push(makeLevelUpAddressPath({ pathname, search }));
+    replace(makeLevelUpAddressPath({ pathname, search }));
     throw never();
   }
 };

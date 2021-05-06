@@ -1,8 +1,8 @@
-import * as React from "react";
+import * as React from 'react';
 
 declare global {
   const If: React.ComponentType<{
-    condition: boolean;
+    condition: any;
     children: React.ReactNode;
   }>;
   const For: React.ComponentType<{
@@ -15,7 +15,7 @@ declare global {
     children: React.ReactNode;
   }>;
   const When: React.ComponentType<{
-    condition: boolean;
+    condition: any;
     children: React.ReactNode;
   }>;
   const Otherwise: React.ComponentType<{

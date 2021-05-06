@@ -19,11 +19,12 @@ const orders: Order[] = [
 ];
 const product: Game = {
   banner: '',
+  rawgId: -1,
   cover: '',
-  developer: '',
-  platformId: 'n64',
-  productId: 'super_mario_64',
-  publisher: '',
+  developers: [],
+  platforms: [{ id: 'n64', releaseDate: new Date() }],
+  id: 'super_mario_64',
+  publishers: [],
   releaseDate: new Date(),
   type: Type.GAME,
   name: 'Super Mario 64',

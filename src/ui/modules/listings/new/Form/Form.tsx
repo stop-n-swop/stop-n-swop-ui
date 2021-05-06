@@ -1,7 +1,7 @@
 import React from 'react';
 import Card from 'ui/elements/Card';
 import { useFormContext } from 'react-hook-form';
-import Loader from 'react-spinners/BeatLoader';
+import Loader from 'ui/modules/Loader';
 import type useMachine from 'ui/modules/listings/new/machine';
 import Condition from 'ui/modules/listings/new/Condition';
 import Features from 'ui/modules/listings/new/Features';
@@ -19,6 +19,7 @@ type Dispatch = ReturnType<typeof useMachine>[1];
 
 interface Props {
   productId: string;
+  platformId: string;
   step: Step;
   dispatch: Dispatch;
   username: string;
@@ -28,6 +29,7 @@ interface Props {
 
 export default function Form({
   productId,
+  platformId,
   step,
   dispatch,
   username,
@@ -60,7 +62,11 @@ export default function Form({
             <Region previous={onPrevious} />
           </When>
           <When condition={step === 'price'}>
-            <Price previous={onPrevious} productId={productId} />
+            <Price
+              previous={onPrevious}
+              productId={productId}
+              platformId={platformId}
+            />
           </When>
           <When condition={step === 'description'}>
             <Description previous={onPrevious} />
@@ -77,7 +83,7 @@ export default function Form({
           </When>
           <When condition={step === 'submitting'}>
             <div className="text-center">
-              <Loader color="#FFF" />
+              <Loader />
             </div>
           </When>
           <When condition={step === 'done'}>

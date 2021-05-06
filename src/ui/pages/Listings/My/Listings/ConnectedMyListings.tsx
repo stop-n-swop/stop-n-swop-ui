@@ -8,6 +8,7 @@ const listings: IListing[] = [
   {
     productId: 'super_mario_64',
     listingId: 'a',
+    platformId: 'nintendo-64',
     description: "It's awesome",
     location: 'London, UK',
     price: 50,
@@ -25,6 +26,7 @@ const listings: IListing[] = [
   {
     productId: 'super_mario_64',
     listingId: 'b',
+    platformId: 'nintendo-64',
     description: "It's awesome",
     location: 'London, UK',
     price: 50,
@@ -42,6 +44,7 @@ const listings: IListing[] = [
   {
     productId: 'super_mario_64',
     listingId: 'c',
+    platformId: 'nintendo-64',
     description: "It's awesome",
     location: 'London, UK',
     price: 50,
