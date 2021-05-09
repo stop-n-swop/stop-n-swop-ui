@@ -1,4 +1,5 @@
 import React from 'react';
+import { BaseError } from '@sns/abyss';
 
 export default function FieldError({ error }: { error: any }) {
   if (error == null) {
@@ -8,6 +9,9 @@ export default function FieldError({ error }: { error: any }) {
   const message = (() => {
     if (typeof error === 'string') {
       return error;
+    }
+    if (error instanceof BaseError) {
+      return error.toString();
     }
     if (typeof error.message === 'string') {
       return error.message;

@@ -1568,6 +1568,9 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
+"@sns/abyss@file:.yalc/@sns/abyss":
+  version "0.0.0"
+
 "@sns/contracts@file:.yalc/@sns/contracts":
   version "0.0.0"
 

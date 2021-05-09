@@ -1,7 +1,5 @@
 import { Condition, Region } from '@sns/contracts/listing';
 import { Status } from '@sns/contracts/order';
-import { CommonCode } from '@sns/contracts/common';
-import { UserCode } from '@sns/contracts/user';
 import { flatten, unflatten } from 'flat';
 import { Reason } from 'domain/constants/auth';
 
@@ -178,12 +176,6 @@ const enMessages = {
     },
   },
   error: {
-    [UserCode.INVALID_LOGIN]: 'Email or Password are incorrect',
-    [UserCode.NOT_UNIQUE]: 'This email address has already been registered',
-    [CommonCode.BAD_REQUEST]: 'Malformed request syntax',
-    [CommonCode.NOT_FOUND]:
-      'The requested resource could not be found or does not exist',
-    [CommonCode.CONFLICT]: 'Conflict in the current resource state',
     forbidden: 'You are not authorised to carry out this action',
     unavailable: 'The service is currently unavailable, please try again',
     gatewayTimeout: 'The service is currently unavailable, please try again',

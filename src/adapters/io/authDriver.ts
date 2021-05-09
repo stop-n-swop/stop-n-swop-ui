@@ -9,6 +9,7 @@ import type {
 import type { AuthDriver, Driver } from 'ports/io';
 import type { Navigate } from 'ports/navigation';
 import { makeLoginPath } from 'ui/constants/paths';
+import { NotAuthorisedError } from '@sns/abyss';
 
 const authDriver = (
   driver: Driver,
@@ -35,7 +36,7 @@ const authDriver = (
         },
       });
     } catch (e) {
-      if (e.status !== 401) {
+      if (!(e instanceof NotAuthorisedError)) {
         throw e;
       }
       // we don't want to end up going round and round forever

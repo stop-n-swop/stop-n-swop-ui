@@ -1,5 +1,6 @@
 import jpex, { Global } from 'jpex';
 import type { Driver } from 'ports/io';
+import { responseToError } from '@sns/abyss';
 
 type Fetch = typeof window.fetch;
 
@@ -69,16 +70,15 @@ const handleErrorResponse = async (response: Response) => {
   if (isJson(response)) {
     const json = await response.json();
     // eslint-disable-next-line prefer-promise-reject-errors
-    return Promise.reject({
+    return responseToError({
       status: response.status,
       error: json,
     });
   }
   const text = await response.text();
-  // eslint-disable-next-line prefer-promise-reject-errors
-  return Promise.reject({
+  return responseToError({
     status: response.status,
-    error: text,
+    error: text as any,
   });
 };
 
@@ -102,7 +102,8 @@ const driver = (fetch: Global<'fetch', Fetch>): Driver => async ({
   const response = await fetch(url, payload);
 
   if (!response.ok) {
-    return handleErrorResponse(response);
+    const error = await handleErrorResponse(response);
+    throw error;
   }
 
   const result = isJson(response) ? await response.json() : null;

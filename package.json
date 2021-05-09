@@ -24,6 +24,7 @@
     "@respite/exchange": "^4.0.0",
     "@respite/query": "^4.0.0",
     "@respite/select": "^4.0.0",
+    "@sns/abyss": "file:.yalc/@sns/abyss",
     "@sns/contracts": "file:.yalc/@sns/contracts",
     "classnames": "^2.2.6",
     "date-fns": "^2.19.0",

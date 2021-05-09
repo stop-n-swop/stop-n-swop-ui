@@ -10,6 +10,7 @@ import type { Navigate } from 'ports/navigation';
 import { LOGIN } from 'ui/constants/paths';
 import '../authDriver';
 import { Reason } from 'domain/constants/auth';
+import { NotAuthorisedError, UnknownError } from '@sns/abyss';
 
 const setup = () => {
   const jpex = base.extend();
@@ -82,17 +83,17 @@ describe('when logged in', () => {
     describe('when error is a 500', () => {
       it('rethrows the error', async () => {
         const { authDriver, driver } = setup();
-        driver.mockRejectedValue({ status: 500 });
+        driver.mockRejectedValue(new UnknownError());
 
         const promise = authDriver({ url: '/api' });
 
-        await expect(promise).rejects.toEqual({ status: 500 });
+        await expect(promise).rejects.toThrow(new UnknownError());
       });
     });
     describe('when error is a 401', () => {
       it('refreshes the auth tokens', async () => {
         const { authDriver, driver, refreshTokens, saveTokens } = setup();
-        driver.mockRejectedValueOnce({ status: 401 });
+        driver.mockRejectedValueOnce(new NotAuthorisedError());
 
         await authDriver({ url: '/api' });
 
@@ -111,7 +112,7 @@ describe('when logged in', () => {
             navigate,
             clearTokens,
           } = setup();
-          driver.mockRejectedValueOnce({ status: 401 });
+          driver.mockRejectedValueOnce(new NotAuthorisedError());
           refreshTokens.mockRejectedValue(new Error('failed to refresh'));
 
           authDriver({ url: '/api' });
@@ -126,7 +127,7 @@ describe('when logged in', () => {
       });
       it('attempts to fetch again', async () => {
         const { authDriver, driver } = setup();
-        driver.mockRejectedValueOnce({ status: 401 });
+        driver.mockRejectedValueOnce(new NotAuthorisedError());
 
         await authDriver({ url: '/api' });
 
@@ -135,7 +136,7 @@ describe('when logged in', () => {
       describe('when re-fetch succeeds', () => {
         it('returns the result', async () => {
           const { authDriver, driver } = setup();
-          driver.mockRejectedValueOnce({ status: 401 });
+          driver.mockRejectedValueOnce(new NotAuthorisedError());
 
           const response = await authDriver({ url: '/api' });
 
@@ -151,7 +152,7 @@ describe('when logged in', () => {
             clearTokens,
             navigate,
           } = setup();
-          driver.mockRejectedValue({ status: 401 });
+          driver.mockRejectedValue(new NotAuthorisedError());
 
           authDriver({ url: '/api' });
           await new Promise((res) => setTimeout(res, 10));

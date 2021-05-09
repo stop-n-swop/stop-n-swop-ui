@@ -1,8 +1,6 @@
 import React from 'react';
 import type { ImageUrl } from 'domain/types';
-import { getErrorMessage } from 'domain/selectors/common';
-import { useIntl } from 'ui/intl';
-import { CommonCode } from '@sns/contracts/common';
+import { BaseError, ValidationError } from '@sns/abyss';
 import Empty from './Empty';
 import Port from './Port';
 import Preview from './Preview';
@@ -24,7 +22,6 @@ export default function Upload({
   onChange(value: ImageUrl): void;
   upload(file: File): Promise<string>;
 }) {
-  const intl = useIntl();
   const handleClear = () => {
     onChange(null);
   };
@@ -40,10 +37,13 @@ export default function Upload({
     if (uploadError == null) {
       return null;
     }
-    if (uploadError.error?.code === CommonCode.VALIDATION) {
-      return Object.values(uploadError.error.errors)[0];
+    if (uploadError instanceof ValidationError) {
+      return Object.values(uploadError.errors)[0];
     }
-    return getErrorMessage(uploadError, intl);
+    if (uploadError instanceof BaseError) {
+      return uploadError.toString();
+    }
+    return uploadError.message;
   })();
 
   return (

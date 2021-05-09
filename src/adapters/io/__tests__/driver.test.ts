@@ -1,3 +1,4 @@
+import { UnknownError } from '@sns/abyss';
 import base, { Global } from 'jpex';
 import type { Driver } from 'ports/io';
 import '../driver';
@@ -113,10 +114,7 @@ describe('when response fails', () => {
 
     const promise = driver({ url: '/api' });
 
-    await expect(promise).rejects.toEqual({
-      status: 500,
-      error: { someValue: true },
-    });
+    await expect(promise).rejects.toThrow(new UnknownError());
   });
   it('rejects with the status and error text', async () => {
     const { driver, response } = setup();
@@ -126,9 +124,6 @@ describe('when response fails', () => {
 
     const promise = driver({ url: '/api' });
 
-    await expect(promise).rejects.toEqual({
-      status: 500,
-      error: 'text',
-    });
+    await expect(promise).rejects.toEqual(new UnknownError());
   });
 });

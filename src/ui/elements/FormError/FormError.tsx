@@ -1,3 +1,4 @@
+import { BaseError } from '@sns/abyss';
 import React from 'react';
 
 export default function FormError({ error }: { error: any }) {
@@ -8,6 +9,9 @@ export default function FormError({ error }: { error: any }) {
   const message = (() => {
     if (typeof error === 'string') {
       return error;
+    }
+    if (error instanceof BaseError) {
+      return error.toString();
     }
     if (typeof error.message === 'string') {
       return error.message;

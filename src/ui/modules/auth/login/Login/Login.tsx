@@ -4,8 +4,8 @@ import Card from 'ui/elements/Card';
 import { useIntl } from 'ui/intl';
 import { ids } from 'ui/messages';
 import FormError from 'ui/elements/FormError';
-import { getErrorMessage } from 'domain/selectors/common';
 import type { Reason } from 'domain/constants/auth';
+import { BaseError } from '@sns/abyss';
 
 export default function LoginForm({
   reason,
@@ -32,7 +32,11 @@ export default function LoginForm({
         </If>
         <If condition={Boolean(error)}>
           <div className="lg:px-12 xl:px-0">
-            <FormError error={getErrorMessage(error, intl)} />
+            <FormError
+              error={
+                error instanceof BaseError ? error.toString() : error?.message
+              }
+            />
           </div>
         </If>
         <div className="text-center">{children}</div>

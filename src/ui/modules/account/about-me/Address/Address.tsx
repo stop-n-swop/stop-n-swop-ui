@@ -3,9 +3,8 @@ import cx from 'classnames';
 import { InputController } from 'ui/elements/Input';
 import { useForm } from 'react-hook-form';
 import { useUpdateUser, useUser } from 'usecases/user';
-import { useGetMessage, useIntl } from 'ui/intl';
+import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
-import { getErrorMessage } from 'domain/selectors/common';
 import FormError from 'ui/elements/FormError';
 import Submit from 'ui/elements/Submit';
 import Form from '../../dashboard/Form';
@@ -21,7 +20,6 @@ export default function Address({
   submitText: ReactNode;
   onSubmit?(): any;
 }) {
-  const intl = useIntl();
   const { data: user } = useUser();
   const { action, error, reset, status } = useUpdateUser();
   const getMessage = useGetMessage();
@@ -37,7 +35,7 @@ export default function Address({
     <Form formProps={formProps} onSubmit={handleSubmit}>
       <h3 className="text-lg font-bold">{title}</h3>
       <p className="text-sm text-gray-100 italic">{description}</p>
-      <FormError error={getErrorMessage(error, intl)} />
+      <FormError error={error} />
       <div
         className={cx(
           'space-y-4 flex-grow mt-8',

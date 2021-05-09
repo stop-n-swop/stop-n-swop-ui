@@ -5,7 +5,6 @@ import { useUpdateUser, useUser } from 'usecases/user';
 import { useIntl } from 'ui/intl';
 import { ids } from 'ui/messages';
 import FormError from 'ui/elements/FormError';
-import { getErrorMessage } from 'domain/selectors/common';
 import Submit from 'ui/elements/Submit';
 import Form from '../../dashboard/Form';
 
@@ -35,7 +34,7 @@ export default function Username({
     <Form formProps={formProps} onSubmit={handleSubmit}>
       <h3 className="text-lg font-bold">{title}</h3>
       <p className="text-sm text-gray-100 italic">{description}</p>
-      <FormError error={getErrorMessage(error, intl)} />
+      <FormError error={error} />
       <div className="flex flex-col flex-grow">
         <div className="flex-grow my-8 lg:my-20 w-full md:w-1/2 mx-auto">
           <InputController
