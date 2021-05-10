@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Screen from 'ui/modules/games/browse/Screen';
-import { usePlatforms } from 'usecases/platforms';
-import { useGames } from 'usecases/games';
+import { usePlatforms } from 'application/platforms';
+import { useGames } from 'application/games';
 import { isEmpty } from 'crosscutting/utils';
 import { Status } from '@respite/core';
 import { useHistory } from 'react-router-dom';

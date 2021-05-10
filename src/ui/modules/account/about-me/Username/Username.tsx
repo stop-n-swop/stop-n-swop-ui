@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 import { InputController } from 'ui/elements/Input';
 import { useForm } from 'react-hook-form';
-import { useUpdateUser, useUser } from 'usecases/user';
+import { useUpdateUser, useUser } from 'application/user';
 import { useIntl } from 'ui/intl';
 import { ids } from 'ui/messages';
 import FormError from 'ui/elements/FormError';

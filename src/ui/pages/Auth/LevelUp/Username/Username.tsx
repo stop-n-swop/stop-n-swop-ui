@@ -5,7 +5,7 @@ import { useQueryParam } from 'ui/hooks';
 import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 import Username from 'ui/modules/account/about-me/Username';
-import { useAuthGuard } from 'usecases/auth';
+import { useAuthGuard } from 'application/auth';
 
 export default function LevelUpUsername() {
   useAuthGuard();

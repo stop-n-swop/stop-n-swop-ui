@@ -1,6 +1,6 @@
 import React from 'react';
 import Input from 'ui/elements/Input';
-import { useUser } from 'usecases/user';
+import { useUser } from 'application/user';
 import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 

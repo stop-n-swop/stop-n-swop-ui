@@ -1,7 +1,7 @@
 import React from 'react';
 import Login from 'ui/modules/auth/login/Login';
 import LoginForm from 'ui/modules/auth/login/Form';
-import { useLogIn } from 'usecases/auth';
+import { useLogIn } from 'application/auth';
 import { makeDashboardPath } from 'ui/constants/paths';
 import { useQueryParam } from 'ui/hooks';
 import { useHistory } from 'react-router-dom';
@@ -11,7 +11,7 @@ import G from 'ui/assets/g-logo.png';
 import { useMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 import { useResolve } from 'react-jpex';
-import type { Config } from 'ports/io';
+import type { Config } from 'core/io';
 import type { Reason } from 'domain/constants/auth';
 
 export default function LoginPage() {

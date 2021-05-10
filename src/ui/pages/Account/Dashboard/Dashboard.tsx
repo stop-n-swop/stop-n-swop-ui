@@ -10,7 +10,7 @@ import Email from 'ui/modules/account/about-me/Email';
 import Address from 'ui/modules/account/about-me/Address';
 import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
-import { useAuthGuard } from 'usecases/auth';
+import { useAuthGuard } from 'application/auth';
 
 export default function Dashboard() {
   useAuthGuard();

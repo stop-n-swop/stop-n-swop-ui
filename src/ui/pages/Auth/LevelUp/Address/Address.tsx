@@ -5,7 +5,7 @@ import { useQueryParam } from 'ui/hooks';
 import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 import Address from 'ui/modules/account/about-me/Address';
-import { useAuthGuard } from 'usecases/auth';
+import { useAuthGuard } from 'application/auth';
 
 export default function LevelUpAddress() {
   useAuthGuard();

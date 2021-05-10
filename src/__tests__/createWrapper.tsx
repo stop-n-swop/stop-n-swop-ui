@@ -5,7 +5,7 @@ import { Router, Route } from 'react-router-dom';
 import type { JpexInstance } from 'jpex';
 import { createMemoryHistory, History } from 'history';
 import { Provider as Intl } from 'ui/intl';
-import type { Driver, Storage } from 'ports/io';
+import type { Driver, Storage } from 'core/io';
 
 interface Props {
   inject?(jpex: JpexInstance): void;

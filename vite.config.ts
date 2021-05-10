@@ -8,10 +8,10 @@ export default defineConfig({
   base: '/',
   resolve: {
     alias: {
-      adapters: '/src/adapters',
-      ports: '/src/ports',
+      infrastructure: '/src/infrastructure',
+      core: '/src/core',
       domain: '/src/domain',
-      usecases: '/src/usecases',
+      application: '/src/application',
       ui: '/src/ui',
       crosscutting: '/src/crosscutting',
     },
@@ -60,8 +60,8 @@ export default defineConfig({
                   'jpex/babel-plugin',
                   {
                     pathAlias: {
-                      adapters: '/src/adapters',
-                      ports: '/src/ports',
+                      infrastructure: '/src/infrastructure',
+                      core: '/src/core',
                     },
                     omitIndex: true,
                   },

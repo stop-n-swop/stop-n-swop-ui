@@ -15,8 +15,8 @@ module.exports = {
       'jpex/babel-plugin',
       {
         pathAlias: {
-          adapters: '/src/adapters',
-          ports: '/src/ports',
+          infrastructure: '/src/infrastructure',
+          core: '/src/core',
         },
         omitIndex: true,
       },

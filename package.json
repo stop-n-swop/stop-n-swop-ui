@@ -16,7 +16,8 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint src/ && tsc",
-    "test": "jest"
+    "test": "jest",
+    "ci": "yarn lint && yarn test && yarn build"
   },
   "dependencies": {
     "@respite/action": "^4.0.0",

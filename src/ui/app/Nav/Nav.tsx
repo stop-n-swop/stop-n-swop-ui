@@ -6,7 +6,7 @@ import Button from 'ui/elements/Button';
 import { useMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 import { CHECKOUT } from 'ui/constants/paths';
-import { useIsLoggedIn } from 'usecases/auth';
+import { useIsLoggedIn } from 'application/auth';
 import Title from './Title';
 import NavItems from './NavItems';
 

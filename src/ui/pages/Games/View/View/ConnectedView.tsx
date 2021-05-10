@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useGame } from 'usecases/games';
-import { usePlatform } from 'usecases/platforms';
+import { useGame } from 'application/games';
+import { usePlatform } from 'application/platforms';
 import View from './View';
 
 export default function ConectedViewPage() {

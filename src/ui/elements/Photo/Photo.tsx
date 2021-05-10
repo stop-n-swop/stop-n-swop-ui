@@ -1,4 +1,4 @@
-import type { Config } from 'ports/io';
+import type { Config } from 'core/io';
 import React, { ImgHTMLAttributes, useMemo } from 'react';
 import { useResolve } from 'react-jpex';
 

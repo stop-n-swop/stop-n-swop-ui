@@ -7,7 +7,7 @@ import PageTitle from 'ui/elements/PageTitle';
 import { useMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 import type { Query } from '@respite/core';
-import type { useGames } from 'usecases/games';
+import type { useGames } from 'application/games';
 import More from '../More';
 import Empty from '../Empty';
 

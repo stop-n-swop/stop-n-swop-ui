@@ -4,7 +4,7 @@ import { useMessage } from 'ui/intl';
 import { List } from 'ui/elements/list';
 import PageTitle from 'ui/elements/PageTitle';
 import { ids } from 'ui/messages';
-import { useAuthGuard } from 'usecases/auth';
+import { useAuthGuard } from 'application/auth';
 import MyOrder from './MyOrder';
 
 const orders: Order[] = [

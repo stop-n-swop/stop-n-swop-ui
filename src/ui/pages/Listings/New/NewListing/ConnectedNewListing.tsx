@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useAuthGuard } from 'usecases/auth';
+import { useAuthGuard } from 'application/auth';
 import NewListing from './NewListing';
 
 export default function ConnectedNewListing() {
