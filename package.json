@@ -17,6 +17,7 @@
     "build": "vite build",
     "lint": "eslint src/ && tsc",
     "test": "jest",
+    "relink": "cd ../contracts && yalc publish && cd ../abyss && yalc publish && cd ../ui && yalc add @sns/contracts && yalc add @sns/abyss && rm -rf node_modules && yarn install",
     "ci": "yarn lint && yarn test && yarn build"
   },
   "dependencies": {

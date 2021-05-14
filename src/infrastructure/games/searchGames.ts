@@ -1,4 +1,8 @@
 import jpex from 'jpex';
+import type {
+  SearchGamesRequest,
+  SearchGamesResponse,
+} from '@sns/contracts/product';
 import type { SearchGames } from 'core/games';
 import type { Driver } from 'core/io';
 
@@ -18,7 +22,7 @@ const searchGames = (driver: Driver): SearchGames => async ({
     };
   }
 
-  const { data } = await driver<unknown, any>({
+  const { data } = await driver<SearchGamesRequest, SearchGamesResponse>({
     url: '/api/games',
     data: {
       page,
