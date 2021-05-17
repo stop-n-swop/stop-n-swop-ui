@@ -6,6 +6,7 @@ import { isEmpty } from 'crosscutting/utils';
 import { Status } from '@respite/core';
 import { useHistory } from 'react-router-dom';
 import { useQueryParam } from 'ui/hooks';
+import { useDebounce } from 'use-debounce';
 import Items from './Items';
 
 export default function Browse() {
@@ -18,6 +19,7 @@ export default function Browse() {
   const [page, setPage] = useState(0);
   const [search, setSearch] = useState(initialSearch);
   const [platformIds, setPlatformIds] = useState<string[]>(initialPlatforms);
+  const [latentSearch] = useDebounce(search, 500);
 
   useEffect(() => {
     if (!mountedRef.current) {
@@ -46,8 +48,8 @@ export default function Browse() {
 
   useEffect(() => {
     const params = new URLSearchParams('');
-    if (search) {
-      params.append('q', search);
+    if (latentSearch) {
+      params.append('q', latentSearch);
     }
     if (platformIds.length) {
       platformIds.forEach((id) => {
@@ -56,7 +58,7 @@ export default function Browse() {
     }
 
     history.replace({ search: params.toString() });
-  }, [history, platformIds, search]);
+  }, [history, platformIds, latentSearch]);
 
   useEffect(() => {
     setPage(0);
