@@ -17,3 +17,4 @@ export const PlatformsKey = Symbol('platforms');
 
 // Listings
 export const ListingRequirementsKey = Symbol('listing_requirements');
+export const CreateListingKey = Symbol('create_listing');

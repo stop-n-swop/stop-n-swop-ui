@@ -11,6 +11,7 @@ import Description from 'ui/modules/listings/new/Description';
 import Photos from 'ui/modules/listings/new/Photos';
 import Review from 'ui/modules/listings/new/Review';
 import Done from 'ui/modules/listings/new/Done';
+import Error from 'ui/modules/listings/new/Error';
 import type { Values } from 'ui/modules/listings/new/types';
 import Tracker from 'ui/modules/listings/new/Tracker/Tracker';
 import type { Query } from '@respite/core';
@@ -33,6 +34,7 @@ interface Props {
       required: boolean;
     }>;
   }>;
+  error: any;
 }
 
 export default function Form({
@@ -44,6 +46,7 @@ export default function Form({
   location,
   previousUrl,
   requirementsQuery,
+  error,
 }: Props) {
   const { handleSubmit } = useFormContext<Values>();
   const { push } = useHistory();
@@ -107,6 +110,9 @@ export default function Form({
           </When>
           <When condition={step === 'done'}>
             <Done />
+          </When>
+          <When condition={step === 'error'}>
+            <Error error={error} previous={onPrevious} />
           </When>
           <Otherwise>{step}</Otherwise>
         </Choose>

@@ -22,7 +22,7 @@ const Row = ({
   const isMounted = useIsMounted();
 
   return (
-    <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 sm:px-3 pb-3">
+    <div className="w-full px-12 sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 sm:px-3 pb-3">
       {/* TODO: add intl for all the image keys */}
       <h2 className="flex-grow">
         {getMessage(

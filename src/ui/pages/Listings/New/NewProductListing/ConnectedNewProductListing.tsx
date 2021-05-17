@@ -7,7 +7,9 @@ import { useAuthGuard } from 'application/auth';
 import { useRequirements } from 'application/listings';
 import { useGame } from 'application/games';
 import { useUser } from 'application/user';
+import { useCreateListing } from 'application/listings/useCreateListing';
 import NewProductListing from './NewProductListing';
+import { useOnSubmit } from './utils';
 
 export default function ConnectedNewProductListing() {
   useAuthGuard({ username: true, address: true });
@@ -25,13 +27,8 @@ export default function ConnectedNewProductListing() {
       address: { city, country },
     },
   } = useUser();
-  const onSubmit = async (values: Values) => {
-    // eslint-disable-next-line no-console
-    console.log(values);
-    return new Promise((res) => {
-      setTimeout(res, 2000);
-    });
-  };
+  const { action: create, error } = useCreateListing();
+  const onSubmit = useOnSubmit({ create, platformId, productId });
   const formProps = useForm<Values>();
   const [step, dispatch] = useMachine(firstStep, { onSubmit });
 
@@ -46,6 +43,7 @@ export default function ConnectedNewProductListing() {
         location={`${city}, ${country}`}
         username={username}
         requirementsQuery={requirementsQuery}
+        error={error}
       />
     </FormProvider>
   );

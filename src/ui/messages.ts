@@ -159,6 +159,10 @@ const enMessages = {
         title: "Nearly there! Let's just check everything's correct:",
         submit: 'Looks good!',
       },
+      error: {
+        title: 'Uhoh looks like something went wrong!',
+        back: 'Review my listing',
+      },
     },
     edit: {
       title: 'Edit listing {name} ({listingId})',

@@ -27,7 +27,7 @@ function Option({
 
   return (
     <OptionBox
-      className={cx('p-2 w-full', 'sm:w-1/2 sm:px-12 sm:py-6', 'lg:w-1/4')}
+      className={cx('p-2 w-1/2', 'sm:px-12 sm:py-6', 'lg:w-1/4')}
       selected={id === value}
       onClick={() => onChange(id)}
     >

@@ -77,7 +77,7 @@ const makeMachine = (initial: Step) =>
       ),
 
       done: state(),
-      error: state(),
+      error: state(transition('previous', 'review')),
     },
     (ctx: Context) => ctx,
   );

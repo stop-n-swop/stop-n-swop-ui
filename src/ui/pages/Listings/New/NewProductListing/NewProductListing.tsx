@@ -24,6 +24,7 @@ interface Props {
       required: boolean;
     }>;
   }>;
+  error: any;
 }
 
 export default function NewProductListing({
@@ -35,6 +36,7 @@ export default function NewProductListing({
   username,
   location,
   requirementsQuery,
+  error,
 }: Props) {
   return (
     <div className="flex-grow flex flex-col relative">
@@ -50,6 +52,7 @@ export default function NewProductListing({
         step={step}
         username={username}
         requirementsQuery={requirementsQuery}
+        error={error}
       />
     </div>
   );
