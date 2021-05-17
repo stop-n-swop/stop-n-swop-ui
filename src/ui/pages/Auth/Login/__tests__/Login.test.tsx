@@ -57,6 +57,7 @@ beforeEach(() => {
       jpex.constant<Driver>(driver);
       jpex.constant<Storage>(storage as any);
       jpex.constant<Config>({
+        api: { url: '' },
         oauth: {
           google: {
             url: '',

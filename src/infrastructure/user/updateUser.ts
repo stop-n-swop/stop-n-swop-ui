@@ -8,7 +8,7 @@ import type { UpdateUser } from 'core/user';
 
 const updateUser = (driver: AuthDriver): UpdateUser => async (args) => {
   const response = await driver<UpdateUserRequest, UpdateUserResponse>({
-    url: '/api/users/my',
+    url: '/users/my',
     method: 'PATCH',
     data: args,
   });

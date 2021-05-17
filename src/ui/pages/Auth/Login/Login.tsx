@@ -31,7 +31,7 @@ export default function LoginPage() {
           responseType="token"
           clientId={config.oauth.google.clientId}
           scope={config.oauth.google.scope}
-          redirectUri="http://localhost:3001/oauth"
+          redirectUri={`${window.location.origin}/oauth`}
           onSuccess={async (response: {
             /* eslint-disable camelcase */
             access_token: string;

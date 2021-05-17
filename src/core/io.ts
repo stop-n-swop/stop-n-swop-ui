@@ -28,6 +28,9 @@ export type Temp = {
 export type Storage = Window['localStorage'];
 
 export interface Config {
+  api: {
+    url: string;
+  };
   oauth: Record<
     string,
     {

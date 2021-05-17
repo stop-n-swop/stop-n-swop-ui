@@ -1,5 +1,5 @@
 import jpex, { Global } from 'jpex';
-import type { Driver } from 'core/io';
+import type { Config, Driver } from 'core/io';
 import { responseToError } from '@sns/abyss';
 
 type Fetch = typeof window.fetch;
@@ -23,7 +23,8 @@ const makeQuery = (data: Record<string, any>) => {
   return params.toString();
 };
 
-const makeUrl = (url: string, params?: Record<string, any>) => {
+const makeUrl = (root: string, path: string, params?: Record<string, any>) => {
+  const url = `${root}${path}`;
   if (params == null || !Object.keys(params).length) {
     return url;
   }
@@ -82,7 +83,10 @@ const handleErrorResponse = async (response: Response) => {
   });
 };
 
-const driver = (fetch: Global<'fetch', Fetch>): Driver => async ({
+const driver = (
+  fetch: Global<'fetch', Fetch>,
+  config: Config,
+): Driver => async ({
   url: rawUrl,
   method = 'GET',
   data,
@@ -90,7 +94,7 @@ const driver = (fetch: Global<'fetch', Fetch>): Driver => async ({
   headers: customHeaders,
 }) => {
   const payload: RequestInit = {};
-  let url = makeUrl(rawUrl, params);
+  let url = makeUrl(config.api.url, rawUrl, params);
   url = appendData(data, url, method, payload);
   const headers = makeHeaders(customHeaders);
 

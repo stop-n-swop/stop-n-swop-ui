@@ -1,6 +1,6 @@
 import { UnknownError } from '@sns/abyss';
 import base, { Global } from 'jpex';
-import type { Driver } from 'core/io';
+import type { Config, Driver } from 'core/io';
 import '../driver';
 
 const setup = () => {
@@ -17,8 +17,12 @@ const setup = () => {
     text: jest.fn().mockResolvedValue(text),
   };
   const fetch = jest.fn().mockResolvedValue(response);
+  const config = { api: { url: '/api' } };
 
-  const driver = jpex.resolveWith<Driver, Global<'fetch'>>([fetch]);
+  const driver = jpex.resolveWith<Driver, Global<'fetch'>, Config>([
+    fetch,
+    config,
+  ]);
 
   return {
     json,
@@ -32,9 +36,9 @@ const setup = () => {
 it('makes a fetch request', async () => {
   const { driver, fetch } = setup();
 
-  await driver({ url: '/api' });
+  await driver({ url: '/' });
 
-  expect(fetch).toBeCalledWith('/api', {
+  expect(fetch).toBeCalledWith('/api/', {
     headers: [['Content-Type', 'application/json']],
     method: 'GET',
   });
@@ -42,7 +46,7 @@ it('makes a fetch request', async () => {
 it('returns the status and response data', async () => {
   const { driver } = setup();
 
-  const response = await driver({ url: '/api' });
+  const response = await driver({ url: '/api/' });
 
   expect(response).toEqual({
     status: 200,
@@ -54,9 +58,9 @@ it('returns the status and response data', async () => {
 it('sends the delivery method', async () => {
   const { driver, fetch } = setup();
 
-  await driver({ url: '/api', method: 'POST' });
+  await driver({ url: '/', method: 'POST' });
 
-  expect(fetch).toBeCalledWith('/api', {
+  expect(fetch).toBeCalledWith('/api/', {
     headers: [['Content-Type', 'application/json']],
     method: 'POST',
   });
@@ -64,9 +68,9 @@ it('sends the delivery method', async () => {
 it('sends data with the request', async () => {
   const { driver, fetch } = setup();
 
-  await driver({ url: '/api', method: 'POST', data: { someFlag: true } });
+  await driver({ url: '/', method: 'POST', data: { someFlag: true } });
 
-  expect(fetch).toBeCalledWith('/api', {
+  expect(fetch).toBeCalledWith('/api/', {
     headers: [['Content-Type', 'application/json']],
     method: 'POST',
     body: JSON.stringify({ someFlag: true }),
@@ -75,9 +79,9 @@ it('sends data with the request', async () => {
 it('adds data to the url query param', async () => {
   const { driver, fetch } = setup();
 
-  await driver({ url: '/api', data: { 'some param': 'yes & no' } });
+  await driver({ url: '/', data: { 'some param': 'yes & no' } });
 
-  expect(fetch).toBeCalledWith('/api?some+param=yes+%26+no', {
+  expect(fetch).toBeCalledWith('/api/?some+param=yes+%26+no', {
     headers: [['Content-Type', 'application/json']],
     method: 'GET',
   });
@@ -85,7 +89,7 @@ it('adds data to the url query param', async () => {
 it('injects url params', async () => {
   const { driver, fetch } = setup();
 
-  await driver({ url: '/api/{userId}', params: { userId: 'yo&yo' } });
+  await driver({ url: '/{userId}', params: { userId: 'yo&yo' } });
 
   expect(fetch).toBeCalledWith('/api/yo%26yo', {
     headers: [['Content-Type', 'application/json']],
@@ -95,9 +99,9 @@ it('injects url params', async () => {
 it('appends headers', async () => {
   const { driver, fetch } = setup();
 
-  await driver({ url: '/api', headers: { Authorization: '1234' } });
+  await driver({ url: '/', headers: { Authorization: '1234' } });
 
-  expect(fetch).toBeCalledWith('/api', {
+  expect(fetch).toBeCalledWith('/api/', {
     headers: [
       ['Content-Type', 'application/json'],
       ['Authorization', '1234'],
@@ -112,7 +116,7 @@ describe('when response fails', () => {
     response.ok = false;
     response.status = 500;
 
-    const promise = driver({ url: '/api' });
+    const promise = driver({ url: '/' });
 
     await expect(promise).rejects.toThrow(new UnknownError());
   });
@@ -122,7 +126,7 @@ describe('when response fails', () => {
     response.status = 500;
     response.headers.get.mockReturnValue('text/plain');
 
-    const promise = driver({ url: '/api' });
+    const promise = driver({ url: '/' });
 
     await expect(promise).rejects.toEqual(new UnknownError());
   });

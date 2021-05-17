@@ -13,7 +13,7 @@ const refreshTokens = (
   const { refreshToken: token } = await getTokens();
 
   const response = await driver<RefreshTokenRequest, RefreshTokenResponse>({
-    url: '/api/auth/sessions',
+    url: '/auth/sessions',
     method: 'PATCH',
     data: { token },
   });

@@ -23,7 +23,7 @@ const searchGames = (driver: Driver): SearchGames => async ({
   }
 
   const { data } = await driver<SearchGamesRequest, SearchGamesResponse>({
-    url: '/api/games',
+    url: '/games',
     data: {
       page,
       q: search,

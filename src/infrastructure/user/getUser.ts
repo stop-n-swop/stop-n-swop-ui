@@ -5,7 +5,7 @@ import type { GetUser } from 'core/user';
 
 const getUser = (driver: AuthDriver): GetUser => async () => {
   const response = await driver<void, User>({
-    url: '/api/users/my',
+    url: '/users/my',
   });
 
   return response.data;

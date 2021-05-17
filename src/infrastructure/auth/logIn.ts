@@ -5,7 +5,7 @@ import type { LoginRequest, LoginResponse } from '@sns/contracts/user';
 
 const logIn = (driver: Driver): LogIn => async ({ provider, token }) => {
   const response = await driver<LoginRequest, LoginResponse>({
-    url: '/api/auth/sessions',
+    url: '/auth/sessions',
     method: 'POST',
     data: { provider, token },
   });

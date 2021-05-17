@@ -15,7 +15,7 @@ const uploadImage = (
   const {
     data: { id },
   } = await driver<any, { id: string }>({
-    url: '/api/images',
+    url: '/images',
     method: 'POST',
     headers: { 'Content-Type': null },
     data: formData,

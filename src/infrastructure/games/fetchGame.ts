@@ -5,7 +5,7 @@ import type { Driver } from 'core/io';
 
 const fetchGame = (driver: Driver): FetchGame => async ({ id }) => {
   const { data } = await driver<GetGameRequest, GetGameResponse>({
-    url: '/api/games/{id}',
+    url: '/games/{id}',
     params: { id },
   });
 

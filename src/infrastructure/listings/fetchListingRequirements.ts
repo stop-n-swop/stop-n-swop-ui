@@ -15,7 +15,7 @@ const fetchListingRequirements = (
     GetListingRequirementsRequest,
     GetListingRequirementsResponse
   >({
-    url: '/api/games/{productId}/{platformId}/requirements',
+    url: '/games/{productId}/{platformId}/requirements',
     params: {
       platformId,
       productId,
