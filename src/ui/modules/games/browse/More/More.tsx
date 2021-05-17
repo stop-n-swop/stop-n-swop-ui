@@ -4,16 +4,18 @@ import Loader from 'ui/modules/Loader';
 export default function More({
   nextPage,
   setPage,
+  loading,
 }: {
   nextPage: number;
   setPage(page: number): void;
+  loading: boolean;
 }) {
   const ref = useRef();
 
   useEffect(() => {
     const observer = new IntersectionObserver((entities) => {
       const [target] = entities;
-      if (target.isIntersecting) {
+      if (target.isIntersecting && !loading) {
         setPage(nextPage);
       }
     });
@@ -23,7 +25,7 @@ export default function More({
     return () => {
       observer.disconnect();
     };
-  }, [nextPage, setPage]);
+  }, [nextPage, setPage, loading]);
 
   return (
     <div className="text-center my-8" ref={ref}>

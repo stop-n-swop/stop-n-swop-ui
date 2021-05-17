@@ -6,7 +6,7 @@ import type { Platform } from '@sns/contracts/product';
 import PageTitle from 'ui/elements/PageTitle';
 import { useMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
-import type { Query } from '@respite/core';
+import { Query, Status } from '@respite/core';
 import type { useGames } from 'application/games';
 import More from '../More';
 import Empty from '../Empty';
@@ -37,8 +37,10 @@ export default function BrowseScreen({
       nextPage,
       counts: { platforms: platformCounts },
     },
+    status,
   } = gamesQuery;
   const { data: platforms } = platformsQuery;
+  const loading = status === Status.FETCHING || status === Status.LOADING;
 
   return (
     <div className="flex-grow flex flex-col">
@@ -60,7 +62,7 @@ export default function BrowseScreen({
             <div className="flex-grow">
               <ProductList>{children}</ProductList>
               <If condition={nextPage != null && nextPage >= 0}>
-                <More nextPage={nextPage} setPage={setPage} />
+                <More nextPage={nextPage} setPage={setPage} loading={loading} />
               </If>
             </div>
           </Otherwise>
