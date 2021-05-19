@@ -45,9 +45,7 @@ export default function PlatformFinder({
             kind="primary"
             to={makeNewListingPlatformPath({ platformId })}
           >
-            <span className="pr-3">
-              {getMessage(ids.listings.new.platform.button)}
-            </span>
+            <span>{getMessage(ids.listings.new.platform.button)}</span>
           </Button>
         </div>
       </If>
