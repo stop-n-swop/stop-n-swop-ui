@@ -1,23 +1,30 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
+import {
+  FaStream,
+  FaShoppingCart,
+  FaEnvelope,
+  FaCheckCircle,
+  FaTimes,
+  FaMoneyBillWave,
+} from 'react-icons/fa';
 import { Order, Status } from '@sns/contracts/order';
 import { useMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
+import { colorMatrix, iconMatrix } from 'ui/modules/listings/utils';
 
-export default function OrderStatus({
-  order,
-  actions,
-}: {
-  order: Order;
-  actions: ReactNode;
-}) {
+export default function OrderStatus({ order }: { order: Order }) {
   const status = order?.status ?? Status.NONE;
+  const Icon = iconMatrix[status];
+  const color = colorMatrix[status];
 
   return (
-    <>
-      <span className="px-4 py-3 font-medium w-full lg:w-1/2 text-center lg:text-left">
+    <div className="flex items-center space-x-4 px-4 py-3 font-medium w-full text-center lg:text-left">
+      <span className={color}>
+        <Icon size="2rem" />
+      </span>
+      <span>
         {useMessage(ids.order.status[status] ?? ids.order.status.none)}
       </span>
-      <div className="w-full lg:w-1/2 flex flex-col">{actions}</div>
-    </>
+    </div>
   );
 }

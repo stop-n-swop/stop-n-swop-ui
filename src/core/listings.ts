@@ -30,3 +30,5 @@ export type FetchProductsListingCount = (
     count: number;
   }>
 >;
+
+export type FetchMyListings = () => Promise<Listing[]>;

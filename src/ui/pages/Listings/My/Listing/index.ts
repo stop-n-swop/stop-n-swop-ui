@@ -1,1 +1,1 @@
-export { default } from './ConnectedMyListing';
+export { default } from './MyListing';

@@ -6,11 +6,14 @@ import PageTitle from 'ui/elements/PageTitle';
 import { List } from 'ui/elements/list';
 import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
-import type { Listing as IListing } from '@sns/contracts/listing';
-import Listing from './ConnectedListing';
+import { useMyListings } from 'application/listings';
+import { useAuthGuard } from 'application/auth';
+import Listing from './Listing';
 
-export default function MyListings({ listings }: { listings: IListing[] }) {
+export default function MyListings() {
+  useAuthGuard();
   const getMessage = useGetMessage();
+  const { data: listings } = useMyListings();
 
   return (
     <div>

@@ -20,8 +20,8 @@ export interface CreateListingResponse {
 }
 
 export interface SearchListingsRequest {
-  productId: string;
-  platformId: string;
+  productId?: string;
+  platformId?: string;
   boxed?: boolean;
   instructions?: boolean;
   condition?: Condition | Condition[];

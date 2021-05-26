@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import type { Status as IStatus } from '@sns/contracts/order';
 import type { Audit } from '@sns/contracts/listing';
 import Buyer from '../Buyer';
@@ -15,6 +15,7 @@ interface Props {
   seller: string;
   history: Audit;
   createdDate: Date;
+  actions: ReactNode;
 }
 
 export default function Overview({
@@ -26,6 +27,7 @@ export default function Overview({
   seller,
   history,
   createdDate,
+  actions,
 }: Props) {
   return (
     <div className="space-y-8 lg:w-1/2">
@@ -35,6 +37,7 @@ export default function Overview({
         </div>
         <Buyer username={buyer} />
       </div>
+      <div>{actions}</div>
       <ViewLink
         listingId={listingId}
         productId={productId}

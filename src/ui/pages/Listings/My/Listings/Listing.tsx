@@ -1,46 +1,24 @@
 import React from 'react';
 import ListingItem from 'ui/modules/listings/my/listings/ListingItem';
 import OrderStatus from 'ui/modules/listings/my/listings/OrderStatus';
-import Actions from 'ui/modules/listings/my/listings/Actions';
 import { makeViewMyListingPath } from 'ui/constants/paths';
-import type { Status as RStatus } from '@respite/core';
+import { useGame } from 'application/games';
 import type { Listing } from '@sns/contracts/listing';
-import type { Order, Status } from '@sns/contracts/order';
-import type { Product } from '@sns/contracts/product';
 
-export default function MyListing({
-  listing,
-  product,
-  order,
-  status,
-  onClick,
-}: {
-  listing: Listing;
-  product: Product;
-  order: Order;
-  status: RStatus;
-  onClick(status: Status): void;
-}) {
-  const { id: listingId } = listing;
+export default function MyListing({ listing }: { listing: Listing }) {
+  const {
+    id: listingId,
+    products: [{ productId }],
+  } = listing;
+  const { data: product } = useGame({ id: productId });
+  // TODO: get the listing order
 
   return (
     <ListingItem
       to={makeViewMyListingPath({ listingId })}
       listing={listing}
       product={product}
-      orderStatus={
-        <OrderStatus
-          order={order}
-          actions={
-            <Actions
-              status={status}
-              listing={listing}
-              order={order}
-              onClick={onClick}
-            />
-          }
-        />
-      }
+      orderStatus={<OrderStatus order={null} />}
     />
   );
 }

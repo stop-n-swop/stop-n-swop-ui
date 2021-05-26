@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 import { makeEditListingPath } from 'ui/constants/paths';
 import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
+import { iconMatrix } from 'ui/modules/listings/utils';
+import { FaPen } from 'react-icons/fa';
 import type { Listing } from '@sns/contracts/listing';
 
 export const makeGetButtonState =
@@ -45,45 +47,48 @@ export default function Actions({ listing, order, status, onClick }: Props) {
     id: listingId,
     products: [{ productId, platformId }],
   } = listing;
+
   if (order == null) {
     return (
       <>
         <Button
+          className="w-full space-x-4"
           component={Link}
           to={makeEditListingPath({ productId, platformId, listingId })}
           kind="secondary"
         >
-          {getMessage(ids.listings.myListings.actions.edit)}
+          <span>
+            <FaPen />
+          </span>
+          <span>{getMessage(ids.listings.myListings.actions.edit)}</span>
         </Button>
         <Button
+          className="w-full space-x-4"
           kind="tertiary"
           state={getButtonState(Status.CANCELLED, 'error')}
           onClick={handleClick(Status.CANCELLED)}
         >
-          {getMessage(ids.listings.myListings.actions.cancel)}
+          <span>
+            <iconMatrix.cancelled />
+          </span>
+          <span>{getMessage(ids.listings.myListings.actions.cancel)}</span>
         </Button>
       </>
     );
-  }
-  if (order.status === Status.CREATED) {
-    return null;
   }
   if (order.status === Status.SOLD) {
     return (
       <>
         <Button
+          className="w-full space-x-4"
           kind="primary"
           state={getButtonState(Status.POSTED)}
           onClick={handleClick(Status.POSTED)}
         >
-          {getMessage(ids.listings.myListings.actions.post)}
-        </Button>
-        <Button
-          kind="tertiary"
-          state={getButtonState(Status.CANCELLED, 'error')}
-          onClick={handleClick(Status.CANCELLED)}
-        >
-          {getMessage(ids.listings.myListings.actions.cancel)}
+          <span>
+            <iconMatrix.posted />
+          </span>
+          <span>{getMessage(ids.listings.myListings.actions.post)}</span>
         </Button>
       </>
     );
