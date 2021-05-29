@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import Button from 'ui/elements/Button';
 import { makeGameListingPath } from 'ui/constants/paths';
 import { Link } from 'react-router-dom';
 import { useCurrency, useGetMessage } from 'ui/intl';
 import cx from 'classnames';
 import { ids } from 'ui/messages';
-import AddToBasket from '../../listing/AddToBasket';
 
 interface Props {
   productId: string;
@@ -14,6 +13,7 @@ interface Props {
   price: number;
   postage: number;
   currency: string;
+  addToBasket: ReactNode;
   readonly?: boolean;
 }
 
@@ -25,6 +25,7 @@ export default function Actions({
   productId,
   platformId,
   listingId,
+  addToBasket,
 }: Props) {
   const getMessage = useGetMessage();
 
@@ -48,11 +49,7 @@ export default function Actions({
         })}
       </div>
       <If condition={!readonly}>
-        <AddToBasket
-          productId={productId}
-          listingId={listingId}
-          className="text-sm"
-        />
+        {addToBasket}
         <Button
           kind="tertiary"
           className="text-xs md:px-0"

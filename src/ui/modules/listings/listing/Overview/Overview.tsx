@@ -1,16 +1,13 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import Button from 'ui/elements/Button';
 import { useCurrency, useGetMessage } from 'ui/intl';
 import { Link } from 'react-router-dom';
 import { makeUserPath } from 'ui/constants/paths';
 import StarRating from 'ui/modules/listings/listings/StarRating';
 import { ids } from 'ui/messages';
-import AddToBasket from '../AddToBasket';
 
 export default function Overview({
   className,
-  productId,
-  listingId,
   username,
   location,
   description,
@@ -18,10 +15,9 @@ export default function Overview({
   price,
   postage,
   currency,
+  addToBasket,
 }: {
   className: string;
-  productId: string;
-  listingId: string;
   username: string;
   location: string;
   description: string;
@@ -29,6 +25,7 @@ export default function Overview({
   price: number;
   postage: number;
   currency: string;
+  addToBasket: ReactNode;
 }) {
   const getMessage = useGetMessage();
 
@@ -43,7 +40,7 @@ export default function Overview({
             })}
           </div>
         </div>
-        <AddToBasket productId={productId} listingId={listingId} />
+        {addToBasket}
       </div>
       <div>
         <h3>{getMessage(ids.listings.listing.seller)}</h3>

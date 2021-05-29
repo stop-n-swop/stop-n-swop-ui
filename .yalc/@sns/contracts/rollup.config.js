@@ -2,7 +2,7 @@ import babel from "rollup-plugin-babel";
 import localResolve from "rollup-plugin-node-resolve";
 import cleanup from "rollup-plugin-cleanup";
 
-const domains = ["listing", "order", "product", "user"];
+const domains = ["basket", "listing", "order", "product", "user"];
 
 const configs = domains.map((domain) => {
   return {

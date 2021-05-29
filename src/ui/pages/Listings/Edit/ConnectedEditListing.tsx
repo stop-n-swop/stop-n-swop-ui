@@ -39,6 +39,7 @@ const listing: Listing = {
     'box-back': cartridge3,
   },
   createdDate: new Date('2021-03-30'),
+  status: null,
 };
 
 export default function ConnectedEditListing() {

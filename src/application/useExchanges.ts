@@ -12,12 +12,14 @@ import {
   ListingKey,
   ListingCountKey,
   ListingHistoryKey,
+  AddToBasketKey,
+  BasketKey,
 } from './keys';
 
 export default function useExchanges() {
   useExchange(
     [
-      [TokensKey, UserKey],
+      [TokensKey, UserKey, BasketKey],
       [LogInKey, AuthKey, LogOutKey],
     ],
     [UserKey, UpdateUserKey],
@@ -31,5 +33,6 @@ export default function useExchanges() {
       ],
       CreateListingKey,
     ],
+    [BasketKey, AddToBasketKey],
   );
 }

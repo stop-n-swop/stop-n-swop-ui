@@ -44,6 +44,7 @@ export default function Review({ username, location, previous }: Props) {
             currency="GBP"
             postage={postage}
             readonly
+            addToBasket={null}
           />
         </ListingsItem>
       </div>

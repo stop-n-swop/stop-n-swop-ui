@@ -2,10 +2,19 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
+exports.CommonErrorCode = void 0;
+(function (CommonErrorCode) {
+  CommonErrorCode["UNKNOWN"] = "UNKNOWN";
+  CommonErrorCode["NOT_FOUND"] = "NOT_FOUND";
+  CommonErrorCode["NOT_AUTHORIZED"] = "NOT_AUTHORIZED";
+  CommonErrorCode["CONFLICT"] = "CONFLICT";
+  CommonErrorCode["BAD_REQUEST"] = "BAD_REQUEST";
+  CommonErrorCode["VALIDATION"] = "VALIDATION";
+})(exports.CommonErrorCode || (exports.CommonErrorCode = {}));
 class BaseError extends Error {
   constructor(...args) {
     super(...args);
-    this.code = "UNKNOWN";
+    this.code = exports.CommonErrorCode.UNKNOWN;
     this.status = 500;
   }
   toHttpResponse() {
@@ -22,19 +31,34 @@ class BaseError extends Error {
 }
 class UnknownError extends BaseError {}
 class NotFoundError extends BaseError {
-  constructor(...args) {
-    super(...args);
-    this.code = "NOT_FOUND";
+  constructor(entity, id) {
+    super(`Could not find requested game ${id}`);
+    this.entity = entity;
+    this.id = id;
+    this.code = exports.CommonErrorCode.NOT_FOUND;
     this.status = 404;
   }
   toString() {
-    return "The requested resource was not found";
+    if (this.entity && this.id) {
+      return `Hmm, we couldn't find a ${this.entity} for ${this.id}`;
+    }
+    return "Requested resource could not be found";
+  }
+  toHttpResponse() {
+    return {
+      status: this.status,
+      body: {
+        code: this.code,
+        id: this.id,
+        entity: this.entity
+      }
+    };
   }
 }
 class NotAuthorisedError extends BaseError {
   constructor(...args) {
     super(...args);
-    this.code = "NOT_AUTHORIZED";
+    this.code = exports.CommonErrorCode.NOT_AUTHORIZED;
     this.status = 401;
   }
   toString() {
@@ -44,7 +68,7 @@ class NotAuthorisedError extends BaseError {
 class ConflictError extends BaseError {
   constructor(...args) {
     super(...args);
-    this.code = "CONFLICT";
+    this.code = exports.CommonErrorCode.CONFLICT;
     this.status = 409;
   }
   toString() {
@@ -54,57 +78,18 @@ class ConflictError extends BaseError {
 class BadRequestError extends BaseError {
   constructor(...args) {
     super(...args);
-    this.code = "BAD_REQUEST";
+    this.code = exports.CommonErrorCode.BAD_REQUEST;
     this.status = 400;
   }
   toString() {
     return "The data you provided was not valid...";
   }
 }
-class UsernameNotUniqueError extends ConflictError {
-  constructor(...args) {
-    super(...args);
-    this.code = "USERNAME_NOT_UNIQUE";
-  }
-  toString() {
-    return "This username has already been picked by another user";
-  }
-}
-class InvalidLoginError extends BadRequestError {
-  constructor(...args) {
-    super(...args);
-    this.code = "INVALID_LOGIN";
-  }
-  toString() {
-    return "Unable to log in with these credentials...";
-  }
-}
-class InvalidTokenError extends NotAuthorisedError {
-  constructor(...args) {
-    super(...args);
-    this.code = "INVALID_TOKEN";
-  }
-}
-class OutdatedTokenError extends NotAuthorisedError {
-  constructor(...args) {
-    super(...args);
-    this.code = "OUTDATED_TOKEN";
-  }
-}
-class UserNotFoundError extends NotFoundError {
-  constructor(...args) {
-    super(...args);
-    this.code = "USER_NOT_FOUND";
-  }
-  toString() {
-    return "The user could not be found..";
-  }
-}
 class ValidationError extends BadRequestError {
   constructor(errors) {
     super();
     this.errors = errors;
-    this.code = "VALIDATION";
+    this.code = exports.CommonErrorCode.VALIDATION;
   }
   toHttpResponse() {
     return {
@@ -119,40 +104,173 @@ class ValidationError extends BadRequestError {
     return "";
   }
 }
+
+exports.AuthErrorCode = void 0;
+(function (AuthErrorCode) {
+  AuthErrorCode["INVALID_LOGIN"] = "INVALID_LOGIN";
+  AuthErrorCode["INVALID_TOKEN"] = "INVALID_TOKEN";
+  AuthErrorCode["OUTDATED_TOKEN"] = "OUTDATED_TOKEN";
+})(exports.AuthErrorCode || (exports.AuthErrorCode = {}));
+class InvalidLoginError extends BadRequestError {
+  constructor(...args) {
+    super(...args);
+    this.code = exports.AuthErrorCode.INVALID_LOGIN;
+  }
+  toString() {
+    return "Unable to log in with these credentials...";
+  }
+}
+class InvalidTokenError extends NotAuthorisedError {
+  constructor(...args) {
+    super(...args);
+    this.code = exports.AuthErrorCode.INVALID_TOKEN;
+  }
+}
+class OutdatedTokenError extends NotAuthorisedError {
+  constructor(...args) {
+    super(...args);
+    this.code = exports.AuthErrorCode.OUTDATED_TOKEN;
+  }
+}
+
+exports.GameErrorCode = void 0;
+(function (GameErrorCode) {
+  GameErrorCode["GAME_NOT_FOUND"] = "GAME_NOT_FOUND";
+  GameErrorCode["INVALID_GAME_PLATFORM"] = "INVALID_GAME_PLATFORM";
+})(exports.GameErrorCode || (exports.GameErrorCode = {}));
+class GameNotFoundError extends NotFoundError {
+  constructor(id) {
+    super("game", id);
+    this.code = exports.GameErrorCode.GAME_NOT_FOUND;
+  }
+  toString() {
+    return `Hmm, we couldn't find a game with the id ${this.id}`;
+  }
+}
+class InvalidGamePlatformError extends BadRequestError {
+  constructor(platformId, gameId) {
+    super(`Invalid platform ${platformId} for game ${gameId}`);
+    this.platformId = platformId;
+    this.gameId = gameId;
+    this.code = exports.GameErrorCode.INVALID_GAME_PLATFORM;
+  }
+  toString() {
+    return `Invalid platform ${this.platformId} for game ${this.gameId}`;
+  }
+  toHttpResponse() {
+    return {
+      status: this.status,
+      body: {
+        code: this.code,
+        platformId: this.platformId,
+        gameId: this.gameId
+      }
+    };
+  }
+}
+
+exports.ImageErrorCode = void 0;
+(function (ImageErrorCode) {
+  ImageErrorCode["UPLOAD_FAILED"] = "UPLOAD_FAILED";
+})(exports.ImageErrorCode || (exports.ImageErrorCode = {}));
 class UploadFailedError extends UnknownError {
   constructor(...args) {
     super(...args);
-    this.code = "UPLOAD_FAILED";
+    this.code = exports.ImageErrorCode.UPLOAD_FAILED;
   }
   toString() {
     return "Something went wrong uploading your image, please try again";
   }
 }
+
+exports.ListingErrorCode = void 0;
+(function (ListingErrorCode) {
+  ListingErrorCode["CREATE_LISTING"] = "CREATE_LISTING";
+  ListingErrorCode["LISTING_NOT_FOUND"] = "LISTING_NOT_FOUND";
+})(exports.ListingErrorCode || (exports.ListingErrorCode = {}));
+class CreateListingError extends UnknownError {
+  constructor(...args) {
+    super(...args);
+    this.code = exports.ListingErrorCode.CREATE_LISTING;
+  }
+  toString() {
+    return "Uhoh looks like we couldn't create this listing. You might want to try again?";
+  }
+}
+class ListingNotFoundError extends NotFoundError {
+  constructor(id) {
+    super("listing", id);
+    this.code = exports.ListingErrorCode.LISTING_NOT_FOUND;
+  }
+}
+
+exports.PlatformErrorCode = void 0;
+(function (PlatformErrorCode) {
+  PlatformErrorCode["PLATFORM_NOT_FOUND"] = "PLATFORM_NOT_FOUND";
+})(exports.PlatformErrorCode || (exports.PlatformErrorCode = {}));
+class PlatformNotFoundError extends NotFoundError {
+  constructor(id) {
+    super("platform", id);
+    this.code = exports.PlatformErrorCode.PLATFORM_NOT_FOUND;
+  }
+}
+
+exports.UserErrorCode = void 0;
+(function (UserErrorCode) {
+  UserErrorCode["USERNAME_NOT_UNIQUE"] = "USERNAME_NOT_UNIQUE";
+  UserErrorCode["USER_NOT_FOUND"] = "USER_NOT_FOUND";
+})(exports.UserErrorCode || (exports.UserErrorCode = {}));
+class UsernameNotUniqueError extends ConflictError {
+  constructor(...args) {
+    super(...args);
+    this.code = exports.UserErrorCode.USERNAME_NOT_UNIQUE;
+  }
+  toString() {
+    return "This username has already been picked by another user";
+  }
+}
+class UserNotFoundError extends NotFoundError {
+  constructor(id) {
+    super("user", id);
+    this.code = exports.UserErrorCode.USER_NOT_FOUND;
+  }
+}
+
 const responseToError = response => {
   var _response$error;
   switch ((_response$error = response.error) == null ? void 0 : _response$error.code) {
-    case "UNKNOWN":
+    case exports.CommonErrorCode.UNKNOWN:
       return new UnknownError();
-    case "NOT_FOUND":
-      return new NotFoundError();
-    case "NOT_AUTHORIZED":
+    case exports.CommonErrorCode.NOT_FOUND:
+      return new NotFoundError(response.error.entity, response.error.id);
+    case exports.CommonErrorCode.NOT_AUTHORIZED:
       return new NotAuthorisedError();
-    case "CONFLICT":
+    case exports.CommonErrorCode.CONFLICT:
       return new ConflictError();
-    case "BAD_REQUEST":
+    case exports.CommonErrorCode.BAD_REQUEST:
       return new BadRequestError();
-    case "USERNAME_NOT_UNIQUE":
-      return new UsernameNotUniqueError();
-    case "INVALID_LOGIN":
-      return new InvalidLoginError();
-    case "OUTDATED_TOKEN":
-      return new OutdatedTokenError();
-    case "USER_NOT_FOUND":
-      return new UserNotFoundError();
-    case "VALIDATION":
+    case exports.CommonErrorCode.VALIDATION:
       return new ValidationError(response.error.errors);
-    case "UPLOAD_FAILED":
+    case exports.UserErrorCode.USERNAME_NOT_UNIQUE:
+      return new UsernameNotUniqueError();
+    case exports.UserErrorCode.USER_NOT_FOUND:
+      return new UserNotFoundError(response.error.id);
+    case exports.AuthErrorCode.INVALID_LOGIN:
+      return new InvalidLoginError();
+    case exports.AuthErrorCode.OUTDATED_TOKEN:
+      return new OutdatedTokenError();
+    case exports.ImageErrorCode.UPLOAD_FAILED:
       return new UploadFailedError();
+    case exports.GameErrorCode.GAME_NOT_FOUND:
+      return new GameNotFoundError(response.error.id);
+    case exports.GameErrorCode.INVALID_GAME_PLATFORM:
+      return new InvalidGamePlatformError(response.error.platformId, response.error.gameId);
+    case exports.ListingErrorCode.CREATE_LISTING:
+      return new CreateListingError();
+    case exports.ListingErrorCode.LISTING_NOT_FOUND:
+      return new ListingNotFoundError(response.error.id);
+    case exports.PlatformErrorCode.PLATFORM_NOT_FOUND:
+      return new PlatformNotFoundError(response.error.id);
   }
   switch (response.status) {
     case 400:
@@ -160,7 +278,7 @@ const responseToError = response => {
     case 401:
       return new NotAuthorisedError();
     case 404:
-      return new NotFoundError();
+      return new NotFoundError("", "");
     case 409:
       return new ConflictError();
   }
@@ -170,11 +288,16 @@ const responseToError = response => {
 exports.BadRequestError = BadRequestError;
 exports.BaseError = BaseError;
 exports.ConflictError = ConflictError;
+exports.CreateListingError = CreateListingError;
+exports.GameNotFoundError = GameNotFoundError;
+exports.InvalidGamePlatformError = InvalidGamePlatformError;
 exports.InvalidLoginError = InvalidLoginError;
 exports.InvalidTokenError = InvalidTokenError;
+exports.ListingNotFoundError = ListingNotFoundError;
 exports.NotAuthorisedError = NotAuthorisedError;
 exports.NotFoundError = NotFoundError;
 exports.OutdatedTokenError = OutdatedTokenError;
+exports.PlatformNotFoundError = PlatformNotFoundError;
 exports.UnknownError = UnknownError;
 exports.UploadFailedError = UploadFailedError;
 exports.UserNotFoundError = UserNotFoundError;

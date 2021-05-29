@@ -22,6 +22,7 @@ const product: Game = {
 
 const listings: IListing[] = [
   {
+    status: null,
     id: 'a',
     products: [
       {
@@ -46,6 +47,7 @@ const listings: IListing[] = [
     createdDate: new Date(),
   },
   {
+    status: null,
     id: 'b',
     currency: 'GBP',
     postage: 0,
@@ -70,6 +72,7 @@ const listings: IListing[] = [
     createdDate: new Date(),
   },
   {
+    status: null,
     id: 'c',
     currency: 'GBP',
     postage: 0,

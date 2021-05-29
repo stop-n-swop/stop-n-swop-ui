@@ -12,7 +12,7 @@ export interface GetListingRequirementsResponse {
 
 export type CreateListingRequest = Omit<
   Listing,
-  "id" | "createdDate" | "username" | "location" | "rating"
+  "id" | "createdDate" | "username" | "location" | "rating" | "status"
 >;
 
 export interface CreateListingResponse {

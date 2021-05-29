@@ -23,3 +23,7 @@ export const ListingKey = Symbol('listing');
 export const ListingCountKey = Symbol('listing_count');
 export const MyListingsKey = Symbol('my_listings');
 export const ListingHistoryKey = Symbol('listing_history');
+
+// Basket
+export const BasketKey = Symbol('basket');
+export const AddToBasketKey = Symbol('add_to_basket');

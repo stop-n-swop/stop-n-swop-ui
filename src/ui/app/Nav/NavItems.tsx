@@ -24,6 +24,7 @@ interface Props {
   open: boolean;
   accountOpen: boolean;
   loggedIn: boolean;
+  basketCount: number;
   close(): void;
   setAccountOpen: (v: boolean) => void;
 }
@@ -33,6 +34,7 @@ export default function NavItems({
   open,
   close,
   accountOpen,
+  basketCount,
   setAccountOpen,
 }: Props) {
   const ref = useRef<HTMLUListElement>(null);
@@ -86,6 +88,11 @@ export default function NavItems({
         onClose={close}
       >
         {getMessage(ids.nav.basket)}
+        <If condition={basketCount > 0}>
+          <div className="bg-secondary rounded-full w-5 h-5 flex justify-center items-center absolute top-0 right-0 text-white">
+            {basketCount}
+          </div>
+        </If>
       </NavItem>
       <Choose>
         <When condition={loggedIn}>

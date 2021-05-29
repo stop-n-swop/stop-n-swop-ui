@@ -4,36 +4,40 @@ import Overview from 'ui/modules/listings/listing/Overview';
 import Features from 'ui/modules/listings/listing/Features';
 import Card from 'ui/elements/Card';
 import PageTitle from 'ui/elements/PageTitle';
-import type { Stats } from '@sns/contracts/listing';
+import AddToBasket from 'ui/modules/listings/AddToBasket';
+import { useListing } from 'application/listings';
+import { useGame } from 'application/games';
+import { useParams } from 'react-router-dom';
+import { useAddToBasket, useBasket } from 'application/basket';
+import { isInBasket } from 'domain/selectors/basket';
 
-export default function ListingPage({
-  productId,
-  listingId,
-  images,
-  description,
-  location,
-  productName,
-  username,
-  stats,
-  rating,
-  price,
-  postage,
-  currency,
-}: {
-  productId: string;
-  listingId: string;
-  images: Record<string, string>;
-  description: string;
-  location: string;
-  productName: string;
-  username: string;
-  stats: Stats;
-  rating: number;
-  price: number;
-  postage: number;
-  currency: string;
-}) {
+export default function ListingPage() {
+  const { listingId, productId } =
+    useParams<{
+      productId: string;
+      listingId: string;
+      platformId: string;
+    }>();
+
+  const { data: listing } = useListing({ id: listingId });
+  const { data: product } = useGame({ id: productId });
+  const { action: addToBasket, status } = useAddToBasket();
+  const { data: basket } = useBasket();
   const listingText = `(${listingId})`;
+
+  const {
+    images,
+    description,
+    username,
+    rating,
+    currency,
+    postage,
+    price,
+    location,
+    stats,
+  } = listing;
+  const { name: productName } = product;
+  const inBasket = isInBasket(listingId, basket);
 
   return (
     <div>
@@ -45,8 +49,6 @@ export default function ListingPage({
         <div className="lg:flex">
           <Slideshow images={Object.values(images)} className="lg:w-1/2 mb-4" />
           <Overview
-            productId={productId}
-            listingId={listingId}
             className="space-y-8 lg:w-1/2 xl:w-auto"
             description={description}
             location={location}
@@ -55,6 +57,14 @@ export default function ListingPage({
             currency={currency}
             postage={postage}
             price={price}
+            addToBasket={
+              <AddToBasket
+                listingId={listingId}
+                onAddToBasket={addToBasket}
+                status={status}
+                inBasket={inBasket}
+              />
+            }
           />
         </div>
         <Features stats={stats} />

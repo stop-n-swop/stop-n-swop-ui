@@ -7,7 +7,7 @@ export interface GetListingRequirementsResponse {
         required: boolean;
     }>;
 }
-export declare type CreateListingRequest = Omit<Listing, "id" | "createdDate" | "username" | "location" | "rating">;
+export declare type CreateListingRequest = Omit<Listing, "id" | "createdDate" | "username" | "location" | "rating" | "status">;
 export interface CreateListingResponse {
     id: string;
 }
