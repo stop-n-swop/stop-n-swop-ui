@@ -1,20 +1,29 @@
 import { ulid } from 'ulid';
-import { Status } from '@sns/contracts/basket';
+import {
+  AddToBasketRequest,
+  AddToBasketResponse,
+  Status,
+} from '@sns/contracts/basket';
 import jpex from 'jpex';
 import type { GetTokens } from 'core/auth';
 import type { AddToBasket, FetchMyBasket } from 'core/basket';
-import type { Persist } from 'core/io';
+import type { AuthDriver, Persist } from 'core/io';
 
 const addToBasket =
   (
     getTokens: GetTokens,
     persist: Persist,
     fetchBasket: FetchMyBasket,
+    driver: AuthDriver,
   ): AddToBasket =>
   async ({ listingId }) => {
     const { authToken } = await getTokens();
     if (authToken) {
-      // TODO: add to basket via api
+      await driver<AddToBasketRequest, AddToBasketResponse>({
+        method: 'POST',
+        url: '/baskets/my/items',
+        data: { listingId },
+      });
       return;
     }
     let basket = await fetchBasket();

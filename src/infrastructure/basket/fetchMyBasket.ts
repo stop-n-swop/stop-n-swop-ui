@@ -1,16 +1,25 @@
 import jpex from 'jpex';
 import type { GetTokens } from 'core/auth';
 import type { FetchMyBasket } from 'core/basket';
-import type { Persist } from 'core/io';
-import type { Basket } from '@sns/contracts/basket';
+import type { AuthDriver, Persist } from 'core/io';
+import type {
+  Basket,
+  FetchBasketRequest,
+  FetchBasketResponse,
+} from '@sns/contracts/basket';
 
 const fetchMyBasket =
-  (getTokens: GetTokens, persist: Persist): FetchMyBasket =>
+  (getTokens: GetTokens, persist: Persist, driver: AuthDriver): FetchMyBasket =>
   async () => {
     const { authToken } = await getTokens();
     if (authToken) {
-      // TODO: fetch basket from api
-      return null;
+      const { data: basket } = await driver<
+        FetchBasketRequest,
+        FetchBasketResponse
+      >({
+        url: '/baskets/my',
+      });
+      return basket;
     }
 
     const basket = await persist.get<Basket>('basket');
