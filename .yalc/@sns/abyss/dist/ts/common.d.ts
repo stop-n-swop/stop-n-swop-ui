@@ -1,7 +1,8 @@
 export declare enum CommonErrorCode {
     UNKNOWN = "UNKNOWN",
     NOT_FOUND = "NOT_FOUND",
-    NOT_AUTHORIZED = "NOT_AUTHORIZED",
+    NOT_AUTHENTICATED = "NOT_AUTHENTICATED",
+    NOT_AUTHORISED = "NOT_AUTHORISED",
     CONFLICT = "CONFLICT",
     BAD_REQUEST = "BAD_REQUEST",
     VALIDATION = "VALIDATION"
@@ -45,6 +46,11 @@ export declare class NotFoundError extends BaseError {
             entity: string;
         };
     };
+}
+export declare class NotAuthenticatedError extends BaseError {
+    code: string;
+    status: number;
+    toString(): string;
 }
 export declare class NotAuthorisedError extends BaseError {
     code: string;

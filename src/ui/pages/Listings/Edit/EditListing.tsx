@@ -3,7 +3,7 @@ import PageTitle from 'ui/elements/PageTitle';
 import { useMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 import Form from 'ui/modules/listings/new/Form';
-import { MY_LISTINGS } from 'ui/constants/paths';
+import { makeViewMyListingPath } from 'ui/constants/paths';
 import type useMachine from 'ui/modules/listings/new/machine';
 import type { Query } from '@respite/core';
 
@@ -47,7 +47,7 @@ export default function NewProductListing({
         error={null}
         dispatch={dispatch}
         location={location}
-        previousUrl={MY_LISTINGS}
+        previousUrl={makeViewMyListingPath({ listingId })}
         productId={productId}
         platformId={platformId}
         step={step}

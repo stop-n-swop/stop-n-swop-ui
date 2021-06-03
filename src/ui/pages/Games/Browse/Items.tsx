@@ -17,7 +17,6 @@ export default function Items({
   listingsCountsQuery: ReturnType<typeof useListingsCounts>;
   platformIds: string[];
   available: boolean;
-  page: number;
 }) {
   const {
     data: { games },

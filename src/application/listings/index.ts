@@ -5,3 +5,4 @@ export * from './useListings';
 export * from './useListingsCounts';
 export * from './useMyListings';
 export * from './useRequirements';
+export * from './useUpdateListing';

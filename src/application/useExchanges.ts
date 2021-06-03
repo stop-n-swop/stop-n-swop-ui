@@ -14,6 +14,7 @@ import {
   ListingHistoryKey,
   AddToBasketKey,
   BasketKey,
+  UpdateListingKey,
 } from './keys';
 
 export default function useExchanges() {
@@ -31,7 +32,7 @@ export default function useExchanges() {
         ListingCountKey,
         ListingHistoryKey,
       ],
-      CreateListingKey,
+      [CreateListingKey, UpdateListingKey],
     ],
     [BasketKey, AddToBasketKey],
   );

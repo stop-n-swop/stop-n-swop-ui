@@ -6,7 +6,8 @@ exports.CommonErrorCode = void 0;
 (function (CommonErrorCode) {
   CommonErrorCode["UNKNOWN"] = "UNKNOWN";
   CommonErrorCode["NOT_FOUND"] = "NOT_FOUND";
-  CommonErrorCode["NOT_AUTHORIZED"] = "NOT_AUTHORIZED";
+  CommonErrorCode["NOT_AUTHENTICATED"] = "NOT_AUTHENTICATED";
+  CommonErrorCode["NOT_AUTHORISED"] = "NOT_AUTHORISED";
   CommonErrorCode["CONFLICT"] = "CONFLICT";
   CommonErrorCode["BAD_REQUEST"] = "BAD_REQUEST";
   CommonErrorCode["VALIDATION"] = "VALIDATION";
@@ -55,14 +56,24 @@ class NotFoundError extends BaseError {
     };
   }
 }
-class NotAuthorisedError extends BaseError {
+class NotAuthenticatedError extends BaseError {
   constructor(...args) {
     super(...args);
-    this.code = exports.CommonErrorCode.NOT_AUTHORIZED;
+    this.code = exports.CommonErrorCode.NOT_AUTHENTICATED;
     this.status = 401;
   }
   toString() {
     return "You are not correctly authenticated";
+  }
+}
+class NotAuthorisedError extends BaseError {
+  constructor(...args) {
+    super(...args);
+    this.code = exports.CommonErrorCode.NOT_AUTHORISED;
+    this.status = 403;
+  }
+  toString() {
+    return "You do not have permission for this action";
   }
 }
 class ConflictError extends BaseError {
@@ -120,13 +131,13 @@ class InvalidLoginError extends BadRequestError {
     return "Unable to log in with these credentials...";
   }
 }
-class InvalidTokenError extends NotAuthorisedError {
+class InvalidTokenError extends NotAuthenticatedError {
   constructor(...args) {
     super(...args);
     this.code = exports.AuthErrorCode.INVALID_TOKEN;
   }
 }
-class OutdatedTokenError extends NotAuthorisedError {
+class OutdatedTokenError extends NotAuthenticatedError {
   constructor(...args) {
     super(...args);
     this.code = exports.AuthErrorCode.OUTDATED_TOKEN;
@@ -187,6 +198,8 @@ exports.ListingErrorCode = void 0;
 (function (ListingErrorCode) {
   ListingErrorCode["CREATE_LISTING"] = "CREATE_LISTING";
   ListingErrorCode["LISTING_NOT_FOUND"] = "LISTING_NOT_FOUND";
+  ListingErrorCode["UPDATE_FAILED"] = "UPDATE_FAILED";
+  ListingErrorCode["UPDATE_LISTING_PROHIBITED"] = "UPDATE_LISTING_PROHIBITED";
 })(exports.ListingErrorCode || (exports.ListingErrorCode = {}));
 class CreateListingError extends UnknownError {
   constructor(...args) {
@@ -201,6 +214,24 @@ class ListingNotFoundError extends NotFoundError {
   constructor(id) {
     super("listing", id);
     this.code = exports.ListingErrorCode.LISTING_NOT_FOUND;
+  }
+}
+class UpdateListingFailedError extends UnknownError {
+  constructor(...args) {
+    super(...args);
+    this.code = exports.ListingErrorCode.UPDATE_FAILED;
+  }
+  toString() {
+    return "Something went wrong trying to save this listing...";
+  }
+}
+class UpdateListingProhibitedError extends NotAuthorisedError {
+  constructor(...args) {
+    super(...args);
+    this.code = exports.ListingErrorCode.UPDATE_LISTING_PROHIBITED;
+  }
+  toString() {
+    return "You do not have permission to edit this listing";
   }
 }
 
@@ -243,7 +274,9 @@ const responseToError = response => {
       return new UnknownError();
     case exports.CommonErrorCode.NOT_FOUND:
       return new NotFoundError(response.error.entity, response.error.id);
-    case exports.CommonErrorCode.NOT_AUTHORIZED:
+    case exports.CommonErrorCode.NOT_AUTHENTICATED:
+      return new NotAuthenticatedError();
+    case exports.CommonErrorCode.NOT_AUTHORISED:
       return new NotAuthorisedError();
     case exports.CommonErrorCode.CONFLICT:
       return new ConflictError();
@@ -269,6 +302,10 @@ const responseToError = response => {
       return new CreateListingError();
     case exports.ListingErrorCode.LISTING_NOT_FOUND:
       return new ListingNotFoundError(response.error.id);
+    case exports.ListingErrorCode.UPDATE_FAILED:
+      return new UpdateListingFailedError();
+    case exports.ListingErrorCode.UPDATE_LISTING_PROHIBITED:
+      return new UpdateListingProhibitedError();
     case exports.PlatformErrorCode.PLATFORM_NOT_FOUND:
       return new PlatformNotFoundError(response.error.id);
   }
@@ -276,6 +313,8 @@ const responseToError = response => {
     case 400:
       return new BadRequestError();
     case 401:
+      return new NotAuthenticatedError();
+    case 403:
       return new NotAuthorisedError();
     case 404:
       return new NotFoundError("", "");
@@ -294,11 +333,14 @@ exports.InvalidGamePlatformError = InvalidGamePlatformError;
 exports.InvalidLoginError = InvalidLoginError;
 exports.InvalidTokenError = InvalidTokenError;
 exports.ListingNotFoundError = ListingNotFoundError;
+exports.NotAuthenticatedError = NotAuthenticatedError;
 exports.NotAuthorisedError = NotAuthorisedError;
 exports.NotFoundError = NotFoundError;
 exports.OutdatedTokenError = OutdatedTokenError;
 exports.PlatformNotFoundError = PlatformNotFoundError;
 exports.UnknownError = UnknownError;
+exports.UpdateListingFailedError = UpdateListingFailedError;
+exports.UpdateListingProhibitedError = UpdateListingProhibitedError;
 exports.UploadFailedError = UploadFailedError;
 exports.UserNotFoundError = UserNotFoundError;
 exports.UsernameNotUniqueError = UsernameNotUniqueError;

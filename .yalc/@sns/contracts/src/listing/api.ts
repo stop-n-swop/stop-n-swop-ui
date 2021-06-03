@@ -16,9 +16,12 @@ export interface CreateListingResponse {
   id: string;
 }
 
+export interface UpdateListingParams {
+  listingId: string;
+}
 export type UpdateListingRequest = Omit<
   Listing,
-  "createdDate" | "username" | "location" | "rating" | "status"
+  "createdDate" | "username" | "location" | "rating" | "status" | "id"
 >;
 export type UpdateListingResponse = Listing;
 

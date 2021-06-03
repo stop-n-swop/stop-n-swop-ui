@@ -3,6 +3,7 @@ import type {
   SearchListingsRequest,
   Listing,
   AuditItem,
+  UpdateListingRequest,
 } from '@sns/contracts/listing';
 
 export type FetchListingRequirements = (args: {
@@ -15,6 +16,10 @@ export type FetchListingRequirements = (args: {
 export type CreateListing = (
   args: CreateListingRequest,
 ) => Promise<{ id: string }>;
+
+export type UpdateListing = (
+  args: UpdateListingRequest & { id: string },
+) => Promise<Listing>;
 
 export type SearchListings = (
   args: SearchListingsRequest,

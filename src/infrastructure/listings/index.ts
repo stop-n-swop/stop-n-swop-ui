@@ -5,3 +5,4 @@ import './fetchListingRequirements';
 import './fetchMyListings';
 import './fetchProductsListingCount';
 import './searchListings';
+import './updateListing';

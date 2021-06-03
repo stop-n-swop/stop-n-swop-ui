@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import Screen from 'ui/modules/games/browse/Screen';
 import { usePlatforms } from 'application/platforms';
 import { useGames } from 'application/games';
-import { isEmpty } from 'crosscutting/utils';
 import { Status } from '@respite/core';
 import { useHistory } from 'react-router-dom';
 import { useQueryParam } from 'ui/hooks';
@@ -94,7 +93,6 @@ export default function Browse() {
       setAvailable={setAvailable}
     >
       <Items
-        page={page}
         gamesQuery={gamesQuery}
         platformsQuery={platformsQuery}
         platformIds={platformIds}

@@ -1,7 +1,7 @@
 import { Reason } from 'domain/constants/auth';
 import jpex from 'jpex';
 import { makeLoginPath } from 'ui/constants/paths';
-import { NotAuthorisedError } from '@sns/abyss';
+import { NotAuthenticatedError } from '@sns/abyss';
 import type {
   ClearTokens,
   GetTokens,
@@ -36,7 +36,7 @@ const authDriver = (
         },
       });
     } catch (e) {
-      if (!(e instanceof NotAuthorisedError)) {
+      if (!(e instanceof NotAuthenticatedError)) {
         throw e;
       }
       // we don't want to end up going round and round forever

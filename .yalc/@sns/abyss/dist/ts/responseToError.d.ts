@@ -1,5 +1,5 @@
-import { BadRequestError, ConflictError, NotAuthorisedError, NotFoundError, UnknownError } from "./common";
+import { BadRequestError, ConflictError, NotAuthenticatedError, NotAuthorisedError, NotFoundError, UnknownError } from "./common";
 export declare const responseToError: (response: {
     status: number;
     error: Record<string, any>;
-}) => UnknownError | NotFoundError | NotAuthorisedError | ConflictError | BadRequestError;
+}) => UnknownError | NotFoundError | NotAuthenticatedError | NotAuthorisedError | ConflictError | BadRequestError;

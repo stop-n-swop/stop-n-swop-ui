@@ -81,7 +81,7 @@ it('adds data to the url query param', async () => {
 
   await driver({ url: '/', data: { 'some param': 'yes & no' } });
 
-  expect(fetch).toBeCalledWith('/api/?some+param=yes+%26+no', {
+  expect(fetch).toBeCalledWith('/api/?some%20param=yes%20%26%20no', {
     headers: [['Content-Type', 'application/json']],
     method: 'GET',
   });

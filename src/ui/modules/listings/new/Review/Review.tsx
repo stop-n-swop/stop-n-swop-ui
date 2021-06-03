@@ -26,7 +26,7 @@ export default function Review({ username, location, previous }: Props) {
         <ListingsItem
           image={Object.values(images)[0]}
           location={location}
-          rating={2.5}
+          rating={0}
           username={username}
           style={{}}
           stats={{

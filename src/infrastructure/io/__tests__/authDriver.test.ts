@@ -1,7 +1,7 @@
 import base from 'jpex';
 import { LOGIN } from 'ui/constants/paths';
 import { Reason } from 'domain/constants/auth';
-import { NotAuthorisedError, UnknownError } from '@sns/abyss';
+import { NotAuthenticatedError, UnknownError } from '@sns/abyss';
 import type { AuthDriver, Driver } from 'core/io';
 import type {
   GetTokens,
@@ -93,7 +93,7 @@ describe('when logged in', () => {
     describe('when error is a 401', () => {
       it('refreshes the auth tokens', async () => {
         const { authDriver, driver, refreshTokens, saveTokens } = setup();
-        driver.mockRejectedValueOnce(new NotAuthorisedError());
+        driver.mockRejectedValueOnce(new NotAuthenticatedError());
 
         await authDriver({ url: '/api' });
 
@@ -107,7 +107,7 @@ describe('when logged in', () => {
         it('redirects to the login page', async () => {
           const { authDriver, driver, refreshTokens, navigate, clearTokens } =
             setup();
-          driver.mockRejectedValueOnce(new NotAuthorisedError());
+          driver.mockRejectedValueOnce(new NotAuthenticatedError());
           refreshTokens.mockRejectedValue(new Error('failed to refresh'));
 
           authDriver({ url: '/api' });
@@ -122,7 +122,7 @@ describe('when logged in', () => {
       });
       it('attempts to fetch again', async () => {
         const { authDriver, driver } = setup();
-        driver.mockRejectedValueOnce(new NotAuthorisedError());
+        driver.mockRejectedValueOnce(new NotAuthenticatedError());
 
         await authDriver({ url: '/api' });
 
@@ -131,7 +131,7 @@ describe('when logged in', () => {
       describe('when re-fetch succeeds', () => {
         it('returns the result', async () => {
           const { authDriver, driver } = setup();
-          driver.mockRejectedValueOnce(new NotAuthorisedError());
+          driver.mockRejectedValueOnce(new NotAuthenticatedError());
 
           const response = await authDriver({ url: '/api' });
 
@@ -142,7 +142,7 @@ describe('when logged in', () => {
         it('signs out and redirects to login', async () => {
           const { authDriver, driver, refreshTokens, clearTokens, navigate } =
             setup();
-          driver.mockRejectedValue(new NotAuthorisedError());
+          driver.mockRejectedValue(new NotAuthenticatedError());
 
           authDriver({ url: '/api' });
           await new Promise((res) => setTimeout(res, 10));

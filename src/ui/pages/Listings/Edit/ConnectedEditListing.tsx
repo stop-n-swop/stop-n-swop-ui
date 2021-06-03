@@ -1,84 +1,35 @@
-import { Condition, Region, Listing } from '@sns/contracts/listing';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
-import { useHistory, useParams } from 'react-router-dom';
-import cartridge from 'ui/assets/s-l640.jpg';
-import cartridge2 from 'ui/assets/cartridge-back.jpg';
-import cartridge3 from 'ui/assets/Super_Mario_64_Boxart.png';
-import useMachine from 'ui/modules/listings/new/machine';
-import { MY_LISTINGS } from 'ui/constants/paths';
+import { useParams } from 'react-router-dom';
+import useMachine, { firstStep } from 'ui/modules/listings/new/machine';
 import { useAuthGuard } from 'application/auth';
 import { useRequirements } from 'application/listings';
+import { useMyListing } from 'application/listings/useMyListing';
+import { useGame } from 'application/games';
 import type { Values } from 'ui/modules/listings/new/types';
 import EditListing from './EditListing';
-
-const listing: Listing = {
-  id: 'sm64_001',
-  products: [
-    {
-      platformId: 'nintendo-64',
-      productId: 'super_mario_64',
-    },
-  ],
-  postage: 0,
-  currency: 'GBP',
-  description: '',
-  location: 'London, UK',
-  price: 50,
-  rating: 3.5,
-  stats: {
-    boxed: false,
-    condition: Condition.POOR,
-    region: Region.PAL,
-    instructions: false,
-  },
-  username: 'seller1337',
-  images: {
-    main: cartridge,
-    'box-front': cartridge2,
-    'box-back': cartridge3,
-  },
-  createdDate: new Date('2021-03-30'),
-  status: null,
-};
+import { getDefaultValues, useOnSubmit, useRedirectOnDone } from './utils';
 
 export default function ConnectedEditListing() {
   useAuthGuard();
-  const { push } = useHistory();
   const { productId, listingId, platformId } =
     useParams<{
       productId: string;
       listingId: string;
       platformId: string;
     }>();
+  const { data: game } = useGame({ id: productId });
+  const { data: listing } = useMyListing({ id: listingId });
   const requirementsQuery = useRequirements({ productId, platformId });
-  const onSubmit = async (values: Values) => {
-    // eslint-disable-next-line no-console
-    console.log(values);
-    return new Promise((res) => {
-      setTimeout(res, 2000);
-    });
-  };
+
+  const onSubmit = useOnSubmit({ listingId, platformId, productId });
+
+  const [step, dispatch] = useMachine(firstStep, { onSubmit });
   const formProps = useForm<Values>({
-    defaultValues: {
-      boxed: listing.stats.boxed,
-      condition: listing.stats.condition,
-      description: listing.description,
-      images: listing.images,
-      instructions: listing.stats.instructions,
-      price: listing.price,
-      region: listing.stats.region,
-    },
+    defaultValues: getDefaultValues(listing),
   });
 
-  const [step, dispatch] = useMachine('condition', { onSubmit });
-  const name = 'Super Mario 64';
-
-  useEffect(() => {
-    if (step === 'done') {
-      push(MY_LISTINGS);
-    }
-  }, [push, step]);
+  useRedirectOnDone({ step, listingId });
 
   return (
     <FormProvider {...formProps}>
@@ -88,9 +39,9 @@ export default function ConnectedEditListing() {
         platformId={platformId}
         dispatch={dispatch}
         step={step}
-        name={name}
-        location="London, UK"
-        username="seller1337"
+        name={game.name}
+        location={listing.location}
+        username={listing.username}
         requirementsQuery={requirementsQuery}
       />
     </FormProvider>

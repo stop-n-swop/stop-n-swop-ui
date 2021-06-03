@@ -11,7 +11,10 @@ export declare type CreateListingRequest = Omit<UpdateListingRequest, "id">;
 export interface CreateListingResponse {
     id: string;
 }
-export declare type UpdateListingRequest = Omit<Listing, "createdDate" | "username" | "location" | "rating" | "status">;
+export interface UpdateListingParams {
+    listingId: string;
+}
+export declare type UpdateListingRequest = Omit<Listing, "createdDate" | "username" | "location" | "rating" | "status" | "id">;
 export declare type UpdateListingResponse = Listing;
 export interface SearchListingsRequest {
     productId?: string;
