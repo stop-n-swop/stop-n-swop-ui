@@ -1,6 +1,7 @@
 .linaria-cache/
 coverage/
 .eslintcache
+/stats.html
 
 # Logs
 logs

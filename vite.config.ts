@@ -3,10 +3,23 @@ import reactRefresh from '@vitejs/plugin-react-refresh';
 import babel from '@babel/core';
 import jpex from '@jpex-js/vite-plugin';
 // import analyze from 'rollup-plugin-analyzer';
+import { visualizer } from 'rollup-plugin-visualizer';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   base: '/',
+  build: {
+    rollupOptions: {
+      plugins: [
+        // analyze()
+        visualizer({
+          gzipSize: true,
+          brotliSize: true,
+          template: 'sunburst',
+        }),
+      ],
+    },
+  },
   resolve: {
     alias: {
       infrastructure: '/src/infrastructure',
