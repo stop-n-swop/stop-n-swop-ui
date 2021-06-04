@@ -34,7 +34,7 @@ export default function History({
         <tbody>
           <HistoryRow
             date={createdDate}
-            status={Status.NONE}
+            status={Status.OPEN}
             username={username}
           />
           {history.map((item) => (

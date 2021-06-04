@@ -76,7 +76,7 @@ export default function Actions({ listing, order, status, onClick }: Props) {
       </>
     );
   }
-  if (order.status === Status.SOLD) {
+  if (order.status === Status.PAID) {
     return (
       <>
         <Button

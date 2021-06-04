@@ -26,7 +26,7 @@ export default function Actions({ order, status, onClick }: Props) {
   if (order.status === Status.CREATED) {
     return null;
   }
-  if (order.status === Status.SOLD) {
+  if (order.status === Status.PAID) {
     return null;
   }
   if (order.status === Status.POSTED) {

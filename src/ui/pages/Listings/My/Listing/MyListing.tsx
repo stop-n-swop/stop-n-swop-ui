@@ -30,7 +30,7 @@ export default function MyListing() {
   });
   const { data: history } = useHistory({ listingId });
   const order: Order = null;
-  const status = order?.status ?? Status.NONE;
+  const status = order?.status ?? Status.OPEN;
 
   return (
     <div>

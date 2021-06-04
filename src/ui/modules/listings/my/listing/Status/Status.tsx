@@ -17,7 +17,7 @@ export default function ListingStatus({ status }: { status: Status }) {
           <Icon size="1em" />
         </span>
         <span>
-          {getMessage(ids.order.status[status] ?? ids.order.status.none)}
+          {getMessage(ids.order.status[status] ?? ids.order.status.open)}
         </span>
       </div>
     </div>

@@ -5,7 +5,7 @@ import { ids } from 'ui/messages';
 import { colorMatrix, iconMatrix } from 'ui/modules/listings/utils';
 
 export default function OrderStatus({ order }: { order: Order }) {
-  const status = order?.status ?? Status.NONE;
+  const status = order?.status ?? Status.OPEN;
   const Icon = iconMatrix[status];
   const color = colorMatrix[status];
 
@@ -15,7 +15,7 @@ export default function OrderStatus({ order }: { order: Order }) {
         <Icon size="2rem" />
       </span>
       <span>
-        {useMessage(ids.order.status[status] ?? ids.order.status.none)}
+        {useMessage(ids.order.status[status] ?? ids.order.status.open)}
       </span>
     </div>
   );

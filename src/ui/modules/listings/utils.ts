@@ -6,22 +6,29 @@ import {
   FaShoppingCart,
   FaStream,
   FaTimes,
+  FaEllipsisH,
 } from 'react-icons/fa';
 
 export const iconMatrix = {
-  [Status.NONE]: FaStream,
+  [Status.OPEN]: FaStream,
   [Status.CREATED]: FaShoppingCart,
-  [Status.SOLD]: FaMoneyBillWave,
+  [Status.APPROVED]: FaEllipsisH,
+  [Status.DECLINED]: FaTimes,
+  [Status.CANCELLED]: FaTimes,
+  [Status.PAID]: FaMoneyBillWave,
+  [Status.NOT_PAID]: FaTimes,
   [Status.POSTED]: FaEnvelope,
   [Status.RECEIVED]: FaCheckCircle,
-  [Status.CANCELLED]: FaTimes,
 };
 
 export const colorMatrix = {
-  [Status.NONE]: 'text-white',
+  [Status.OPEN]: 'text-white',
   [Status.CREATED]: 'text-secondary',
-  [Status.SOLD]: 'text-primary',
+  [Status.APPROVED]: 'text-white',
+  [Status.DECLINED]: 'text-gray-400',
+  [Status.CANCELLED]: 'text-danger',
+  [Status.PAID]: 'text-primary',
+  [Status.NOT_PAID]: 'text-danger',
   [Status.POSTED]: 'text-secondary',
   [Status.RECEIVED]: 'text-primary',
-  [Status.CANCELLED]: 'text-danger',
 };

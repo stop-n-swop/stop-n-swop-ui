@@ -9,11 +9,13 @@ import MyOrder from './MyOrder';
 
 const orders: Order[] = [
   {
+    id: '',
     listingId: 'b',
     username: 'buyer1',
-    status: Status.SOLD,
+    status: Status.OPEN,
   },
   {
+    id: '',
     listingId: 'c',
     username: 'buyer1',
     status: Status.POSTED,
