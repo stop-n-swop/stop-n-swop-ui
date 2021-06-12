@@ -3,6 +3,7 @@ import { Order } from "./entities";
 export interface SearchOrdersRequest {
   listingId?: string;
   username?: string;
+  active?: boolean;
 }
 export interface SearchOrdersResponse {
   orders: Order[];

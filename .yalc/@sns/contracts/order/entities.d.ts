@@ -4,4 +4,5 @@ export interface Order {
     listingId: string;
     username: string;
     status: Status;
+    created: Date;
 }

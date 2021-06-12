@@ -236,6 +236,7 @@ let OrderErrorCode;
   OrderErrorCode["ORDER_NOT_FOUND"] = "ORDER_NOT_FOUND";
   OrderErrorCode["ORDER_NOT_OWNED_BY_USER"] = "ORDER_NOT_OWNED_BY_USER";
   OrderErrorCode["INVALID_TRANSITION"] = "INVALID_TRANSITION";
+  OrderErrorCode["LISTING_OWNED_BY_USER"] = "LISTING_OWNED_BY_USER";
 })(OrderErrorCode || (OrderErrorCode = {}));
 class OrderNotFoundError extends NotFoundError {
   constructor(id) {
@@ -259,6 +260,15 @@ class InvalidStatusError extends BadRequestError {
   }
   toString() {
     return "You have attempted to change your order status to an invalid value";
+  }
+}
+class ListingOwnedByUserError extends NotAuthorisedError {
+  constructor(...args) {
+    super(...args);
+    this.code = OrderErrorCode.LISTING_OWNED_BY_USER;
+  }
+  toString() {
+    return "You cannot create an order for a listing you own";
   }
 }
 
@@ -341,6 +351,8 @@ const responseToError = response => {
       return new OrderNotFoundError(response.error.id);
     case OrderErrorCode.ORDER_NOT_OWNED_BY_USER:
       return new OrderNotOwnedByUserError("", "");
+    case OrderErrorCode.LISTING_OWNED_BY_USER:
+      return new ListingOwnedByUserError();
   }
   switch (response.status) {
     case 400:
@@ -357,4 +369,4 @@ const responseToError = response => {
   return new UnknownError();
 };
 
-export { AuthErrorCode, BadRequestError, BaseError, CommonErrorCode, ConflictError, CreateListingError, GameErrorCode, GameNotFoundError, ImageErrorCode, InvalidGamePlatformError, InvalidLoginError, InvalidStatusError, InvalidTokenError, ListingErrorCode, ListingNotFoundError, NotAuthenticatedError, NotAuthorisedError, NotFoundError, OrderErrorCode, OrderNotFoundError, OrderNotOwnedByUserError, OutdatedTokenError, PlatformErrorCode, PlatformNotFoundError, UnknownError, UpdateListingFailedError, UpdateListingProhibitedError, UploadFailedError, UserErrorCode, UserNotFoundError, UsernameNotUniqueError, ValidationError, responseToError };
+export { AuthErrorCode, BadRequestError, BaseError, CommonErrorCode, ConflictError, CreateListingError, GameErrorCode, GameNotFoundError, ImageErrorCode, InvalidGamePlatformError, InvalidLoginError, InvalidStatusError, InvalidTokenError, ListingErrorCode, ListingNotFoundError, ListingOwnedByUserError, NotAuthenticatedError, NotAuthorisedError, NotFoundError, OrderErrorCode, OrderNotFoundError, OrderNotOwnedByUserError, OutdatedTokenError, PlatformErrorCode, PlatformNotFoundError, UnknownError, UpdateListingFailedError, UpdateListingProhibitedError, UploadFailedError, UserErrorCode, UserNotFoundError, UsernameNotUniqueError, ValidationError, responseToError };

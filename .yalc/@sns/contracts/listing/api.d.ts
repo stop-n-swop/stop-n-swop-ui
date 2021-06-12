@@ -1,3 +1,4 @@
+import { Status } from "../order";
 import { AuditItem, Listing } from "./entities";
 import { Condition, Region } from "./enums";
 export declare type GetListingRequirementsRequest = void;
@@ -26,6 +27,7 @@ export interface SearchListingsRequest {
     rating?: number;
     minPrice?: number;
     maxPrice?: number;
+    status?: Status;
 }
 export interface SearchListingsResponse {
     listings: Listing[];

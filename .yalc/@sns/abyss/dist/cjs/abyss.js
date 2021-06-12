@@ -240,6 +240,7 @@ exports.OrderErrorCode = void 0;
   OrderErrorCode["ORDER_NOT_FOUND"] = "ORDER_NOT_FOUND";
   OrderErrorCode["ORDER_NOT_OWNED_BY_USER"] = "ORDER_NOT_OWNED_BY_USER";
   OrderErrorCode["INVALID_TRANSITION"] = "INVALID_TRANSITION";
+  OrderErrorCode["LISTING_OWNED_BY_USER"] = "LISTING_OWNED_BY_USER";
 })(exports.OrderErrorCode || (exports.OrderErrorCode = {}));
 class OrderNotFoundError extends NotFoundError {
   constructor(id) {
@@ -263,6 +264,15 @@ class InvalidStatusError extends BadRequestError {
   }
   toString() {
     return "You have attempted to change your order status to an invalid value";
+  }
+}
+class ListingOwnedByUserError extends NotAuthorisedError {
+  constructor(...args) {
+    super(...args);
+    this.code = exports.OrderErrorCode.LISTING_OWNED_BY_USER;
+  }
+  toString() {
+    return "You cannot create an order for a listing you own";
   }
 }
 
@@ -345,6 +355,8 @@ const responseToError = response => {
       return new OrderNotFoundError(response.error.id);
     case exports.OrderErrorCode.ORDER_NOT_OWNED_BY_USER:
       return new OrderNotOwnedByUserError("", "");
+    case exports.OrderErrorCode.LISTING_OWNED_BY_USER:
+      return new ListingOwnedByUserError();
   }
   switch (response.status) {
     case 400:
@@ -371,6 +383,7 @@ exports.InvalidLoginError = InvalidLoginError;
 exports.InvalidStatusError = InvalidStatusError;
 exports.InvalidTokenError = InvalidTokenError;
 exports.ListingNotFoundError = ListingNotFoundError;
+exports.ListingOwnedByUserError = ListingOwnedByUserError;
 exports.NotAuthenticatedError = NotAuthenticatedError;
 exports.NotAuthorisedError = NotAuthorisedError;
 exports.NotFoundError = NotFoundError;
