@@ -7,13 +7,17 @@ import History from 'ui/modules/listings/my/listing/History';
 import { useAuthGuard } from 'application/auth';
 import { useMyListing } from 'application/listings/useMyListing';
 import { useGame } from 'application/games';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useHistory } from 'application/listings';
 import { useChangeStatus, useListingOrders } from 'application/orders';
 import FormError from 'ui/elements/FormError';
+import { MY_LISTINGS } from 'ui/constants/paths';
+import { useGetMessage } from 'ui/intl';
+import { ids } from 'ui/messages';
 
 export default function MyListing() {
   useAuthGuard();
+  const getMessage = useGetMessage();
   const { listingId } = useParams<{ listingId: string }>();
 
   const { data: listing, invalidate: invalidateListing } = useMyListing({
@@ -57,7 +61,12 @@ export default function MyListing() {
 
   return (
     <div>
-      <PageTitle>{game.name}</PageTitle>
+      <PageTitle>
+        <Link to={MY_LISTINGS}>
+          {getMessage(ids.listings.myListings.title)}
+        </Link>
+        <span>{game.name}</span>
+      </PageTitle>
       <Card className="md:mt-3 lg:mt-4 xl:mt-8 xl:w-4/5 xl:mx-auto flex flex-col space-y-8">
         <If condition={error}>
           <FormError error={error} />

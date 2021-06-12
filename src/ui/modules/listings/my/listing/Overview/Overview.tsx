@@ -2,6 +2,8 @@ import React, { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { makeGameListingPath } from 'ui/constants/paths';
 import Button from 'ui/elements/Button';
+import { useGetMessage } from 'ui/intl';
+import { ids } from 'ui/messages';
 import type { Status as IStatus } from '@sns/contracts/order';
 import Buyer from '../Buyer';
 import Status from '../Status';
@@ -27,11 +29,15 @@ export default function Overview({
   history,
   actions,
 }: Props) {
+  const getMessage = useGetMessage();
+
   return (
     <div className="space-y-8">
       <div className="space-y-8 lg:flex lg:space-y-0">
         <div className="lg:w-1/2">
-          <h3 className="font-semibold">Listing</h3>
+          <h3 className="font-semibold">
+            {getMessage(ids.listings.myListing.listing)}
+          </h3>
           <Button
             component={Link}
             to={makeGameListingPath({ listingId, platformId, productId })}
@@ -43,7 +49,9 @@ export default function Overview({
         </div>
         <If condition={orderId}>
           <div>
-            <h3 className="font-semibold">Order</h3>
+            <h3 className="font-semibold">
+              {getMessage(ids.listings.myListing.order)}
+            </h3>
             <div className="text-sm">{orderId}</div>
           </div>
         </If>

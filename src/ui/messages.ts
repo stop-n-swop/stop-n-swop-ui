@@ -39,7 +39,7 @@ const enMessages = {
     list: 'Sell stuff',
   },
   games: {
-    title: 'Browse games',
+    title: 'Games',
     actions: {
       favourite: 'Favourite',
       list: 'List this game',
@@ -166,13 +166,18 @@ const enMessages = {
       },
     },
     edit: {
-      title: 'Edit listing {name} ({listingId})',
+      title: 'Edit',
     },
     myListings: {
       title: 'My listings',
       listButton: 'Create a new listing',
     },
     myListing: {
+      listing: 'Listing',
+      order: 'order',
+      multiOrders: {
+        title: 'There are several active orders for this listing:',
+      },
       buyer: {
         label: 'Buyer',
       },
@@ -232,7 +237,14 @@ const enMessages = {
     },
   },
   order: {
-    title: 'My Orders',
+    myOrders: {
+      title: 'My Orders',
+      empty: "Looks like you haven't got any orders yet",
+    },
+    myOrder: {
+      order: 'order',
+      listing: 'listing',
+    },
     actions: {
       edit: 'Edit',
       [Status.OPEN]: 'Open',

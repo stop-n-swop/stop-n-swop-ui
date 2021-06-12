@@ -19,7 +19,6 @@ import {
   NEW_LISTING,
   NEW_LISTING_PLATFORM,
   MY_LISTING,
-  MY_LISTING_ORDERS,
 } from 'ui/constants/paths';
 import Home from 'ui/pages/Home';
 

@@ -4,6 +4,8 @@ import Card from 'ui/elements/Card';
 import PageTitle from 'ui/elements/PageTitle';
 import { ids } from 'ui/messages';
 import GameFinder from 'ui/modules/listings/new/Game';
+import { Link } from 'react-router-dom';
+import { NEW_LISTING } from 'ui/constants/paths';
 import type { Game } from '@sns/contracts/product';
 
 interface Props {
@@ -23,7 +25,10 @@ export default function NewListing({
 }: Props) {
   return (
     <div className="flex-grow flex flex-col relative">
-      <PageTitle>{useMessage(ids.listings.new.pageTitle)}</PageTitle>
+      <PageTitle>
+        <Link to={NEW_LISTING}>{useMessage(ids.listings.new.pageTitle)}</Link>
+        <span>{platformId}</span>
+      </PageTitle>
       <Card className="lg:absolute lg:left-1/2 lg:top-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2 lg:transform w-full xl:w-4/5">
         <GameFinder
           productId={productId}

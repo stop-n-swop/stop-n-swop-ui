@@ -11,7 +11,7 @@ const getButtonStatus = ({
   owned,
   addStatus,
   listingStatus,
-}: Props) => {
+}: Pick<Props, 'inBasket' | 'owned' | 'addStatus' | 'listingStatus'>) => {
   if (inBasket) {
     return 'success';
   }
@@ -30,7 +30,11 @@ const getButtonStatus = ({
   return 'none';
 };
 
-const getTitle = ({ inBasket, owned, listingStatus }: Props) => {
+const getTitle = ({
+  inBasket,
+  owned,
+  listingStatus,
+}: Pick<Props, 'inBasket' | 'owned' | 'listingStatus'>) => {
   if (inBasket) {
     return 'This item is already in your basket';
   }
@@ -40,6 +44,7 @@ const getTitle = ({ inBasket, owned, listingStatus }: Props) => {
   if (listingStatus !== Status.OPEN) {
     return 'This listing is no longer available';
   }
+  return undefined;
 };
 
 interface Props {
@@ -52,11 +57,18 @@ interface Props {
   className?: string;
 }
 
-export default function AddToBasket(props: Props) {
-  const { className, onAddToBasket, listingId } = props;
+export default function AddToBasket({
+  addStatus,
+  inBasket,
+  listingId,
+  listingStatus,
+  onAddToBasket,
+  owned,
+  className,
+}: Props) {
   const getMessage = useGetMessage();
-  const state = getButtonStatus(props);
-  const title = getTitle(props);
+  const state = getButtonStatus({ addStatus, inBasket, listingStatus, owned });
+  const title = getTitle({ inBasket, listingStatus, owned });
 
   return (
     <Button

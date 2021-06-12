@@ -7,14 +7,18 @@ import PageTitle from 'ui/elements/PageTitle';
 import AddToBasket from 'ui/modules/listings/AddToBasket';
 import { useListing } from 'application/listings';
 import { useGame } from 'application/games';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useAddToBasket, useBasket } from 'application/basket';
 import { isInBasket } from 'domain/selectors/basket';
 import { useUser } from 'application/user';
 import { useIsLoggedIn } from 'application/auth';
+import { GAMES, makeGamePath } from 'ui/constants/paths';
+import { useGetMessage } from 'ui/intl';
+import { ids } from 'ui/messages';
 
 export default function ListingPage() {
-  const { listingId, productId } =
+  const getMessage = useGetMessage();
+  const { listingId, productId, platformId } =
     useParams<{
       productId: string;
       listingId: string;
@@ -25,7 +29,6 @@ export default function ListingPage() {
   const { data: product } = useGame({ id: productId });
   const { action: addToBasket, status: addStatus } = useAddToBasket();
   const { data: basket } = useBasket();
-  const listingText = `(${listingId})`;
 
   const loggedIn = useIsLoggedIn();
   const userQuery = useUser();
@@ -49,8 +52,9 @@ export default function ListingPage() {
   return (
     <div>
       <PageTitle>
-        <span className="pr-6">{productName}</span>
-        <span className="text-xs text-gray-500">{listingText}</span>
+        <Link to={GAMES}>{getMessage(ids.games.title)}</Link>
+        <Link to={makeGamePath({ platformId, productId })}>{productName}</Link>
+        <span>{listingId}</span>
       </PageTitle>
       <Card className="md:mt-3 lg:mt-4 xl:mt-8 xl:w-4/5 xl:mx-auto flex flex-col lg:p-8 xl:pt-12 xl:px-0 xl:pb-0">
         <div className="lg:flex">

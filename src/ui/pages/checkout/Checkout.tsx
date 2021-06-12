@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { useBasket, useSubmitBasket } from 'application/basket';
 import React from 'react';
 import Button from 'ui/elements/Button';
@@ -9,7 +10,7 @@ export default function CheckoutPage() {
   return (
     <div>
       <ul>
-        {basket.items.map(({ id, listingId }) => (
+        {basket?.items?.map(({ id, listingId }) => (
           <li>
             {id}
             {' - '}

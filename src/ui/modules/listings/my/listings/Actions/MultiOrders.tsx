@@ -1,10 +1,9 @@
 import React from 'react';
 import { Order, Status } from '@sns/contracts/order';
-import Button from 'ui/elements/Button';
-import { useGetDate, useGetMessage } from 'ui/intl';
-import { FaTimes } from 'react-icons/fa';
-import { List, ListItem } from 'ui/elements/list';
+import { useGetMessage } from 'ui/intl';
+import { List } from 'ui/elements/list';
 import { sortBy } from 'crosscutting/utils';
+import { ids } from 'ui/messages';
 import type { Status as RStatus } from '@respite/core';
 import ActionButton from './ActionButton';
 import MultiOrder from './MultiOrder';
@@ -26,11 +25,10 @@ export default function MultiOrders({
     return orderId === active.orderId && status === active.status;
   };
   const getMessage = useGetMessage();
-  const getDate = useGetDate();
 
   return (
     <div className="space-y-4">
-      <p>There are several active orders for this listing:</p>
+      <p>{getMessage(ids.listings.myListing.multiOrders.title)}</p>
       <List>
         {sortBy(orders, (order) => order.created).map((order) => (
           <MultiOrder

@@ -24,7 +24,7 @@ module.exports = {
   ],
   moduleNameMapper: {
     '^.+\\.(css|sass|scss)$': 'identity-obj-proxy',
-    '^.+\\.(jpg|png|svg)$': '<rootDir>/config/jest/fileStub.js',
+    '^.+\\.(jpg|png|svg|gif)$': '<rootDir>/config/jest/fileStub.js',
   },
   watchPlugins: [
     'jest-watch-typeahead/filename',

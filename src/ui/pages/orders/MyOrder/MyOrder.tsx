@@ -3,10 +3,13 @@ import { useGame } from 'application/games';
 import { useHistory, useListing } from 'application/listings';
 import { useChangeStatus, useMyOrder } from 'application/orders';
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import { MY_ORDERS } from 'ui/constants/paths';
 import Card from 'ui/elements/Card';
 import FormError from 'ui/elements/FormError';
 import PageTitle from 'ui/elements/PageTitle';
+import { useMessage } from 'ui/intl';
+import { ids } from 'ui/messages';
 import History from 'ui/modules/listings/my/listing/History';
 import Actions from 'ui/modules/orders/my/order/Actions';
 import Overview from 'ui/modules/orders/my/order/Overview/Overview';
@@ -28,7 +31,10 @@ export default function MyOrder() {
 
   return (
     <div>
-      <PageTitle>{game.name}</PageTitle>
+      <PageTitle>
+        <Link to={MY_ORDERS}>{useMessage(ids.order.myOrders.title)}</Link>
+        <span>{game.name}</span>
+      </PageTitle>
       <Card className="md:mt-3 lg:mt-4 xl:mg-8 xl:w-4/5 xl:mx-auto flex flex-col">
         <If condition={error}>
           <FormError error={error} />

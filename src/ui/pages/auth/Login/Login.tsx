@@ -6,7 +6,7 @@ import OAuth2Login from 'react-simple-oauth2-login';
 import G from 'ui/assets/g-logo.png';
 import { makeDashboardPath } from 'ui/constants/paths';
 import { useQueryParam } from 'ui/hooks';
-import { useGetMessage, useMessage } from 'ui/intl';
+import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 import LoginForm from 'ui/modules/auth/login/Form';
 import Login from 'ui/modules/auth/login/Login';

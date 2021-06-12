@@ -1,11 +1,7 @@
 import React from 'react';
 import { Order, Status } from '@sns/contracts/order';
-import Button from 'ui/elements/Button';
-import { useGetDate, useGetMessage } from 'ui/intl';
-import { FaTimes } from 'react-icons/fa';
-import { List, ListItem } from 'ui/elements/list';
-import { sortBy } from 'crosscutting/utils';
-import { ids } from 'ui/messages';
+import { useGetDate } from 'ui/intl';
+import { ListItem } from 'ui/elements/list';
 import type { Status as RStatus } from '@respite/core';
 import ActionButton from './ActionButton';
 
@@ -22,7 +18,6 @@ export default function MultiOrder({
   onChangeStatus,
   active,
 }: Props) {
-  const getMessage = useGetMessage();
   const getDate = useGetDate();
 
   return (

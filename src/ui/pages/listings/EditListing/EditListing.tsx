@@ -1,9 +1,15 @@
 import React from 'react';
 import PageTitle from 'ui/elements/PageTitle';
-import { useMessage } from 'ui/intl';
+import { useGetMessage, useMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 import Form from 'ui/modules/listings/new/Form';
-import { makeMyListingPath } from 'ui/constants/paths';
+import {
+  GAMES,
+  makeGameListingPath,
+  makeGamePath,
+  makeMyListingPath,
+} from 'ui/constants/paths';
+import { Link } from 'react-router-dom';
 import type useMachine from 'ui/modules/listings/new/machine';
 import type { Query } from '@respite/core';
 
@@ -40,10 +46,17 @@ export default function EditListing({
   requirementsQuery,
   error,
 }: Props) {
+  const getMessage = useGetMessage();
+
   return (
     <div className="flex-grow flex flex-col relative">
       <PageTitle>
-        {useMessage(ids.listings.edit.title, { name, listingId })}
+        <Link to={GAMES}>{getMessage(ids.games.title)}</Link>
+        <Link to={makeGamePath({ platformId, productId })}>{name}</Link>
+        <Link to={makeGameListingPath({ listingId, platformId, productId })}>
+          {listingId}
+        </Link>
+        <span>{useMessage(ids.listings.edit.title)}</span>
       </PageTitle>
       <Form
         error={error}

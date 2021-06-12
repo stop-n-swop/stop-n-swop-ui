@@ -1,5 +1,5 @@
 import React from 'react';
-import { useMessage } from 'ui/intl';
+import { useGetMessage } from 'ui/intl';
 import { List } from 'ui/elements/list';
 import PageTitle from 'ui/elements/PageTitle';
 import { ids } from 'ui/messages';
@@ -11,17 +11,18 @@ import Order from './Order';
 
 export default function MyOrders() {
   useAuthGuard();
+  const getMessage = useGetMessage();
 
   const { data: orders } = useMyOrders();
 
   return (
     <div>
-      <PageTitle>{useMessage(ids.order.title)}</PageTitle>
+      <PageTitle>{getMessage(ids.order.myOrders.title)}</PageTitle>
       <div className="xl:w-4/5 xl:mx-auto mt-6">
         <Choose>
           <When condition={orders.length === 0}>
             <Card>
-              <p>Looks like you haven't got any orders yet</p>
+              <p>{getMessage(ids.order.myOrders.empty)}</p>
             </Card>
           </When>
           <Otherwise>
