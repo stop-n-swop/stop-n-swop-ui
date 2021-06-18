@@ -8,13 +8,13 @@ import type {
 
 const fetchProductsListingCount =
   (driver: Driver): FetchProductsListingCount =>
-  async (products) => {
+  async ({ productIds }) => {
     const response = await driver<
       GetProductsListingCountRequest,
       GetProductsListingCountResponse
     >({
       url: '/listings/counts',
-      data: { products },
+      data: { productIds },
       method: 'POST',
     });
 

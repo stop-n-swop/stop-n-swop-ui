@@ -33,12 +33,6 @@ export default function BrowseFilters({
         label={getMessage(ids.games.filters.preferences.label)}
       >
         <Checkbox
-          label={getMessage(ids.games.filters.preferences.favourites)}
-          value={false}
-          onChange={() => null}
-          className="mb-3"
-        />
-        <Checkbox
           label={getMessage(ids.games.filters.preferences.available)}
           value={available}
           onChange={setAvailable}

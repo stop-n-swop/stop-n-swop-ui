@@ -18,24 +18,15 @@ export const makeNewListingPlatformPath = ({
 export const GAME_LISTING = `${GAME}/listings/:listingId`;
 export const makeGameListingPath = ({
   productId,
-  platformId,
   listingId,
 }: {
   productId: string;
-  platformId: string;
   listingId: string;
-}) => `${makeGamePath({ platformId, productId })}/listings/${listingId}`;
+}) => `${makeGamePath({ productId })}/listings/${listingId}`;
 
-export const EDIT_LISTING = `${GAME}/listings/:listingId/edit`;
-export const makeEditListingPath = ({
-  productId,
-  platformId,
-  listingId,
-}: {
-  productId: string;
-  platformId: string;
-  listingId: string;
-}) => `${makeGameListingPath({ platformId, productId, listingId })}/edit`;
+export const EDIT_LISTING = `${MY_LISTING}/edit`;
+export const makeEditListingPath = ({ listingId }: { listingId: string }) =>
+  `${makeMyListingPath({ listingId })}/edit`;
 
 export const GAME_NEW_LISTING = `${NEW_LISTING_PLATFORM}/:productId`;
 export const makeGameNewListingPath = ({

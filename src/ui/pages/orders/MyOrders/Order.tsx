@@ -9,7 +9,7 @@ import type { Order as IOrder } from '@sns/contracts/order';
 export default function MyOrder({ order }: { order: IOrder }) {
   const { data: listing } = useListing({ id: order.listingId });
   const {
-    products: [{ productId }],
+    productIds: [productId],
   } = listing;
   const { data: product } = useGame({ id: productId });
 

@@ -20,7 +20,7 @@ interface Props {
 
 export default function ProductItem({
   game: { id, name, cover, banner },
-  platform: { id: platformId, name: platformName },
+  platform: { name: platformName },
   style,
   totalListings,
   favourite,
@@ -29,7 +29,7 @@ export default function ProductItem({
   return (
     <GridItem
       component={Link}
-      to={makeGamePath({ platformId, productId: id })}
+      to={makeGamePath({ productId: id })}
       style={style}
     >
       <div className="w-1/4 md:w-full flex-shrink-0 relative md:pb-2/3">

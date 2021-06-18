@@ -2,7 +2,7 @@ import { Status } from '@sns/contracts/order';
 import React, { useState } from 'react';
 import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
-import type { Audit } from '@sns/contracts/listing';
+import type { AuditItem } from '@sns/contracts/listing';
 import HistoryRow from './Row';
 
 export default function History({
@@ -10,7 +10,7 @@ export default function History({
   createdDate,
   username,
 }: {
-  history: Audit;
+  history: AuditItem[];
   createdDate: Date;
   username: string;
 }) {

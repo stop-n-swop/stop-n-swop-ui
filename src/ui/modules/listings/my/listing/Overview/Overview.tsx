@@ -11,7 +11,6 @@ import Status from '../Status';
 interface Props {
   productId: string;
   listingId: string;
-  platformId: string;
   orderId: string;
   status: IStatus;
   buyer: string;
@@ -22,7 +21,6 @@ interface Props {
 export default function Overview({
   productId,
   listingId,
-  platformId,
   orderId,
   status,
   buyer,
@@ -40,7 +38,7 @@ export default function Overview({
           </h3>
           <Button
             component={Link}
-            to={makeGameListingPath({ listingId, platformId, productId })}
+            to={makeGameListingPath({ listingId, productId })}
             className="text-sm inline-flex"
             padding={false}
           >

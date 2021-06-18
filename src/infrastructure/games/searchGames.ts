@@ -25,7 +25,7 @@ const searchGames =
       data: {
         page,
         q: search,
-        platforms,
+        platformIds: platforms,
       },
     });
 

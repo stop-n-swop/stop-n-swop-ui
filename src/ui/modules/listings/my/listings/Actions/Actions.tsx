@@ -37,10 +37,7 @@ export default function Actions({
   };
   const getMessage = useGetMessage();
 
-  const {
-    id: listingId,
-    products: [{ productId, platformId }],
-  } = listing;
+  const { id: listingId } = listing;
 
   if (listing.status === Status.OPEN) {
     return (
@@ -48,7 +45,7 @@ export default function Actions({
         <Button
           className="w-full lg:w-auto space-x-4"
           component={Link}
-          to={makeEditListingPath({ productId, platformId, listingId })}
+          to={makeEditListingPath({ listingId })}
           kind="primary"
         >
           <span>

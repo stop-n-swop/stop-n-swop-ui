@@ -20,7 +20,7 @@ export default function Overview({
   history,
   listing: {
     id: listingId,
-    products: [{ platformId, productId }],
+    productIds: [productId],
   },
   order: { id: orderId, status },
 }: Props) {
@@ -43,7 +43,6 @@ export default function Overview({
             component={Link}
             to={makeGameListingPath({
               listingId,
-              platformId,
               productId,
             })}
             className="text-sm inline-flex"

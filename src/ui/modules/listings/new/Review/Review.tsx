@@ -40,7 +40,6 @@ export default function Review({ username, location, previous }: Props) {
             listingId=""
             price={price}
             productId=""
-            platformId=""
             currency="GBP"
             postage={postage}
             readonly

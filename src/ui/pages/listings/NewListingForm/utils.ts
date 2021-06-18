@@ -4,10 +4,8 @@ import type { Values } from 'ui/modules/listings/new/types';
 export const useOnSubmit = ({
   create,
   productId,
-  platformId,
 }: {
   productId: string;
-  platformId: string;
   create: ReturnType<typeof useCreateListing>['action'];
 }) => {
   const onSubmit = async ({
@@ -34,12 +32,7 @@ export const useOnSubmit = ({
         instructions,
         region,
       },
-      products: [
-        {
-          platformId,
-          productId,
-        },
-      ],
+      productIds: [productId],
     });
   };
   return onSubmit;

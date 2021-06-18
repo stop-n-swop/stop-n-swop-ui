@@ -12,17 +12,18 @@ import { getDefaultValues, useOnSubmit, useRedirectOnDone } from './utils';
 
 export default function ConnectedEditListing() {
   useAuthGuard();
-  const { productId, listingId, platformId } =
+  const { listingId } =
     useParams<{
-      productId: string;
       listingId: string;
-      platformId: string;
     }>();
-  const { data: game } = useGame({ id: productId });
   const { data: listing } = useMyListing({ id: listingId });
-  const requirementsQuery = useRequirements({ productId, platformId });
+  const { data: game } = useGame({ id: listing.productIds[0] });
+  const requirementsQuery = useRequirements({
+    productId: game.id,
+    platformId: game.platformId,
+  });
 
-  const [onSubmit, error] = useOnSubmit({ listingId, platformId, productId });
+  const [onSubmit, error] = useOnSubmit({ listingId, productId: game.id });
 
   const [step, dispatch] = useMachine(firstStep, { onSubmit });
   const formProps = useForm<Values>({
@@ -35,8 +36,8 @@ export default function ConnectedEditListing() {
     <FormProvider {...formProps}>
       <EditListing
         listingId={listingId}
-        productId={productId}
-        platformId={platformId}
+        productId={game.id}
+        platformId={game.platformId}
         dispatch={dispatch}
         step={step}
         name={game.name}

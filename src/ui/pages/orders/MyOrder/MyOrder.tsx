@@ -19,7 +19,7 @@ export default function MyOrder() {
   const { orderId } = useParams<{ orderId: string }>();
   const { data: order } = useMyOrder({ id: orderId });
   const { data: listing } = useListing({ id: order.listingId });
-  const { data: game } = useGame({ id: listing.products[0].productId });
+  const { data: game } = useGame({ id: listing.productIds[0] });
   const { data: history } = useHistory({ orderId });
   const {
     action: changeStatus,

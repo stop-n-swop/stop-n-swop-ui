@@ -19,7 +19,6 @@ export declare type UpdateListingRequest = Omit<Listing, "createdDate" | "userna
 export declare type UpdateListingResponse = Listing;
 export interface SearchListingsRequest {
     productId?: string;
-    platformId?: string;
     boxed?: boolean;
     instructions?: boolean;
     condition?: Condition | Condition[];
@@ -38,15 +37,11 @@ export interface GetListingParams {
 export declare type GetListingRequest = void;
 export declare type GetListingResponse = Listing;
 export interface GetProductsListingCountRequest {
-    products: Array<{
-        productId: string;
-        platformId: string;
-    }>;
+    productIds: string[];
 }
 export interface GetProductsListingCountResponse {
     counts: Array<{
         productId: string;
-        platformId: string;
         count: number;
     }>;
 }

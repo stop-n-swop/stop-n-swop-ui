@@ -8,7 +8,7 @@ import type { Listing } from '@sns/contracts/listing';
 export default function MyListing({ listing }: { listing: Listing }) {
   const {
     id: listingId,
-    products: [{ productId }],
+    productIds: [productId],
   } = listing;
   const { data: product } = useGame({ id: productId });
   // TODO: get the listing order

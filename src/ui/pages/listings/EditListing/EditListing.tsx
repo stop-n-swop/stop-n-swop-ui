@@ -52,8 +52,8 @@ export default function EditListing({
     <div className="flex-grow flex flex-col relative">
       <PageTitle>
         <Link to={GAMES}>{getMessage(ids.games.title)}</Link>
-        <Link to={makeGamePath({ platformId, productId })}>{name}</Link>
-        <Link to={makeGameListingPath({ listingId, platformId, productId })}>
+        <Link to={makeGamePath({ productId })}>{name}</Link>
+        <Link to={makeGameListingPath({ listingId, productId })}>
           {listingId}
         </Link>
         <span>{useMessage(ids.listings.edit.title)}</span>

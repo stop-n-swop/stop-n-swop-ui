@@ -12,14 +12,12 @@ import ListingsArea from './ListingsArea';
 
 export default function View() {
   const [favourite, setFavourite] = useState(false);
-  const { productId, platformId } =
+  const { productId } =
     useParams<{
       productId: string;
-      platformId: string;
     }>();
   const { data: game } = useGame({ id: productId });
-  const { data: platform } = usePlatform({ id: platformId });
-  const { releaseDate } = game.platforms.find(({ id }) => id === platformId);
+  const { data: platform } = usePlatform({ id: game.platformId });
   const getMessage = useGetMessage();
 
   return (
@@ -35,17 +33,17 @@ export default function View() {
           developer={game.developers[0]}
           publisher={game.publishers[0]}
           name={game.name}
-          releaseDate={releaseDate}
+          releaseDate={game.releaseDate}
           platform={platform.name}
         />
         <QuickActions
-          platformId={platformId}
+          platformId={game.platformId}
           productId={productId}
           favourite={favourite}
           onFavouriteClick={() => setFavourite(!favourite)}
           onCollectClick={() => null}
         />
-        <ListingsArea platformId={platformId} productId={productId} />
+        <ListingsArea productId={productId} />
       </div>
     </>
   );

@@ -9,11 +9,9 @@ import type { Step } from 'ui/modules/listings/new/machine';
 export const useOnSubmit = ({
   productId,
   listingId,
-  platformId,
 }: {
   productId: string;
   listingId: string;
-  platformId: string;
 }) => {
   const { action, error } = useUpdateListing();
 
@@ -29,12 +27,7 @@ export const useOnSubmit = ({
   }: Values) => {
     await action({
       id: listingId,
-      products: [
-        {
-          platformId,
-          productId,
-        },
-      ],
+      productIds: [productId],
       currency: 'GBP',
       description,
       images: Object.fromEntries(

@@ -8,7 +8,6 @@ import { ids } from 'ui/messages';
 
 interface Props {
   productId: string;
-  platformId: string;
   listingId: string;
   price: number;
   postage: number;
@@ -23,7 +22,6 @@ export default function Actions({
   postage,
   currency,
   productId,
-  platformId,
   listingId,
   addToBasket,
 }: Props) {
@@ -57,7 +55,6 @@ export default function Actions({
           component={Link}
           to={makeGameListingPath({
             productId,
-            platformId,
             listingId,
           })}
         >

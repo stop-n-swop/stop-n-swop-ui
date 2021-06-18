@@ -29,7 +29,7 @@ export default function ConnectedNewProductListing() {
     },
   } = useUser();
   const { action: create, error } = useCreateListing();
-  const onSubmit = useOnSubmit({ create, platformId, productId });
+  const onSubmit = useOnSubmit({ create, productId });
   const formProps = useForm<Values>();
   const [step, dispatch] = useMachine(firstStep, { onSubmit });
 

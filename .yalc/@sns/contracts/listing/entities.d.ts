@@ -8,10 +8,7 @@ export interface Stats {
 }
 export interface Listing {
     id: string;
-    products: Array<{
-        productId: string;
-        platformId: string;
-    }>;
+    productIds: string[];
     images: Record<string, string>;
     price: number;
     postage: number;

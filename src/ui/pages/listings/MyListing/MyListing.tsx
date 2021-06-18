@@ -25,7 +25,7 @@ export default function MyListing() {
   });
 
   const {
-    products: [{ productId, platformId }],
+    productIds: [productId],
     username,
     createdDate,
     status,
@@ -73,7 +73,6 @@ export default function MyListing() {
         </If>
         <Overview
           listingId={listingId}
-          platformId={platformId}
           productId={productId}
           orderId={orderId}
           status={status}

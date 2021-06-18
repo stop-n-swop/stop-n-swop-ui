@@ -9,7 +9,6 @@ type Args = Parameters<SearchListings>[0];
 export const useListings = encase(
   (searchListings: SearchListings) => (args: Args, opts?: QueryOptions) => {
     const {
-      platformId,
       productId,
       boxed,
       condition,
@@ -18,6 +17,7 @@ export const useListings = encase(
       minPrice,
       rating,
       region,
+      status,
     } = args;
     const cache = useCache();
 
@@ -31,13 +31,13 @@ export const useListings = encase(
         return result;
       },
       [
-        platformId,
         productId,
         boxed,
         instructions,
         maxPrice,
         minPrice,
         rating,
+        status,
         [...(condition || [])].join(','),
         [...(region || [])].join(','),
       ],

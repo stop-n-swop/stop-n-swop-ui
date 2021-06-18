@@ -56,7 +56,6 @@ const enMessages = {
     filters: {
       preferences: {
         label: 'Preferences',
-        favourites: 'Favourites',
         available: 'Available',
       },
       manufacturer: {

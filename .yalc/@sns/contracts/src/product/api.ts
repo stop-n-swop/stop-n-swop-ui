@@ -3,7 +3,7 @@ import { Game } from "./entities";
 export interface SearchGamesRequest {
   page?: number;
   q?: string;
-  platforms?: string[];
+  platformIds?: string[];
 }
 
 export interface SearchGamesResponse {
@@ -15,6 +15,6 @@ export interface SearchGamesResponse {
   };
 }
 
+export type GetGameParams = { gameId: string };
 export type GetGameRequest = void;
-
 export type GetGameResponse = Game;

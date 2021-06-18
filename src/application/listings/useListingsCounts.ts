@@ -9,41 +9,41 @@ import type { PromiseType } from 'crosscutting/utils';
 
 type Result = PromiseType<ReturnType<FetchProductsListingCount>>;
 
-const getProducts = (games: Game[], page: number) => {
+const getProductIds = (games: Game[], page: number) => {
   const start = page * 20;
   const end = page * 20 + 20;
 
-  return games.slice(start, end).flatMap((game) => {
-    return game.platforms.map((platform) => {
-      return {
-        productId: game.id,
-        platformId: platform.id,
-      };
-    });
-  });
+  return games.slice(start, end).map((game) => game.id);
+};
+
+const getPageAndDeps = (
+  gamesQuery: ReturnType<typeof useGames>,
+): [number, any[]] => {
+  const queryDeps = (<InternalQuery<typeof gamesQuery['data']>>gamesQuery).deps;
+  const page = queryDeps[1];
+  const deps = queryDeps.slice(2);
+
+  return [page, deps];
 };
 
 export const useListingsCounts = encase(
   (fetch: FetchProductsListingCount) =>
     (gamesQuery: ReturnType<typeof useGames>, opts?: QueryOptions) => {
-      // TODO: clean al of this up...
-      const queryDeps = (<InternalQuery<typeof gamesQuery['data']>>gamesQuery)
-        .deps;
-      const page = queryDeps[1];
-      const deps = queryDeps.slice(2);
+      // TODO: clean all of this up...
+      const [page, deps] = getPageAndDeps(gamesQuery);
 
       return useInfiniteQuery<Result>(
         ListingCountKey,
         page,
         async (previous) => {
           const { games } = await gamesQuery.resolve();
-          const products = getProducts(games, page);
+          const productIds = getProductIds(games, page);
 
-          if (products.length === 0) {
+          if (productIds.length === 0) {
             return previous;
           }
 
-          const result = await fetch(products);
+          const result = await fetch({ productIds });
 
           return [...previous, ...result];
         },

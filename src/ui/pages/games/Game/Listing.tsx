@@ -15,7 +15,7 @@ interface Props {
 
 export default function Listing({
   listing: {
-    products: [{ productId, platformId }],
+    productIds: [productId],
     id: listingId,
     username,
     images,
@@ -46,7 +46,6 @@ export default function Listing({
         listingId={listingId}
         price={price}
         productId={productId}
-        platformId={platformId}
         currency={currency}
         postage={postage}
         addToBasket={

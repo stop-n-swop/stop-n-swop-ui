@@ -18,7 +18,7 @@ import { ids } from 'ui/messages';
 
 export default function ListingPage() {
   const getMessage = useGetMessage();
-  const { listingId, productId, platformId } =
+  const { listingId, productId } =
     useParams<{
       productId: string;
       listingId: string;
@@ -53,7 +53,7 @@ export default function ListingPage() {
     <div>
       <PageTitle>
         <Link to={GAMES}>{getMessage(ids.games.title)}</Link>
-        <Link to={makeGamePath({ platformId, productId })}>{productName}</Link>
+        <Link to={makeGamePath({ productId })}>{productName}</Link>
         <span>{listingId}</span>
       </PageTitle>
       <Card className="md:mt-3 lg:mt-4 xl:mt-8 xl:w-4/5 xl:mx-auto flex flex-col lg:p-8 xl:pt-12 xl:px-0 xl:pb-0">

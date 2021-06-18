@@ -11,11 +11,10 @@ import type { Values } from 'ui/modules/listings/browse/types';
 import Listings from './Listings';
 
 interface Props {
-  platformId: string;
   productId: string;
 }
 
-export default function ListingsArea({ platformId, productId }: Props) {
+export default function ListingsArea({ productId }: Props) {
   const formProps = useForm<Values>({
     defaultValues: {
       condition: [],
@@ -28,7 +27,6 @@ export default function ListingsArea({ platformId, productId }: Props) {
   const values = useWatch<Values>({ control: formProps.control });
   const args = useMemo(() => {
     return {
-      platformId,
       productId,
       boxed:
         values.features.includes('boxed') && values.features.includes('unboxed')
@@ -49,7 +47,6 @@ export default function ListingsArea({ platformId, productId }: Props) {
       ),
     };
   }, [
-    platformId,
     productId,
     values.condition,
     values.features,

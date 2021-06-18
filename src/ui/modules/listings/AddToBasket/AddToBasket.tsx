@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaShoppingBasket } from 'react-icons/fa';
+import cx from 'classnames';
 import { useGetMessage } from 'ui/intl';
 import Button from 'ui/elements/Button';
 import { ids } from 'ui/messages';
@@ -73,7 +74,7 @@ export default function AddToBasket({
   return (
     <Button
       kind="primary"
-      className={className}
+      className={cx(className, state === 'disabled' && 'opacity-10')}
       state={state}
       onClick={() => onAddToBasket({ listingId })}
       title={title}

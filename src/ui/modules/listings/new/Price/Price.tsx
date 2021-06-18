@@ -11,9 +11,7 @@ import Buttons from '../Buttons';
 export default function PriceStep({
   previous,
   productId,
-  platformId,
 }: {
-  platformId: string;
   productId: string;
   previous(): void;
 }) {
@@ -28,7 +26,7 @@ export default function PriceStep({
           kind="tertiary"
           component="a"
           target="_blank"
-          href={makeGamePath({ platformId, productId })}
+          href={makeGamePath({ productId })}
           padding={false}
           className="text-xs"
         >
