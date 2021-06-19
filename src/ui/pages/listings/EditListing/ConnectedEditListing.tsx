@@ -37,7 +37,6 @@ export default function ConnectedEditListing() {
       <EditListing
         listingId={listingId}
         productId={game.id}
-        platformId={game.platformId}
         dispatch={dispatch}
         step={step}
         name={game.name}

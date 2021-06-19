@@ -16,6 +16,7 @@ export default function ConnectedNewListing() {
     search,
     page: 0,
     platforms: search ? [platformId] : [],
+    available: null,
   });
 
   return (

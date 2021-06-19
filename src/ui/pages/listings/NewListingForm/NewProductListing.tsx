@@ -53,7 +53,6 @@ export default function NewProductListing({
         location={location}
         previousUrl={NEW_LISTING}
         productId={productId}
-        platformId={platformId}
         step={step}
         username={username}
         requirementsQuery={requirementsQuery}

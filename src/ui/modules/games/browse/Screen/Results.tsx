@@ -1,9 +1,10 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, Suspense } from 'react';
 import { ProductList } from 'ui/modules/product/products';
 import Filters from 'ui/modules/games/browse/Filters';
 import { Query, Status } from '@respite/core';
+import LoadingPage from 'ui/pages/Loading';
 import type { Platform } from '@sns/contracts/product';
-import type { useGames } from 'application/games';
+import type { useCounts, useGames } from 'application/games';
 import More from '../More';
 import Empty from '../Empty';
 import type { useListingsCounts } from 'application/listings';
@@ -12,6 +13,7 @@ export default function Results({
   platformsQuery,
   gamesQuery,
   listingsCountsQuery,
+  gamesCountsQuery,
   hasSearched,
   platformIds,
   setPlatformIds,
@@ -23,6 +25,7 @@ export default function Results({
   hasSearched: boolean;
   platformsQuery: Query<Platform[]>;
   gamesQuery: ReturnType<typeof useGames>;
+  gamesCountsQuery: ReturnType<typeof useCounts>;
   listingsCountsQuery: ReturnType<typeof useListingsCounts>;
   platformIds: string[];
   setPlatformIds(value: string[]): void;
@@ -31,13 +34,10 @@ export default function Results({
   available: boolean;
   setAvailable(value: boolean): void;
 }) {
+  const { status } = gamesQuery;
   const {
-    data: {
-      nextPage,
-      counts: { platforms: platformCounts },
-    },
-    status,
-  } = gamesQuery;
+    data: { platforms: platformCounts, available: availableCount },
+  } = gamesCountsQuery;
   const { data: platforms } = platformsQuery;
   const loading = (() => {
     if (status === Status.FETCHING || status === Status.LOADING) {
@@ -51,6 +51,7 @@ export default function Results({
     }
     return false;
   })();
+  const nextPage = status === Status.SUCCESS ? gamesQuery.data.nextPage : -1;
 
   return (
     <div className="flex-grow flex flex-col lg:flex-row">
@@ -59,6 +60,7 @@ export default function Results({
         platformIds={platformIds}
         setPlatformIds={setPlatformIds}
         platformCounts={platformCounts}
+        availableCount={availableCount}
         hasSearched={hasSearched}
         available={available}
         setAvailable={setAvailable}
@@ -69,10 +71,12 @@ export default function Results({
         </When>
         <Otherwise>
           <div className="flex-grow">
-            <ProductList>{children}</ProductList>
-            <If condition={nextPage != null && nextPage >= 0}>
-              <More nextPage={nextPage} setPage={setPage} loading={loading} />
-            </If>
+            <Suspense fallback={<LoadingPage />}>
+              <ProductList>{children}</ProductList>
+              <If condition={nextPage != null && nextPage >= 0}>
+                <More nextPage={nextPage} setPage={setPage} loading={loading} />
+              </If>
+            </Suspense>
           </div>
         </Otherwise>
       </Choose>

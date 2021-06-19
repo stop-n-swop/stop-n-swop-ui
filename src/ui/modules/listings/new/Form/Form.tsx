@@ -22,7 +22,6 @@ type Dispatch = ReturnType<typeof useMachine>[1];
 
 interface Props {
   productId: string;
-  platformId: string;
   step: Step;
   dispatch: Dispatch;
   username: string;
@@ -39,7 +38,6 @@ interface Props {
 
 export default function Form({
   productId,
-  platformId,
   step,
   dispatch,
   username,
@@ -81,11 +79,7 @@ export default function Form({
             <Region previous={onPrevious} />
           </When>
           <When condition={step === 'price'}>
-            <Price
-              previous={onPrevious}
-              productId={productId}
-              platformId={platformId}
-            />
+            <Price previous={onPrevious} productId={productId} />
           </When>
           <When condition={step === 'description'}>
             <Description previous={onPrevious} />

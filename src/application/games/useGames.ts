@@ -1,7 +1,6 @@
 import { QueryOptions, useQuery } from '@respite/query';
 import { encase } from 'react-jpex';
 import { GameKey, GamesKey } from 'application/keys';
-import { useDebounce } from 'use-debounce';
 import { useCache } from '@respite/core';
 import { useEffect, useRef } from 'react';
 import type { SearchGames } from 'core/games';
@@ -48,9 +47,8 @@ type Result = PromiseType<ReturnType<SearchGames>>;
 
 export const useGames = encase(
   (searchGames: SearchGames) =>
-    ({ page, platforms, search }: Args, opts?: QueryOptions) => {
+    ({ page, platforms, search, available }: Args, opts?: QueryOptions) => {
       const cache = useCache();
-      const [latentSearch] = useDebounce(search, 500);
 
       return useInfiniteQuery<Result>(
         GamesKey,
@@ -59,23 +57,24 @@ export const useGames = encase(
           const result = await searchGames({
             page,
             platforms,
-            search: latentSearch,
+            search,
+            available,
           });
           result.games?.forEach((game) => {
             cache.success([GameKey, game.id], game);
           });
           return {
-            ...result,
+            nextPage: result.nextPage,
             games: [...previous.games, ...(result.games ?? [])],
           };
         },
-        [latentSearch, platforms.join(',')],
+        [search, platforms.join(','), available],
         {
           initialState: {
             nextPage: -1,
             games: [],
-            counts: { total: 0, platforms: {} },
           },
+          ttl: available ? 30000 : undefined,
           ...opts,
         },
       );

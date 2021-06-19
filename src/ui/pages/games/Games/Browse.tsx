@@ -1,12 +1,12 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, Suspense } from 'react';
 import Screen from 'ui/modules/games/browse/Screen';
 import { usePlatforms } from 'application/platforms';
-import { useGames } from 'application/games';
-import { Status } from '@respite/core';
+import { useCounts, useGames } from 'application/games';
 import { useHistory } from 'react-router-dom';
 import { useQueryParam } from 'ui/hooks';
 import { useDebounce } from 'use-debounce';
 import { useListingsCounts } from 'application/listings';
+import LoadingPage from 'ui/pages/Loading';
 import Items from './Items';
 
 export default function Browse() {
@@ -46,16 +46,18 @@ export default function Browse() {
 
   const platformsQuery = usePlatforms();
   const gamesQuery = useGames({
-    search,
+    search: latentSearch,
     page,
     platforms: platformIds,
+    available,
+  });
+  const gamesCountsQuery = useCounts({
+    available,
+    platforms: platformIds,
+    search: latentSearch,
   });
   const listingsCountsQuery = useListingsCounts(gamesQuery);
-  const hasSearched =
-    (gamesQuery.status === Status.SUCCESS ||
-      gamesQuery.status === Status.FETCHING) &&
-    gamesQuery.data.games != null &&
-    Boolean(search);
+  const hasSearched = Boolean(latentSearch) || platformIds.length > 0;
 
   useEffect(() => {
     const params = new URLSearchParams('');
@@ -83,6 +85,7 @@ export default function Browse() {
       gamesQuery={gamesQuery}
       platformsQuery={platformsQuery}
       listingsCountsQuery={listingsCountsQuery}
+      gamesCountsQuery={gamesCountsQuery}
       search={search}
       platformIds={platformIds}
       onSearch={setSearch}
@@ -92,13 +95,14 @@ export default function Browse() {
       available={available}
       setAvailable={setAvailable}
     >
-      <Items
-        gamesQuery={gamesQuery}
-        platformsQuery={platformsQuery}
-        platformIds={platformIds}
-        available={available}
-        listingsCountsQuery={listingsCountsQuery}
-      />
+      <Suspense fallback={<LoadingPage />}>
+        <Items
+          gamesQuery={gamesQuery}
+          platformsQuery={platformsQuery}
+          platformIds={platformIds}
+          listingsCountsQuery={listingsCountsQuery}
+        />
+      </Suspense>
     </Screen>
   );
 }

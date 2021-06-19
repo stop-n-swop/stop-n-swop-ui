@@ -10,13 +10,11 @@ export default function Items({
   gamesQuery,
   listingsCountsQuery,
   platformIds,
-  available,
 }: {
   platformsQuery: Query<Platform[]>;
-  gamesQuery: Query<{ games: Game[]; nextPage: number; counts: any }>;
+  gamesQuery: Query<{ games: Game[]; nextPage: number }>;
   listingsCountsQuery: ReturnType<typeof useListingsCounts>;
   platformIds: string[];
-  available: boolean;
 }) {
   const {
     data: { games },
@@ -42,9 +40,6 @@ export default function Items({
           listingsCounts.find((row) => row.productId === game.id)?.count ?? 0;
 
         if (platform == null) {
-          return null;
-        }
-        if (available && totalListings === 0) {
           return null;
         }
 

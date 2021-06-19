@@ -12,6 +12,7 @@ interface Props {
   platformIds: string[];
   setPlatformIds(value: string[]): void;
   platformCounts: Record<string, number>;
+  availableCount: number;
   hasSearched: boolean;
 }
 
@@ -23,8 +24,15 @@ export default function BrowseFilters({
   platformIds,
   setPlatformIds,
   platformCounts,
+  availableCount,
 }: Props) {
   const getMessage = useGetMessage();
+
+  const availableLabel = hasSearched
+    ? `${getMessage(
+        ids.games.filters.preferences.available,
+      )} (${availableCount})`
+    : getMessage(ids.games.filters.preferences.available);
 
   return (
     <Filters>
@@ -33,7 +41,7 @@ export default function BrowseFilters({
         label={getMessage(ids.games.filters.preferences.label)}
       >
         <Checkbox
-          label={getMessage(ids.games.filters.preferences.available)}
+          label={availableLabel}
           value={available}
           onChange={setAvailable}
         />

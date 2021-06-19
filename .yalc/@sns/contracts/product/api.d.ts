@@ -3,17 +3,24 @@ export interface SearchGamesRequest {
     page?: number;
     q?: string;
     platformIds?: string[];
+    available?: boolean;
 }
 export interface SearchGamesResponse {
     nextPage: number;
     games: Game[];
-    counts: {
-        total: number;
-        platforms: Record<string, number>;
-    };
 }
 export declare type GetGameParams = {
     gameId: string;
 };
 export declare type GetGameRequest = void;
 export declare type GetGameResponse = Game;
+export interface GetSearchCountsRequest {
+    q?: string;
+    platformIds?: string[];
+    available?: boolean;
+}
+export interface GetSearchCountsResponse {
+    total: number;
+    available: number;
+    platforms: Record<string, number>;
+}

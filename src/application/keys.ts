@@ -16,6 +16,7 @@ export const UpdateUserKey = Symbol('update_user');
 // Queries
 export const GamesKey = Symbol('games');
 export const GameKey = Symbol('game');
+export const GamesCountsKey = Symbol('games_counts');
 
 // Platforms
 export const PlatformsKey = Symbol('platforms');

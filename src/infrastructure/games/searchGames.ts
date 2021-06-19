@@ -8,24 +8,14 @@ import type { Driver } from 'core/io';
 
 const searchGames =
   (driver: Driver): SearchGames =>
-  async ({ page, platforms, search }) => {
-    if (!search) {
-      return {
-        games: null,
-        nextPage: -1,
-        counts: {
-          total: 0,
-          platforms: {},
-        },
-      };
-    }
-
+  async ({ page, platforms, search, available }) => {
     const { data } = await driver<SearchGamesRequest, SearchGamesResponse>({
       url: '/games',
       data: {
         page,
         q: search,
         platformIds: platforms,
+        available,
       },
     });
 

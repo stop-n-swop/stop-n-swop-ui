@@ -18,7 +18,6 @@ type Dispatch = ReturnType<typeof useMachine>[1];
 
 interface Props {
   productId: string;
-  platformId: string;
   listingId: string;
   name: string;
   step: Step;
@@ -36,7 +35,6 @@ interface Props {
 
 export default function EditListing({
   productId,
-  platformId,
   listingId,
   name,
   step,
@@ -64,7 +62,6 @@ export default function EditListing({
         location={location}
         previousUrl={makeMyListingPath({ listingId })}
         productId={productId}
-        platformId={platformId}
         step={step}
         username={username}
         requirementsQuery={requirementsQuery}
