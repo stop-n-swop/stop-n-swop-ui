@@ -20,6 +20,7 @@ import {
   ListingOrdersKey,
   ChangeStatusKey,
   ChangeListingStatusKey,
+  AddressKey,
 } from './keys';
 
 export default function useExchanges() {
@@ -55,6 +56,7 @@ export default function useExchanges() {
         HistoryKey,
         MyOrdersKey,
         ListingOrdersKey,
+        AddressKey,
       ],
       [ChangeStatusKey, ChangeListingStatusKey],
     ],

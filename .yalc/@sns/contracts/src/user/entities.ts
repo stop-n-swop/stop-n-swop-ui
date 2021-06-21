@@ -1,3 +1,11 @@
+export interface Address {
+  line1: string;
+  line2: string;
+  city: string;
+  postcode: string;
+  country: string;
+}
+
 export interface User {
   email: string;
   username: string;

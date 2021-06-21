@@ -1,6 +1,7 @@
 import { Status } from "../order";
 import { AuditItem, Listing } from "./entities";
 import { Condition, Region } from "./enums";
+import { Address } from "../user";
 export declare type GetListingRequirementsRequest = void;
 export interface GetListingRequirementsResponse {
     photos: Array<{
@@ -59,4 +60,11 @@ export interface ChangeListingStatusRequest {
     status: Status;
 }
 export interface ChangeListingStatusResponse {
+}
+export interface GetListingAddressParams {
+    listingId: string;
+}
+export interface GetListingAddressResponse {
+    name: string;
+    address: Address;
 }

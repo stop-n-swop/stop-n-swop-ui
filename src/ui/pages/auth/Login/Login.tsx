@@ -4,7 +4,7 @@ import React from 'react';
 import { useResolve } from 'react-jpex';
 import OAuth2Login from 'react-simple-oauth2-login';
 import G from 'ui/assets/g-logo.png';
-import { makeDashboardPath } from 'ui/constants/paths';
+import { HOME } from 'ui/constants/paths';
 import { useQueryParam } from 'ui/hooks';
 import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
@@ -17,7 +17,7 @@ import type { Config } from 'core/io';
 
 export default function LoginPage() {
   const getMessage = useGetMessage();
-  const redirect = useQueryParam('redirect') || makeDashboardPath();
+  const redirect = useQueryParam('redirect') || HOME;
   const reason = useQueryParam<Reason>('reason');
   const { action: logIn, error, submitting } = useLogIn();
   const config = useResolve<Config>();

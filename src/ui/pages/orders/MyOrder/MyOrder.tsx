@@ -20,7 +20,7 @@ export default function MyOrder() {
   const { data: order } = useMyOrder({ id: orderId });
   const { data: listing } = useListing({ id: order.listingId });
   const { data: game } = useGame({ id: listing.productIds[0] });
-  const { data: history } = useHistory({ orderId });
+  const historyQuery = useHistory({ orderId });
   const {
     action: changeStatus,
     status: actionStatus,
@@ -58,7 +58,7 @@ export default function MyOrder() {
             <History
               username={username}
               createdDate={createdDate}
-              history={history}
+              historyQuery={historyQuery}
             />
           }
         />

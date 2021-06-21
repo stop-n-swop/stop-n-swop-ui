@@ -1,49 +1,50 @@
 // Auth
 // Queries
 export const AuthKey = Symbol('auth');
-export const TokensKey = Symbol('auth_tokens');
+export const TokensKey = Symbol('auth tokens');
 // Actions
-export const LogInKey = Symbol('log_in');
-export const LogOutKey = Symbol('log_out');
+export const LogInKey = Symbol('log in');
+export const LogOutKey = Symbol('log out');
 
 // User
 // Queries
 export const UserKey = Symbol('user');
 // Actions
-export const UpdateUserKey = Symbol('update_user');
+export const UpdateUserKey = Symbol('update user');
 
 // Games
 // Queries
 export const GamesKey = Symbol('games');
 export const GameKey = Symbol('game');
-export const GamesCountsKey = Symbol('games_counts');
+export const GamesCountsKey = Symbol('games counts');
 
 // Platforms
 export const PlatformsKey = Symbol('platforms');
 
 // Listings
 // Queries
-export const ListingRequirementsKey = Symbol('listing_requirements');
+export const ListingRequirementsKey = Symbol('requirements');
 export const ListingsKey = Symbol('listings');
 export const ListingKey = Symbol('listing');
-export const ListingCountKey = Symbol('listing_count');
-export const MyListingsKey = Symbol('my_listings');
-export const HistoryKey = Symbol('listing_history');
+export const ListingCountKey = Symbol('count');
+export const MyListingsKey = Symbol('my listings');
+export const HistoryKey = Symbol('history');
+export const AddressKey = Symbol('address');
 // Actions
-export const CreateListingKey = Symbol('create_listing');
-export const UpdateListingKey = Symbol('update_listing');
-export const ChangeListingStatusKey = Symbol('change_listing_status');
+export const CreateListingKey = Symbol('create listing');
+export const UpdateListingKey = Symbol('update listing');
+export const ChangeListingStatusKey = Symbol('change listing status');
 
 // Orders
 // Queries
-export const MyOrdersKey = Symbol('my_orders');
-export const ListingOrdersKey = Symbol('listing_orders');
+export const MyOrdersKey = Symbol('my orders');
+export const ListingOrdersKey = Symbol('listing orders');
 // Actions
-export const ChangeStatusKey = Symbol('change_status');
+export const ChangeStatusKey = Symbol('change status');
 
 // Basket
 // Queries
 export const BasketKey = Symbol('basket');
 // Actions
-export const AddToBasketKey = Symbol('add_to_basket');
-export const SubmitBasketKey = Symbol('submit_basket');
+export const AddToBasketKey = Symbol('add to basket');
+export const SubmitBasketKey = Symbol('submit basket');

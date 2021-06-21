@@ -1,9 +1,10 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, Suspense } from 'react';
 import { Link } from 'react-router-dom';
 import { makeGameListingPath } from 'ui/constants/paths';
 import Button from 'ui/elements/Button';
 import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
+import Loader from 'ui/modules/Loader';
 import type { Status as IStatus } from '@sns/contracts/order';
 import Buyer from '../Buyer';
 import Status from '../Status';
@@ -16,6 +17,7 @@ interface Props {
   buyer: string;
   history: ReactNode;
   actions: ReactNode;
+  buyerAddress: ReactNode;
 }
 
 export default function Overview({
@@ -26,6 +28,7 @@ export default function Overview({
   buyer,
   history,
   actions,
+  buyerAddress,
 }: Props) {
   const getMessage = useGetMessage();
 
@@ -62,6 +65,9 @@ export default function Overview({
           <Buyer username={buyer} />
         </If>
       </div>
+      <Suspense fallback={<Loader size="0.5rem" sensible />}>
+        {buyerAddress}
+      </Suspense>
       {actions}
       {history}
     </div>

@@ -1,16 +1,17 @@
-import { Status } from '@sns/contracts/order';
-import React, { useState } from 'react';
+import React, { useState, Suspense } from 'react';
 import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
+import Loader from 'ui/modules/Loader';
 import type { AuditItem } from '@sns/contracts/listing';
-import HistoryRow from './Row';
+import HistoryList from './List';
+import type { Query } from '@respite/core';
 
 export default function History({
-  history,
+  historyQuery,
   createdDate,
   username,
 }: {
-  history: AuditItem[];
+  historyQuery: Query<AuditItem[]>;
   createdDate: Date;
   username: string;
 }) {
@@ -27,35 +28,19 @@ export default function History({
         {getMessage(ids.listings.myListing.history.label)}
       </button>
       <If condition={open}>
-        <table className="w-full">
-          <thead className="sr-only">
-            <tr>
-              <th>{getMessage(ids.listings.myListing.history.headers.date)}</th>
-              <th>
-                {getMessage(ids.listings.myListing.history.headers.username)}
-              </th>
-              <th>
-                {getMessage(ids.listings.myListing.history.headers.status)}
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {history
-              .slice()
-              .sort(
-                (a, b) =>
-                  new Date(b.date).getTime() - new Date(a.date).getTime(),
-              )
-              .map((item) => (
-                <HistoryRow key={new Date(item.date).getTime()} {...item} />
-              ))}
-            <HistoryRow
-              date={createdDate}
-              status={Status.OPEN}
-              username={username}
-            />
-          </tbody>
-        </table>
+        <Suspense
+          fallback={
+            <div className="flex justify-center">
+              <Loader size="0.5rem" sensible />
+            </div>
+          }
+        >
+          <HistoryList
+            createdDate={createdDate}
+            username={username}
+            historyQuery={historyQuery}
+          />
+        </Suspense>
       </If>
     </div>
   );

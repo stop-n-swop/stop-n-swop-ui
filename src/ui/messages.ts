@@ -180,6 +180,9 @@ const enMessages = {
       buyer: {
         label: 'Buyer',
       },
+      address: {
+        label: 'Address',
+      },
       status: {
         label: 'Status',
       },

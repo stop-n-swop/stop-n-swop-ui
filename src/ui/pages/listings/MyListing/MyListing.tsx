@@ -4,6 +4,7 @@ import PageTitle from 'ui/elements/PageTitle';
 import Overview from 'ui/modules/listings/my/listing/Overview';
 import Actions from 'ui/modules/listings/my/listings/Actions';
 import History from 'ui/modules/listings/my/listing/History';
+import BuyerAddress from 'ui/modules/listings/my/listing/BuyerAddress';
 import { useAuthGuard } from 'application/auth';
 import { useMyListing } from 'application/listings/useMyListing';
 import { useGame } from 'application/games';
@@ -11,6 +12,7 @@ import { Link, useParams } from 'react-router-dom';
 import {
   useHistory,
   useChangeStatus as useChangeListingStatus,
+  useAddress,
 } from 'application/listings';
 import {
   useChangeStatus as useChangeOrderStatus,
@@ -42,12 +44,14 @@ export default function MyListing() {
   const { data: game } = useGame({
     id: productId,
   });
-  const { data: history, invalidate: invalidateHistory } = useHistory({
+  const historyQuery = useHistory({
     listingId,
   });
+  const invalidateHistory = historyQuery.invalidate;
   const { data: orders, invalidate: invalidateOrders } = useListingOrders({
     listingId,
   });
+  const addressQuery = useAddress({ listingId });
   const {
     action: changeOrderStatus,
     status: actionStatus1,
@@ -69,7 +73,7 @@ export default function MyListing() {
       invalidateListing();
       invalidateHistory();
       invalidateOrders();
-    }, 10000);
+    }, 30000);
 
     return () => clearInterval(handle);
   }, [invalidateHistory, invalidateListing, invalidateOrders]);
@@ -116,8 +120,11 @@ export default function MyListing() {
             <History
               username={username}
               createdDate={createdDate}
-              history={history}
+              historyQuery={historyQuery}
             />
+          }
+          buyerAddress={
+            <BuyerAddress addressQuery={addressQuery} status={status} />
           }
         />
       </Card>

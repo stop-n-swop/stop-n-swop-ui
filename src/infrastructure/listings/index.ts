@@ -1,5 +1,6 @@
 import './changeListingStatus';
 import './createListing';
+import './fetchAddress';
 import './fetchHistory';
 import './fetchListing';
 import './fetchListingRequirements';
