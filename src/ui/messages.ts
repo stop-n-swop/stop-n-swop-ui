@@ -261,7 +261,7 @@ const enMessages = {
     status: {
       [Status.OPEN]: 'Listed',
       [Status.CLOSED]: 'Closed',
-      [Status.CREATED]: 'Order placed',
+      [Status.PLACED]: 'Order placed',
       [Status.APPROVED]: 'Processing payment',
       [Status.DECLINED]: 'Declined',
       [Status.PAID]: 'Paid',

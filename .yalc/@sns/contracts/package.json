@@ -1,6 +1,6 @@
 {
   "name": "@sns/contracts",
-  "version": "0.0.0+5f729c93",
+  "version": "0.0.0+540bd322",
   "repository": "git@github.com:stop-n-swop/stop-n-swop-contracts.git",
   "author": "Jack Ellis",
   "license": "MIT",
@@ -10,5 +10,5 @@
     "build": "yarn build:js && yarn build:ts",
     "prepublishOnly": "yarn build"
   },
-  "yalcSig": "5f729c9324de434b5e95bbc0f06912d0"
+  "yalcSig": "540bd322df304836a2cafabfc797818a"
 }

@@ -24,7 +24,7 @@ export default function Actions({ order, status, onClick }: Props) {
   };
   const getMessage = useGetMessage();
 
-  if (order.status === OrderStatus.CREATED) {
+  if (order.status === OrderStatus.PLACED) {
     return (
       <div className="md:flex md:space-x-4 lg:space-x-8">
         <ActionButton

@@ -76,7 +76,7 @@ export default function Actions({
       </div>
     );
   }
-  if (listing.status === Status.CREATED && orders.length > 1) {
+  if (listing.status === Status.PLACED && orders.length > 1) {
     return (
       <MultiOrders
         active={active}
@@ -92,7 +92,7 @@ export default function Actions({
     return null;
   }
 
-  if (listing.status === Status.CREATED) {
+  if (listing.status === Status.PLACED) {
     return (
       <div className="block md:flex md:space-x-4 lg:space-x-8">
         <ActionButton

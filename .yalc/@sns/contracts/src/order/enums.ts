@@ -1,7 +1,9 @@
 export enum Status {
   OPEN = "open", // the default - listing is open
   CLOSED = "closed", // listing has been closed by the seller
-  CREATED = "created", // a buyer has purchased the listing and is waiting for approval
+  CREATED = "created", // a buyer has started the checkout process
+  PENDING = "pending", // the buyer has partially progressed through the checkout process
+  PLACED = "placed", // the buyer has complete the checkout process and is awaiting approval
   APPROVED = "approved", // the seller has approved the transaction
   DECLINED = "declined", // the seller has declined the transaction
   PAID = "paid", // the transaction has succeeded
