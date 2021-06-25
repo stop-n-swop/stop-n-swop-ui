@@ -51,7 +51,11 @@ export default function ListingPage() {
         <Link to={makeGamePath({ productId })}>{productName}</Link>
         <span>{listingId}</span>
       </PageTitle>
-      <Card className="md:mt-3 lg:mt-4 xl:mt-8 xl:w-4/5 xl:mx-auto flex flex-col lg:p-8 xl:pt-12 xl:px-0 xl:pb-0">
+      <Card
+        title={productName}
+        className="md:mt-3 lg:mt-4 xl:mt-8 xl:w-4/5 xl:mx-auto flex flex-col"
+        padding="p-3 lg:p-8 xl:pt-12 xl:px-0 xl:pb-0"
+      >
         <div className="lg:flex">
           <Slideshow images={Object.values(images)} className="lg:w-1/2 mb-4" />
           <Overview

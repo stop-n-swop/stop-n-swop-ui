@@ -332,6 +332,24 @@ const enMessages = {
       },
     },
   },
+  checkout: {
+    billingAddress: {
+      title: 'Billing Address',
+      description:
+        "Please confirm your billing address. This is the address that's linked to your payment method",
+      useForDelivery: {
+        label: 'My delivery address is the same',
+      },
+      next: 'Continue',
+    },
+    deliveryAddress: {
+      title: 'Delivery Address',
+      description:
+        'Please enter the address you want this item to be delivered to',
+      previous: 'Back',
+      next: 'Continue',
+    },
+  },
 };
 
 // this just creates us a deeply nested object of ids

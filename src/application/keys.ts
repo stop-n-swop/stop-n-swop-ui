@@ -42,3 +42,4 @@ export const ListingOrdersKey = Symbol('listing orders');
 // Actions
 export const ChangeStatusKey = Symbol('change status');
 export const CreateOrderKey = Symbol('create order');
+export const PatchOrderKey = Symbol('patch order');

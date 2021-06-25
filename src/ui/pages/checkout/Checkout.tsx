@@ -4,7 +4,7 @@ import { useListing } from 'application/listings';
 import { useCreateOrder } from 'application/orders';
 import React from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import { makeCheckoutBillingAddressPath } from 'ui/constants/paths';
+import { makeContinueCheckoutPath } from 'ui/constants/paths';
 import Button from 'ui/elements/Button';
 import Card from 'ui/elements/Card';
 import FormError from 'ui/elements/FormError';
@@ -19,7 +19,7 @@ export default function CheckoutPage() {
 
   const handleClick = async () => {
     const { orderId } = await createOrder({ listingId });
-    push(makeCheckoutBillingAddressPath({ orderId }));
+    push(makeContinueCheckoutPath({ orderId }));
   };
 
   return (

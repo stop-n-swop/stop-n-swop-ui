@@ -11,10 +11,10 @@ export default function Container({
   children: ReactNode;
 }) {
   return (
-    <Card className="w-full flex-grow lg:my-4 xl:w-4/5 mx-auto flex flex-col">
-      <h2 className="text-xl font-bold my-4">
-        {useMessage(ids.account.dashboard.welcome, { name })}
-      </h2>
+    <Card
+      title={useMessage(ids.account.dashboard.welcome, { name })}
+      className="w-full flex-grow lg:my-4 xl:w-4/5 mx-auto flex flex-col"
+    >
       {children}
     </Card>
   );

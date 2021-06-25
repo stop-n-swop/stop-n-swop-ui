@@ -28,7 +28,6 @@ export default function PlatformFinder({
 
   return (
     <div>
-      <h2 className="text-lg">{getMessage(ids.listings.new.title)}</h2>
       <Typeahead
         id="platform_search"
         options={options}

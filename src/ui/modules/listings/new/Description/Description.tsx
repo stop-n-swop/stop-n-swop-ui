@@ -10,9 +10,6 @@ export default function DescriptionStep({ previous }: { previous(): void }) {
 
   return (
     <div>
-      <h2 className="text-lg">
-        {getMessage(ids.listings.new.description.title)}
-      </h2>
       <div className="sm:w-3/4 lg:w-1/2 sm:mx-auto">
         <Controller
           name="description"

@@ -1,3 +1,4 @@
+import { Address } from "../user";
 import type { Status } from "./enums";
 
 export interface Order {
@@ -6,4 +7,6 @@ export interface Order {
   username: string;
   status: Status;
   created: Date;
+  billingAddress: Address;
+  deliveryAddress: Address;
 }

@@ -23,12 +23,6 @@ const Row = ({
 
   return (
     <div className="w-full px-12 sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 sm:px-3 pb-3">
-      {/* TODO: add intl for all the image keys */}
-      <h2 className="flex-grow">
-        {getMessage(
-          ids.listings.new.photos[imageKey] || ids.listings.new.photos.unknown,
-        )}
-      </h2>
       <Controller
         name={name}
         rules={{

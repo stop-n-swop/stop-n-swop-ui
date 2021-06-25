@@ -31,7 +31,6 @@ export default function GameFinder({
 
   return (
     <div>
-      <h2 className="text-lg">{getMessage(ids.listings.new.title)}</h2>
       <Typeahead
         id="product_search"
         options={options}

@@ -33,9 +33,12 @@ export default function MyOrder() {
     <div>
       <PageTitle>
         <Link to={MY_ORDERS}>{useMessage(ids.order.myOrders.title)}</Link>
-        <span>{game.name}</span>
+        <span>{orderId}</span>
       </PageTitle>
-      <Card className="md:mt-3 lg:mt-4 xl:mg-8 xl:w-4/5 xl:mx-auto flex flex-col">
+      <Card
+        title={game.name}
+        className="md:mt-3 lg:mt-4 xl:mg-8 xl:w-4/5 xl:mx-auto flex flex-col"
+      >
         <If condition={error}>
           <FormError error={error} />
         </If>

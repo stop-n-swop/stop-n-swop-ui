@@ -1,4 +1,5 @@
 import { AuditItem } from "../listing";
+import { DeepPartial } from "../utils";
 import { Order } from "./entities";
 export interface SearchOrdersRequest {
     listingId?: string;
@@ -19,12 +20,11 @@ export interface CreateOrderRequest {
 export interface CreateOrderResponse {
     id: string;
 }
-export interface PatchOrderParams {
+export interface UpdateOrderStatusParams {
     orderId: string;
 }
-export declare type PatchOrderRequest = Pick<Order, "status">;
-export interface PatchOrderResponse {
-}
+export declare type UpdateOrderStatusRequest = Pick<Order, "status">;
+export declare type UpdateOrderStatusResponse = Order;
 export interface GetHistoryParams {
     orderId: string;
 }
@@ -32,3 +32,8 @@ export declare type GetHistoryRequest = void;
 export interface GetHistoryResponse {
     history: AuditItem[];
 }
+export interface PatchOrderParams {
+    orderId: string;
+}
+export declare type PatchOrderRequest = Pick<DeepPartial<Order>, "billingAddress" | "deliveryAddress">;
+export declare type PatchOrderResponse = Order;

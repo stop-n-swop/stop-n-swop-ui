@@ -1,7 +1,7 @@
 import jpex from 'jpex';
 import type {
-  PatchOrderResponse,
-  PatchOrderRequest,
+  UpdateOrderStatusRequest,
+  UpdateOrderStatusResponse,
 } from '@sns/contracts/order';
 import type { AuthDriver } from 'core/io';
 import type { ChangeStatus } from 'core/orders';
@@ -9,7 +9,7 @@ import type { ChangeStatus } from 'core/orders';
 const changeStatus =
   (driver: AuthDriver): ChangeStatus =>
   async ({ orderId, status }) => {
-    await driver<PatchOrderRequest, PatchOrderResponse>({
+    await driver<UpdateOrderStatusRequest, UpdateOrderStatusResponse>({
       url: '/orders/{orderId}/status',
       params: { orderId },
       method: 'POST',

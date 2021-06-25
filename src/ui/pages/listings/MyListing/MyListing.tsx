@@ -87,9 +87,12 @@ export default function MyListing() {
         <Link to={MY_LISTINGS}>
           {getMessage(ids.listings.myListings.title)}
         </Link>
-        <span>{game.name}</span>
+        <span>{listingId}</span>
       </PageTitle>
-      <Card className="md:mt-3 lg:mt-4 xl:mt-8 xl:w-4/5 xl:mx-auto flex flex-col space-y-8">
+      <Card
+        title={game.name}
+        className="md:mt-3 lg:mt-4 xl:mt-8 xl:w-4/5 xl:mx-auto flex flex-col space-y-8"
+      >
         <If condition={error}>
           <FormError error={error} />
         </If>

@@ -29,7 +29,10 @@ export default function NewListing({
         <Link to={NEW_LISTING}>{useMessage(ids.listings.new.pageTitle)}</Link>
         <span>{platformId}</span>
       </PageTitle>
-      <Card className="lg:absolute lg:left-1/2 lg:top-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2 lg:transform w-full xl:w-4/5">
+      <Card
+        title={useMessage(ids.listings.new.title)}
+        className="lg:absolute lg:left-1/2 lg:top-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2 lg:transform w-full xl:w-4/5"
+      >
         <GameFinder
           productId={productId}
           platformId={platformId}

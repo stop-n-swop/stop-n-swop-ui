@@ -51,7 +51,6 @@ export default function RegionStep({ previous }: { previous(): void }) {
 
   return (
     <div>
-      <h3 className="text-lg">{getMessage(ids.listings.new.region.title)}</h3>
       <Controller
         name="region"
         defaultValue=""

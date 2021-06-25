@@ -14,6 +14,8 @@ import Done from 'ui/modules/listings/new/Done';
 import Error from 'ui/modules/listings/new/Error';
 import Tracker from 'ui/modules/listings/new/Tracker/Tracker';
 import { useHistory } from 'react-router-dom';
+import { useMessage } from 'ui/intl';
+import { ids } from 'ui/messages';
 import type { Values } from 'ui/modules/listings/new/types';
 import type { Query } from '@respite/core';
 
@@ -58,6 +60,7 @@ export default function Form({
 
   return (
     <Card
+      title={useMessage(ids.listings.new[step]?.title)}
       padding={false}
       className="w-full xl:w-4/5 xl:mx-auto lg:my-8 xl:my-12"
     >

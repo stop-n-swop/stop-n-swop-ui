@@ -20,7 +20,6 @@ export default function PriceStep({
 
   return (
     <div>
-      <h3 className="text-lg">{getMessage(ids.listings.new.price.title)}</h3>
       <div className="flex">
         <Button
           kind="tertiary"

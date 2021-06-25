@@ -22,7 +22,10 @@ export default function NewListing({
   return (
     <div className="flex-grow flex flex-col relative">
       <PageTitle>{useMessage(ids.listings.new.pageTitle)}</PageTitle>
-      <Card className="lg:absolute lg:left-1/2 lg:top-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2 lg:transform w-full xl:w-4/5">
+      <Card
+        title={useMessage(ids.listings.new.title)}
+        className="lg:absolute lg:left-1/2 lg:top-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2 lg:transform w-full xl:w-4/5"
+      >
         <PlatformFinder
           platformId={platformId}
           results={results}

@@ -11,10 +11,11 @@ import Address from 'ui/modules/account/about-me/Address';
 import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 import { useAuthGuard } from 'application/auth';
+import { useUser } from 'application/user';
 
 export default function Dashboard() {
   useAuthGuard();
-  const name = 'jb';
+  const { data: user } = useUser();
   const { section, subSection } =
     useParams<{
       section: string;
@@ -25,7 +26,7 @@ export default function Dashboard() {
   return (
     <>
       <PageTitle>{getMessage(ids.account.dashboard.title)}</PageTitle>
-      <Container name={name}>
+      <Container name={user.username}>
         <Sections section={section} subSection={subSection} sections={sections}>
           <Route
             path={makeDashboardPath({

@@ -168,7 +168,7 @@ export const palettes: Record<string, Palette> = {
 
 export const pickAPalette = () => {
   const paletteKeys = Object.keys(palettes).slice(1);
-  const shouldUsePalette = Math.random() > 0.7;
+  const shouldUsePalette = Math.random() > 0.5;
   if (shouldUsePalette) {
     const randomPaletteIndex = Math.floor(Math.random() * paletteKeys.length);
     const key = paletteKeys[randomPaletteIndex];

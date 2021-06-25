@@ -6,7 +6,7 @@ import { ids } from 'ui/messages';
 import ActionButton from 'ui/modules/listings/my/listings/Actions/ActionButton';
 import { FaShoppingCart, FaThumbsDown, FaThumbsUp } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import { makeCheckoutBillingAddressPath } from 'ui/constants/paths';
+import { makeContinueCheckoutPath } from 'ui/constants/paths';
 import type { Status } from '@respite/core';
 
 interface Props {
@@ -36,7 +36,7 @@ export default function Actions({ order, status, onClick }: Props) {
         <Button
           className="w-full lg:w-auto space-x-4"
           component={Link}
-          to={makeCheckoutBillingAddressPath({ orderId: order.id })}
+          to={makeContinueCheckoutPath({ orderId: order.id })}
           kind="primary"
         >
           <span>
@@ -44,6 +44,13 @@ export default function Actions({ order, status, onClick }: Props) {
           </span>
           <span>{getMessage(ids.order.actions.pending)}</span>
         </Button>
+        <ActionButton
+          orderId={order.id}
+          action={OrderStatus.CANCELLED}
+          active={isActive(OrderStatus.CANCELLED)}
+          status={status}
+          onClick={handleClick}
+        />
       </div>
     );
   }

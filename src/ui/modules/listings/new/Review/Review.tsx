@@ -21,7 +21,6 @@ export default function Review({ username, location, previous }: Props) {
 
   return (
     <div>
-      <h3 className="text-lg">{getMessage(ids.listings.new.review.title)}</h3>
       <div className="my-12">
         <ListingsItem
           image={Object.values(images)[0]}

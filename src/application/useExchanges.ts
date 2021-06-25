@@ -19,6 +19,7 @@ import {
   ChangeListingStatusKey,
   AddressKey,
   CreateOrderKey,
+  PatchOrderKey,
 } from './keys';
 
 export default function useExchanges() {
@@ -43,7 +44,7 @@ export default function useExchanges() {
         ListingOrdersKey,
         AddressKey,
       ],
-      [ChangeStatusKey, ChangeListingStatusKey],
+      [ChangeStatusKey, ChangeListingStatusKey, PatchOrderKey],
     ],
     [[MyOrdersKey], [CreateOrderKey]],
   );

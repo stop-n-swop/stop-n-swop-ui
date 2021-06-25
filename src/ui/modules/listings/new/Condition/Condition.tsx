@@ -43,9 +43,6 @@ export default function ConditionStep({ previous }: { previous(): void }) {
 
   return (
     <div>
-      <h2 className="text-lg">
-        {getMessage(ids.listings.new.condition.title)}
-      </h2>
       <Controller
         name="condition"
         defaultValue=""

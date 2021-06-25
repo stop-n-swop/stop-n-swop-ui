@@ -44,7 +44,6 @@ export default function FeaturesStep({ previous }: { previous(): void }) {
 
   return (
     <div>
-      <h3 className="text-lg">{getMessage(ids.listings.new.features.title)}</h3>
       <div className="my-8 flex flex-wrap justify-center md:space-x-12">
         <Controller
           name="boxed"

@@ -19,6 +19,8 @@ import {
   NEW_LISTING,
   NEW_LISTING_PLATFORM,
   MY_LISTING,
+  BILLING_ADDRESS,
+  DELIVERY_ADDRESS,
 } from 'ui/constants/paths';
 import Home from 'ui/pages/Home';
 
@@ -31,6 +33,8 @@ const Login = lazy(() => import('ui/pages/auth/Login'));
 const Logout = lazy(() => import('ui/pages/auth/Logout'));
 // Checkout
 const Checkout = lazy(() => import('ui/pages/checkout/Checkout'));
+const BillingAddress = lazy(() => import('ui/pages/checkout/BillingAddress'));
+const DeliveryAddress = lazy(() => import('ui/pages/checkout/DeliveryAddress'));
 // Games
 const Games = lazy(() => import('ui/pages/games/Games'));
 const Game = lazy(() => import('ui/pages/games/Game'));
@@ -75,6 +79,13 @@ export default function Routes() {
       <Route path={CHECKOUT} exact>
         <Checkout />
       </Route>
+      <Route path={BILLING_ADDRESS} exact>
+        <BillingAddress />
+      </Route>
+      <Route path={DELIVERY_ADDRESS} exact>
+        <DeliveryAddress />
+      </Route>
+
       <Route path={GAMES} exact>
         <Games />
       </Route>
