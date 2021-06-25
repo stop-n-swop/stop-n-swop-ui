@@ -113,6 +113,7 @@
     "rollup-plugin-visualizer": "^5.5.0",
     "tailwindcss": "^2.1.2",
     "typescript": "~4.2.4",
-    "vite": "^2.0.5"
+    "vite": "^2.0.5",
+    "vite-plugin-react-svg": "^0.2.0"
   }
 }

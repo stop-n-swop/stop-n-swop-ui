@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import reactRefresh from '@vitejs/plugin-react-refresh';
 import babel from '@babel/core';
 import jpex from '@jpex-js/vite-plugin';
+import svg from 'vite-plugin-react-svg';
 // import analyze from 'rollup-plugin-analyzer';
 import { visualizer } from 'rollup-plugin-visualizer';
 
@@ -83,5 +84,9 @@ export default defineConfig({
       },
     },
     reactRefresh(),
+    svg({
+      defaultExport: 'component',
+      expandProps: 'end',
+    }),
   ],
 });
