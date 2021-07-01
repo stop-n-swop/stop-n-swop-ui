@@ -28,7 +28,7 @@ export default function MyOrders() {
           <Otherwise>
             <List>
               {sortBy(orders, (order) => order.created, false).map((order) => (
-                <Order order={order} />
+                <Order key={order.id} order={order} />
               ))}
             </List>
           </Otherwise>

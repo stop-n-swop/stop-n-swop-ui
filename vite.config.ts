@@ -1,18 +1,20 @@
 import { defineConfig } from 'vite';
 import reactRefresh from '@vitejs/plugin-react-refresh';
-import babel from '@babel/core';
 import jpex from '@jpex-js/vite-plugin';
 import svg from 'vite-plugin-react-svg';
-// import analyze from 'rollup-plugin-analyzer';
 import { visualizer } from 'rollup-plugin-visualizer';
+import mdx from 'vite-plugin-mdx';
+import importToCDN, { autoComplete } from 'vite-plugin-cdn-import';
+import jsxControl from './vite-plugin-jsx-control';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   base: '/',
   build: {
+    emptyOutDir: true,
+    polyfillDynamicImport: false,
     rollupOptions: {
       plugins: [
-        // analyze()
         visualizer({
           gzipSize: true,
           brotliSize: true,
@@ -42,6 +44,10 @@ export default defineConfig({
     },
   },
   plugins: [
+    mdx(),
+    importToCDN({
+      modules: [autoComplete('react'), autoComplete('react-dom')],
+    }),
     jpex({
       pathAlias: {
         infrastructure: '/src/infrastructure',
@@ -49,40 +55,7 @@ export default defineConfig({
       },
       omitIndex: true,
     }),
-    {
-      name: 'babel',
-      enforce: 'pre',
-      transform(code, id) {
-        if (!id.endsWith('.ts') && !id.endsWith('.tsx')) {
-          return;
-        }
-        if (!code.includes('<If') && !code.includes('<Choose>')) {
-          return;
-        }
-        return new Promise((res, rej) => {
-          babel.transform(
-            code,
-            {
-              filename: id,
-              babelrc: false,
-              presets: [],
-              plugins: [
-                '@babel/plugin-syntax-typescript',
-                'babel-plugin-jsx-control-statements',
-              ],
-            },
-            (err, result) => {
-              if (err) {
-                return rej(err);
-              }
-              res({
-                code: result.code,
-              });
-            },
-          );
-        });
-      },
-    },
+    jsxControl,
     reactRefresh(),
     svg({
       defaultExport: 'component',

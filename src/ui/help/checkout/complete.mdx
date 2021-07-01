@@ -1,0 +1,11 @@
+import Button from 'ui/elements/Button';
+import { Link } from 'react-router-dom';
+import { makeMyOrderPath } from 'ui/constants/paths';
+
+**What's next?**
+
+Once your order has been approved and your payment processed, your game will be posted out to you!
+
+You can check on your <Button kind="tertiary" padding={false} className="inline-flex" component={Link} to={makeMyOrderPath({ orderId: props.orderId })}>order's status</Button>, we'll keep you up to date on your order's progress.
+
+_When your game arrives, confirm that it's all good to complete the order._

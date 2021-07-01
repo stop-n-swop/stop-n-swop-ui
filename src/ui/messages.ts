@@ -103,6 +103,7 @@ const enMessages = {
       productPageTitle: 'New listing for {name}',
       title: 'Create a listing',
       buttons: {
+        help: 'How does it work?',
         back: 'Back',
         next: 'Next',
       },
@@ -116,10 +117,20 @@ const enMessages = {
       },
       done: {
         title: "That's it, you're listed!",
+        subtitle: 'What next?',
         description:
           'It can take up to 30 minutes to finish checking and verifying your listing before it goes live',
-        listings: 'View my listings',
-        newListing: 'List something else',
+        description2:
+          "Your listing will soon appear on the game's page, we'll notify you when somebody places an order for it.",
+        description3: [
+          'You can then track and update the order from your ',
+          'manage listing',
+          ' page',
+        ],
+        manageListing: 'Manage your listing',
+        viewListing: 'View your listing',
+        listings: 'Manage all your listings',
+        newListing: 'Create another listing',
       },
       features: {
         title: 'Tell us more about your game!',
@@ -350,36 +361,9 @@ const enMessages = {
       },
       howItWorks: {
         button: 'How it works',
-        steps: [
-          [
-            'Confirm your delivery address',
-            "We'll default to your primary address but you can send it somewhere else if you want",
-          ],
-          [
-            'Proceed & Pay',
-            'All payment information is handled securely by our payment provider',
-            "We won't release your payment to the seller until you're happy with the item",
-          ],
-          [
-            'The seller posts your game',
-            "We'll notify you once your item is out for delivery",
-          ],
-          [
-            "Tell us when you've received it",
-            "If there's anything wrong with the item, let us know. You can speak with the seller or request a refund",
-            "If you're happy with the item, we release the funds to the seller",
-          ],
-        ],
       },
       protectionGuide: {
         title: 'Buyer Protection',
-        steps: [
-          "We've all bought things off marketplaces, given our money away, and then received a dud product - or no product - while the seller has conveniently gone awol.",
-          'To protect our buyers at stop-n-swop we supply a protection service for all transactions.',
-          "In order to facilitate this, we apply a small 2% fee on the base price of all products. This is the amount you'll see throughout the site so there's no surprises when you reach the checkout!",
-          'This means that until you have received your purchase and are happy with it, your payment is not released to the seller.',
-          'If the product is not in the advertised condition, if it does not arrive in time, or if you receive a counterfit or fake product, you can request a refund without the trouble of trying to track down awol sellers.',
-        ],
       },
     },
     billingAddress: {
@@ -397,6 +381,11 @@ const enMessages = {
         'Please enter the address you want this item to be delivered to',
       previous: 'Back',
       next: 'Continue',
+    },
+    complete: {
+      title: 'Order placed!',
+      myOrder: 'View order',
+      games: 'Find more games',
     },
   },
 };

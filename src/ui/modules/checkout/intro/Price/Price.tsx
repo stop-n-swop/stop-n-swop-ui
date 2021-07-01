@@ -1,9 +1,14 @@
 import React from 'react';
 import { useGetCurrency, useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
-import { getProtectionCost, getTotalCost } from 'domain/selectors/listings';
 import Button from 'ui/elements/Button';
-import type { Listing } from '@sns/contracts/listing';
+import {
+  Listing,
+  getProtectionCost,
+  getFinalPrice,
+  getBasePrice,
+  getPostage,
+} from '@sns/contracts/listing';
 
 export default function Price({
   listing,
@@ -14,9 +19,11 @@ export default function Price({
 }) {
   const getCurrency = useGetCurrency();
   const getMessage = useGetMessage();
-  const { price: priceAmount, postage: postageAmount, currency } = listing;
+  const priceAmount = getBasePrice(listing);
+  const postageAmount = getPostage(listing);
+  const { currency } = listing;
   const protectionAmount = getProtectionCost(listing);
-  const totalAmount = getTotalCost(listing);
+  const totalAmount = getFinalPrice(listing);
 
   return (
     <div className="flex flex-wrap">

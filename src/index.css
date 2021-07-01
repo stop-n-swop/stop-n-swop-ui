@@ -67,3 +67,28 @@
   font-weight: normal;
   font-style: normal;
 }
+
+.help {
+  @apply space-y-4;
+}
+.help h2 {
+  @apply text-lg font-semibold pb-4 border-secondary-darkest border-b-2;
+}
+.help * ~ h2 {
+  @apply pt-12;
+}
+.help ol {
+  @apply list-decimal list-outside ml-6 space-y-4;
+}
+.help ul {
+  @apply list-disc list-outside ml-6 space-y-4;
+}
+.help li > :first-child {
+  @apply pb-4;
+}
+/* .help li {
+  @apply space-y-4;
+} */
+.help li > * ~ * {
+  @apply text-sm;
+}

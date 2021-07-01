@@ -22,7 +22,7 @@ export default function History({
     <div>
       <button
         type="button"
-        className="w-full text-left mb-4 font-semibold border-primary border-b"
+        className="w-full text-left mb-4 font-semibold border-secondary border-b"
         onClick={() => setOpen(!open)}
       >
         {getMessage(ids.listings.myListing.history.label)}

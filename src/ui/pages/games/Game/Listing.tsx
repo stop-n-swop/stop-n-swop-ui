@@ -1,8 +1,7 @@
 import React, { CSSProperties } from 'react';
 import { ListingsItem, Actions } from 'ui/modules/listings/listings';
 import Purchase from 'ui/modules/listings/Purchase';
-import { getDisplayPrice } from 'domain/selectors/listings';
-import type { Listing as IListing } from '@sns/contracts/listing';
+import { getDisplayPrice, Listing as IListing } from '@sns/contracts/listing';
 
 interface Props {
   owned: boolean;

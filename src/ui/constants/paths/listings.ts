@@ -36,3 +36,15 @@ export const makeGameNewListingPath = ({
   platformId: string;
   productId: string;
 }) => `${makeNewListingPlatformPath({ platformId })}/${productId}`;
+export const NEW_LISTING_COMPLETE = `${GAME_NEW_LISTING}/:listingId`;
+export const makeNewListingCompletePath = ({
+  platformId,
+  productId,
+  listingId,
+}: {
+  platformId: string;
+  productId: string;
+  listingId: string;
+}) => {
+  return `${makeGameNewListingPath({ platformId, productId })}/${listingId}`;
+};

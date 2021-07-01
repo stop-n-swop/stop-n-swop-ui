@@ -2,6 +2,7 @@ import React from 'react';
 import Modal from 'ui/elements/Modal';
 import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
+import Help from 'ui/help/checkout/intro/protection.mdx';
 
 export default function ProtectionModal({
   isOpen,
@@ -18,11 +19,8 @@ export default function ProtectionModal({
       title={getMessage(ids.checkout.intro.protectionGuide.title)}
       onClose={onClose}
     >
-      <div className="space-y-8">
-        {ids.checkout.intro.protectionGuide.steps.map((id, i) => (
-          // eslint-disable-next-line react/no-array-index-key
-          <p key={i}>{getMessage(id)}</p>
-        ))}
+      <div className="help">
+        <Help />
       </div>
     </Modal>
   );

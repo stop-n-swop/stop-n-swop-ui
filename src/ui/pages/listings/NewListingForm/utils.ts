@@ -1,12 +1,17 @@
+import { makeNewListingCompletePath } from 'ui/constants/paths';
 import type { useCreateListing } from 'application/listings/useCreateListing';
 import type { Values } from 'ui/modules/listings/new/types';
 
 export const useOnSubmit = ({
   create,
   productId,
+  platformId,
+  push,
 }: {
   productId: string;
+  platformId: string;
   create: ReturnType<typeof useCreateListing>['action'];
+  push(to: string): void;
 }) => {
   const onSubmit = async ({
     boxed,
@@ -18,7 +23,7 @@ export const useOnSubmit = ({
     price,
     region,
   }: Values) => {
-    await create({
+    const { id: listingId } = await create({
       currency: 'GBP',
       description,
       images: Object.fromEntries(
@@ -34,6 +39,13 @@ export const useOnSubmit = ({
       },
       productIds: [productId],
     });
+    push(
+      makeNewListingCompletePath({
+        listingId,
+        platformId,
+        productId,
+      }),
+    );
   };
   return onSubmit;
 };

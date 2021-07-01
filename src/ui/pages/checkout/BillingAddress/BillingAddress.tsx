@@ -104,7 +104,10 @@ export default function BillingAddress() {
               <Controller
                 name="useForDelivery"
                 defaultValue={false}
-                render={({ field, fieldState: { error } }) => (
+                render={({
+                  field: { ref, ...field },
+                  fieldState: { error },
+                }) => (
                   <Checkbox
                     {...field}
                     error={error}

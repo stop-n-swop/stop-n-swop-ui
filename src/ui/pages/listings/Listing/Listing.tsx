@@ -13,7 +13,7 @@ import { useIsLoggedIn } from 'application/auth';
 import { GAMES, makeGamePath } from 'ui/constants/paths';
 import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
-import { getDisplayPrice } from 'domain/selectors/listings';
+import { getDisplayPrice } from '@sns/contracts/listing';
 
 export default function ListingPage() {
   const getMessage = useGetMessage();

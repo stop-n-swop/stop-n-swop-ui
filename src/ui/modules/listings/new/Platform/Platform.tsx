@@ -27,7 +27,7 @@ export default function PlatformFinder({
   const getMessage = useGetMessage();
 
   return (
-    <div>
+    <>
       <Typeahead
         id="platform_search"
         options={options}
@@ -48,6 +48,6 @@ export default function PlatformFinder({
           </Button>
         </div>
       </If>
-    </div>
+    </>
   );
 }

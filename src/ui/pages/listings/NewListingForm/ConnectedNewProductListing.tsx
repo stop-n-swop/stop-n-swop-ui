@@ -1,6 +1,6 @@
 import React from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import useMachine, { firstStep } from 'ui/modules/listings/new/machine';
 import { useAuthGuard } from 'application/auth';
 import { useRequirements } from 'application/listings';
@@ -29,7 +29,8 @@ export default function ConnectedNewProductListing() {
     },
   } = useUser();
   const { action: create, error } = useCreateListing();
-  const onSubmit = useOnSubmit({ create, productId });
+  const { push } = useHistory();
+  const onSubmit = useOnSubmit({ create, productId, platformId, push });
   const formProps = useForm<Values>();
   const [step, dispatch] = useMachine(firstStep, { onSubmit });
 

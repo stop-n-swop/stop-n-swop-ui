@@ -10,7 +10,6 @@ import Price from 'ui/modules/listings/new/Price';
 import Description from 'ui/modules/listings/new/Description';
 import Photos from 'ui/modules/listings/new/Photos';
 import Review from 'ui/modules/listings/new/Review';
-import Done from 'ui/modules/listings/new/Done';
 import Error from 'ui/modules/listings/new/Error';
 import Tracker from 'ui/modules/listings/new/Tracker/Tracker';
 import { useHistory } from 'react-router-dom';
@@ -105,13 +104,9 @@ export default function Form({
               <Loader />
             </div>
           </When>
-          <When condition={step === 'done'}>
-            <Done />
-          </When>
           <When condition={step === 'error'}>
             <Error error={error} previous={onPrevious} />
           </When>
-          <Otherwise>{step}</Otherwise>
         </Choose>
       </form>
     </Card>

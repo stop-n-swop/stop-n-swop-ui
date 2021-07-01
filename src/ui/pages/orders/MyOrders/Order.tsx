@@ -4,7 +4,7 @@ import OrderStatus from 'ui/modules/orders/my/orders/OrderStatus';
 import { makeMyOrderPath } from 'ui/constants/paths';
 import { useListing } from 'application/listings';
 import { useGame } from 'application/games';
-import { getTotalCost } from 'domain/selectors/listings';
+import { getFinalPrice } from '@sns/contracts/listing';
 import type { Order as IOrder } from '@sns/contracts/order';
 
 export default function MyOrder({ order }: { order: IOrder }) {
@@ -20,7 +20,7 @@ export default function MyOrder({ order }: { order: IOrder }) {
       listing={listing}
       product={product}
       orderStatus={<OrderStatus status={order.status} />}
-      price={getTotalCost(listing)}
+      price={getFinalPrice(listing)}
     />
   );
 }

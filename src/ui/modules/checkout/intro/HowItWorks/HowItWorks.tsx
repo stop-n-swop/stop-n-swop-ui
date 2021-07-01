@@ -3,8 +3,7 @@ import Button from 'ui/elements/Button';
 import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 import Modal from 'ui/elements/Modal';
-import Item from './Item';
-import List from './List';
+import Help from 'ui/help/checkout/intro/howItWorks.mdx';
 
 export default function HowItWorks() {
   const getMessage = useGetMessage();
@@ -25,12 +24,9 @@ export default function HowItWorks() {
         onClose={() => setShow(false)}
         title={getMessage(ids.checkout.intro.howItWorks.button)}
       >
-        <List>
-          {ids.checkout.intro.howItWorks.steps.map((ids, i) => (
-            // eslint-disable-next-line react/no-array-index-key
-            <Item key={i}>{ids.map((id) => getMessage(id))}</Item>
-          ))}
-        </List>
+        <div className="help">
+          <Help />
+        </div>
       </Modal>
     </div>
   );

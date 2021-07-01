@@ -21,6 +21,9 @@ import {
   MY_LISTING,
   BILLING_ADDRESS,
   DELIVERY_ADDRESS,
+  NEW_LISTING_COMPLETE,
+  CHECKOUT_COMPLETE,
+  CHECKOUT_PAYMENT,
 } from 'ui/constants/paths';
 import Home from 'ui/pages/Home';
 
@@ -35,6 +38,8 @@ const Logout = lazy(() => import('ui/pages/auth/Logout'));
 const Checkout = lazy(() => import('ui/pages/checkout/Checkout'));
 const BillingAddress = lazy(() => import('ui/pages/checkout/BillingAddress'));
 const DeliveryAddress = lazy(() => import('ui/pages/checkout/DeliveryAddress'));
+const Payment = lazy(() => import('ui/pages/checkout/Payment'));
+const Complete = lazy(() => import('ui/pages/checkout/Complete'));
 // Games
 const Games = lazy(() => import('ui/pages/games/Games'));
 const Game = lazy(() => import('ui/pages/games/Game'));
@@ -46,6 +51,9 @@ const NewListingPlatform = lazy(
 );
 const NewListingGame = lazy(() => import('ui/pages/listings/NewListingGame'));
 const NewListingForm = lazy(() => import('ui/pages/listings/NewListingForm'));
+const NewListingComplete = lazy(
+  () => import('ui/pages/listings/NewListingCompete'),
+);
 const MyListings = lazy(() => import('ui/pages/listings/MyListings'));
 const MyListing = lazy(() => import('ui/pages/listings/MyListing'));
 // Orders
@@ -85,6 +93,12 @@ export default function Routes() {
       <Route path={DELIVERY_ADDRESS} exact>
         <DeliveryAddress />
       </Route>
+      <Route path={CHECKOUT_PAYMENT} exact>
+        <Payment />
+      </Route>
+      <Route path={CHECKOUT_COMPLETE} exact>
+        <Complete />
+      </Route>
 
       <Route path={GAMES} exact>
         <Games />
@@ -107,6 +121,9 @@ export default function Routes() {
       </Route>
       <Route path={GAME_NEW_LISTING} exact>
         <NewListingForm />
+      </Route>
+      <Route path={NEW_LISTING_COMPLETE} exact>
+        <NewListingComplete />
       </Route>
       <Route path={MY_LISTINGS} exact>
         <MyListings />
