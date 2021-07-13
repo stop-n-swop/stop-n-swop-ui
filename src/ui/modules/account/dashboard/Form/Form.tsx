@@ -14,7 +14,7 @@ export default function Form({
     <FormProvider {...formProps}>
       <form
         onSubmit={formProps.handleSubmit(onSubmit)}
-        className="flex flex-col flex-grow"
+        className="flex flex-col flex-grow space-y-8"
       >
         {children}
       </form>

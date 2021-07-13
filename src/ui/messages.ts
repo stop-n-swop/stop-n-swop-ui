@@ -250,7 +250,7 @@ const enMessages = {
       details: {
         title: 'Your details',
         description:
-          'we need to know a few basic details before you can begin trading on Stop N Swop...',
+          'We need to know a few basic details before you can begin trading on Stop N Swop...',
       },
       address: {
         description:
@@ -314,7 +314,7 @@ const enMessages = {
           address: 'Address',
         },
         billing: {
-          label: 'About me',
+          label: 'Billing',
           account: 'Bank Account',
           verify: 'Verify',
         },
@@ -471,6 +471,32 @@ const enMessages = {
         'Please enter the address you want this item to be delivered to',
       previous: 'Back',
       next: 'Continue',
+    },
+    payment: {
+      title: 'Payment Details',
+      name: {
+        label: 'Name on card',
+        required: 'Please enter your name as it appears on your card',
+      },
+      cardNumber: {
+        label: 'Card number',
+        required: 'Please enter the long number on the front of your card',
+        length: 'This number should be {length} numbers long',
+      },
+      expiry: {
+        label: 'Expiry date',
+        required: 'Please enter the "expires end" date from your card',
+        length: 'This should be in the format MM/YY',
+      },
+      cvc: {
+        label: 'Security code',
+        required:
+          'Please enter the {length} digit security code from the back of your card',
+      },
+      remember: {
+        label: 'Remember my details',
+      },
+      submit: 'Pay {amount}',
     },
     complete: {
       title: 'Order placed!',

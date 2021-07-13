@@ -32,19 +32,23 @@ export default function Overview({
 
   return (
     <div className={className}>
-      <div className="flex space-x-8 items-center">
-        <div className="text-xl">{useCurrency(price, { currency })}</div>
-        <div className="text-sm text-gray-200">
-          <Choose>
-            <When condition={postage}>
-              {getMessage(ids.listings.listing.postage, {
-                postage: getCurrency(postage, { currency }),
-              })}
-            </When>
-            <Otherwise>{getMessage(ids.listings.listing.noPostage)}</Otherwise>
-          </Choose>
+      <div className="flex flex-col sm:flex-row sm:space-x-8 items-center  sm:justify-between">
+        <div className="flex space-x-8 items-center w-full sm:w-auto justify-end sm:justify-start">
+          <div className="text-xl">{useCurrency(price, { currency })}</div>
+          <div className="text-sm text-gray-200">
+            <Choose>
+              <When condition={postage}>
+                {getMessage(ids.listings.listing.postage, {
+                  postage: getCurrency(postage, { currency }),
+                })}
+              </When>
+              <Otherwise>
+                {getMessage(ids.listings.listing.noPostage)}
+              </Otherwise>
+            </Choose>
+          </div>
         </div>
-        {addToBasket}
+        <div className="w-full sm:w-1/3">{addToBasket}</div>
       </div>
       <div>
         <h3>{getMessage(ids.listings.listing.seller)}</h3>

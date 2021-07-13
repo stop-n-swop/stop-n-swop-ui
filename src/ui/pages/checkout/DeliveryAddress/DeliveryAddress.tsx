@@ -17,7 +17,7 @@ import { ids } from 'ui/messages';
 import type { Address } from '@sns/contracts/user';
 
 export default function DeliveryAddress() {
-  useAuthGuard({ username: true });
+  useAuthGuard({ username: true, details: true });
   const getMessage = useGetMessage();
   const { orderId } = useParams<{ orderId: string }>();
   const {

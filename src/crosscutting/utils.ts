@@ -44,3 +44,7 @@ export const sortBy = <T>(list: T[], fn: (t: T) => any, asc = true) => {
     return x > y ? -1 : 1;
   });
 };
+
+export const isNumeric = (x: string | number) => {
+  return Boolean(x && !Number.isNaN(Number(x)));
+};

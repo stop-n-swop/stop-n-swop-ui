@@ -39,7 +39,7 @@ const combineActions = (...actions: Array<ActionQuery<any>>) => {
 };
 
 export default function BillingAddress() {
-  useAuthGuard({ username: true });
+  useAuthGuard({ username: true, details: true });
   const getMessage = useGetMessage();
   const { orderId } = useParams<{ orderId: string }>();
   const {
@@ -58,7 +58,7 @@ export default function BillingAddress() {
 
   const formProps = useForm({
     mode: 'onChange',
-    defaultValues: { address, useForDelivery: false },
+    defaultValues: { address, useForDelivery: true },
   });
   const handleSubmit = async (values: {
     address: Address;

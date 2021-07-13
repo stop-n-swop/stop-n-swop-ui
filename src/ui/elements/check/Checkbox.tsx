@@ -5,7 +5,7 @@ import FieldError from '../FieldError';
 
 type Kind = 'primary' | 'secondary';
 
-interface Props {
+export interface Props {
   value: boolean;
   label?: ReactNode;
   labelClassName?: string;

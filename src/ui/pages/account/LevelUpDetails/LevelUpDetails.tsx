@@ -27,6 +27,7 @@ export default function LevelUpDetails() {
           onSubmit={() => push(redirect)}
           mandatory
           showEmail={false}
+          showUsername
           user={user}
         />
       </Card>

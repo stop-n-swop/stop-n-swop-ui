@@ -25,13 +25,12 @@ export const useAuthGuard = ({
     replace(makeLoginPath({ reason: Reason.LOGIN_REQUIRED, pathname, search }));
     throw never();
   }
-
-  if (username && !hasUsername(userQuery.data)) {
-    replace(makeLevelUpUsernamePath({ pathname, search }));
+  if (details && !(hasDetails(userQuery.data) && hasUsername(userQuery.data))) {
+    replace(makeLeveLUpDetailsPath({ pathname, search }));
     throw never();
   }
-  if (details && !hasDetails(userQuery.data)) {
-    replace(makeLeveLUpDetailsPath({ pathname, search }));
+  if (username && !hasUsername(userQuery.data)) {
+    replace(makeLevelUpUsernamePath({ pathname, search }));
     throw never();
   }
   if (address && !hasAddress(userQuery.data)) {

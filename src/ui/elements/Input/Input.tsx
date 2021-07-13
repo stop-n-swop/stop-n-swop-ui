@@ -1,6 +1,7 @@
 import React, { InputHTMLAttributes, ReactNode } from 'react';
 import cx from 'classnames';
 import './input.css';
+import { isNumeric } from 'crosscutting/utils';
 import FieldError from '../FieldError';
 
 type State = 'success' | 'error' | 'disabled' | 'none';
@@ -18,6 +19,7 @@ export interface Props
   labelClassName?: string;
   state?: State;
   error?: any;
+  hasError?: boolean;
 }
 
 export default function Input({
@@ -32,9 +34,11 @@ export default function Input({
   label,
   id,
   error,
+  hasError = !!error,
   disabled,
   // eslint-disable-next-line no-nested-ternary
-  state = error ? 'error' : disabled ? 'disabled' : 'none',
+  state = hasError ? 'error' : disabled ? 'disabled' : 'none',
+  onChange,
   children,
   ...props
 }: Props) {
@@ -64,6 +68,16 @@ export default function Input({
               className,
             )}
             disabled={disabled}
+            onChange={(e) => {
+              if (
+                props.inputMode === 'numeric' &&
+                e.target.value &&
+                !isNumeric(e.target.value)
+              ) {
+                return;
+              }
+              onChange?.(e);
+            }}
             {...props}
           />
           <If condition={label}>
@@ -82,7 +96,7 @@ export default function Input({
         </div>
         {suffix}
       </div>
-      <If condition={Boolean(error)}>
+      <If condition={error}>
         <FieldError error={error} />
       </If>
     </>

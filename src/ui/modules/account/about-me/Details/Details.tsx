@@ -23,6 +23,7 @@ export default function Details({
   user,
   mandatory = false,
   showEmail = true,
+  showUsername = false,
 }: {
   user: User;
   title?: ReactNode;
@@ -30,6 +31,7 @@ export default function Details({
   submitText: ReactNode;
   mandatory?: boolean;
   showEmail?: boolean;
+  showUsername?: boolean;
   onSubmit?(): any;
 }) {
   const formProps = useForm();
@@ -68,6 +70,29 @@ export default function Details({
               disabled
               label={getMessage(ids.account.aboutMe.email.email.label)}
               defaultValue={user.email ?? ''}
+            />
+          </div>
+        </If>
+        <If condition={showUsername}>
+          {/* TODO: make a shared username input since we've got the same input and rules in 2 places now */}
+          <div className="my-4 w-full md:w-1/2 mx-auto">
+            <InputController
+              id="username"
+              name="username"
+              defaultValue={user.username ?? ''}
+              label={getMessage(ids.account.aboutMe.username.username.label)}
+              rules={{
+                required: getMessage(
+                  ids.account.aboutMe.username.username.required,
+                ),
+                maxLength: {
+                  value: 20,
+                  message: getMessage(
+                    ids.account.aboutMe.username.username.maxLength,
+                    { maxLength: 20 },
+                  ),
+                },
+              }}
             />
           </div>
         </If>
@@ -120,13 +145,13 @@ export default function Details({
           />
         </div>
         <div className="my-4 w-full md:w-1/2 mx-auto">
-          {/* TODO: wec could do with a specific nationality dropdown */}
+          {/* TODO: we could do with a specific nationality dropdown */}
           <SelectController
             Select={Country}
             name="nationality"
             id="nationality"
             label={getMessage(ids.account.aboutMe.details.nationality.label)}
-            defaultValue={user.nationality ?? 'GB'}
+            defaultValue={user.nationality ?? user.address.country ?? 'GB'}
             options={[]}
             rules={{
               required: {
