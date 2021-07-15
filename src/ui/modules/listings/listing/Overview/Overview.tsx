@@ -48,7 +48,7 @@ export default function Overview({
             </Choose>
           </div>
         </div>
-        <div className="w-full sm:w-1/3">{addToBasket}</div>
+        <div className="w-full sm:w-auto">{addToBasket}</div>
       </div>
       <div>
         <h3>{getMessage(ids.listings.listing.seller)}</h3>

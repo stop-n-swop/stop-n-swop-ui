@@ -11,11 +11,13 @@ import FormError from 'ui/elements/FormError';
 import Submit from 'ui/elements/Submit';
 import AddressFields from 'ui/modules/account/about-me/Address/AddressFields';
 import {
+  makeCheckoutPath,
   makeCheckoutPaymentPath,
   makeDeliveryAddressPath,
 } from 'ui/constants/paths';
 import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
+import { LinkButton } from 'ui/elements/Button';
 import type { ActionQuery } from '@respite/action';
 import type { Address } from '@sns/contracts/user';
 
@@ -43,7 +45,7 @@ export default function BillingAddress() {
   const getMessage = useGetMessage();
   const { orderId } = useParams<{ orderId: string }>();
   const {
-    data: { billingAddress: address },
+    data: { billingAddress: address, listingId },
   } = useMyOrder({ id: orderId });
   const { data: user } = useUser();
   const patchOrderAction = usePatchOrder();
@@ -58,7 +60,9 @@ export default function BillingAddress() {
 
   const formProps = useForm({
     mode: 'onChange',
-    defaultValues: { address, useForDelivery: true },
+    defaultValues: {
+      useForDelivery: true,
+    },
   });
   const handleSubmit = async (values: {
     address: Address;
@@ -118,7 +122,10 @@ export default function BillingAddress() {
                 )}
               />
             </div>
-            <div className="flex justify-center">
+            <div className="flex justify-around">
+              <LinkButton kind="tertiary" to={makeCheckoutPath({ listingId })}>
+                {getMessage(ids.checkout.deliveryAddress.previous)}
+              </LinkButton>
               <Submit status={status} reset={reset}>
                 {getMessage(ids.checkout.billingAddress.next)}
               </Submit>

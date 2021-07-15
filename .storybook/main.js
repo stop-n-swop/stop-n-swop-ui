@@ -1,6 +1,6 @@
 const jpex = require('@jpex-js/vite-plugin');
 const svg = require('vite-plugin-react-svg');
-// const mdx = require('vite-plugin-mdx').default;
+const mdx = require('vite-plugin-mdx').default;
 const jsxControl = require('../vite-plugin-jsx-control');
 
 module.exports = {
@@ -19,8 +19,8 @@ module.exports = {
       ui: '/src/ui',
       crosscutting: '/src/crosscutting',
     };
+    config.resolve.extensions = ['.js', '.ts', '.mjs', '.tsx', '.mdx'];
     config.plugins = [
-      // mdx(),
       jpex({
         pathAlias: {
           infrastructure: '/src/infrastructure',
@@ -34,6 +34,7 @@ module.exports = {
         expandProps: 'end',
       }),
       ...config.plugins,
+      mdx(),
     ];
     return config;
   },

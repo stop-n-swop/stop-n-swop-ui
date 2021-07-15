@@ -31,7 +31,7 @@ export default function MyListing() {
   const getMessage = useGetMessage();
   const { listingId } = useParams<{ listingId: string }>();
 
-  const { data: listing, invalidate: invalidateListing } = useMyListing({
+  const { data: listing } = useMyListing({
     id: listingId,
   });
 
@@ -47,8 +47,7 @@ export default function MyListing() {
   const historyQuery = useHistory({
     listingId,
   });
-  const invalidateHistory = historyQuery.invalidate;
-  const { data: orders, invalidate: invalidateOrders } = useListingOrders({
+  const { data: orders } = useListingOrders({
     listingId,
   });
   const addressQuery = useAddress({ listingId });

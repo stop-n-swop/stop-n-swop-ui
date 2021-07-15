@@ -33,7 +33,7 @@ class BaseError extends Error {
 class UnknownError extends BaseError {}
 class NotFoundError extends BaseError {
   constructor(entity, id) {
-    super(`Could not find requested game ${id}`);
+    super(`Could not find requested ${entity} ${id}`);
     this.entity = entity;
     this.id = id;
     this.code = exports.CommonErrorCode.NOT_FOUND;

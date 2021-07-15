@@ -11,8 +11,19 @@ export const makeDeliveryAddressPath = ({ orderId }: { orderId: string }) =>
   `/checkout/${orderId}/delivery`;
 
 export const CHECKOUT_PAYMENT = '/checkout/:orderId/payment';
-export const makeCheckoutPaymentPath = ({ orderId }: { orderId: string }) =>
-  `/checkout/${orderId}/payment`;
+export const makeCheckoutPaymentPath = ({
+  orderId,
+  failed,
+}: {
+  orderId: string;
+  failed?: boolean;
+}) => {
+  const str = `/checkout/${orderId}/payment`;
+  if (failed) {
+    return `${str}?retry=true`;
+  }
+  return str;
+};
 export const CHECKOUT_PROCESSING = '/checkout/:orderId/process';
 export const makeCheckoutProcessingPath = ({ orderId }: { orderId: string }) =>
   `/checkout/${orderId}/process`;

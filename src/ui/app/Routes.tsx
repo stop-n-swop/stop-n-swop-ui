@@ -25,6 +25,7 @@ import {
   CHECKOUT_COMPLETE,
   CHECKOUT_PAYMENT,
   LEVEL_UP_DETAILS,
+  CHECKOUT_PROCESSING,
 } from 'ui/constants/paths';
 import Home from 'ui/pages/Home';
 
@@ -41,6 +42,7 @@ const Checkout = lazy(() => import('ui/pages/checkout/Checkout'));
 const BillingAddress = lazy(() => import('ui/pages/checkout/BillingAddress'));
 const DeliveryAddress = lazy(() => import('ui/pages/checkout/DeliveryAddress'));
 const Payment = lazy(() => import('ui/pages/checkout/Payment'));
+const ProcessingPayment = lazy(() => import('ui/pages/checkout/Processing'));
 const Complete = lazy(() => import('ui/pages/checkout/Complete'));
 // Games
 const Games = lazy(() => import('ui/pages/games/Games'));
@@ -104,6 +106,9 @@ export default function Routes() {
       </Route>
       <Route path={CHECKOUT_PAYMENT} exact>
         <Payment />
+      </Route>
+      <Route path={CHECKOUT_PROCESSING} exact>
+        <ProcessingPayment />
       </Route>
       <Route path={CHECKOUT_COMPLETE} exact>
         <Complete />
