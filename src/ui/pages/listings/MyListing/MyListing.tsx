@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Card from 'ui/elements/Card';
 import PageTitle from 'ui/elements/PageTitle';
 import Overview from 'ui/modules/listings/my/listing/Overview';

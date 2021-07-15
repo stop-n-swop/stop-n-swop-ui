@@ -559,6 +559,9 @@ const enMessages = {
           'Your identity verification has failed. Please check your account settings for more info.',
         action: 'View',
       },
+      orderRefunded: {
+        title: 'Your order payment has been refunded to your account',
+      },
     },
   },
 };

@@ -12,6 +12,7 @@ exports.Type = void 0;
   Type["LISTING_NOT_PAID"] = "listing_not_paid";
   Type["ORDER_POSTED"] = "order_posted";
   Type["ORDER_RECEIVED"] = "order_received";
+  Type["ORDER_REFUNDED"] = "order_refunded";
   Type["KYC_VERIFIED"] = "kyc_verified";
   Type["KYC_FAILED"] = "kyc_failed";
 })(exports.Type || (exports.Type = {}));

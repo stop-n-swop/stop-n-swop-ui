@@ -7,6 +7,7 @@ export enum Type {
   LISTING_NOT_PAID = "listing_not_paid",
   ORDER_POSTED = "order_posted",
   ORDER_RECEIVED = "order_received",
+  ORDER_REFUNDED = "order_refunded",
   KYC_VERIFIED = "kyc_verified",
   KYC_FAILED = "kyc_failed",
 }

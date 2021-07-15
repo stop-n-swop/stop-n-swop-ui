@@ -10,6 +10,7 @@ import OrderPaid from './states/OrderPaid';
 import OrderPlaced from './states/OrderPlaced';
 import OrderPosted from './states/OrderPosted';
 import OrderReceived from './states/OrderReceived';
+import OrderRefunded from './states/OrderRefunded';
 
 const matrix = {
   [Type.ORDER_PLACED]: OrderPlaced,
@@ -20,6 +21,7 @@ const matrix = {
   [Type.ORDER_NOT_PAID]: OrderNotPaid,
   [Type.ORDER_POSTED]: OrderPosted,
   [Type.ORDER_RECEIVED]: OrderReceived,
+  [Type.ORDER_REFUNDED]: OrderRefunded,
   [Type.KYC_VERIFIED]: KycVerified,
   [Type.KYC_FAILED]: KycFailed,
 };
