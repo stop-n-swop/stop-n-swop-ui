@@ -21,3 +21,8 @@ export type PatchOrder = (
 ) => Promise<void>;
 
 export type FetchHistory = (args: { orderId: string }) => Promise<AuditItem[]>;
+
+export type PlaceOrder = (args: {
+  orderId: string;
+  cardId: string;
+}) => Promise<unknown>;

@@ -1,5 +1,6 @@
 import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
+import { Status as ActionStatus } from '@respite/core';
 import type { User } from '@sns/contracts/user';
 import CardScreen from './CardScreen';
 import type { Listing } from '@sns/contracts/listing';
@@ -26,6 +27,8 @@ export const Basic = () => {
             lastName: 'Ellis',
           } as User
         }
+        error={null}
+        status={ActionStatus.IDLE}
       />
     </FormProvider>
   );

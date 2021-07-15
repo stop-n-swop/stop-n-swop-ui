@@ -22,6 +22,7 @@ import {
   PatchOrderKey,
   SaveBankKey,
   UploadKycKey,
+  PlaceOrderKey,
 } from './keys';
 
 export default function useExchanges() {
@@ -49,5 +50,6 @@ export default function useExchanges() {
       [ChangeStatusKey, ChangeListingStatusKey, PatchOrderKey],
     ],
     [[MyOrdersKey], [CreateOrderKey]],
+    [[MyOrdersKey, ListingsKey, HistoryKey], [PlaceOrderKey]],
   );
 }

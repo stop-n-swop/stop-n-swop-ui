@@ -20,7 +20,7 @@ import type { ActionQuery } from '@respite/action';
 import type { Address } from '@sns/contracts/user';
 
 // TODO: make this part of respite
-const combineActions = (...actions: Array<ActionQuery<any>>) => {
+export const combineActions = (...actions: Array<ActionQuery<any>>) => {
   return {
     status: actions.reduce(
       (status, action) => (status === Status.IDLE ? action.status : status),

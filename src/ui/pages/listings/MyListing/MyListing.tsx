@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import Card from 'ui/elements/Card';
 import PageTitle from 'ui/elements/PageTitle';
 import Overview from 'ui/modules/listings/my/listing/Overview';
-import Actions from 'ui/modules/listings/my/listings/Actions';
+import Actions from 'ui/modules/listings/my/listing/Actions';
 import History from 'ui/modules/listings/my/listing/History';
 import BuyerAddress from 'ui/modules/listings/my/listing/BuyerAddress';
 import { useAuthGuard } from 'application/auth';
@@ -63,20 +63,10 @@ export default function MyListing() {
     error: error2,
   } = useChangeListingStatus();
 
+  // TODO: use combineActions
   const actionStatus =
     actionStatus1 === Status.IDLE ? actionStatus2 : actionStatus1;
   const error = error1 ?? error2;
-
-  // TODO: would be good to make this a respite native
-  useEffect(() => {
-    const handle = setInterval(() => {
-      invalidateListing();
-      invalidateHistory();
-      invalidateOrders();
-    }, 30000);
-
-    return () => clearInterval(handle);
-  }, [invalidateHistory, invalidateListing, invalidateOrders]);
 
   const orderId = orders.length > 1 ? undefined : orders[0]?.id;
   const buyer = orders.length > 1 ? undefined : orders[0]?.username;

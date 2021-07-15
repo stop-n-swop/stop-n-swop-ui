@@ -1,6 +1,6 @@
 const jpex = require('@jpex-js/vite-plugin');
 const svg = require('vite-plugin-react-svg');
-const mdx = require('vite-plugin-mdx').default;
+// const mdx = require('vite-plugin-mdx').default;
 const jsxControl = require('../vite-plugin-jsx-control');
 
 module.exports = {
@@ -20,7 +20,7 @@ module.exports = {
       crosscutting: '/src/crosscutting',
     };
     config.plugins = [
-      mdx(),
+      // mdx(),
       jpex({
         pathAlias: {
           infrastructure: '/src/infrastructure',

@@ -2,8 +2,9 @@ import React from 'react';
 import {
   FaCheck,
   FaEnvelope,
-  FaEnvelopeOpenText,
   FaLock,
+  FaThumbsDown,
+  FaThumbsUp,
   FaTimes,
   FaUnlock,
 } from 'react-icons/fa';
@@ -20,7 +21,8 @@ const iconMatrix = {
   [Action.APPROVED]: FaCheck,
   [Action.DECLINED]: FaTimes,
   [Action.POSTED]: FaEnvelope,
-  [Action.RECEIVED]: FaEnvelopeOpenText,
+  [Action.RECEIVED]: FaThumbsUp,
+  [Action.DISPUTED]: FaThumbsDown,
 };
 const kindMatrix = {
   [Action.OPEN]: 'primary',
@@ -30,6 +32,7 @@ const kindMatrix = {
   [Action.DECLINED]: 'secondary',
   [Action.POSTED]: 'primary',
   [Action.RECEIVED]: 'primary',
+  [Action.DISPUTED]: 'secondary',
 };
 const stateMatrix = {
   [Action.CANCELLED]: 'error',
@@ -43,6 +46,7 @@ const messageMatrix = {
   [Action.DECLINED]: ids.order.actions.declined,
   [Action.POSTED]: ids.order.actions.posted,
   [Action.RECEIVED]: ids.order.actions.received,
+  [Action.DISPUTED]: ids.order.actions.disputed,
 };
 
 interface Props {

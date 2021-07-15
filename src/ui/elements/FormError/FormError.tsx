@@ -16,6 +16,9 @@ export default function FormError({ error }: { error: any }) {
     if (typeof error.message === 'string') {
       return error.message;
     }
+    if (typeof error.ResultMessage === 'string') {
+      return error.ResultMessage;
+    }
     return undefined;
   })();
 

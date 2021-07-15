@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaLock } from 'react-icons/fa';
-import { InputController } from 'ui/elements/Input';
+import Input, { InputController } from 'ui/elements/Input';
 import banner from 'ui/assets/powered-by-mangopay.png';
 import Submit from 'ui/elements/Submit';
 import { CheckboxController } from 'ui/elements/check';
@@ -8,16 +8,22 @@ import Card from 'ui/elements/Card';
 import { getFinalPrice, Listing } from '@sns/contracts/listing';
 import { useGetCurrency, useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
+import FormError from 'ui/elements/FormError';
 import CardInput from '../CardInput';
 import ExpiryInput from '../ExpiryInput';
 import SecurityInput from '../SecurityInput';
 import type { User } from '@sns/contracts/user';
+import type { Status } from '@respite/core';
 
 export default function CardScreen({
   user,
   listing,
   onSubmit,
+  error,
+  status,
 }: {
+  error: any;
+  status: Status;
   user: User;
   listing: Listing;
   onSubmit(values: any): any;
@@ -37,16 +43,19 @@ export default function CardScreen({
       >
         <div className="flex flex-col items-center">
           <div className="space-y-12 w-96">
+            <If condition={error}>
+              <div className="mb-10">
+                <FormError error={error} />
+              </div>
+            </If>
             <div>
-              <InputController
+              <Input
                 name="name"
-                autoComplete="cc-name"
                 id="name"
                 label={g(ids.checkout.payment.name.label)}
-                defaultValue={defaultName}
-                rules={{
-                  required: g(ids.checkout.payment.name.required),
-                }}
+                value={defaultName}
+                onChange={() => null}
+                disabled
               />
             </div>
             <div>
@@ -133,7 +142,7 @@ export default function CardScreen({
               />
             </div>
             <div>
-              <Submit className="w-full space-x-4">
+              <Submit className="w-full space-x-4" status={status}>
                 <FaLock />
                 <span>
                   {g(ids.checkout.payment.submit, {

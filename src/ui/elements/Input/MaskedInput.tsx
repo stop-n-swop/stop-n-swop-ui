@@ -1,10 +1,4 @@
-import React, {
-  KeyboardEvent,
-  ChangeEvent,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import cx from 'classnames';
 
 export default function MaskedInput({

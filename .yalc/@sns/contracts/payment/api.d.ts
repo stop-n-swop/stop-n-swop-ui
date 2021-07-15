@@ -6,3 +6,18 @@ export interface SaveBankDetailsRequest {
     accountNumber: string;
 }
 export declare type SaveBankDetailsResponse = {};
+export declare type CreateCardRequest = void;
+export interface CreateCardResponse {
+    id: string;
+    accessKey: string;
+    preregistrationData: string;
+    cardRegistrationUrl: string;
+}
+export interface PlaceOrderParams {
+    orderId: string;
+}
+export interface PlaceOrderRequest {
+    cardId: string;
+    secureModeReturnUrl: string;
+}
+export declare type PlaceOrderResponse = {};

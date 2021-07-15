@@ -4,7 +4,10 @@ import OrderStatus from 'ui/modules/listings/my/listings/OrderStatus';
 import { makeMyListingPath } from 'ui/constants/paths';
 import { useGame } from 'application/games';
 import { Listing, getListedPrice } from '@sns/contracts/listing';
-import { Status } from '@sns/contracts/order';
+import {
+  doesListingHaveActions,
+  isListingComplete,
+} from 'domain/selectors/listings';
 
 export default function MyListing({ listing }: { listing: Listing }) {
   const {
@@ -12,8 +15,8 @@ export default function MyListing({ listing }: { listing: Listing }) {
     productIds: [productId],
   } = listing;
   const { data: product } = useGame({ id: productId });
-  const hasActions = [Status.PLACED, Status.PAID].includes(listing.status);
-  const isComplete = [Status.CLOSED, Status.RECEIVED].includes(listing.status);
+  const hasActions = doesListingHaveActions(listing);
+  const isComplete = isListingComplete(listing);
   // TODO: get the listing order
 
   return (

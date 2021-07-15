@@ -237,6 +237,7 @@ let OrderErrorCode;
   OrderErrorCode["ORDER_NOT_OWNED_BY_USER"] = "ORDER_NOT_OWNED_BY_USER";
   OrderErrorCode["INVALID_TRANSITION"] = "INVALID_TRANSITION";
   OrderErrorCode["LISTING_OWNED_BY_USER"] = "LISTING_OWNED_BY_USER";
+  OrderErrorCode["ORDER_NOT_AVAILABLE"] = "ORDER_NOT_AVAILABLE";
 })(OrderErrorCode || (OrderErrorCode = {}));
 class OrderNotFoundError extends NotFoundError {
   constructor(id) {
@@ -269,6 +270,15 @@ class ListingOwnedByUserError extends NotAuthorisedError {
   }
   toString() {
     return "You cannot create an order for a listing you own";
+  }
+}
+class OrderNotAvailableError extends ConflictError {
+  constructor(...args) {
+    super(...args);
+    this.code = OrderErrorCode.ORDER_NOT_AVAILABLE;
+  }
+  toString() {
+    return "This listing is no longer available :(";
   }
 }
 
@@ -415,6 +425,8 @@ const responseToError = response => {
       return new OrderNotOwnedByUserError("", "");
     case OrderErrorCode.LISTING_OWNED_BY_USER:
       return new ListingOwnedByUserError();
+    case OrderErrorCode.ORDER_NOT_AVAILABLE:
+      return new OrderNotAvailableError();
     case PaymentErrorCode.MISSING_REGISTER_FIELDS:
       return new MissingRegisterFieldsError();
     case PaymentErrorCode.FAILED_TO_REGISTER:
@@ -445,4 +457,4 @@ const responseToError = response => {
   return new UnknownError();
 };
 
-export { AuthErrorCode, BadRequestError, BankAccountFailError, BaseError, CommonErrorCode, ConflictError, CreateListingError, FailedToRegisterError, GameErrorCode, GameNotFoundError, ImageErrorCode, InvalidGamePlatformError, InvalidLoginError, InvalidStatusError, InvalidTokenError, KycDocumentFailedError, KycPageFailedError, KycPageTooSmallError, KycSubmitFailedError, ListingErrorCode, ListingNotFoundError, ListingOwnedByUserError, MissingRegisterFieldsError, NotAuthenticatedError, NotAuthorisedError, NotFoundError, OrderErrorCode, OrderNotFoundError, OrderNotOwnedByUserError, OutdatedTokenError, PaymentErrorCode, PlatformErrorCode, PlatformNotFoundError, UnknownError, UpdateListingFailedError, UpdateListingProhibitedError, UploadFailedError, UserErrorCode, UserNotFoundError, UsernameNotUniqueError, ValidationError, responseToError };
+export { AuthErrorCode, BadRequestError, BankAccountFailError, BaseError, CommonErrorCode, ConflictError, CreateListingError, FailedToRegisterError, GameErrorCode, GameNotFoundError, ImageErrorCode, InvalidGamePlatformError, InvalidLoginError, InvalidStatusError, InvalidTokenError, KycDocumentFailedError, KycPageFailedError, KycPageTooSmallError, KycSubmitFailedError, ListingErrorCode, ListingNotFoundError, ListingOwnedByUserError, MissingRegisterFieldsError, NotAuthenticatedError, NotAuthorisedError, NotFoundError, OrderErrorCode, OrderNotAvailableError, OrderNotFoundError, OrderNotOwnedByUserError, OutdatedTokenError, PaymentErrorCode, PlatformErrorCode, PlatformNotFoundError, UnknownError, UpdateListingFailedError, UpdateListingProhibitedError, UploadFailedError, UserErrorCode, UserNotFoundError, UsernameNotUniqueError, ValidationError, responseToError };

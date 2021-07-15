@@ -241,6 +241,7 @@ exports.OrderErrorCode = void 0;
   OrderErrorCode["ORDER_NOT_OWNED_BY_USER"] = "ORDER_NOT_OWNED_BY_USER";
   OrderErrorCode["INVALID_TRANSITION"] = "INVALID_TRANSITION";
   OrderErrorCode["LISTING_OWNED_BY_USER"] = "LISTING_OWNED_BY_USER";
+  OrderErrorCode["ORDER_NOT_AVAILABLE"] = "ORDER_NOT_AVAILABLE";
 })(exports.OrderErrorCode || (exports.OrderErrorCode = {}));
 class OrderNotFoundError extends NotFoundError {
   constructor(id) {
@@ -273,6 +274,15 @@ class ListingOwnedByUserError extends NotAuthorisedError {
   }
   toString() {
     return "You cannot create an order for a listing you own";
+  }
+}
+class OrderNotAvailableError extends ConflictError {
+  constructor(...args) {
+    super(...args);
+    this.code = exports.OrderErrorCode.ORDER_NOT_AVAILABLE;
+  }
+  toString() {
+    return "This listing is no longer available :(";
   }
 }
 
@@ -419,6 +429,8 @@ const responseToError = response => {
       return new OrderNotOwnedByUserError("", "");
     case exports.OrderErrorCode.LISTING_OWNED_BY_USER:
       return new ListingOwnedByUserError();
+    case exports.OrderErrorCode.ORDER_NOT_AVAILABLE:
+      return new OrderNotAvailableError();
     case exports.PaymentErrorCode.MISSING_REGISTER_FIELDS:
       return new MissingRegisterFieldsError();
     case exports.PaymentErrorCode.FAILED_TO_REGISTER:
@@ -470,6 +482,7 @@ exports.MissingRegisterFieldsError = MissingRegisterFieldsError;
 exports.NotAuthenticatedError = NotAuthenticatedError;
 exports.NotAuthorisedError = NotAuthorisedError;
 exports.NotFoundError = NotFoundError;
+exports.OrderNotAvailableError = OrderNotAvailableError;
 exports.OrderNotFoundError = OrderNotFoundError;
 exports.OrderNotOwnedByUserError = OrderNotOwnedByUserError;
 exports.OutdatedTokenError = OutdatedTokenError;

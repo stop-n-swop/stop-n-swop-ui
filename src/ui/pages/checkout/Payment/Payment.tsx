@@ -1,15 +1,15 @@
-import { Status } from '@sns/contracts/order';
 import { useAuthGuard } from 'application/auth';
 import { useListing } from 'application/listings';
-import { useChangeStatus, useMyOrder } from 'application/orders';
+import { useMyOrder, usePlaceOrder } from 'application/orders';
+import { useCreateCard } from 'application/payments';
 import { useUser } from 'application/user';
 import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useHistory, useParams } from 'react-router-dom';
-import { makeCheckoutCompletePath } from 'ui/constants/paths';
+import { makeCheckoutProcessingPath } from 'ui/constants/paths';
 import CardScreen from 'ui/modules/checkout/payment/CardScreen/CardScreen';
+import { combineActions } from '../BillingAddress/BillingAddress';
 
-// TODO: this page
 export default function Payment() {
   useAuthGuard({
     username: true,
@@ -22,21 +22,44 @@ export default function Payment() {
   });
   const { data: user } = useUser();
   const { orderId } = useParams<{ orderId: string }>();
-  const { action } = useChangeStatus();
   const { push } = useHistory();
 
   const { data: order } = useMyOrder({ id: orderId });
   const { data: listing } = useListing({ id: order.listingId });
 
-  const handleSubmit = formProps.handleSubmit(async (values) => {
-    console.log(values);
-    await action({ orderId, status: Status.PLACED });
-    push(makeCheckoutCompletePath({ orderId }));
-  });
+  const placeAction = usePlaceOrder();
+  const createAction = useCreateCard();
+  const { error, status } = combineActions(placeAction, createAction);
+
+  const handleSubmit = formProps.handleSubmit(
+    async ({
+      cardNumber,
+      cvc,
+      expiry,
+    }: {
+      cardNumber: string;
+      expiry: string;
+      cvc: string;
+      remember: boolean;
+    }) => {
+      const { cardId } = await createAction.action({ cardNumber, cvc, expiry });
+      await placeAction.action({
+        cardId,
+        orderId,
+      });
+      push(makeCheckoutProcessingPath({ orderId }));
+    },
+  );
 
   return (
     <FormProvider {...formProps}>
-      <CardScreen user={user} listing={listing} onSubmit={handleSubmit} />
+      <CardScreen
+        error={error}
+        status={status}
+        user={user}
+        listing={listing}
+        onSubmit={handleSubmit}
+      />
     </FormProvider>
   );
 }

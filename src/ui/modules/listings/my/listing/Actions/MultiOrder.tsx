@@ -13,7 +13,7 @@ interface Props {
 }
 
 export default function MultiOrder({
-  order: { id, created, username },
+  order: { id, created, username, status: orderStatus },
   status,
   onChangeStatus,
   active,
@@ -39,15 +39,17 @@ export default function MultiOrder({
           kind="tertiary"
           showIcon={false}
         />
-        <ActionButton
-          action={Status.APPROVED}
-          active={active.orderId === id && active.status === Status.APPROVED}
-          orderId={id}
-          status={status}
-          onClick={onChangeStatus}
-          kind="tertiary"
-          showIcon={false}
-        />
+        <If condition={orderStatus === Status.PAID}>
+          <ActionButton
+            action={Status.APPROVED}
+            active={active.orderId === id && active.status === Status.APPROVED}
+            orderId={id}
+            status={status}
+            onClick={onChangeStatus}
+            kind="tertiary"
+            showIcon={false}
+          />
+        </If>
       </div>
     </ListItem>
   );

@@ -12,7 +12,7 @@ interface Props {
 export default function BuyerAddress({ addressQuery, status }: Props) {
   const getMessage = useGetMessage();
 
-  if (status !== Status.PAID) {
+  if (status !== Status.APPROVED) {
     return null;
   }
   const {

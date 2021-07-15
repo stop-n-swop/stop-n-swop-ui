@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Button from 'ui/elements/Button';
 import { Link } from 'react-router-dom';
 import { NEW_LISTING } from 'ui/constants/paths';
@@ -14,16 +14,7 @@ import Listing from './Listing';
 export default function MyListings() {
   useAuthGuard();
   const getMessage = useGetMessage();
-  const { data: listings, invalidate } = useMyListings();
-
-  // TODO: would be good to make this a respite native
-  useEffect(() => {
-    const handle = setInterval(() => {
-      invalidate();
-    }, 30000);
-
-    return () => clearInterval(handle);
-  }, [invalidate]);
+  const { data: listings } = useMyListings();
 
   return (
     <div>

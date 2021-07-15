@@ -42,17 +42,6 @@ export default function Actions({
   if (listing.status === Status.OPEN) {
     return (
       <div className="md:flex md:space-x-4 lg:space-x-8">
-        <Button
-          className="w-full lg:w-auto space-x-4"
-          component={Link}
-          to={makeEditListingPath({ listingId })}
-          kind="primary"
-        >
-          <span>
-            <FaPen />
-          </span>
-          <span>{getMessage(ids.order.actions.edit)}</span>
-        </Button>
         <ActionButton
           orderId=""
           action={Status.CLOSED}
@@ -73,10 +62,24 @@ export default function Actions({
           status={status}
           onClick={handleClick}
         />
+        <Button
+          className="w-full lg:w-auto space-x-4"
+          component={Link}
+          to={makeEditListingPath({ listingId })}
+          kind="secondary"
+        >
+          <span>
+            <FaPen />
+          </span>
+          <span>{getMessage(ids.order.actions.edit)}</span>
+        </Button>
       </div>
     );
   }
-  if (listing.status === Status.PLACED && orders.length > 1) {
+  if (
+    [Status.PLACED, Status.PAID].includes(listing.status) &&
+    orders.length > 1
+  ) {
     return (
       <MultiOrders
         active={active}
@@ -93,6 +96,27 @@ export default function Actions({
   }
 
   if (listing.status === Status.PLACED) {
+    return (
+      <div className="block md:flex md:space-x-4 lg:space-x-8">
+        <ActionButton
+          orderId={order.id}
+          action={Status.DECLINED}
+          active={isActive(order.id, Status.DECLINED)}
+          status={status}
+          onClick={handleClick}
+        />
+        <ActionButton
+          orderId={order.id}
+          action={Status.CLOSED}
+          active={isActive(order.id, Status.CLOSED)}
+          status={status}
+          onClick={handleClick}
+        />
+      </div>
+    );
+  }
+
+  if (listing.status === Status.PAID) {
     return (
       <div className="block md:flex md:space-x-4 lg:space-x-8">
         <ActionButton
@@ -119,7 +143,7 @@ export default function Actions({
       </div>
     );
   }
-  if (listing.status === Status.PAID) {
+  if (listing.status === Status.APPROVED) {
     return (
       <div className="md:flex md:space-x-4 lg:space-x-8">
         <ActionButton

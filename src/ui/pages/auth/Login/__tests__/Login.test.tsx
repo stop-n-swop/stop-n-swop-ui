@@ -68,6 +68,10 @@ beforeEach(() => {
         images: {
           url: '',
         },
+        mango: {
+          url: '',
+          id: '',
+        },
       });
     },
     Render({ children }) {

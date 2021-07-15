@@ -13,6 +13,9 @@ export const makeDeliveryAddressPath = ({ orderId }: { orderId: string }) =>
 export const CHECKOUT_PAYMENT = '/checkout/:orderId/payment';
 export const makeCheckoutPaymentPath = ({ orderId }: { orderId: string }) =>
   `/checkout/${orderId}/payment`;
+export const CHECKOUT_PROCESSING = '/checkout/:orderId/process';
+export const makeCheckoutProcessingPath = ({ orderId }: { orderId: string }) =>
+  `/checkout/${orderId}/process`;
 export const CHECKOUT_COMPLETE = '/checkout/:orderId/complete';
 export const makeCheckoutCompletePath = ({ orderId }: { orderId: string }) =>
   `/checkout/${orderId}/complete`;

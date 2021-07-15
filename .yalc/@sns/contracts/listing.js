@@ -3,11 +3,11 @@
 Object.defineProperty(exports, '__esModule', { value: true });
 
 const PROTECTION_RATE = 0.04;
-const BASE_CHARGE_RATE = 0.06;
-const SCALE_CHARGE_LIMIT = 0.2;
+const BASE_CHARGE_RATE = 0.04;
+const SCALE_CHARGE_LIMIT = 0;
 const PROVIDER_BASE_RATE = 0.019;
-const PROVIDER_BASE_COST = 0.2;
-const PROVIDER_PAYOUT_COST = 0.45;
+const PROVIDER_BASE_COST = 20;
+const PROVIDER_PAYOUT_COST = 0;
 
 exports.Condition = void 0;
 (function (Condition) {
