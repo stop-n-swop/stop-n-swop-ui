@@ -2,6 +2,7 @@ import { Status } from '@sns/contracts/order';
 import React from 'react';
 import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
+import { CountryISO } from 'domain/constants';
 import type { useAddress } from 'application/listings';
 
 interface Props {
@@ -18,9 +19,11 @@ export default function BuyerAddress({ addressQuery, status }: Props) {
   const {
     data: {
       name,
-      address: { city, country, line1, line2, postcode },
+      address: { city, country: countryCode, line1, line2, postcode },
     },
   } = addressQuery;
+
+  const country = CountryISO[countryCode] ?? countryCode;
 
   return (
     <div>

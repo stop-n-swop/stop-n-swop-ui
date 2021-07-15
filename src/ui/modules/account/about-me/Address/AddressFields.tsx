@@ -73,7 +73,7 @@ export default function AddressFields({
           id="address.country"
           name="address.country"
           label={getMessage(ids.account.aboutMe.address.country.label)}
-          defaultValue={address.country ?? 'GB'}
+          defaultValue={address.country || 'GB'}
           rules={{ required }}
           options={[]}
         />

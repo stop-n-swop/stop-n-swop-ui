@@ -505,6 +505,9 @@ const enMessages = {
       },
       submit: 'Pay {amount}',
     },
+    processing: {
+      text: 'Processing your payment...',
+    },
     complete: {
       title: 'Order placed!',
       myOrder: 'View order',
@@ -516,7 +519,7 @@ const enMessages = {
     states: {
       orderPlaced: {
         title: 'An order has been placed for your listing',
-        subtitle: 'Approve the order to get the ball rolling',
+        subtitle: "We're just processing the payment now",
         action: 'View',
       },
       orderCancelled: {
@@ -529,7 +532,8 @@ const enMessages = {
       },
       orderPaid: {
         title: 'The order for your listing has been paid 🎉',
-        subtitle: 'You can now arrange for your item to be delivered!',
+        subtitle:
+          'Approve the order and arrange for your item to be delivered!',
         action: 'View',
       },
       orderNotPaid: {

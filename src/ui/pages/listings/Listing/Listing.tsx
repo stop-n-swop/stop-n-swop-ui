@@ -54,12 +54,12 @@ export default function ListingPage() {
       <Card
         title={productName}
         className="md:mt-3 lg:mt-4 xl:mt-8 xl:w-4/5 xl:mx-auto flex flex-col"
-        padding="p-3 lg:p-8 xl:pt-12 xl:px-0 xl:pb-0"
+        padding="p-3 lg:p-8 xl:pt-12 xl:px-8 xl:pb-0"
       >
         <div className="lg:flex">
           <Slideshow images={Object.values(images)} className="lg:w-1/2 mb-4" />
           <Overview
-            className="space-y-8 lg:w-1/2 xl:w-auto"
+            className="space-y-8 lg:w-1/2"
             description={description}
             location={location}
             username={username}

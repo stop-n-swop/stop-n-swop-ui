@@ -28,7 +28,6 @@ export default function DeliveryAddress() {
 
   const formProps = useForm({
     mode: 'onChange',
-    defaultValues: { address },
   });
   const handleSubmit = async (values: { address: Address }) => {
     await patchOrder({

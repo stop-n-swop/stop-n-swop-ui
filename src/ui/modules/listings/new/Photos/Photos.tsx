@@ -17,12 +17,16 @@ const Row = ({
   imageKey: string;
   required: boolean;
 }) => {
-  const name = `images.${imageKey}`;
   const getMessage = useGetMessage();
   const isMounted = useIsMounted();
+  const label = getMessage(
+    ids.listings.new.photos[imageKey] ?? ids.listings.new.photos.unknown,
+  );
+  const name = `images.${imageKey}`;
 
   return (
     <div className="w-full px-12 sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 sm:px-3 pb-3">
+      <p className="italic text-sm">{label}</p>
       <Controller
         name={name}
         rules={{

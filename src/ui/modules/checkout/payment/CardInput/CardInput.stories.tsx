@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import CardInput from './CardInput';
 
 export default {
-  title: 'modules / payment / CardScreen / CardInput',
+  title: 'modules / checkout / payment / CardScreen / CardInput',
 };
 
 export const Basic = () => {

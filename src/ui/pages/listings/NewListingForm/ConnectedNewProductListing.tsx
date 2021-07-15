@@ -7,6 +7,7 @@ import { useRequirements } from 'application/listings';
 import { useGame } from 'application/games';
 import { useUser } from 'application/user';
 import { useCreateListing } from 'application/listings/useCreateListing';
+import { CountryISO } from 'domain/constants';
 import type { Values } from 'ui/modules/listings/new/types';
 import NewProductListing from './NewProductListing';
 import { useOnSubmit } from './utils';
@@ -38,6 +39,8 @@ export default function ConnectedNewProductListing() {
   });
   const [step, dispatch] = useMachine(firstStep, { onSubmit });
 
+  const location = `${city}, ${CountryISO[country] ?? country}`;
+
   return (
     <FormProvider {...formProps}>
       <NewProductListing
@@ -46,7 +49,7 @@ export default function ConnectedNewProductListing() {
         dispatch={dispatch}
         step={step}
         name={name}
-        location={`${city}, ${country}`}
+        location={location}
         username={username}
         requirementsQuery={requirementsQuery}
         error={error}
