@@ -271,6 +271,11 @@ const enMessages = {
     myOrder: {
       order: 'order',
       listing: 'listing',
+      receivedModal: {
+        trigger: 'Received...',
+        title: "You've received your order, that's great!",
+        subtitle: 'Right?',
+      },
     },
     actions: {
       edit: 'Edit',
@@ -282,8 +287,8 @@ const enMessages = {
       [Status.DECLINED]: 'Decline',
       [Status.NOT_PAID]: 'Try again',
       [Status.POSTED]: 'Posted',
-      [Status.RECEIVED]: "Received & everything's good!",
-      [Status.DISPUTED]: "I'm not happy with the item",
+      [Status.RECEIVED]: 'All good!',
+      [Status.DISPUTED]: "Something's wrong",
       [Status.NOT_RECEIVED]: "My item hasn't arrived yet",
       feedback: 'Leave feedback?',
     },

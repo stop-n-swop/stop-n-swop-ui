@@ -22,14 +22,14 @@ export default function Modal({
       overlayClassName="fixed inset-0 bg-black bg-opacity-20"
       className={cx(
         'absolute inset-0 outline-none max-h-full overflow-y-auto',
-        'lg:inset-20',
-        'xl:inset-auto xl:top-1/2 xl:left-1/2 xl:-translate-x-1/2 xl:-translate-y-1/2 xl:transform',
+        'md:inset-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:transform',
       )}
       onRequestClose={onClose}
       style={{ content: { fontSize: 20 } }}
     >
       <Card
-        className="h-full border border-white overflow-y-auto"
+        className="h-full border border-white overflow-y-auto flex flex-col flex-grow"
+        innerClassName="flex-grow flex flex-col"
         title={
           onClose ? (
             <>

@@ -12,6 +12,7 @@ import {
   makeContinueCheckoutPath,
 } from 'ui/constants/paths';
 import type { Status } from '@respite/core';
+import ReceivedModal from './ReceivedModal';
 
 interface Props {
   order: Order;
@@ -21,6 +22,7 @@ interface Props {
 
 export default function Actions({ order, status, onClick }: Props) {
   const [active, setActive] = useState<OrderStatus>();
+  const [receivedModal, setReceivedModal] = useState(false);
   const handleClick = ({ status }: { status: OrderStatus }) => {
     setActive(status);
     onClick(status);
@@ -100,19 +102,16 @@ export default function Actions({ order, status, onClick }: Props) {
   if (order.status === OrderStatus.POSTED) {
     return (
       <div className="md:flex md:space-x-4 lg:space-x-8">
-        <ActionButton
-          orderId={order.id}
-          action={OrderStatus.RECEIVED}
-          active={isActive(OrderStatus.RECEIVED)}
-          status={status}
+        <Button kind="primary" onClick={() => setReceivedModal(true)}>
+          {getMessage(ids.order.myOrder.receivedModal.trigger)}
+        </Button>
+        <ReceivedModal
+          active={active}
+          isOpen={receivedModal}
           onClick={handleClick}
-        />
-        <ActionButton
-          orderId={order.id}
-          action={OrderStatus.DISPUTED}
-          active={isActive(OrderStatus.DISPUTED)}
+          onClose={() => setReceivedModal(false)}
+          order={order}
           status={status}
-          onClick={handleClick}
         />
       </div>
     );
