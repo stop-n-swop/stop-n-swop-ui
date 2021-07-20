@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import { Order, Status as OrderStatus } from '@sns/contracts/order';
-import Button from 'ui/elements/Button';
+import Button, { LinkButton } from 'ui/elements/Button';
 import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 import ActionButton from 'ui/modules/listings/my/listing/Actions/ActionButton';
 import { FaShoppingCart } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import { makeContinueCheckoutPath } from 'ui/constants/paths';
+import {
+  makeCheckoutPaymentPath,
+  makeCheckoutProcessingPath,
+  makeContinueCheckoutPath,
+} from 'ui/constants/paths';
 import type { Status } from '@respite/core';
 
 interface Props {
@@ -60,12 +64,9 @@ export default function Actions({ order, status, onClick }: Props) {
         <Button
           className="w-full lg:w-auto space-x-4"
           component={Link}
-          to={makeContinueCheckoutPath({ orderId: order.id })}
+          to={makeCheckoutPaymentPath({ orderId: order.id })}
           kind="primary"
         >
-          <span>
-            <FaShoppingCart />
-          </span>
           <span>{getMessage(ids.order.actions.notPaid)}</span>
         </Button>
         <ActionButton
@@ -75,6 +76,23 @@ export default function Actions({ order, status, onClick }: Props) {
           status={status}
           onClick={handleClick}
         />
+      </div>
+    );
+  }
+
+  if (order.status === OrderStatus.PAYING) {
+    return (
+      <div className="md:flex md:space-x-4 lg:space-x-8">
+        <LinkButton
+          className="w-full lg:w-auto space-x-4"
+          to={makeCheckoutProcessingPath({ orderId: order.id })}
+          kind="primary"
+        >
+          <span>
+            <FaShoppingCart />
+          </span>
+          <span>{getMessage(ids.order.actions.pending)}</span>
+        </LinkButton>
       </div>
     );
   }

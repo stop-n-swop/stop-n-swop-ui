@@ -291,6 +291,18 @@ let PaymentErrorCode;
   PaymentErrorCode["KYC_PAGE_TOO_SMALL"] = "KYC_PAGE_TOO_SMALL";
   PaymentErrorCode["KYC_PAGE_FAILED"] = "KYC_PAGE_FAILED";
   PaymentErrorCode["KYC_SUBMIT_FAILED"] = "KYC_SUBMIT_FAILED";
+  PaymentErrorCode["PAYMENT_FAILED"] = "PAYMENT_FAILED";
+  PaymentErrorCode["INVALID_CARD_NUMBER"] = "M105101";
+  PaymentErrorCode["INVALID_CARD_NAME"] = "M105102";
+  PaymentErrorCode["DO_NOT_HONOUR"] = "M101101";
+  PaymentErrorCode["INACTIVE_CARD"] = "M101106";
+  PaymentErrorCode["MAX_CARD_ATTEMPTS"] = "M101111";
+  PaymentErrorCode["TRANSACTION_REFUSED"] = "M101199";
+  PaymentErrorCode["3DSECURE_SESSION_EXPIRED"] = "M101304";
+  PaymentErrorCode["3DSECURE_FAILED"] = "M101301";
+  PaymentErrorCode["CARD_NUMBER_FORMAT"] = "M105202";
+  PaymentErrorCode["PAST_EXPIRY_DATE"] = "M105203";
+  PaymentErrorCode["TXN_NOT_FOUND"] = "TXN_NOT_FOUND";
 })(PaymentErrorCode || (PaymentErrorCode = {}));
 class MissingRegisterFieldsError extends BadRequestError {
   constructor(...args) {
@@ -343,6 +355,111 @@ class KycSubmitFailedError extends UnknownError {
     this.code = PaymentErrorCode.KYC_SUBMIT_FAILED;
   }
 }
+class PaymentFailedError extends UnknownError {
+  constructor(...args) {
+    super(...args);
+    this.code = PaymentErrorCode.PAYMENT_FAILED;
+  }
+  toString() {
+    return "There was an issue trying to process your payment. Please try again";
+  }
+}
+class InvalidCardNumberError extends BadRequestError {
+  constructor(...args) {
+    super(...args);
+    this.code = PaymentErrorCode.INVALID_CARD_NUMBER;
+  }
+  toString() {
+    return "You have entered an invalid card number";
+  }
+}
+class InvalidCardNameError extends BadRequestError {
+  constructor(...args) {
+    super(...args);
+    this.code = PaymentErrorCode.INVALID_CARD_NAME;
+  }
+  toString() {
+    return "The given name doesn't match the card holder's name";
+  }
+}
+class DoNotHonourError extends BadRequestError {
+  constructor(...args) {
+    super(...args);
+    this.code = PaymentErrorCode.DO_NOT_HONOUR;
+  }
+  toString() {
+    return 'The payment has failed with a "Do Not Honour" response';
+  }
+}
+class InvactiveCardError extends BadRequestError {
+  constructor(...args) {
+    super(...args);
+    this.code = PaymentErrorCode.INACTIVE_CARD;
+  }
+  toString() {
+    return "This card has been flagged as being inactive by your bank";
+  }
+}
+class MaxCardAttemptsError extends BadRequestError {
+  constructor(...args) {
+    super(...args);
+    this.code = PaymentErrorCode.MAX_CARD_ATTEMPTS;
+  }
+  toString() {
+    return "You have reached the maximum number of attempts for this card";
+  }
+}
+class TransactionRefusedError extends BadRequestError {
+  constructor(...args) {
+    super(...args);
+    this.code = PaymentErrorCode.TRANSACTION_REFUSED;
+  }
+  toString() {
+    return "The transaction has been refused. Please contact your bank for more information";
+  }
+}
+class ThreeDSecureSessionExpiredError extends NotAuthorisedError {
+  constructor(...args) {
+    super(...args);
+    this.code = PaymentErrorCode["3DSECURE_SESSION_EXPIRED"];
+  }
+  toString() {
+    return "Your 3D Secure session has expired";
+  }
+}
+class ThreeDSecureFailedError extends UnknownError {
+  constructor(...args) {
+    super(...args);
+    this.code = PaymentErrorCode["3DSECURE_FAILED"];
+  }
+  toString() {
+    return "3D Secure authentication has failed";
+  }
+}
+class CardNumberFormatError extends BadRequestError {
+  constructor(...args) {
+    super(...args);
+    this.code = PaymentErrorCode.CARD_NUMBER_FORMAT;
+  }
+  toString() {
+    return "The card number is not valid, please check and try again";
+  }
+}
+class PastExpryDateError extends BadRequestError {
+  constructor(...args) {
+    super(...args);
+    this.code = PaymentErrorCode.PAST_EXPIRY_DATE;
+  }
+  toString() {
+    return "You have entered an expired date";
+  }
+}
+class TxnNotFoundError extends NotFoundError {
+  constructor(id) {
+    super("txn", id);
+    this.code = PaymentErrorCode.TXN_NOT_FOUND;
+  }
+}
 
 let PlatformErrorCode;
 (function (PlatformErrorCode) {
@@ -376,13 +493,12 @@ class UserNotFoundError extends NotFoundError {
   }
 }
 
-const responseToError = response => {
-  var _response$error;
-  switch ((_response$error = response.error) == null ? void 0 : _response$error.code) {
+const hydrate = (code, error = {}) => {
+  switch (code) {
     case CommonErrorCode.UNKNOWN:
       return new UnknownError();
     case CommonErrorCode.NOT_FOUND:
-      return new NotFoundError(response.error.entity, response.error.id);
+      return new NotFoundError(error.entity, error.id);
     case CommonErrorCode.NOT_AUTHENTICATED:
       return new NotAuthenticatedError();
     case CommonErrorCode.NOT_AUTHORISED:
@@ -392,11 +508,11 @@ const responseToError = response => {
     case CommonErrorCode.BAD_REQUEST:
       return new BadRequestError();
     case CommonErrorCode.VALIDATION:
-      return new ValidationError(response.error.errors);
+      return new ValidationError(error.errors);
     case UserErrorCode.USERNAME_NOT_UNIQUE:
       return new UsernameNotUniqueError();
     case UserErrorCode.USER_NOT_FOUND:
-      return new UserNotFoundError(response.error.id);
+      return new UserNotFoundError(error.id);
     case AuthErrorCode.INVALID_LOGIN:
       return new InvalidLoginError();
     case AuthErrorCode.OUTDATED_TOKEN:
@@ -404,23 +520,23 @@ const responseToError = response => {
     case ImageErrorCode.UPLOAD_FAILED:
       return new UploadFailedError();
     case GameErrorCode.GAME_NOT_FOUND:
-      return new GameNotFoundError(response.error.id);
+      return new GameNotFoundError(error.id);
     case GameErrorCode.INVALID_GAME_PLATFORM:
-      return new InvalidGamePlatformError(response.error.platformId, response.error.gameId);
+      return new InvalidGamePlatformError(error.platformId, error.gameId);
     case ListingErrorCode.CREATE_LISTING:
       return new CreateListingError();
     case ListingErrorCode.LISTING_NOT_FOUND:
-      return new ListingNotFoundError(response.error.id);
+      return new ListingNotFoundError(error.id);
     case ListingErrorCode.UPDATE_FAILED:
       return new UpdateListingFailedError();
     case ListingErrorCode.UPDATE_LISTING_PROHIBITED:
       return new UpdateListingProhibitedError();
     case PlatformErrorCode.PLATFORM_NOT_FOUND:
-      return new PlatformNotFoundError(response.error.id);
+      return new PlatformNotFoundError(error.id);
     case OrderErrorCode.INVALID_TRANSITION:
       return new InvalidStatusError();
     case OrderErrorCode.ORDER_NOT_FOUND:
-      return new OrderNotFoundError(response.error.id);
+      return new OrderNotFoundError(error.id);
     case OrderErrorCode.ORDER_NOT_OWNED_BY_USER:
       return new OrderNotOwnedByUserError("", "");
     case OrderErrorCode.LISTING_OWNED_BY_USER:
@@ -441,20 +557,52 @@ const responseToError = response => {
       return new KycPageFailedError();
     case PaymentErrorCode.KYC_SUBMIT_FAILED:
       return new KycSubmitFailedError();
-  }
-  switch (response.status) {
-    case 400:
-      return new BadRequestError();
-    case 401:
-      return new NotAuthenticatedError();
-    case 403:
-      return new NotAuthorisedError();
-    case 404:
-      return new NotFoundError("", "");
-    case 409:
-      return new ConflictError();
+    case PaymentErrorCode.PAYMENT_FAILED:
+      return new PaymentFailedError();
+    case PaymentErrorCode.INVALID_CARD_NUMBER:
+      return new InvalidCardNumberError();
+    case PaymentErrorCode.INVALID_CARD_NAME:
+      return new InvalidCardNameError();
+    case PaymentErrorCode.DO_NOT_HONOUR:
+      return new DoNotHonourError();
+    case PaymentErrorCode.INACTIVE_CARD:
+      return new InvactiveCardError();
+    case PaymentErrorCode.MAX_CARD_ATTEMPTS:
+      return new MaxCardAttemptsError();
+    case PaymentErrorCode.TRANSACTION_REFUSED:
+      return new TransactionRefusedError();
+    case PaymentErrorCode["3DSECURE_SESSION_EXPIRED"]:
+      return new ThreeDSecureSessionExpiredError();
+    case PaymentErrorCode["3DSECURE_FAILED"]:
+      return new ThreeDSecureFailedError();
+    case PaymentErrorCode.CARD_NUMBER_FORMAT:
+      return new CardNumberFormatError();
+    case PaymentErrorCode.PAST_EXPIRY_DATE:
+      return new PastExpryDateError();
+    case PaymentErrorCode.TXN_NOT_FOUND:
+      return new TxnNotFoundError(error.id);
   }
   return new UnknownError();
 };
 
-export { AuthErrorCode, BadRequestError, BankAccountFailError, BaseError, CommonErrorCode, ConflictError, CreateListingError, FailedToRegisterError, GameErrorCode, GameNotFoundError, ImageErrorCode, InvalidGamePlatformError, InvalidLoginError, InvalidStatusError, InvalidTokenError, KycDocumentFailedError, KycPageFailedError, KycPageTooSmallError, KycSubmitFailedError, ListingErrorCode, ListingNotFoundError, ListingOwnedByUserError, MissingRegisterFieldsError, NotAuthenticatedError, NotAuthorisedError, NotFoundError, OrderErrorCode, OrderNotAvailableError, OrderNotFoundError, OrderNotOwnedByUserError, OutdatedTokenError, PaymentErrorCode, PlatformErrorCode, PlatformNotFoundError, UnknownError, UpdateListingFailedError, UpdateListingProhibitedError, UploadFailedError, UserErrorCode, UserNotFoundError, UsernameNotUniqueError, ValidationError, responseToError };
+const responseToError = response => {
+  var _response$error;
+  let err = hydrate((_response$error = response.error) == null ? void 0 : _response$error.code, response.error);
+  if (err.constructor === UnknownError) {
+    switch (response.status) {
+      case 400:
+        return new BadRequestError();
+      case 401:
+        return new NotAuthenticatedError();
+      case 403:
+        return new NotAuthorisedError();
+      case 404:
+        return new NotFoundError("", "");
+      case 409:
+        return new ConflictError();
+    }
+  }
+  return err;
+};
+
+export { AuthErrorCode, BadRequestError, BankAccountFailError, BaseError, CardNumberFormatError, CommonErrorCode, ConflictError, CreateListingError, DoNotHonourError, FailedToRegisterError, GameErrorCode, GameNotFoundError, ImageErrorCode, InvactiveCardError, InvalidCardNameError, InvalidCardNumberError, InvalidGamePlatformError, InvalidLoginError, InvalidStatusError, InvalidTokenError, KycDocumentFailedError, KycPageFailedError, KycPageTooSmallError, KycSubmitFailedError, ListingErrorCode, ListingNotFoundError, ListingOwnedByUserError, MaxCardAttemptsError, MissingRegisterFieldsError, NotAuthenticatedError, NotAuthorisedError, NotFoundError, OrderErrorCode, OrderNotAvailableError, OrderNotFoundError, OrderNotOwnedByUserError, OutdatedTokenError, PastExpryDateError, PaymentErrorCode, PaymentFailedError, PlatformErrorCode, PlatformNotFoundError, ThreeDSecureFailedError, ThreeDSecureSessionExpiredError, TransactionRefusedError, TxnNotFoundError, UnknownError, UpdateListingFailedError, UpdateListingProhibitedError, UploadFailedError, UserErrorCode, UserNotFoundError, UsernameNotUniqueError, ValidationError, hydrate, responseToError };

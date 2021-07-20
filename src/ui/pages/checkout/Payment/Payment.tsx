@@ -1,10 +1,10 @@
-import { OrderNotAvailableError } from '@sns/abyss';
-import { Status } from '@sns/contracts/order';
+import { PaymentFailedError, hydrate, UnknownError } from '@sns/abyss';
+import { Order, Status } from '@sns/contracts/order';
 import { useAuthGuard } from 'application/auth';
 import { useListing } from 'application/listings';
 import { useMyOrder, usePlaceOrder } from 'application/orders';
 import { useCards } from 'application/payments';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import {
   makeCheckoutPaymentNewPath,
@@ -15,8 +15,23 @@ import PaymentScreen from 'ui/modules/checkout/payment/PaymentScreen';
 import Cards from 'ui/modules/checkout/payment/Cards';
 import NewCard from 'ui/modules/checkout/payment/NewCard';
 import SubmitCard from 'ui/modules/checkout/payment/SubmitCard/SubmitCard';
-import { combineActions } from '../BillingAddress/BillingAddress';
-import type { ActionQuery } from '@respite/action';
+
+const getError = (error: any, order: Order, retry: boolean) => {
+  if (error) {
+    return error;
+  }
+  if (order.status === Status.NOT_PAID && order.errorCode) {
+    const error = hydrate(`M${order.errorCode}`);
+    if (error.constructor === UnknownError) {
+      return new PaymentFailedError();
+    }
+    return error;
+  }
+  if (retry) {
+    return new PaymentFailedError();
+  }
+  return null;
+};
 
 export default function Payment() {
   useAuthGuard({
@@ -29,22 +44,11 @@ export default function Payment() {
   const { data: order } = useMyOrder({ id: orderId });
   const { data: listing } = useListing({ id: order.listingId });
   const { data: cards } = useCards();
-  const placeAction = usePlaceOrder();
-  const { error, status } = combineActions(
-    placeAction,
-    {
-      error: retry
-        ? 'Your payment was unsuccessful, please try again' // TODO: add to abyss
-        : undefined,
-    } as ActionQuery<any>,
-    {
-      error:
-        listing.status === Status.OPEN
-          ? undefined
-          : new OrderNotAvailableError(),
-    } as ActionQuery<any>,
+  const { action: placeOrder, status, error: placOrderError } = usePlaceOrder();
+  const error = useMemo(
+    () => getError(placOrderError, order, retry),
+    [order, placOrderError, retry],
   );
-  const { action: placeOrder } = placeAction;
 
   const [cardId, setCardId] = useState<string>(cards[0]?.id);
 

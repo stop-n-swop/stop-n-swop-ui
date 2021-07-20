@@ -1,5 +1,6 @@
 import jpex from 'jpex';
 import sdk from 'mangopay-cardregistration-js-kit';
+import { hydrate } from '@sns/abyss';
 import type { CompleteCard } from 'core/payments';
 import type { Config } from 'core/io';
 
@@ -37,7 +38,9 @@ jpex.factory<CompleteCard>(
             cardType: 'CB_VISA_MASTERCARD',
           },
           (result) => res({ cardId: result.CardId }),
-          (err) => rej(err),
+          (e) => {
+            rej(hydrate(`M${e.ResultCode}`));
+          },
         );
       });
     },

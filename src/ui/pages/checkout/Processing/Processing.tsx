@@ -14,12 +14,20 @@ export default function Processing() {
   const { push } = useHistory();
 
   useEffect(() => {
-    if (order.status === Status.PAID) {
-      push(makeCheckoutCompletePath({ orderId }));
-    } else if (order.status === Status.NOT_PAID) {
-      push(makeCheckoutPaymentPath({ orderId, failed: true }));
-    } else if (order.status !== Status.PLACED) {
-      push(makeCheckoutPaymentPath({ orderId, failed: true }));
+    switch (order.status) {
+      case Status.PAYING:
+        // still processing
+        break;
+      case Status.PLACED:
+        // order has been placed
+        push(makeCheckoutCompletePath({ orderId }));
+        break;
+      default:
+        // any other status means something went wrong
+        // most likely set to NOT_PAID but it could also have been
+        // declined/cancelled
+        push(makeCheckoutPaymentPath({ orderId, failed: true }));
+        break;
     }
   }, [order.status, orderId, push]);
 

@@ -7,4 +7,5 @@ export * from "./order";
 export * from "./payments";
 export * from "./platform";
 export * from "./user";
+export * from "./hydrate";
 export * from "./responseToError";

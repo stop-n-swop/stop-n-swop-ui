@@ -292,8 +292,8 @@ const enMessages = {
       [Status.CLOSED]: 'Closed',
       [Status.CREATED]: 'In progress',
       [Status.PENDING]: 'In progress',
-      [Status.PLACED]: 'Processing payment',
-      [Status.PAID]: 'Paid',
+      [Status.PAYING]: 'Payment in progress...',
+      [Status.PLACED]: 'Order placed',
       [Status.NOT_PAID]: 'Payment failed',
       [Status.APPROVED]: 'Approved',
       [Status.DECLINED]: 'Declined',
@@ -525,8 +525,9 @@ const enMessages = {
     title: 'Notifications',
     states: {
       orderPlaced: {
-        title: 'An order has been placed for your listing',
-        subtitle: "We're just processing the payment now",
+        title: 'An order has been placed for your listing 🎉',
+        subtitle:
+          'Approve the order and arrange for your item to be delivered!',
         action: 'View',
       },
       orderCancelled: {
@@ -537,19 +538,9 @@ const enMessages = {
         action: 'View',
         why: 'Why?',
       },
-      orderPaid: {
-        title: 'The order for your listing has been paid 🎉',
-        subtitle:
-          'Approve the order and arrange for your item to be delivered!',
-        action: 'View',
-      },
       orderNotPaid: {
         title: 'Your order payment has failed',
         subtitle: 'Ack!',
-      },
-      listingNotPaid: {
-        title: 'Payment failed for your listing',
-        subtitle: 'Uh what now?',
       },
       orderPosted: {
         title: 'Your order is on its way!',

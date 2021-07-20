@@ -3,9 +3,9 @@ export enum Status {
   CLOSED = "closed", // listing has been closed by the seller
   CREATED = "created", // a buyer has started the checkout process
   PENDING = "pending", // the buyer has partially progressed through the checkout process
-  PLACED = "placed", // the buyer has submitted their order with payment details and is waiting for the payment to succeed
-  PAID = "paid", // the buyer's payment has gone through
+  PAYING = "paying", // the buyer has submitted their order with payment details and is waiting for the payment to succeed
   NOT_PAID = "notPaid", // the buyer's payment has failed
+  PLACED = "placed", // the order has officially been placed (payment has gone through)
   APPROVED = "approved", // the seller has approved the order
   DECLINED = "declined", // the seller has declined the order
   POSTED = "posted", // the seller has posted the item
