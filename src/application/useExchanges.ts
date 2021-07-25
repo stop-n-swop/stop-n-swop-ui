@@ -23,6 +23,9 @@ import {
   PlaceOrderKey,
   CardsKey,
   CreateCardKey,
+  BalanceKey,
+  WithdrawBalanceKey,
+  TransactionsKey,
 } from './keys';
 
 export default function useExchanges() {
@@ -49,5 +52,6 @@ export default function useExchanges() {
     [[MyOrdersKey], [CreateOrderKey]],
     [[MyOrdersKey, ListingsKey, HistoryKey], [PlaceOrderKey]],
     [CardsKey, CreateCardKey],
+    [[BalanceKey, TransactionsKey], [WithdrawBalanceKey]],
   );
 }

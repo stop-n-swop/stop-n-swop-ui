@@ -13,3 +13,6 @@ export const makeDashboardPath = ({
   }
   return '/my/dashboard';
 };
+
+export const BALANCE = '/my/balance';
+export const makeBalancePath = () => BALANCE;

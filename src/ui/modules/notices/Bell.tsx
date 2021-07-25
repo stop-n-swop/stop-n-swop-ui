@@ -3,6 +3,8 @@ import Button from 'ui/elements/Button';
 import { FaRegBell } from 'react-icons/fa';
 import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
+import { useBoop } from 'ui/hooks';
+import { animated } from 'react-spring';
 import type { Notice } from '@sns/contracts/notice';
 
 const getUnreadNotices = (notices: Notice[]) => {
@@ -18,6 +20,7 @@ export default function Bell({
   onOpen(): void;
   notices: Notice[];
 }) {
+  const [style, boop] = useBoop({ rotation: -20, scale: 0.95 });
   const g = useGetMessage();
   const [unread, setUnread] = useState(() => getUnreadNotices(notices));
   const hasUnread = unread > 0;
@@ -40,8 +43,11 @@ export default function Bell({
       className="relative space-x-3"
       title="notifications"
       onClick={onOpen}
+      onMouseEnter={boop}
     >
-      <FaRegBell size="1.5em" />
+      <animated.span style={style}>
+        <FaRegBell size="1em" />
+      </animated.span>
       <If condition={hasUnread}>
         <div
           className="md:absolute bg-primary-light rounded-full w-5 h-5 top-0 right-0 flex justify-center items-center text-xs"

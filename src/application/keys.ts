@@ -52,7 +52,10 @@ export const NoticesKey = Symbol('notices');
 // Payments
 // Queries
 export const CardsKey = Symbol('cards');
+export const TransactionsKey = Symbol('transactions');
+export const BalanceKey = Symbol('balance');
 // Actions
 export const CreateCardKey = Symbol('create card');
 export const SaveBankKey = Symbol('save bank account');
 export const UploadKycKey = Symbol('upload kyc');
+export const WithdrawBalanceKey = Symbol('withdraw balance');

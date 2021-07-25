@@ -303,6 +303,7 @@ let PaymentErrorCode;
   PaymentErrorCode["CARD_NUMBER_FORMAT"] = "M105202";
   PaymentErrorCode["PAST_EXPIRY_DATE"] = "M105203";
   PaymentErrorCode["TXN_NOT_FOUND"] = "TXN_NOT_FOUND";
+  PaymentErrorCode["PAY_OUT_NOT_READY"] = "PAY_OUT_NOT_READY";
 })(PaymentErrorCode || (PaymentErrorCode = {}));
 class MissingRegisterFieldsError extends BadRequestError {
   constructor(...args) {
@@ -460,6 +461,14 @@ class TxnNotFoundError extends NotFoundError {
     this.code = PaymentErrorCode.TXN_NOT_FOUND;
   }
 }
+class PayOutNotReadyError extends BadRequestError {
+  constructor() {
+    super("Attempted to pay out but user is not in a ready state");
+  }
+  toString() {
+    return "You are not set up for pay outs. Please make sure you have set up bank details and verified your identity.";
+  }
+}
 
 let PlatformErrorCode;
 (function (PlatformErrorCode) {
@@ -581,6 +590,8 @@ const hydrate = (code, error = {}) => {
       return new PastExpryDateError();
     case PaymentErrorCode.TXN_NOT_FOUND:
       return new TxnNotFoundError(error.id);
+    case PaymentErrorCode.PAY_OUT_NOT_READY:
+      return new PayOutNotReadyError();
   }
   return new UnknownError();
 };
@@ -605,4 +616,4 @@ const responseToError = response => {
   return err;
 };
 
-export { AuthErrorCode, BadRequestError, BankAccountFailError, BaseError, CardNumberFormatError, CommonErrorCode, ConflictError, CreateListingError, DoNotHonourError, FailedToRegisterError, GameErrorCode, GameNotFoundError, ImageErrorCode, InvactiveCardError, InvalidCardNameError, InvalidCardNumberError, InvalidGamePlatformError, InvalidLoginError, InvalidStatusError, InvalidTokenError, KycDocumentFailedError, KycPageFailedError, KycPageTooSmallError, KycSubmitFailedError, ListingErrorCode, ListingNotFoundError, ListingOwnedByUserError, MaxCardAttemptsError, MissingRegisterFieldsError, NotAuthenticatedError, NotAuthorisedError, NotFoundError, OrderErrorCode, OrderNotAvailableError, OrderNotFoundError, OrderNotOwnedByUserError, OutdatedTokenError, PastExpryDateError, PaymentErrorCode, PaymentFailedError, PlatformErrorCode, PlatformNotFoundError, ThreeDSecureFailedError, ThreeDSecureSessionExpiredError, TransactionRefusedError, TxnNotFoundError, UnknownError, UpdateListingFailedError, UpdateListingProhibitedError, UploadFailedError, UserErrorCode, UserNotFoundError, UsernameNotUniqueError, ValidationError, hydrate, responseToError };
+export { AuthErrorCode, BadRequestError, BankAccountFailError, BaseError, CardNumberFormatError, CommonErrorCode, ConflictError, CreateListingError, DoNotHonourError, FailedToRegisterError, GameErrorCode, GameNotFoundError, ImageErrorCode, InvactiveCardError, InvalidCardNameError, InvalidCardNumberError, InvalidGamePlatformError, InvalidLoginError, InvalidStatusError, InvalidTokenError, KycDocumentFailedError, KycPageFailedError, KycPageTooSmallError, KycSubmitFailedError, ListingErrorCode, ListingNotFoundError, ListingOwnedByUserError, MaxCardAttemptsError, MissingRegisterFieldsError, NotAuthenticatedError, NotAuthorisedError, NotFoundError, OrderErrorCode, OrderNotAvailableError, OrderNotFoundError, OrderNotOwnedByUserError, OutdatedTokenError, PastExpryDateError, PayOutNotReadyError, PaymentErrorCode, PaymentFailedError, PlatformErrorCode, PlatformNotFoundError, ThreeDSecureFailedError, ThreeDSecureSessionExpiredError, TransactionRefusedError, TxnNotFoundError, UnknownError, UpdateListingFailedError, UpdateListingProhibitedError, UploadFailedError, UserErrorCode, UserNotFoundError, UsernameNotUniqueError, ValidationError, hydrate, responseToError };

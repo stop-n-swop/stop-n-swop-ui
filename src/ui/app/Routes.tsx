@@ -27,11 +27,13 @@ import {
   LEVEL_UP_DETAILS,
   CHECKOUT_PROCESSING,
   CHECKOUT_PAYMENT_NEW,
+  BALANCE,
 } from 'ui/constants/paths';
 import Home from 'ui/pages/Home';
 
 // Account
 const Dashboard = lazy(() => import('ui/pages/account/Dashboard'));
+const Balance = lazy(() => import('ui/pages/account/Balance'));
 const LevelUpUsername = lazy(() => import('ui/pages/account/LevelUpUsername'));
 const LevelUpAddress = lazy(() => import('ui/pages/account/LevelUpAddress'));
 const LevelUpDetails = lazy(() => import('ui/pages/account/LevelUpDetails'));
@@ -77,6 +79,9 @@ export default function Routes() {
       {/* Account */}
       <Route path={DASHBOARD} exact>
         <Dashboard />
+      </Route>
+      <Route path={BALANCE} exact>
+        <Balance />
       </Route>
       <Route path={LEVEL_UP_ADDRESS} exact>
         <LevelUpAddress />

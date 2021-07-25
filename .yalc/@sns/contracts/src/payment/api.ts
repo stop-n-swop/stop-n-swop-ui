@@ -1,5 +1,5 @@
 import { Address } from "../user";
-import { Card } from "./entities";
+import { Card, Transaction } from "./entities";
 
 export interface SaveBankDetailsRequest {
   name: string;
@@ -28,4 +28,17 @@ export type PlaceOrderResponse = {};
 
 export interface GetCardsResponse {
   cards: Array<Card>;
+}
+
+export interface GetTransactionsResponse {
+  transactions: Transaction[];
+}
+
+export interface GetBalanceResponse {
+  balance: number;
+  currency: string;
+}
+
+export interface WithdrawBalanceRequest {
+  amount: number;
 }

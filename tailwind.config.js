@@ -36,7 +36,8 @@ module.exports = {
       },
       fontFamily: {
         // display: ['zx_spectrumregular'],
-        title: ['zx_spectrumregular'],
+        retro: ['zx_spectrumregular'],
+        title: ['Roboto'],
         display: ['Roboto'],
         logo: ['lithographbold'],
       },

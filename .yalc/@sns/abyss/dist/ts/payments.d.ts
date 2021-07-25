@@ -18,7 +18,8 @@ export declare enum PaymentErrorCode {
     "3DSECURE_FAILED" = "M101301",
     CARD_NUMBER_FORMAT = "M105202",
     PAST_EXPIRY_DATE = "M105203",
-    TXN_NOT_FOUND = "TXN_NOT_FOUND"
+    TXN_NOT_FOUND = "TXN_NOT_FOUND",
+    PAY_OUT_NOT_READY = "PAY_OUT_NOT_READY"
 }
 export declare class MissingRegisterFieldsError extends BadRequestError {
     code: PaymentErrorCode;
@@ -91,4 +92,8 @@ export declare class PastExpryDateError extends BadRequestError {
 export declare class TxnNotFoundError extends NotFoundError {
     code: PaymentErrorCode;
     constructor(id: string);
+}
+export declare class PayOutNotReadyError extends BadRequestError {
+    constructor();
+    toString(): string;
 }

@@ -81,7 +81,11 @@ export default function NavItems({
       <Choose>
         <When condition={loggedIn}>
           <Notices />
-          <Account open={accountOpen} setOpen={setAccountOpen} />
+          <Account
+            open={accountOpen}
+            setOpen={setAccountOpen}
+            onClose={close}
+          />
         </When>
         <Otherwise>
           <NavItem to={LOGIN} Icon={FaUserCircle} onClose={close}>

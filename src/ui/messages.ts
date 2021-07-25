@@ -20,6 +20,8 @@ const enMessages = {
       login: 'log in',
       logout: 'log out',
       dashboard: 'my account',
+      balance: 'balance',
+      balancePill: 'claim',
     },
   },
   elements: {
@@ -445,6 +447,54 @@ const enMessages = {
           complete: "You're all set to start receiving earnings!",
           outstanding:
             'Make sure to provide your bank details to start receiving your earnings...',
+        },
+      },
+    },
+    balance: {
+      balance: {
+        label: 'Your balance',
+        required: 'Please enter an amount',
+        min: 'You must withddraw at least {min}',
+        max: "You can't withdraw more than you have!",
+        withdraw: 'Withdraw',
+        confirm: 'Confirm',
+        cancel: 'Cancel',
+        completed:
+          'Your funds are being transferred, it can take up to 48 hours to appear in your account.',
+      },
+      obligates: {
+        both: 'Before you can withdraw any funds you will need to set up your bank details and verify your identity',
+        notVerified:
+          'Before you can withdraw any funds you will need to verify your identity',
+        verifying:
+          'Your identity is still being processed. Once you have been verified you will be able to withdraw your funds',
+        account:
+          'Before you can withdraw any funds you will need to set up your bank details',
+      },
+      transactions: {
+        title: 'Recent transactions',
+        date: {
+          label: 'Date',
+        },
+        listingId: {
+          label: 'Listing',
+        },
+        transactionId: {
+          label: 'Transaction',
+        },
+        type: {
+          label: 'Transaction',
+          'pay-in': 'Pay in',
+          transfer: 'Completed sale',
+          'pay-out': 'Withdrawal',
+          refund: 'Refund',
+          unknown: '',
+        },
+        amount: {
+          label: 'Amount',
+        },
+        fees: {
+          label: 'fees',
         },
       },
     },

@@ -12,7 +12,7 @@ export default function Title() {
       style={style}
       onMouseEnter={boop}
       to={HOME}
-      className="hover:text-gray-500 md:transition-colors text-3xl"
+      className="hover:text-gray-500 md:transition-colors text-lg"
       title="home"
     >
       <Logo />
