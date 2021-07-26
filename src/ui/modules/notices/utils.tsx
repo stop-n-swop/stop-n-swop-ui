@@ -3,7 +3,9 @@ import DefaultNotice from './states/DefaultNotice';
 import KycFailed from './states/KycFailed';
 import KycVerified from './states/KycVerified';
 import OrderCancelled from './states/OrderCancelled';
+import OrderComplete from './states/OrderComplete';
 import OrderDeclined from './states/OrderDeclined';
+import OrderNoResponse from './states/OrderNoResponse';
 import OrderNotPaid from './states/OrderNotPaid';
 import OrderPlaced from './states/OrderPlaced';
 import OrderPosted from './states/OrderPosted';
@@ -18,6 +20,8 @@ const matrix = {
   [Type.ORDER_POSTED]: OrderPosted,
   [Type.ORDER_RECEIVED]: OrderReceived,
   [Type.ORDER_REFUNDED]: OrderRefunded,
+  [Type.ORDER_NO_RESPONSE]: OrderNoResponse,
+  [Type.ORDER_COMPLETE]: OrderComplete,
   [Type.KYC_VERIFIED]: KycVerified,
   [Type.KYC_FAILED]: KycFailed,
 };

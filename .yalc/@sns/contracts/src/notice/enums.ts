@@ -6,6 +6,8 @@ export enum Type {
   ORDER_POSTED = "order_posted",
   ORDER_RECEIVED = "order_received",
   ORDER_REFUNDED = "order_refunded",
+  ORDER_NO_RESPONSE = "order_no_response",
+  ORDER_COMPLETE = "order_complete",
   KYC_VERIFIED = "kyc_verified",
   KYC_FAILED = "kyc_failed",
 }

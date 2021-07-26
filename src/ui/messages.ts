@@ -604,6 +604,17 @@ const enMessages = {
       orderReceived: {
         title: 'Your item has been received by the buyer',
       },
+      orderNoResponse: {
+        title: 'Your order has been completed',
+        subtitle:
+          "As you haven't told us whether your order arrived or not we assume everything's fine",
+      },
+      orderComplete: {
+        title: 'Order completed',
+        subtitle:
+          'Your item has sold and the funds have been credited to your balance, hurray!',
+        action: 'View',
+      },
       kycVerified: {
         title: 'Your identity verification has passed!',
       },
