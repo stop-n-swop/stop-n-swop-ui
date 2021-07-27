@@ -10,7 +10,7 @@ import type { Navigate } from 'core/navigation';
 
 jpex.factory<PlaceOrder>(
   (driver: AuthDriver, location: Location, navigate: Navigate): PlaceOrder =>
-    async ({ orderId, cardId }) => {
+    async ({ orderId, cardId, remember = true }) => {
       const secureModeReturnUrl =
         location.origin + makeCheckoutProcessingPath({ orderId });
 
@@ -23,6 +23,7 @@ jpex.factory<PlaceOrder>(
         data: {
           cardId,
           secureModeReturnUrl,
+          remember,
         },
       });
 

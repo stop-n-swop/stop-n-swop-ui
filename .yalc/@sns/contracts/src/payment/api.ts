@@ -23,6 +23,7 @@ export interface PlaceOrderParams {
 export interface PlaceOrderRequest {
   cardId: string;
   secureModeReturnUrl: string;
+  remember: boolean;
 }
 export type PlaceOrderResponse = {
   secureMode: boolean;

@@ -25,4 +25,5 @@ export type FetchHistory = (args: { orderId: string }) => Promise<AuditItem[]>;
 export type PlaceOrder = (args: {
   orderId: string;
   cardId: string;
+  remember?: boolean;
 }) => Promise<unknown>;

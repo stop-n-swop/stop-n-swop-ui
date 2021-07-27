@@ -40,6 +40,7 @@ export default function PaymentNew() {
       cardNumber,
       cvc,
       expiry,
+      remember,
     }: {
       cardNumber: string;
       expiry: string;
@@ -50,6 +51,7 @@ export default function PaymentNew() {
       await placeAction.action({
         cardId,
         orderId,
+        remember,
       });
       push(makeCheckoutProcessingPath({ orderId }));
     },
