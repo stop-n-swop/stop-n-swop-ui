@@ -132,9 +132,15 @@ const enMessages = {
           'manage listing',
           ' page',
         ],
+        description4: [
+          'Before you can withdraw your earnings from a sold listing you will need to set up your ',
+          'bank account',
+          ' for the funds to be credited to. You will also need to ',
+          'verify your identity',
+          " so we know you're a real person!",
+        ],
         manageListing: 'Manage your listing',
         viewListing: 'View your listing',
-        listings: 'Manage all your listings',
         newListing: 'Create another listing',
       },
       features: {
@@ -168,8 +174,18 @@ const enMessages = {
         title: 'How much do you want to list this for?',
         link: 'Check listing prices for this game',
         required: 'Please enter an amount',
+        min: 'The minimum allowed price for a listing is {min}',
         label: 'Price',
         postage: 'Postage',
+        platformFee: {
+          title: 'Platform fee',
+        },
+        breakdown: {
+          title: 'Price breakdown',
+          platform: 'Platform fee:',
+          protection: 'Order protection:',
+          earnings: 'Earnings:',
+        },
       },
       region: {
         title: 'What region is your listing?',
@@ -508,7 +524,7 @@ const enMessages = {
       price: {
         price: 'Price:',
         postage: 'Postage:',
-        protection: 'Buyer protection:',
+        protection: 'Order protection:',
         total: 'Total to pay:',
       },
       howItWorks: {

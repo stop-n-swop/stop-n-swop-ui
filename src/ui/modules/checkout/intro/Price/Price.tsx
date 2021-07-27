@@ -4,9 +4,9 @@ import { ids } from 'ui/messages';
 import Button from 'ui/elements/Button';
 import {
   Listing,
-  getProtectionCost,
   getFinalPrice,
   getBasePrice,
+  getProtectionCharge,
   getPostage,
 } from '@sns/contracts/listing';
 
@@ -19,10 +19,10 @@ export default function Price({
 }) {
   const getCurrency = useGetCurrency();
   const getMessage = useGetMessage();
-  const priceAmount = getBasePrice(listing);
-  const postageAmount = getPostage(listing);
   const { currency } = listing;
-  const protectionAmount = getProtectionCost(listing);
+  const protectionAmount = getProtectionCharge(listing);
+  const priceAmount = getBasePrice(listing) - protectionAmount;
+  const postageAmount = getPostage(listing);
   const totalAmount = getFinalPrice(listing);
 
   return (
@@ -33,18 +33,6 @@ export default function Price({
       <span className="w-1/2 text-right">
         {getCurrency(priceAmount, { currency })}
       </span>
-      <span className="w-1/2">
-        <Button
-          title={getMessage(ids.help.whatsThis)}
-          padding={false}
-          onClick={openProtectionModal}
-        >
-          {getMessage(ids.checkout.intro.price.protection)}
-        </Button>
-      </span>
-      <span className="w-1/2 text-right">
-        {getCurrency(protectionAmount, { currency })}
-      </span>
       <If condition={postageAmount}>
         <span className="w-1/2">
           {getMessage(ids.checkout.intro.price.postage)}
@@ -53,6 +41,19 @@ export default function Price({
           {getCurrency(postageAmount, { currency })}
         </span>
       </If>
+      <span className="w-1/2">
+        <Button
+          title={getMessage(ids.help.whatsThis)}
+          padding={false}
+          onClick={openProtectionModal}
+          className="font-normal"
+        >
+          {getMessage(ids.checkout.intro.price.protection)}
+        </Button>
+      </span>
+      <span className="w-1/2 text-right">
+        {getCurrency(protectionAmount, { currency })}
+      </span>
       <hr className="border border-gray-500 w-full my-2" />
       <span className="w-1/2">
         {getMessage(ids.checkout.intro.price.total)}

@@ -1,12 +1,11 @@
 import React from 'react';
-import Button from 'ui/elements/Button';
+import { LinkButton } from 'ui/elements/Button';
 import {
+  makeDashboardPath,
   makeGameListingPath,
   makeMyListingPath,
-  MY_LISTINGS,
   NEW_LISTING,
 } from 'ui/constants/paths';
-import { Link } from 'react-router-dom';
 import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 
@@ -19,6 +18,7 @@ export default function Done({
 }) {
   const getMessage = useGetMessage();
 
+  // TODO: probably move all this text to a .mdx help file
   return (
     <div>
       <div className="flex flex-col my-12 space-y-8">
@@ -29,40 +29,56 @@ export default function Done({
         <p>{getMessage(ids.listings.new.done.description2)}</p>
         <p>
           {getMessage(ids.listings.new.done.description3[0])}
-          <Button
+          <LinkButton
             kind="tertiary"
             className="inline-flex"
-            component={Link}
-            padding={false}
             to={makeMyListingPath({ listingId })}
           >
             {getMessage(ids.listings.new.done.description3[1])}
-          </Button>
+          </LinkButton>
           {getMessage(ids.listings.new.done.description3[2])}
+        </p>
+        <p>
+          {getMessage(ids.listings.new.done.description4[0])}
+          <LinkButton
+            kind="tertiary"
+            className="inline-flex"
+            to={makeDashboardPath({
+              section: 'billing',
+              subSection: 'account',
+            })}
+          >
+            {getMessage(ids.listings.new.done.description4[1])}
+          </LinkButton>
+          {getMessage(ids.listings.new.done.description4[2])}
+          <LinkButton
+            kind="tertiary"
+            className="inline-flex"
+            to={makeDashboardPath({ section: 'billing', subSection: 'verify' })}
+          >
+            {getMessage(ids.listings.new.done.description4[3])}
+          </LinkButton>
+          {getMessage(ids.listings.new.done.description4[4])}
         </p>
       </div>
       <div className="text-right mt-10 flex justify-between flex-col md:flex-row md:space-x-6">
-        <Button
+        <LinkButton
+          padding
           kind="primary"
-          component={Link}
           to={makeGameListingPath({ productId, listingId })}
         >
           {getMessage(ids.listings.new.done.viewListing)}
-        </Button>
-        <Button
+        </LinkButton>
+        <LinkButton
+          padding
           kind="secondary"
-          component={Link}
           to={makeMyListingPath({ listingId })}
         >
           {getMessage(ids.listings.new.done.manageListing)}
-        </Button>
-        <Button kind="tertiary" component={Link} to={MY_LISTINGS}>
-          {getMessage(ids.listings.new.done.listings)}
-        </Button>
-
-        <Button component={Link} to={NEW_LISTING}>
+        </LinkButton>
+        <LinkButton padding kind="tertiary" to={NEW_LISTING}>
           {getMessage(ids.listings.new.done.newListing)}
-        </Button>
+        </LinkButton>
       </div>
     </div>
   );

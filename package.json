@@ -18,7 +18,7 @@
     "lint": "eslint --fix src/ && tsc",
     "test": "jest",
     "relink": "cd ../contracts && yalc publish && cd ../abyss && yalc publish && cd ../ui && yalc add @sns/contracts && yalc add @sns/abyss && rm -rf node_modules && yarn install",
-    "ci": "yarn install && yarn lint && yarn test && yarn build && yarn install --production",
+    "ci": "yarn install && yarn lint && yarn test && yarn build && rm -rf node_modules",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "start": "concurrently -k \"cd ../api && yarn dev\" \"cd ../api && yarn tunnel\" \"yarn dev\""
@@ -54,7 +54,6 @@
     "react-spring": "^8.0.27",
     "react-swipeable": "^6.1.0",
     "robot3": "=0.2.18",
-    "ulid": "^2.3.0",
     "use-debounce": "^6.0.1"
   },
   "devDependencies": {

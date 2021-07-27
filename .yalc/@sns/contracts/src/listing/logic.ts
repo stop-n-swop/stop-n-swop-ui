@@ -23,19 +23,24 @@ export const getListedPrice = (listing: Listing) => {
   return getBasePrice(listing) + getPostage(listing);
 };
 
-/** Returns the amount of protection that the custome will pay on top of the listed price */
-export const getProtectionCost = (listing: Listing) => {
-  return getBasePrice(listing) * PROTECTION_RATE;
+/** Returns the amount of order protection that will be deducted from the listed price */
+export const getProtectionCharge = (listing: Listing) => {
+  return getListedPrice(listing) * PROTECTION_RATE;
 };
 
-/** Returns the actual price the customer will pay i.e. price + postage + protection */
+/** Returns the platform charge that will be deducted from the listed price */
+export const getPlatformCharge = (listing: Listing) => {
+  return getListedPrice(listing) * BASE_CHARGE_RATE;
+};
+
+/** Returns the actual price the customer will pay i.e. price + postage */
 export const getFinalPrice = (listing: Listing) => {
-  return getListedPrice(listing) + getProtectionCost(listing);
+  return getListedPrice(listing);
 };
 
 /** Returns the price that will show on the storefront. This is like getFinalPrice but without postage */
 export const getDisplayPrice = (listing: Listing) => {
-  return getBasePrice(listing) + getProtectionCost(listing);
+  return getBasePrice(listing);
 };
 
 /** Returns the amount we expect the payment provider to charge */
@@ -45,15 +50,16 @@ export const getProviderCharges = (listing: Listing) => {
   return cut + PROVIDER_BASE_COST + PROVIDER_PAYOUT_COST;
 };
 
-/** Returns the amount sns will charge the seller */
+/** Returns the amount sns will charge the seller (i.e. order protection + platform charge) */
 export const getListingCharges = (listing: Listing) => {
   const price = getListedPrice(listing);
-  const protection = getProtectionCost(listing);
+  const protection = getProtectionCharge(listing);
+  const platform = getPlatformCharge(listing);
   const provider = getProviderCharges(listing);
 
-  let charge = price * BASE_CHARGE_RATE;
+  let charge = protection + platform;
 
-  if (protection + charge - provider < SCALE_CHARGE_LIMIT) {
+  if (charge - provider < SCALE_CHARGE_LIMIT) {
     charge = SCALE_CHARGE_LIMIT;
   }
 
@@ -67,7 +73,7 @@ export const getListingProfit = (listing: Listing) => {
 
 /** Returns the total cut sns will take from the buyer and the seller */
 export const getTotalCharges = (listing: Listing) => {
-  return getListingCharges(listing) + getProtectionCost(listing);
+  return getListingCharges(listing);
 };
 
 /** Returns the amount sns will have after the payment provider has taken its cut */

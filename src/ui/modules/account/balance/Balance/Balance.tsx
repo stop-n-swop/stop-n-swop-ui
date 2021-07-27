@@ -126,6 +126,10 @@ export default function Balance({
       <Choose>
         <When condition={editing}>
           <div className="flex justify-between">
+            <Button kind="primary" onClick={handleSubmit} className="space-x-4">
+              <FaCheck />
+              <span>{g(ids.account.balance.balance.confirm)}</span>
+            </Button>
             <Button
               kind="tertiary"
               onClick={() => setEditing(false)}
@@ -133,10 +137,6 @@ export default function Balance({
             >
               <FaTimes />
               <span>{g(ids.account.balance.balance.cancel)}</span>
-            </Button>
-            <Button kind="primary" onClick={handleSubmit} className="space-x-4">
-              <FaCheck />
-              <span>{g(ids.account.balance.balance.confirm)}</span>
             </Button>
           </div>
         </When>
