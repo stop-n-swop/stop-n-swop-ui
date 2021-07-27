@@ -20,6 +20,7 @@ export default function Card({
   const Icon = (() => {
     switch (card.provider) {
       case 'CB':
+      case 'VISA':
         return FaCcVisa;
       case 'MASTERCARD':
         return FaCcMastercard;

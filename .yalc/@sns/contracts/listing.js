@@ -52,13 +52,13 @@ const getProviderCharges = listing => {
   return cut + PROVIDER_BASE_COST + PROVIDER_PAYOUT_COST;
 };
 const getListingCharges = listing => {
-  getListedPrice(listing);
   const protection = getProtectionCharge(listing);
   const platform = getPlatformCharge(listing);
   const provider = getProviderCharges(listing);
   let charge = protection + platform;
-  if (charge - provider < SCALE_CHARGE_LIMIT) {
-    charge = SCALE_CHARGE_LIMIT;
+  const diff = charge - provider;
+  if (diff < SCALE_CHARGE_LIMIT) {
+    charge = SCALE_CHARGE_LIMIT - diff;
   }
   return charge;
 };

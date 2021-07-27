@@ -52,15 +52,15 @@ export const getProviderCharges = (listing: Listing) => {
 
 /** Returns the amount sns will charge the seller (i.e. order protection + platform charge) */
 export const getListingCharges = (listing: Listing) => {
-  const price = getListedPrice(listing);
   const protection = getProtectionCharge(listing);
   const platform = getPlatformCharge(listing);
   const provider = getProviderCharges(listing);
 
   let charge = protection + platform;
+  const diff = charge - provider;
 
-  if (charge - provider < SCALE_CHARGE_LIMIT) {
-    charge = SCALE_CHARGE_LIMIT;
+  if (diff < SCALE_CHARGE_LIMIT) {
+    charge = SCALE_CHARGE_LIMIT - diff;
   }
 
   return charge;

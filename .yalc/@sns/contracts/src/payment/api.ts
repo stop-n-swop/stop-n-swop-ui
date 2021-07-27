@@ -24,7 +24,10 @@ export interface PlaceOrderRequest {
   cardId: string;
   secureModeReturnUrl: string;
 }
-export type PlaceOrderResponse = {};
+export type PlaceOrderResponse = {
+  secureMode: boolean;
+  secureModeUrl: string;
+};
 
 export interface GetCardsResponse {
   cards: Array<Card>;
