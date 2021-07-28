@@ -11,6 +11,7 @@ exports.Type = void 0;
   Type["ORDER_POSTED"] = "order_posted";
   Type["ORDER_RECEIVED"] = "order_received";
   Type["ORDER_REFUNDED"] = "order_refunded";
+  Type["ORDER_EXPIRING"] = "order_expiring";
   Type["ORDER_NO_RESPONSE"] = "order_no_response";
   Type["ORDER_COMPLETE"] = "order_complete";
   Type["KYC_VERIFIED"] = "kyc_verified";

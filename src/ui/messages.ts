@@ -620,6 +620,12 @@ const enMessages = {
       orderReceived: {
         title: 'Your item has been received by the buyer',
       },
+      orderExpiring: {
+        title: 'Has your order turned up yet?',
+        subtitle:
+          'Let us know. After 10 days with no response your order will be closed and cannot be refunded',
+        action: 'View',
+      },
       orderNoResponse: {
         title: 'Your order has been completed',
         subtitle:
