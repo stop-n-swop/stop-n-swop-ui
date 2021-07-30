@@ -9,8 +9,7 @@ import { useListingsCounts } from 'application/listings';
 import LoadingPage from 'ui/pages/Loading';
 import Items from './Items';
 
-export default function Browse() {
-  const mountedRef = useRef(false);
+const useInitialValues = () => {
   const initialSearch = useQueryParam<string>('q', { default: '' });
   const initialPlatforms = useQueryParam<string[]>('platforms', {
     array: true,
@@ -19,18 +18,45 @@ export default function Browse() {
     default: false,
     bool: true,
   });
-  const history = useHistory();
-  const [page, setPage] = useState(0);
-  const [search, setSearch] = useState(initialSearch);
-  const [platformIds, setPlatformIds] = useState<string[]>(initialPlatforms);
-  const [available, setAvailable] = useState(initialAvailable);
-  const [latentSearch] = useDebounce(search, 500);
+
+  return { initialSearch, initialPlatforms, initialAvailable };
+};
+
+const useResetParams = ({
+  initialSearch,
+  initialPlatforms,
+  initialAvailable,
+  search,
+  platformIds,
+  available,
+  latentSearch,
+  flush,
+  setPage,
+  setSearch,
+  setPlatformIds,
+  setAvailable,
+}: {
+  initialSearch: string;
+  initialPlatforms: string[];
+  initialAvailable: boolean;
+  search: string;
+  platformIds: string[];
+  available: boolean;
+  latentSearch: string;
+  flush(): void;
+  setPage(p: number): void;
+  setSearch(s: string): void;
+  setPlatformIds(p: string[]): void;
+  setAvailable(b: boolean): void;
+}) => {
+  const mountedRef = useRef(false);
 
   useEffect(() => {
     if (!mountedRef.current) {
       mountedRef.current = true;
       return;
     }
+    // update the search criteria if the url params change
     if (
       initialSearch !== search ||
       initialPlatforms !== platformIds ||
@@ -43,6 +69,57 @@ export default function Browse() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialPlatforms, initialSearch, initialAvailable]);
+
+  // if the url params are cleared we want to immediately flush the debounced search
+  useEffect(() => {
+    if (!search && latentSearch) {
+      flush();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [search]);
+};
+
+// when the search criteria changes we want to update the url params
+const useSyncUrl = ({
+  latentSearch,
+  search,
+  platformIds,
+  available,
+}: {
+  latentSearch: string;
+  search: string;
+  platformIds: string[];
+  available: boolean;
+}) => {
+  const history = useHistory();
+
+  useEffect(() => {
+    const params = new URLSearchParams('');
+    if (latentSearch && latentSearch === search) {
+      params.append('q', latentSearch);
+    }
+    if (platformIds.length) {
+      platformIds.forEach((id) => {
+        params.append('platforms', id);
+      });
+    }
+    if (available) {
+      params.append('available', 'true');
+    }
+
+    history.replace({ search: params.toString() });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [history, platformIds, latentSearch, available]);
+};
+
+export default function Browse() {
+  const { initialAvailable, initialPlatforms, initialSearch } =
+    useInitialValues();
+  const [page, setPage] = useState(0);
+  const [search, setSearch] = useState(initialSearch);
+  const [platformIds, setPlatformIds] = useState<string[]>(initialPlatforms);
+  const [available, setAvailable] = useState(initialAvailable);
+  const [latentSearch, { flush }] = useDebounce(search, 500);
 
   const platformsQuery = usePlatforms();
   const gamesQuery = useGames({
@@ -59,22 +136,22 @@ export default function Browse() {
   const listingsCountsQuery = useListingsCounts(gamesQuery);
   const hasSearched = Boolean(latentSearch) || platformIds.length > 0;
 
-  useEffect(() => {
-    const params = new URLSearchParams('');
-    if (latentSearch) {
-      params.append('q', latentSearch);
-    }
-    if (platformIds.length) {
-      platformIds.forEach((id) => {
-        params.append('platforms', id);
-      });
-    }
-    if (available) {
-      params.append('available', 'true');
-    }
+  useResetParams({
+    available,
+    initialAvailable,
+    initialPlatforms,
+    initialSearch,
+    platformIds,
+    search,
+    latentSearch,
+    flush,
+    setAvailable,
+    setPage,
+    setPlatformIds,
+    setSearch,
+  });
 
-    history.replace({ search: params.toString() });
-  }, [history, platformIds, latentSearch, available]);
+  useSyncUrl({ available, latentSearch, platformIds, search });
 
   useEffect(() => {
     setPage(0);
