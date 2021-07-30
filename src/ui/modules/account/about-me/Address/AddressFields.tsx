@@ -74,7 +74,17 @@ export default function AddressFields({
           name="address.country"
           label={getMessage(ids.account.aboutMe.address.country.label)}
           defaultValue={address.country || 'GB'}
-          rules={{ required }}
+          rules={{
+            required,
+            validate: {
+              supportedCountry(value) {
+                return (
+                  value === 'GB' ||
+                  getMessage(ids.account.aboutMe.address.country.supported)
+                );
+              },
+            },
+          }}
           options={[]}
         />
       </div>

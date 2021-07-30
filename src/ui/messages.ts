@@ -385,6 +385,7 @@ const enMessages = {
         },
         country: {
           label: 'Country',
+          supported: 'Unfortunately we only allow UK residents at this time',
         },
       },
       details: {
