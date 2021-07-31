@@ -29,7 +29,7 @@ export default function GameFinder({
       (platform) => platform.id === product.platformId,
     );
     const value = product.id;
-    const label = getMessage(ids.listings.new.game.label, {
+    const label = getMessage(ids.listings.new.game.game, {
       game: product.name,
       platform: platform.name,
     });
