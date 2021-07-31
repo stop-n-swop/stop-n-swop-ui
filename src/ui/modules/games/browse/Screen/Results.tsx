@@ -9,6 +9,7 @@ import type { useCounts, useGames } from 'application/games';
 import More from '../More';
 import Empty from '../Empty';
 import type { useListingsCounts } from 'application/listings';
+import NoResults from '../NoResults';
 
 export default function Results({
   platformsQuery,
@@ -69,6 +70,15 @@ export default function Results({
       <Choose>
         <When condition={!hasSearched}>
           <Empty />
+        </When>
+        <When
+          condition={
+            hasSearched &&
+            status === Status.SUCCESS &&
+            gamesQuery.data.games.length === 0
+          }
+        >
+          <NoResults />
         </When>
         <Otherwise>
           <div className="flex-grow">

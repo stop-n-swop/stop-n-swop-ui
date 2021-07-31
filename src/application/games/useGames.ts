@@ -93,7 +93,7 @@ export const useGames = (args: Args, opts?: QueryOptions) => {
   return useSelector(query, (result) => {
     return {
       nextPage: result.nextPage,
-      games: result.games.flat(),
+      games: result.games.flatMap((games) => games ?? []),
     };
   });
 };

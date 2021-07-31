@@ -59,6 +59,10 @@ const enMessages = {
         available: '{count} available',
         owner: '{developer} / {publisher}',
         empty: 'Find a game!',
+        noResults: [
+          "Looks like we couldn't find anything!",
+          'Try searching something else or changing your filters',
+        ],
       },
     },
     filters: {
