@@ -60,7 +60,7 @@ export default function ListingsArea({ productId }: Props) {
   const user = loggedIn ? userQuery.data : null;
 
   return (
-    <div className="flex flex-col lg:flex-row flex-grow lg:space-x-4">
+    <div className="flex flex-col lg:flex-row flex-grow">
       <FormProvider {...formProps}>
         <Filters />
       </FormProvider>
@@ -69,7 +69,11 @@ export default function ListingsArea({ productId }: Props) {
         onReset={listingsQuery.invalidate}
       >
         <Suspense fallback={<LoadingPage />}>
-          <Listings listingsQuery={listingsQuery} user={user} />
+          <Listings
+            listingsQuery={listingsQuery}
+            user={user}
+            productId={productId}
+          />
         </Suspense>
       </ErrorBoundary>
     </div>

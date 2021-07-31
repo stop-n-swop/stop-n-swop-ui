@@ -79,6 +79,10 @@ const enMessages = {
     },
   },
   listings: {
+    empty: {
+      title: 'Looks like there are no listings for this game yet',
+      button: 'Create a listing',
+    },
     listing: {
       purchase: 'Buy now',
       details: 'More details',
