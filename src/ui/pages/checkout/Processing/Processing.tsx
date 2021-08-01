@@ -1,6 +1,5 @@
 import { Status } from '@sns/contracts/order';
 import { useMyOrder } from 'application/orders';
-import { STANDARD_TTL } from 'domain/constants';
 import React, { useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import {
@@ -11,7 +10,7 @@ import ProcessingScreen from 'ui/modules/checkout/processing/Screen';
 
 export default function Processing() {
   const { orderId } = useParams<{ orderId: string }>();
-  const { data: order } = useMyOrder({ id: orderId }, { ttl: STANDARD_TTL });
+  const { data: order } = useMyOrder({ id: orderId }, { ttl: 3000 });
   const { push } = useHistory();
 
   useEffect(() => {
