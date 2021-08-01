@@ -37,7 +37,7 @@ export default function ListingsListItem({
             <div className="hidden md:block text-xs italic text-gray-300">
               {location}
             </div>
-            <div className="hidden md:block w-80 xl:w-full">
+            <div className="hidden md:block">
               <Statistics stats={stats} />
             </div>
           </div>
