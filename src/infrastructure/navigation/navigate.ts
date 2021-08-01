@@ -2,11 +2,10 @@ import jpex from 'jpex';
 import type { Navigate } from 'core/navigation';
 
 const navigate =
-  (window: Window): Navigate =>
+  (location: Location): Navigate =>
   (url) => {
     return new Promise(() => {
-      const { location } = window;
-      location.href = url;
+      location.assign(url);
     });
   };
 

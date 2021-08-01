@@ -68,7 +68,13 @@ export default function ListingsArea({ productId }: Props) {
         FallbackComponent={Error}
         onReset={listingsQuery.invalidate}
       >
-        <Suspense fallback={<LoadingPage />}>
+        <Suspense
+          fallback={
+            <div className="flex-grow">
+              <LoadingPage />
+            </div>
+          }
+        >
           <Listings
             listingsQuery={listingsQuery}
             user={user}

@@ -18,11 +18,15 @@ export default function Error({ error, resetErrorBoundary }: FallbackProps) {
   })();
 
   return (
-    <Card className="flex-grow flex flex-col items-center space-y-8">
-      <p>{message}</p>
-      <Button kind="primary" state="error" onClick={resetErrorBoundary}>
-        {useMessage(ids.error.retryButton)}
-      </Button>
+    <Card className="flex-grow flex flex-col items-center">
+      <div className="space-y-8">
+        <p>{message}</p>
+        <div className="justify-center flex">
+          <Button kind="primary" onClick={resetErrorBoundary}>
+            {useMessage(ids.error.retryButton)}
+          </Button>
+        </div>
+      </div>
     </Card>
   );
 }

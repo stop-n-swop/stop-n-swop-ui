@@ -242,12 +242,10 @@ const enMessages = {
     },
   },
   error: {
-    retryButton: 'Refresh',
-    forbidden: 'You are not authorised to carry out this action',
-    unavailable: 'The service is currently unavailable, please try again',
-    gatewayTimeout: 'The service is currently unavailable, please try again',
     unknown: 'An unknown error has ocurred',
     required: 'Required',
+    title: "Uhoh this isn't right...",
+    retryButton: 'Try again',
   },
   regions: {
     [Region.PAL]: 'PAL',
