@@ -1,10 +1,16 @@
-import React, { Fragment } from 'react';
-import FieldError from 'ui/elements/FieldError';
-import Input, { MaskedInput } from 'ui/elements/Input';
+import React, { ComponentProps } from 'react';
+import Input from 'ui/elements/Input';
 import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
+import Cleave from 'cleave.js/react';
 
-const dash = '-';
+type Options = ComponentProps<typeof Cleave>['options'];
+
+const options: Options = {
+  blocks: [2, 2, 2],
+  delimiter: '-',
+  numericOnly: true,
+};
 
 export default function SortCodeInput({
   value,
@@ -18,39 +24,16 @@ export default function SortCodeInput({
   const getMessage = useGetMessage();
 
   return (
-    <div>
-      <MaskedInput
-        groupLength={2}
-        maxLength={6}
-        onChange={onChange}
-        value={value}
-        render={({ first, index, last, ...props }) => (
-          <Fragment key={index}>
-            <div className="w-8">
-              <Input
-                id={`sortcode_${index}`}
-                label={
-                  first
-                    ? getMessage(ids.account.billing.account.sortCode.label)
-                    : undefined
-                }
-                labelClassName="w-60"
-                className="text-center"
-                placeholder="00"
-                inputMode="numeric"
-                hasError={!!error}
-                {...props}
-              />
-            </div>
-            <If condition={!last}>
-              <span className="pt-6">{dash}</span>
-            </If>
-          </Fragment>
-        )}
-      />
-      <If condition={error}>
-        <FieldError error={error} />
-      </If>
-    </div>
+    <Input
+      id="sortcode"
+      value={value}
+      onChange={(e) => {
+        onChange((e.target as any).rawValue);
+      }}
+      error={error}
+      label={getMessage(ids.account.billing.account.sortCode.label)}
+      Component={Cleave}
+      options={options}
+    />
   );
 }

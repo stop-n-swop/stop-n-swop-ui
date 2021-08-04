@@ -26,20 +26,19 @@ export default function Done({
           {getMessage(ids.listings.new.done.subtitle)}
         </h4>
         <p>{getMessage(ids.listings.new.done.description)}</p>
-        <p>{getMessage(ids.listings.new.done.description2)}</p>
         <p>
-          {getMessage(ids.listings.new.done.description3[0])}
+          {getMessage(ids.listings.new.done.description2[0])}
           <LinkButton
             kind="tertiary"
             className="inline-flex"
             to={makeMyListingPath({ listingId })}
           >
-            {getMessage(ids.listings.new.done.description3[1])}
+            {getMessage(ids.listings.new.done.description2[1])}
           </LinkButton>
-          {getMessage(ids.listings.new.done.description3[2])}
+          {getMessage(ids.listings.new.done.description2[2])}
         </p>
         <p>
-          {getMessage(ids.listings.new.done.description4[0])}
+          {getMessage(ids.listings.new.done.description3[0])}
           <LinkButton
             kind="tertiary"
             className="inline-flex"
@@ -48,36 +47,29 @@ export default function Done({
               subSection: 'account',
             })}
           >
-            {getMessage(ids.listings.new.done.description4[1])}
+            {getMessage(ids.listings.new.done.description3[1])}
           </LinkButton>
-          {getMessage(ids.listings.new.done.description4[2])}
+          {getMessage(ids.listings.new.done.description3[2])}
           <LinkButton
             kind="tertiary"
             className="inline-flex"
             to={makeDashboardPath({ section: 'billing', subSection: 'verify' })}
           >
-            {getMessage(ids.listings.new.done.description4[3])}
+            {getMessage(ids.listings.new.done.description3[3])}
           </LinkButton>
-          {getMessage(ids.listings.new.done.description4[4])}
+          {getMessage(ids.listings.new.done.description3[4])}
         </p>
       </div>
       <div className="text-right mt-10 flex justify-between flex-col md:flex-row md:space-x-6">
+        <LinkButton padding kind="secondary" to={NEW_LISTING}>
+          {getMessage(ids.listings.new.done.newListing)}
+        </LinkButton>
         <LinkButton
           padding
           kind="primary"
           to={makeGameListingPath({ productId, listingId })}
         >
           {getMessage(ids.listings.new.done.viewListing)}
-        </LinkButton>
-        <LinkButton
-          padding
-          kind="secondary"
-          to={makeMyListingPath({ listingId })}
-        >
-          {getMessage(ids.listings.new.done.manageListing)}
-        </LinkButton>
-        <LinkButton padding kind="tertiary" to={NEW_LISTING}>
-          {getMessage(ids.listings.new.done.newListing)}
         </LinkButton>
       </div>
     </div>

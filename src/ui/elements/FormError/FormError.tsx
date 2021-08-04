@@ -1,7 +1,9 @@
 import { BaseError } from '@sns/abyss';
-import React from 'react';
+import React, { useState } from 'react';
 
 export default function FormError({ error }: { error: any }) {
+  const [showMore, setShowMore] = useState(false);
+
   if (error == null) {
     return null;
   }
@@ -11,6 +13,21 @@ export default function FormError({ error }: { error: any }) {
       return error;
     }
     if (error instanceof BaseError) {
+      if (showMore) {
+        return (
+          <pre>
+            {' '}
+            {JSON.stringify(
+              {
+                message: error.toString(),
+                ...error.toHttpResponse(),
+              },
+              null,
+              2,
+            )}
+          </pre>
+        );
+      }
       return error.toString();
     }
     if (typeof error.message === 'string') {
@@ -26,5 +43,12 @@ export default function FormError({ error }: { error: any }) {
     return null;
   }
 
-  return <div className="bg-danger p-4 rounded">{message}</div>;
+  return (
+    <div
+      onDoubleClick={() => setShowMore(!showMore)}
+      className="bg-danger-light p-4 rounded"
+    >
+      {message}
+    </div>
+  );
 }

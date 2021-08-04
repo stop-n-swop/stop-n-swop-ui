@@ -17,6 +17,8 @@ const changeStatus =
         status,
       },
     });
+
+    await new Promise((res) => setTimeout(res, 500));
   };
 
 jpex.factory<ChangeStatus>(changeStatus);

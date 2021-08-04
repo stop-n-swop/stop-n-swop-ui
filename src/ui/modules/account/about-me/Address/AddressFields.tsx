@@ -63,7 +63,16 @@ export default function AddressFields({
           name="address.postcode"
           label={getMessage(ids.account.aboutMe.address.postcode.label)}
           defaultValue={address.postcode ?? ''}
-          rules={{ required }}
+          rules={{
+            required,
+            pattern: {
+              message: getMessage(
+                ids.account.aboutMe.address.postcode.validPostcode,
+              ),
+              value:
+                /([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9][A-Za-z]?))))\s?[0-9][A-Za-z]{2})/,
+            },
+          }}
           autoComplete="postal-code"
         />
       </div>

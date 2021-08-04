@@ -1,52 +1,47 @@
-import React, { useMemo, useState } from 'react';
-import { useGetCurrency } from 'ui/intl';
+import React, { ComponentProps } from 'react';
+import { useGetCurrencySymbol } from 'ui/intl';
 import cx from 'classnames';
+import Cleave from 'cleave.js/react';
 import Input, { Props } from './Input';
 
+type Options = ComponentProps<typeof Cleave>['options'];
+
 export default function CurrencyInput({
-  value: actual,
-  onFocus,
-  onBlur,
-  onChange,
   className,
+  value,
+  onChange,
   ...props
 }: Props) {
-  const [focused, setFocused] = useState(false);
-  const getCurrency = useGetCurrency();
-  const type = focused ? 'number' : 'text';
-  const value = useMemo(() => {
-    if (actual == null || actual === '') {
-      return '';
-    }
-    if (focused) {
-      return Number(actual) / 100;
-    }
-    return getCurrency(Number(actual), { currency: 'GBP' });
-  }, [actual, focused, getCurrency]);
+  const getCurrencySymbol = useGetCurrencySymbol();
+
+  const options: Options = {
+    numeral: true,
+    numeralThousandsGroupStyle: 'thousand',
+    numericOnly: true,
+    numeralDecimalScale: 2,
+    prefix: getCurrencySymbol(),
+    rawValueTrimPrefix: true,
+  };
 
   return (
     <Input
-      type={type}
+      Component={Cleave}
       className={cx(className, 'text-right')}
-      value={value}
-      onFocus={(e) => {
-        setFocused(true);
-        onFocus?.(e);
-      }}
-      onBlur={(e) => {
-        setFocused(false);
-        onBlur?.(e);
-      }}
+      autoComplete="off"
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      options={options}
+      value={Number(value) / 100}
       onChange={(e) => {
-        let value: string | number = e.target.value ?? '';
-        if (value.match(/\.(\d){3}/)) {
-          value = value.replace(/\.(\d\d)\d+/, '.$1');
-          e.target.value = value;
-        }
-        if (value) {
-          value = Number(value) * 100;
-        }
-        onChange?.(value as any);
+        onChange?.({
+          ...e,
+          target: {
+            ...e.target,
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            value: e.target.rawValue * 100,
+          },
+        });
       }}
       {...props}
     />

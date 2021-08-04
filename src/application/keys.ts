@@ -48,6 +48,7 @@ export const PlaceOrderKey = Symbol('place order');
 // Notices
 // Queries
 export const NoticesKey = Symbol('notices');
+export const ClearNoticesKey = Symbol('clear notices');
 
 // Payments
 // Queries

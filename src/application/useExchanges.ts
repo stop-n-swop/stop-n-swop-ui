@@ -15,7 +15,6 @@ import {
   ListingOrdersKey,
   ChangeStatusKey,
   ChangeListingStatusKey,
-  AddressKey,
   CreateOrderKey,
   PatchOrderKey,
   SaveBankKey,
@@ -26,6 +25,8 @@ import {
   BalanceKey,
   WithdrawBalanceKey,
   TransactionsKey,
+  NoticesKey,
+  ClearNoticesKey,
 } from './keys';
 
 export default function useExchanges() {
@@ -45,7 +46,6 @@ export default function useExchanges() {
         HistoryKey,
         MyOrdersKey,
         ListingOrdersKey,
-        AddressKey,
       ],
       [ChangeStatusKey, ChangeListingStatusKey, PatchOrderKey],
     ],
@@ -53,5 +53,6 @@ export default function useExchanges() {
     [[MyOrdersKey, ListingsKey, HistoryKey], [PlaceOrderKey]],
     [CardsKey, CreateCardKey],
     [[BalanceKey, TransactionsKey], [WithdrawBalanceKey]],
+    [NoticesKey, ClearNoticesKey],
   );
 }

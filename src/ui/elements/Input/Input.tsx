@@ -1,4 +1,4 @@
-import React, { InputHTMLAttributes, ReactNode } from 'react';
+import React, { ComponentType, InputHTMLAttributes, ReactNode } from 'react';
 import cx from 'classnames';
 import './input.css';
 import { isNumeric } from 'crosscutting/utils';
@@ -20,6 +20,8 @@ export interface Props
   state?: State;
   error?: any;
   hasError?: boolean;
+  Component?: string | ComponentType<any>;
+  options?: any;
 }
 
 export default function Input({
@@ -40,6 +42,7 @@ export default function Input({
   state = hasError ? 'error' : disabled ? 'disabled' : 'none',
   onChange,
   children,
+  Component = 'input',
   ...props
 }: Props) {
   return (
@@ -58,7 +61,7 @@ export default function Input({
       >
         {prefix}
         <div className="flex-grow relative mt-6">
-          <input
+          <Component
             id={id}
             className={cx(
               'input',
@@ -70,6 +73,7 @@ export default function Input({
             disabled={disabled}
             onChange={(e) => {
               if (
+                Component === 'input' &&
                 props.inputMode === 'numeric' &&
                 e.target.value &&
                 !isNumeric(e.target.value)

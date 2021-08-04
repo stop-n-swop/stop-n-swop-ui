@@ -60,6 +60,7 @@ export default function CardScreen({
             </div>
             <div>
               <InputController
+                autoFocus
                 name="cardNumber"
                 id="cardNumber"
                 defaultValue=""

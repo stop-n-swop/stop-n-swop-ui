@@ -27,15 +27,16 @@ export default function Filters({ children }: Props) {
       <Card
         padding={false}
         ref={ref}
-        className={cx(
-          'flex flex-shrink-0 z-10 justify-evenly px-0 py-0 flex-wrap',
-          'md:mb-6',
-          'lg:block lg:px-6 lg:w-1/4 lg:py-4',
-          'xl:w-1/6',
-        )}
-        innerClassName={cx('lg:space-y-6')}
+        className={cx('z-10', 'md:mb-6', 'lg:w-1/4 ', 'xl:w-auto')}
       >
-        {children}
+        <div
+          className={cx(
+            'flex flex-shrink-0 justify-evenly flex-wrap',
+            'lg:block lg:px-6 lg:py-4 lg:space-y-6',
+          )}
+        >
+          {children}
+        </div>
       </Card>
     </context.Provider>
   );

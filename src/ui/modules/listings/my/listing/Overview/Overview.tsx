@@ -21,6 +21,7 @@ interface Props {
   history: ReactNode;
   actions: ReactNode;
   buyerAddress: ReactNode;
+  help: ReactNode;
 }
 
 export default function Overview({
@@ -33,13 +34,14 @@ export default function Overview({
   history,
   actions,
   buyerAddress,
+  help,
 }: Props) {
   const getMessage = useGetMessage();
 
   return (
     <div className="space-y-8">
-      <div className="space-y-8 lg:flex lg:space-y-0">
-        <div className="space-y-8 lg:w-2/3">
+      <div className="space-y-8 md:flex md:space-y-0">
+        <div className="space-y-8 md:w-1/2 lg:w-2/3">
           <div className="flex">
             <div className="w-1/2">
               <h3 className="font-semibold">
@@ -71,13 +73,17 @@ export default function Overview({
               <Buyer username={buyer} />
             </If>
           </div>
-          <Suspense fallback={<Loader size="0.5rem" sensible />}>
-            {buyerAddress}
-          </Suspense>
-          {actions}
         </div>
-        <PriceBreakdown className="lg:w-1/3" listing={listing} />
+        <PriceBreakdown
+          className="w-1/2 lg:w-1/3 hidden md:block"
+          listing={listing}
+        />
       </div>
+      <div className="help">{help}</div>
+      <Suspense fallback={<Loader size="0.5rem" sensible />}>
+        {buyerAddress}
+      </Suspense>
+      {actions}
       {history}
     </div>
   );

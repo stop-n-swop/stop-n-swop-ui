@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useEffect, useMemo } from 'react';
 import { InputController } from 'ui/elements/Input';
 import { useForm } from 'react-hook-form';
 import { useUpdateUser } from 'application/user';
@@ -6,6 +6,7 @@ import { useIntl } from 'ui/intl';
 import { ids } from 'ui/messages';
 import FormError from 'ui/elements/FormError';
 import Submit from 'ui/elements/Submit';
+import { UsernameNotUniqueError } from '@sns/abyss';
 import Form from '../../dashboard/Form';
 import type { User } from '@sns/contracts/user';
 
@@ -23,14 +24,28 @@ export default function Username({
   onSubmit?(): any;
 }) {
   const formProps = useForm();
+  const { setError } = formProps;
   const intl = useIntl();
   const getMessage = intl.message;
-  const { action, error, status, reset } = useUpdateUser();
+  const { action, error: updateError, status, reset } = useUpdateUser();
 
   const handleSubmit = async (values: any) => {
     await action(values);
     onSubmit?.();
   };
+
+  const error = useMemo(() => {
+    if (updateError instanceof UsernameNotUniqueError) {
+      return null;
+    }
+    return updateError;
+  }, [updateError]);
+
+  useEffect(() => {
+    if (updateError instanceof UsernameNotUniqueError) {
+      setError('username', { type: 'api', message: updateError.toString() });
+    }
+  }, [setError, updateError]);
 
   return (
     <Form formProps={formProps} onSubmit={handleSubmit}>

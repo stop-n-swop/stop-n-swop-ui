@@ -44,6 +44,7 @@ export const Basic = ({ status }: BasicProps) => {
           listing={listing}
           order={order}
           history={<div>history</div>}
+          help={<div>help</div>}
           actions={
             <Actions
               onClick={() => null}

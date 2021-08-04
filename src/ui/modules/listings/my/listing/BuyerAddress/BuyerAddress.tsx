@@ -26,18 +26,23 @@ export default function BuyerAddress({ addressQuery, status }: Props) {
   const country = CountryISO[countryCode] ?? countryCode;
 
   return (
-    <div>
-      <div className="font-semibold">
-        {getMessage(ids.listings.myListing.address.label)}
+    <div className="flex">
+      <div
+        className="border-white rounded-xl border p-8 mx-auto space-y-4"
+        style={{ minWidth: '20rem' }}
+      >
+        <div className="font-semibold">
+          {getMessage(ids.listings.myListing.address.label)}
+        </div>
+        <dl className="text-sm">
+          <dt>{name}</dt>
+          <dt>{line1}</dt>
+          <dt>{line2}</dt>
+          <dt>{city}</dt>
+          <dt>{postcode}</dt>
+          <dt>{country}</dt>
+        </dl>
       </div>
-      <dl className="text-sm">
-        <dt>{name}</dt>
-        <dt>{line1}</dt>
-        <dt>{line2}</dt>
-        <dt>{city}</dt>
-        <dt>{postcode}</dt>
-        <dt>{country}</dt>
-      </dl>
     </div>
   );
 }

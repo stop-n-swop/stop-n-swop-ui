@@ -5,14 +5,14 @@ import { useHistory, useChangeStatus, useMyOrder } from 'application/orders';
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { MY_ORDERS } from 'ui/constants/paths';
-import Card from 'ui/elements/Card';
-import FormError from 'ui/elements/FormError';
 import PageTitle from 'ui/elements/PageTitle';
 import { useMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 import History from 'ui/modules/listings/my/listing/History';
 import Actions from 'ui/modules/orders/my/order/Actions';
-import Overview from 'ui/modules/orders/my/order/Overview/Overview';
+import Help from 'ui/modules/orders/my/order/Help';
+import Overview from 'ui/modules/orders/my/order/Overview';
+import Screen from 'ui/modules/orders/my/order/Screen';
 
 export default function MyOrder() {
   useAuthGuard();
@@ -35,37 +35,36 @@ export default function MyOrder() {
         <Link to={MY_ORDERS}>{useMessage(ids.order.myOrders.title)}</Link>
         <span>{orderId}</span>
       </PageTitle>
-      <Card
-        title={game.name}
-        className="md:mt-3 lg:mt-4 xl:mg-8 xl:w-4/5 xl:mx-auto flex flex-col"
-      >
-        <If condition={error}>
-          <FormError error={error} />
-        </If>
-        <Overview
-          listing={listing}
-          order={order}
-          actions={
-            <Actions
-              order={order}
-              status={actionStatus}
-              onClick={(status) =>
-                changeStatus({
-                  orderId,
-                  status,
-                })
-              }
-            />
-          }
-          history={
-            <History
-              username={username}
-              createdDate={createdDate}
-              historyQuery={historyQuery}
-            />
-          }
-        />
-      </Card>
+      <Screen
+        error={error}
+        game={game}
+        overview={
+          <Overview
+            listing={listing}
+            order={order}
+            help={<Help status={order.status} />}
+            actions={
+              <Actions
+                order={order}
+                status={actionStatus}
+                onClick={(status) =>
+                  changeStatus({
+                    orderId,
+                    status,
+                  })
+                }
+              />
+            }
+            history={
+              <History
+                username={username}
+                createdDate={createdDate}
+                historyQuery={historyQuery}
+              />
+            }
+          />
+        }
+      />
     </div>
   );
 }

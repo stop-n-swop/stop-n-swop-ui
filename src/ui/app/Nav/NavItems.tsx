@@ -18,6 +18,8 @@ import {
 import NavItem from './NavItem';
 import Account from './Account';
 import Notices from './Notices';
+import type { useMyListings } from 'application/listings';
+import type { useMyOrders } from 'application/orders';
 
 interface Props {
   open: boolean;
@@ -25,6 +27,8 @@ interface Props {
   loggedIn: boolean;
   close(): void;
   setAccountOpen: (v: boolean) => void;
+  myListingsQuery: ReturnType<typeof useMyListings>;
+  myOrdersQuery: ReturnType<typeof useMyOrders>;
 }
 
 export default function NavItems({
@@ -33,6 +37,8 @@ export default function NavItems({
   close,
   accountOpen,
   setAccountOpen,
+  myListingsQuery,
+  myOrdersQuery,
 }: Props) {
   const ref = useRef<HTMLUListElement>(null);
   useEffect(() => {
@@ -61,15 +67,12 @@ export default function NavItems({
         {getMessage(ids.nav.games)}
       </NavItem>
       <Choose>
-        <When condition={loggedIn}>
+        <When condition={loggedIn && myListingsQuery.data.length}>
           {/* <NavItem to={MY_COLLECTIONS} Icon={FaBoxOpen} onClose={close}>
             <FormattedMessage id={ids.nav.collections} />
           </NavItem> */}
           <NavItem to={MY_LISTINGS} Icon={FaListAlt} onClose={close}>
             {getMessage(ids.nav.listings)}
-          </NavItem>
-          <NavItem to={MY_ORDERS} Icon={FaShippingFast} onClose={close}>
-            {getMessage(ids.nav.orders)}
           </NavItem>
         </When>
         <Otherwise>
@@ -78,9 +81,14 @@ export default function NavItems({
           </NavItem>
         </Otherwise>
       </Choose>
+      <If condition={loggedIn && myOrdersQuery.data.length}>
+        <NavItem to={MY_ORDERS} Icon={FaShippingFast} onClose={close}>
+          {getMessage(ids.nav.orders)}
+        </NavItem>
+      </If>
       <Choose>
         <When condition={loggedIn}>
-          <Notices />
+          <Notices className="hidden md:block" />
           <Account
             open={accountOpen}
             setOpen={setAccountOpen}

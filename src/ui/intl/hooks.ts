@@ -57,6 +57,18 @@ export const useGetCurrency = () => {
   );
 };
 
+export const useGetCurrencySymbol = () => {
+  const getCurrency = useGetCurrency();
+
+  return useCallback(
+    (opts?: Intl.NumberFormatOptions) => {
+      const str = getCurrency(0, opts);
+      return str.replace(/[\d.]/g, '');
+    },
+    [getCurrency],
+  );
+};
+
 export const useCurrency = (number: number, opts?: Intl.NumberFormatOptions) =>
   useGetCurrency()(number, opts);
 

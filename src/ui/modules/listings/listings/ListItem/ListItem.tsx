@@ -32,7 +32,7 @@ export default function ListingsListItem({
         <Image image={image} />
 
         <div className="flex-grow flex-shrink-0 flex flex-col sm:flex-row overflow-x-hidden">
-          <div className="flex flex-col flex-grow justify-between space-y-3 pt-6 md:pb-6">
+          <div className="flex flex-col flex-grow justify-between space-y-3 md:pt-6 md:pb-6">
             <SellerInfo username={username} rating={rating} />
             <div className="hidden md:block text-xs italic text-gray-300">
               {location}

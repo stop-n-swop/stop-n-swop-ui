@@ -56,7 +56,7 @@ export default function Actions({
         {addToBasket}
         <Button
           kind="tertiary"
-          className="text-xs md:px-0"
+          className="text-xs px-0"
           style={{ justifyContent: 'flex-end' }}
           component={Link}
           to={makeGameListingPath({

@@ -101,9 +101,16 @@ export default function Actions({ order, status, onClick }: Props) {
 
   if (order.status === OrderStatus.POSTED) {
     return (
-      <div className="md:flex md:space-x-4 lg:space-x-8">
+      <div className="md:flex justify-center md:space-x-4 lg:space-x-8">
         <Button kind="primary" onClick={() => setReceivedModal(true)}>
           {getMessage(ids.order.myOrder.receivedModal.trigger)}
+        </Button>
+        <Button
+          kind="secondary"
+          state="disabled"
+          title="Please allow up to 7 days for your order to arrive"
+        >
+          {getMessage(ids.order.actions.notReceived)}
         </Button>
         <ReceivedModal
           active={active}
@@ -119,26 +126,16 @@ export default function Actions({ order, status, onClick }: Props) {
   if (order.status === OrderStatus.NOT_RECEIVED) {
     return (
       <div className="md:flex md:space-x-4 lg:space-x-8">
-        <ActionButton
-          orderId={order.id}
-          action={OrderStatus.RECEIVED}
-          active={isActive(OrderStatus.RECEIVED)}
-          status={status}
+        <Button kind="primary" onClick={() => setReceivedModal(true)}>
+          {getMessage(ids.order.myOrder.receivedModal.trigger)}
+        </Button>
+        <ReceivedModal
+          active={active}
+          isOpen={receivedModal}
           onClick={handleClick}
-        />
-        <ActionButton
-          orderId={order.id}
-          action={OrderStatus.DISPUTED}
-          active={isActive(OrderStatus.DISPUTED)}
+          onClose={() => setReceivedModal(false)}
+          order={order}
           status={status}
-          onClick={handleClick}
-        />
-        <ActionButton
-          orderId={order.id}
-          action={OrderStatus.CANCELLED}
-          active={isActive(OrderStatus.CANCELLED)}
-          status={status}
-          onClick={handleClick}
         />
       </div>
     );

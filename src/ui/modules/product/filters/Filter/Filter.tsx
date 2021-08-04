@@ -15,7 +15,7 @@ export default function Filter({ name, label, children }: Props) {
   const active = current === name;
 
   return (
-    <fieldset className=" relativeflex-none">
+    <fieldset className="flex-none">
       <legend
         role="button"
         className={cx(
@@ -36,7 +36,7 @@ export default function Filter({ name, label, children }: Props) {
       </legend>
       <div
         className={cx(
-          'absolute left-0 top-full right-0 overflow-y-autox z-10 lg:transform-none',
+          'absolute left-0 top-full right-0 z-10 lg:transform-none',
           active ? 'block' : 'hidden',
           'lg:static lg:block',
         )}
@@ -47,6 +47,7 @@ export default function Filter({ name, label, children }: Props) {
             'md:text-base',
             'lg:text-sm lg:px-0 lg:py-3 lg:bg-transparent',
           )}
+          style={{ minWidth: 'fit-content' }}
         >
           {children}
         </div>

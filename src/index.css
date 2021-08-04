@@ -78,6 +78,12 @@
 .help * ~ h2 {
   @apply pt-12;
 }
+.help h3 {
+  @apply font-semibold pb-4;
+}
+.help * ~ h3 {
+  @apply pt-8;
+}
 .help ol {
   @apply list-decimal list-outside ml-6 space-y-4;
 }
@@ -92,4 +98,8 @@
 } */
 .help li > * ~ * {
   @apply text-sm;
+}
+
+.help blockquote {
+  @apply py-4 bg-gray-800 px-3 italic border-gray-400 border-l-8;
 }

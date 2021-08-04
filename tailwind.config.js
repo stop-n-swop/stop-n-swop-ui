@@ -69,9 +69,9 @@ module.exports = {
         danger: {
           dark: '#cc1616',
           DEFAULT: '#FF1B1C',
-          light: '#ff5f60',
-          lighter: '#ff7677',
-          lightest: '#ff8d8e',
+          light: '#fc4242',
+          lighter: '#ff5f60',
+          lightest: '#ff7677',
         },
       },
       lineHeight: 1.5,

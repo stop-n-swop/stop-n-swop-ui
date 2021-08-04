@@ -1,5 +1,4 @@
 import React from 'react';
-import Card from 'ui/elements/Card';
 import PageTitle from 'ui/elements/PageTitle';
 import Overview from 'ui/modules/listings/my/listing/Overview';
 import Actions from 'ui/modules/listings/my/listing/Actions';
@@ -19,12 +18,13 @@ import {
   useListingOrders,
 } from 'application/orders';
 
-import FormError from 'ui/elements/FormError';
 import { MY_LISTINGS } from 'ui/constants/paths';
 import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 import { Status } from '@respite/core';
 import { Status as OrderStatus } from '@sns/contracts/order';
+import Screen from 'ui/modules/listings/my/listing/Screen';
+import Help from 'ui/modules/listings/my/listing/Help';
 
 export default function MyListing() {
   useAuthGuard();
@@ -78,49 +78,48 @@ export default function MyListing() {
         </Link>
         <span>{listingId}</span>
       </PageTitle>
-      <Card
-        title={game.name}
-        className="md:mt-3 lg:mt-4 xl:mt-8 xl:w-4/5 max-w-screen-lg mx-auto flex flex-col space-y-8"
-      >
-        <If condition={error}>
-          <FormError error={error} />
-        </If>
-        <Overview
-          listingId={listingId}
-          productId={productId}
-          orderId={orderId}
-          status={status}
-          buyer={buyer}
-          listing={listing}
-          actions={
-            <Actions
-              listing={listing}
-              orders={orders}
-              status={actionStatus}
-              onChangeStatus={({ orderId, status }) => {
-                if (
-                  status === OrderStatus.OPEN ||
-                  status === OrderStatus.CLOSED
-                ) {
-                  changeListingStatus({ status, id: listing.id });
-                } else {
-                  changeOrderStatus({ orderId, status });
-                }
-              }}
-            />
-          }
-          history={
-            <History
-              username={username}
-              createdDate={createdDate}
-              historyQuery={historyQuery}
-            />
-          }
-          buyerAddress={
-            <BuyerAddress addressQuery={addressQuery} status={status} />
-          }
-        />
-      </Card>
+      <Screen
+        error={error}
+        game={game}
+        overview={
+          <Overview
+            listingId={listingId}
+            productId={productId}
+            orderId={orderId}
+            status={status}
+            buyer={buyer}
+            listing={listing}
+            help={<Help status={status} />}
+            actions={
+              <Actions
+                listing={listing}
+                orders={orders}
+                status={actionStatus}
+                onChangeStatus={({ orderId, status }) => {
+                  if (
+                    status === OrderStatus.OPEN ||
+                    status === OrderStatus.CLOSED
+                  ) {
+                    changeListingStatus({ status, id: listing.id });
+                  } else {
+                    changeOrderStatus({ orderId, status });
+                  }
+                }}
+              />
+            }
+            history={
+              <History
+                username={username}
+                createdDate={createdDate}
+                historyQuery={historyQuery}
+              />
+            }
+            buyerAddress={
+              <BuyerAddress addressQuery={addressQuery} status={status} />
+            }
+          />
+        }
+      />
     </div>
   );
 }

@@ -1,12 +1,15 @@
-import React, { ReactNode, useMemo } from 'react';
+import React, { ComponentProps, ReactNode, useMemo, useState } from 'react';
 import {
   FaCcAmex,
   FaCcDiscover,
   FaCcMastercard,
   FaCcVisa,
 } from 'react-icons/fa';
+import Input from 'ui/elements/Input';
+import Cleave from 'cleave.js/react';
 import FieldError from 'ui/elements/FieldError';
-import Input, { MaskedInput } from 'ui/elements/Input';
+
+type Options = ComponentProps<typeof Cleave>['options'];
 
 export default function CardInput({
   value,
@@ -19,48 +22,43 @@ export default function CardInput({
   label: ReactNode;
   error?: any;
 }) {
-  const firstChar = value?.charAt(0) ?? '';
+  const [type, setType] = useState('unknown');
 
   const Icon = useMemo(() => {
-    switch (firstChar) {
-      case '3':
+    switch (type) {
+      case 'amex':
         return () => <FaCcAmex size="2em" />;
-      case '4':
+      case 'visa':
         return () => <FaCcVisa size="2em" />;
-      case '5':
+      case 'mastercard':
         return () => <FaCcMastercard size="2em" />;
-      case '6':
+      case 'discover':
         return () => <FaCcDiscover size="2em" />;
       default:
         return () => null;
     }
-  }, [firstChar]);
+  }, [type]);
+
+  const options: Options = {
+    creditCard: true,
+    onCreditCardTypeChanged: setType,
+  };
 
   return (
     <div>
       <div className="flex items-end space-x-2">
-        <MaskedInput
-          onChange={onChange}
+        <Input
+          Component={Cleave}
+          label={label}
+          id="card"
+          inputMode="numeric"
+          autoComplete="cc-number"
+          hasError={!!error}
           value={value}
-          groupLength={4}
-          maxLength={16}
-          render={({ first, index, last, ...props }) => {
-            return (
-              <div className="w-14 pr-1" key={index}>
-                <Input
-                  label={first ? label : undefined}
-                  labelClassName="w-60"
-                  className="text-center"
-                  placeholder="0000"
-                  id={`card_${index}`}
-                  inputMode="numeric"
-                  autoComplete={first ? 'cc-number' : undefined}
-                  hasError={error}
-                  {...props}
-                />
-              </div>
-            );
+          onChange={(e) => {
+            onChange((e.target as any).rawValue);
           }}
+          options={options}
         />
         <div className="pl-2">
           <Icon />

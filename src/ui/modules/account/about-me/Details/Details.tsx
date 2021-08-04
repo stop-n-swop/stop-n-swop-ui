@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect } from 'react';
+import React, { ReactNode, useEffect, useMemo } from 'react';
 import Input, { DateInput, InputController } from 'ui/elements/Input';
 import { useForm } from 'react-hook-form';
 import { useUpdateUser } from 'application/user';
@@ -7,7 +7,7 @@ import { ids } from 'ui/messages';
 import FormError from 'ui/elements/FormError';
 import Submit from 'ui/elements/Submit';
 import { omitNullProperties } from 'crosscutting/utils';
-import { ValidationError } from '@sns/abyss';
+import { UsernameNotUniqueError, ValidationError } from '@sns/abyss';
 import { SelectController } from 'ui/elements/Select';
 import addYears from 'date-fns/addYears';
 import format from 'date-fns/format';
@@ -23,7 +23,7 @@ export default function Details({
   user,
   mandatory = false,
   showEmail = true,
-  showUsername = false,
+  showUsername = true,
 }: {
   user: User;
   title?: ReactNode;
@@ -38,17 +38,26 @@ export default function Details({
   const { setError } = formProps;
   const intl = useIntl();
   const getMessage = intl.message;
-  const { action, error, status, reset } = useUpdateUser();
+  const { action, error: updateError, status, reset } = useUpdateUser();
 
   const handleSubmit = async (values: any) => {
     await action(omitNullProperties(values));
     onSubmit?.();
   };
 
+  const error = useMemo(() => {
+    if (updateError instanceof UsernameNotUniqueError) {
+      return new ValidationError({
+        username: updateError.toString(),
+      });
+    }
+    return updateError;
+  }, [updateError]);
+
   useEffect(() => {
     if (error instanceof ValidationError) {
       Object.entries(error.errors).forEach(([key, value]) => {
-        setError(key, { type: 'custom', message: value });
+        setError(key, { type: 'api', message: value });
       });
     }
   }, [error, setError]);

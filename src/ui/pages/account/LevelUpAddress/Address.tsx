@@ -22,7 +22,11 @@ export default function LevelUpAddress() {
         className="flex-grow flex flex-col md:flex-grow-0 lg:w-2/3 xl:w-1/2"
       >
         <Address
-          description={getMessage(ids.auth.levelUp.address.description)}
+          description={getMessage(ids.auth.levelUp.address.description)
+            .split('\n')
+            .map((chunk) => (
+              <p>{chunk}</p>
+            ))}
           submitText={getMessage(ids.auth.levelUp.submitText)}
           onSubmit={() => push(redirect)}
           user={user}

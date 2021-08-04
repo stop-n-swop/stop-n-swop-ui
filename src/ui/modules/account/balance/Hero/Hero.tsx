@@ -8,6 +8,7 @@ export default function Hero({ children }: { children: ReactNode }) {
         className="absolute bg-fixed inset-0 bg-cover bg-center filter"
         style={{
           backgroundImage: `url(${background})`,
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore
           '--tw-brightness': 'brightness(.4)',
         }}

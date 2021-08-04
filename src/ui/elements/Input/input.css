@@ -7,6 +7,7 @@
   @apply text-xs;
 }
 
-.input::-webkit-calendar-picker-indicator {
+.input::-webkit-calendar-picker-indicator,
+.input::-moz-calendar-picker-indicator {
   background: none;
 }

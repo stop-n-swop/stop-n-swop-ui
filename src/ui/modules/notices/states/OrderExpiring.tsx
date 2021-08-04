@@ -34,7 +34,7 @@ export default function OrderExpiring({
       <div className="flex space-x-4 items-center">
         <span>{getMessage(ids.notices.states.orderExpiring.title)}</span>
       </div>
-      <div className="text-sm font-light italic mt-1">
+      <div className="text-sm font-light italic mt-1 hidden md:block">
         {getMessage(ids.notices.states.orderExpiring.subtitle)}
       </div>
     </NoticeItem>

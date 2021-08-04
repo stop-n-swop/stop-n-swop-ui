@@ -6,6 +6,7 @@ import { makeEditListingPath } from 'ui/constants/paths';
 import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 import { FaPen } from 'react-icons/fa';
+import cx from 'classnames';
 import type { Status as RStatus } from '@respite/core';
 import type { Listing } from '@sns/contracts/listing';
 import ActionButton from './ActionButton';
@@ -125,7 +126,7 @@ export default function Actions({
 
   if (listing.status === Status.APPROVED) {
     return (
-      <div className={wrapperClass}>
+      <div className={cx(wrapperClass, 'justify-center')}>
         <ActionButton
           orderId={order.id}
           action={Status.POSTED}
@@ -133,7 +134,6 @@ export default function Actions({
           status={status}
           onClick={handleClick}
         />
-        <div className="w-full" />
       </div>
     );
   }

@@ -132,22 +132,19 @@ const enMessages = {
         title: "That's it, you're listed!",
         subtitle: 'What next?',
         description:
-          'It can take up to 30 minutes to finish checking and verifying your listing before it goes live',
-        description2:
-          "Your listing will soon appear on the game's page, we'll notify you when somebody places an order for it.",
-        description3: [
+          "Your listing will soon appear on the game's page, we'll notify you if somebody places an order for it.",
+        description2: [
           'You can then track and update the order from your ',
           'manage listing',
           ' page',
         ],
-        description4: [
+        description3: [
           'Before you can withdraw your earnings from a sold listing you will need to set up your ',
           'bank account',
           ' for the funds to be credited to. You will also need to ',
           'verify your identity',
           " so we know you're a real person!",
         ],
-        manageListing: 'Manage your listing',
         viewListing: 'View your listing',
         newListing: 'Create another listing',
       },
@@ -225,6 +222,9 @@ const enMessages = {
       buyer: {
         label: 'Buyer',
       },
+      seller: {
+        label: 'Seller',
+      },
       address: {
         label: 'Address',
       },
@@ -278,7 +278,7 @@ const enMessages = {
       },
       address: {
         description:
-          'Please provide your current address details. This should be the same address that your bank account is registered at.',
+          'Please provide your current address details.\nThis should be the same address that your bank account is registered at.',
       },
       reason: {
         [Reason.LOGIN_REQUIRED]: 'Please log in to continue...',
@@ -297,7 +297,7 @@ const enMessages = {
       order: 'order',
       listing: 'listing',
       receivedModal: {
-        trigger: 'Received...',
+        trigger: 'Received',
         title: "You've received your order, that's great!",
         subtitle: 'Right?',
       },
@@ -314,7 +314,7 @@ const enMessages = {
       [Status.POSTED]: 'Posted',
       [Status.RECEIVED]: 'All good!',
       [Status.DISPUTED]: "Something's wrong",
-      [Status.NOT_RECEIVED]: "My item hasn't arrived yet",
+      [Status.NOT_RECEIVED]: "My order hasn't arrived yet",
       feedback: 'Leave feedback?',
     },
     status: {
@@ -386,10 +386,11 @@ const enMessages = {
           label: 'Line 2',
         },
         city: {
-          label: 'City',
+          label: 'Town/City',
         },
         postcode: {
-          label: 'Post code / Zip',
+          label: 'Post code',
+          validPostcode: 'Please enter a valid postcode',
         },
         country: {
           label: 'Country',
@@ -602,6 +603,7 @@ const enMessages = {
   },
   notices: {
     title: 'Notifications',
+    clear: 'clear',
     states: {
       orderPlaced: {
         title: 'An order has been placed for your listing 🎉',

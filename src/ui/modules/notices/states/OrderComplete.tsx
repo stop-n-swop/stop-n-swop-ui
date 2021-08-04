@@ -30,7 +30,7 @@ export default function OrderComplete({
       }
     >
       <div>{getMessage(ids.notices.states.orderComplete.title)}</div>
-      <div className="text-sm font-light italic mt-1">
+      <div className="text-sm font-light italic mt-1 hidden md:block">
         {getMessage(ids.notices.states.orderComplete.subtitle)}
       </div>
     </NoticeItem>

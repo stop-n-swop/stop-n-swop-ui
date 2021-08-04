@@ -33,8 +33,12 @@ module.exports = {
         defaultExport: 'component',
         expandProps: 'end',
       }),
-      ...config.plugins,
       mdx(),
+      ...config.plugins.filter((plugin) => {
+        return (
+          !plugin.name?.includes('mdx') && !plugin?.[0]?.name?.includes('mdx')
+        );
+      }),
     ];
     return config;
   },

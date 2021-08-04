@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Button from 'ui/elements/Button';
 import { FaRegBell } from 'react-icons/fa';
-import { useGetMessage } from 'ui/intl';
-import { ids } from 'ui/messages';
 import { useBoop } from 'ui/hooks';
 import { animated } from 'react-spring';
 import type { Notice } from '@sns/contracts/notice';
@@ -21,7 +19,6 @@ export default function Bell({
   notices: Notice[];
 }) {
   const [style, boop] = useBoop({ rotation: -20, scale: 0.95 });
-  const g = useGetMessage();
   const [unread, setUnread] = useState(() => getUnreadNotices(notices));
   const hasUnread = unread > 0;
 
@@ -50,13 +47,12 @@ export default function Bell({
       </animated.span>
       <If condition={hasUnread}>
         <div
-          className="md:absolute bg-primary-light rounded-full w-5 h-5 top-0 right-0 flex justify-center items-center text-xs"
+          className="absolute bg-primary-light rounded-full w-5 h-5 top-0 right-0 flex justify-center items-center text-xs"
           style={{ color: 'white' }}
         >
           {unread}
         </div>
       </If>
-      <span className="md:hidden">{g(ids.notices.title)}</span>
     </Button>
   );
 }

@@ -125,7 +125,7 @@ export default function Balance({
       </If>
       <Choose>
         <When condition={editing}>
-          <div className="flex justify-between">
+          <div className="flex justify-around md:justify-between">
             <Button kind="primary" onClick={handleSubmit} className="space-x-4">
               <FaCheck />
               <span>{g(ids.account.balance.balance.confirm)}</span>

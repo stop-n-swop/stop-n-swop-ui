@@ -10,7 +10,7 @@ export default function OrderNoResponse({ notice }: { notice: Notice }) {
   return (
     <NoticeItem viewed={notice.viewed}>
       <div>{getMessage(ids.notices.states.orderNoResponse.title)}</div>
-      <div className="text-sm font-light italic mt-1">
+      <div className="text-sm font-light italic mt-1 hidden md:block">
         {getMessage(ids.notices.states.orderNoResponse.subtitle)}
       </div>
     </NoticeItem>

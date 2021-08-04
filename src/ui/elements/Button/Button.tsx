@@ -20,7 +20,7 @@ const getColorClassNames = ({ state, kind }: { state: State; kind: Kind }) => {
         case 'error':
           return 'bg-danger hover:bg-danger-light text-white';
         case 'disabled':
-          return 'bg-secondary-lightest text-gray-200';
+          return 'bg-secondary-lightest text-gray-500';
         default:
           return 'bg-secondary hover:bg-secondary-light text-white';
       }
