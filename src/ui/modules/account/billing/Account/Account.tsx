@@ -1,19 +1,20 @@
-import React, { ReactNode, useState } from 'react';
-import { useSaveBankAccount } from 'application/payments';
-import { hasAddress, hasDetails } from 'domain/selectors/user';
-import type { Address, User } from '@sns/contracts/user';
-import Submitted from './Submitted';
-import Edit from './Edit';
-import Incomplete from './Incomplete';
+import React, { ReactNode, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { useIntl } from 'ui/intl';
+import { ValidationError } from '@sns/abyss';
+import { useUpdateUser } from 'application/user';
+import Form from 'ui/modules/account/dashboard/Form';
+import { ids } from 'ui/messages';
+import Submit from 'ui/elements/Submit';
+import FormError from 'ui/elements/FormError';
+import { InputController } from 'ui/elements/Input';
+import type { User } from '@sns/contracts/user';
 
 interface Values {
-  sortCode: string;
-  accountNumber: string;
-  name: string;
-  address: Address;
+  clientEmail: string;
 }
 
-export default function Details({
+export default function Account({
   onSubmit,
   title,
   description,
@@ -26,34 +27,50 @@ export default function Details({
   user: User;
   onSubmit?(): any;
 }) {
-  const [hasAccount, setHasAccount] = useState(() => !!user.hasAccount);
-  const { action, error, status, reset } = useSaveBankAccount();
+  const formProps = useForm();
+  const { setError } = formProps;
+  const intl = useIntl();
+  const getMessage = intl.message;
+  const { action, error, status, reset } = useUpdateUser();
 
   const handleSubmit = async (values: Values) => {
     await action(values);
-    setHasAccount(true);
     onSubmit?.();
   };
 
-  if (!hasDetails(user) || !hasAddress(user)) {
-    return <Incomplete title={title} />;
-  }
+  useEffect(() => {
+    if (error instanceof ValidationError) {
+      Object.entries(error.errors).forEach(([key, value]) => {
+        setError(key, { type: 'api', message: value });
+      });
+    }
+  }, [error, setError]);
 
-  if (hasAccount) {
-    return <Submitted setHasAccount={setHasAccount} />;
-  }
+  // TODO: paypal email address input isn't styled nicely
 
   return (
-    <Edit
-      description={description}
-      error={error}
-      reset={reset}
-      setHasAccount={setHasAccount}
-      status={status}
-      title={title}
-      user={user}
-      submitText={submitText}
-      onSubmit={handleSubmit}
-    />
+    <Form formProps={formProps} onSubmit={handleSubmit}>
+      <If condition={title}>
+        <h3 className="text-lg font-bold">{title}</h3>
+      </If>
+      <p className="text-sm text-gray-100 italic">{description}</p>
+      <FormError error={error} />
+      <div className="flex flex-col flex-grow items-center">
+        <div className="my-4 w-full md:w-2/3">
+          <InputController
+            id="clientEmail"
+            name="clientEmail"
+            type="email"
+            defaultValue={user.clientEmail ?? user.email}
+            label={getMessage(ids.account.billing.account.clientEmail.label)}
+          />
+        </div>
+      </div>
+      <div className="flex justify-end">
+        <Submit kind="primary" reset={reset} status={status}>
+          {submitText}
+        </Submit>
+      </div>
+    </Form>
   );
 }

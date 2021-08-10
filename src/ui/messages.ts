@@ -347,13 +347,11 @@ const enMessages = {
         aboutMe: {
           label: 'About me',
           username: 'Username',
-          details: 'Details',
           address: 'Address',
         },
         billing: {
           label: 'Billing',
-          account: 'Bank Account',
-          verify: 'Verify',
+          account: 'PayPal Account',
         },
       },
     },
@@ -397,82 +395,16 @@ const enMessages = {
           supported: 'Unfortunately we only allow UK residents at this time',
         },
       },
-      details: {
-        title: 'Details',
-        description: '',
-        firstName: {
-          label: 'First name',
-        },
-        lastName: { label: 'Last name' },
-        dateOfBirth: { label: 'Date of birth' },
-        nationality: { label: 'Nationality' },
-      },
     },
     billing: {
-      title: 'Bank account',
+      title: 'PayPal Account',
       description:
-        "You'll need to provide your account number before you can receive any funds for your listings",
+        "You'll need to provide your preferred PayPal email address before you can withdraw any funds from your listings",
       account: {
-        incomplete: {
-          description:
-            "Before you set up your account, you'll need to complete the Details and Address sections of your account",
-          details: 'Details',
-          address: 'Address',
-        },
-        hasAccount: {
-          title: "You've already provided your bank account details",
-          description:
-            "We store your sensitive data securely, so you can't view your existing account number directly.",
-          suggestion:
-            'However, you can register a different account if you want:',
-          edit: 'Enter new account details',
-        },
-        sortCode: {
-          label: 'Sort code',
-        },
-        accountNumber: {
-          label: 'Account number',
-        },
-        name: {
-          label: 'Account holder name',
+        clientEmail: {
+          label: 'PayPal email address',
         },
         cancel: 'Cancel',
-      },
-      verify: {
-        title: 'Verify your identity',
-        incomplete: {
-          description:
-            "Before you begin identity verification, you'll need to complete the Details and Address sections of your account",
-          details: 'Details',
-          address: 'Address',
-        },
-        none: {
-          description:
-            'Before you can transfer your earnings into your account, we need to carry out a quick verification check...',
-          action: 'Please upload a photo of your drivers licence or passport.',
-          hint: 'Verifying your identity will also boost your seller rating!',
-        },
-        verifying: {
-          description: 'We are currently processing your identification',
-          hint: "This could take some time. We will let you know when you've been verified...",
-        },
-        failed: {
-          description:
-            'Unfortunately your identification could not be verified. Please try again.',
-          action: 'Please upload a photo of your drivers licence or passport.',
-        },
-        oudated: {
-          description:
-            "Your identification has expired. You'll need to upload another item before you can continue receiving funds",
-          action:
-            'Please upload a photo of either your drivers licence or passport.',
-        },
-        verified: {
-          description: 'Your identity has been verified',
-          complete: "You're all set to start receiving earnings!",
-          outstanding:
-            'Make sure to provide your bank details to start receiving your earnings...',
-        },
       },
     },
     balance: {
@@ -487,14 +419,9 @@ const enMessages = {
         completed:
           'Your funds are being transferred, it can take up to 48 hours to appear in your account.',
       },
-      obligates: {
-        both: 'Before you can withdraw any funds you will need to set up your bank details and verify your identity',
-        notVerified:
-          'Before you can withdraw any funds you will need to verify your identity',
-        verifying:
-          'Your identity is still being processed. Once you have been verified you will be able to withdraw your funds',
-        account:
-          'Before you can withdraw any funds you will need to set up your bank details',
+      email: {
+        label: 'Your PayPal account',
+        required: 'Set up your PayPal account',
       },
       transactions: {
         title: 'Recent transactions',
@@ -543,57 +470,9 @@ const enMessages = {
         title: 'Buyer Protection',
       },
     },
-    billingAddress: {
-      title: 'Billing Address',
-      description:
-        "Please confirm your billing address. This is the address that's linked to your payment method",
-      useForDelivery: {
-        label: 'My delivery address is the same',
-      },
-      next: 'Continue',
-    },
-    deliveryAddress: {
-      title: 'Delivery Address',
-      description:
-        'Please enter the address you want this item to be delivered to',
-      previous: 'Back',
-      next: 'Continue',
-    },
     payment: {
-      description: 'Choose your payment method:',
-      newCard: 'Use a new card',
-      card: {
-        number: '****{alias}',
-      },
-    },
-    paymentNew: {
-      title: 'Payment Details',
-      name: {
-        label: 'Name on card',
-        required: 'Please enter your name as it appears on your card',
-      },
-      cardNumber: {
-        label: 'Card number',
-        required: 'Please enter the long number on the front of your card',
-        length: 'This number should be {length} numbers long',
-      },
-      expiry: {
-        label: 'Expiry date',
-        required: 'Please enter the "expires end" date from your card',
-        length: 'This should be in the format MM/YY',
-      },
-      cvc: {
-        label: 'Security code',
-        required:
-          'Please enter the {length} digit security code from the back of your card',
-      },
-      remember: {
-        label: 'Remember my details',
-      },
-      submit: 'Pay {amount}',
-    },
-    processing: {
-      text: 'Processing your payment...',
+      title: 'Pay {amount}',
+      description: 'Choose your payment method',
     },
     complete: {
       title: 'Order placed!',

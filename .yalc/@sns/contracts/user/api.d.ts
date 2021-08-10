@@ -13,7 +13,8 @@ export interface LoginRequest {
     token: string;
 }
 export declare type LoginResponse = RefreshTokenResponse;
-export interface UpdateUserRequest extends Pick<Partial<User>, "username" | "phoneNumber" | "firstName" | "lastName" | "dateOfBirth" | "nationality"> {
+export interface UpdateUserRequest extends Pick<Partial<User>, "username"> {
     address?: Partial<User["address"]>;
+    clientEmail?: string;
 }
 export declare type UpdateUserResponse = void;

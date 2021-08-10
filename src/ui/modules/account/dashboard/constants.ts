@@ -14,14 +14,6 @@ export const sections: Section[] = [
         label: ids.account.dashboard.sections.aboutMe.username,
       },
       {
-        key: 'details',
-        to: makeDashboardPath({
-          section: 'about-me',
-          subSection: 'details',
-        }),
-        label: ids.account.dashboard.sections.aboutMe.details,
-      },
-      {
         key: 'address',
         to: makeDashboardPath({ section: 'about-me', subSection: 'address' }),
         label: ids.account.dashboard.sections.aboutMe.address,
@@ -37,11 +29,6 @@ export const sections: Section[] = [
         key: 'account',
         to: makeDashboardPath({ section: 'billing', subSection: 'account' }),
         label: ids.account.dashboard.sections.billing.account,
-      },
-      {
-        key: 'verify',
-        to: makeDashboardPath({ section: 'billing', subSection: 'verify' }),
-        label: ids.account.dashboard.sections.billing.verify,
       },
     ],
   },

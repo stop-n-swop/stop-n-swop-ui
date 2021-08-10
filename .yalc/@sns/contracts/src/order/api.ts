@@ -37,12 +37,3 @@ export type GetHistoryRequest = void;
 export interface GetHistoryResponse {
   history: AuditItem[];
 }
-
-export interface PatchOrderParams {
-  orderId: string;
-}
-export type PatchOrderRequest = Pick<
-  DeepPartial<Order>,
-  "billingAddress" | "deliveryAddress"
->;
-export type PatchOrderResponse = Order;

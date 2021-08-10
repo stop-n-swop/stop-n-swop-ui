@@ -43,7 +43,6 @@ export const ListingOrdersKey = Symbol('listing orders');
 export const ChangeStatusKey = Symbol('change status');
 export const CreateOrderKey = Symbol('create order');
 export const PatchOrderKey = Symbol('patch order');
-export const PlaceOrderKey = Symbol('place order');
 
 // Notices
 // Queries
@@ -52,11 +51,9 @@ export const ClearNoticesKey = Symbol('clear notices');
 
 // Payments
 // Queries
-export const CardsKey = Symbol('cards');
 export const TransactionsKey = Symbol('transactions');
 export const BalanceKey = Symbol('balance');
 // Actions
-export const CreateCardKey = Symbol('create card');
-export const SaveBankKey = Symbol('save bank account');
-export const UploadKycKey = Symbol('upload kyc');
 export const WithdrawBalanceKey = Symbol('withdraw balance');
+export const StartPaymentKey = Symbol('start payment');
+export const CompletePaymentKey = Symbol('complete payment');

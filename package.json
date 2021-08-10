@@ -24,6 +24,7 @@
     "start": "concurrently -k \"cd ../api && yarn dev\" \"cd ../api && yarn tunnel\" \"yarn dev\""
   },
   "dependencies": {
+    "@paypal/react-paypal-js": "^7.2.1",
     "@respite/action": "^4.0.0",
     "@respite/core": "^4.0.0",
     "@respite/exchange": "^4.0.0",
@@ -34,11 +35,10 @@
     "classnames": "^2.2.6",
     "cleave.js": "^1.6.0",
     "date-fns": "^2.22.1",
+    "envalid": "^7.1.1",
     "flat": "^5.0.2",
-    "fuzzy": "^0.1.3",
     "history": "^4.10.0",
     "jpex": "^4.3.0",
-    "mangopay-cardregistration-js-kit": "^1.2.2",
     "qs": "^6.10.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",

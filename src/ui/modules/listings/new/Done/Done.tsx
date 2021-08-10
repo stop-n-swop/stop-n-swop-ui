@@ -60,7 +60,7 @@ export default function Done({
           {getMessage(ids.listings.new.done.description3[4])}
         </p>
       </div>
-      <div className="text-right mt-10 flex justify-between flex-col md:flex-row md:space-x-6">
+      <div className="text-right mt-10 flex justify-around flex-col md:flex-row md:space-x-6">
         <LinkButton padding kind="secondary" to={NEW_LISTING}>
           {getMessage(ids.listings.new.done.newListing)}
         </LinkButton>

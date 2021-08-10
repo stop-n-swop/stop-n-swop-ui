@@ -1,5 +1,4 @@
 import { AuditItem } from "../listing";
-import { DeepPartial } from "../utils";
 import { Order } from "./entities";
 export interface SearchOrdersRequest {
     listingId?: string;
@@ -32,8 +31,3 @@ export declare type GetHistoryRequest = void;
 export interface GetHistoryResponse {
     history: AuditItem[];
 }
-export interface PatchOrderParams {
-    orderId: string;
-}
-export declare type PatchOrderRequest = Pick<DeepPartial<Order>, "billingAddress" | "deliveryAddress">;
-export declare type PatchOrderResponse = Order;

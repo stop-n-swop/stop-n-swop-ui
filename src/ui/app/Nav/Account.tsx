@@ -13,7 +13,7 @@ import { animated } from 'react-spring';
 import { ids } from 'ui/messages';
 import { LOGOUT, makeDashboardPath } from 'ui/constants/paths';
 import { useUser } from 'application/user';
-import { hasPayOutPermissions, isRegistered } from 'domain/selectors/user';
+import { hasPayOutPermissions } from 'domain/selectors/user';
 import { useBalance } from 'application/payments';
 import { MIN_WITHDRAWAL_AMOUNT } from 'domain/constants/payments';
 import NavItem from './NavItem';
@@ -61,8 +61,7 @@ export default function Account({ open, setOpen, onClose }: Props) {
           </li>
           <If
             condition={
-              hasPayOutPermissions(user) ||
-              (isRegistered(user) && balanceQuery.data.balance > 0)
+              hasPayOutPermissions(user) || balanceQuery.data.balance > 0
             }
           >
             <NavItem

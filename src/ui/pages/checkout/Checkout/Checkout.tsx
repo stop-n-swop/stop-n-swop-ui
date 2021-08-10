@@ -13,7 +13,7 @@ import ProtectionModal from 'ui/modules/checkout/intro/ProtectionModal';
 import { useAuthGuard } from 'application/auth';
 
 export default function CheckoutPage() {
-  useAuthGuard({ details: true, username: true });
+  useAuthGuard({ username: true });
   const { listingId } = useParams<{ listingId: string }>();
   const { data: listing } = useListing({ id: listingId });
   const { data: game } = useGame({ id: listing.productIds[0] });

@@ -48,17 +48,3 @@ export const makeLevelUpAddressPath = ({
   const query = params.toString();
   return `${LEVEL_UP_ADDRESS}?${query}`;
 };
-
-export const LEVEL_UP_DETAILS = '/my/details';
-export const makeLeveLUpDetailsPath = ({
-  pathname,
-  search,
-}: {
-  pathname: string;
-  search: string;
-}) => {
-  const params = new URLSearchParams();
-  params.append('redirect', `${pathname}${search}`);
-  const query = params.toString();
-  return `${LEVEL_UP_DETAILS}?${query}`;
-};

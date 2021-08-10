@@ -1,4 +1,6 @@
 import React, { ReactNode } from 'react';
+import { makeDashboardPath } from 'ui/constants/paths';
+import { LinkButton } from 'ui/elements/Button';
 import FormError from 'ui/elements/FormError';
 import { useMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
@@ -6,13 +8,13 @@ import Hero from '../Hero';
 
 export default function Screen({
   balance,
-  obligates,
   transactions,
+  email,
   error,
 }: {
   balance: ReactNode;
-  obligates: ReactNode;
   transactions: ReactNode;
+  email: ReactNode;
   error: any;
 }) {
   return (
@@ -20,8 +22,10 @@ export default function Screen({
       <If condition={error}>
         <FormError error={error} />
       </If>
-      <Hero>{balance}</Hero>
-      {obligates}
+      <Hero>
+        {balance}
+        {email}
+      </Hero>
       <div className="mt-12 space-y-4 container px-4 lg:px-8 2xl:px-12 mx-auto">
         <h2 className="font-semibold">
           {useMessage(ids.account.balance.transactions.title)}

@@ -6,7 +6,6 @@ export interface Order {
     username: string;
     status: Status;
     created: Date;
-    billingAddress: Address;
     deliveryAddress: Address;
     errorCode: string;
 }

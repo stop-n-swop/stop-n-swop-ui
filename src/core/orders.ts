@@ -1,5 +1,5 @@
 import type { AuditItem } from '@sns/contracts/listing';
-import type { Order, PatchOrderRequest, Status } from '@sns/contracts/order';
+import type { Order, Status } from '@sns/contracts/order';
 
 export type FetchMyOrders = () => Promise<Order[]>;
 
@@ -16,14 +16,4 @@ export type ChangeStatus = (args: {
   status: Status;
 }) => Promise<void>;
 
-export type PatchOrder = (
-  args: PatchOrderRequest & { orderId: string },
-) => Promise<void>;
-
 export type FetchHistory = (args: { orderId: string }) => Promise<AuditItem[]>;
-
-export type PlaceOrder = (args: {
-  orderId: string;
-  cardId: string;
-  remember?: boolean;
-}) => Promise<unknown>;

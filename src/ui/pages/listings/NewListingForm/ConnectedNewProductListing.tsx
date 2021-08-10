@@ -13,7 +13,7 @@ import NewProductListing from './NewProductListing';
 import { useOnSubmit } from './utils';
 
 export default function ConnectedNewProductListing() {
-  useAuthGuard({ username: true, address: true, details: true });
+  useAuthGuard({ username: true, address: true });
   const { productId } =
     useParams<{
       productId: string;

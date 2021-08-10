@@ -42,8 +42,7 @@ export interface Config {
   images: {
     url: string;
   };
-  mango: {
-    url: string;
-    id: string;
+  paypal: {
+    clientId: string;
   };
 }

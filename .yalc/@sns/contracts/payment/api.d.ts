@@ -1,34 +1,18 @@
-import { Address } from "../user";
-import { Card, Transaction } from "./entities";
-export interface SaveBankDetailsRequest {
-    name: string;
-    address: Address;
-    sortCode: string;
-    accountNumber: string;
+import { Transaction } from "./entities";
+export interface StartPaymentParams {
+    orderId: string;
 }
-export declare type SaveBankDetailsResponse = {};
-export declare type CreateCardRequest = void;
-export interface CreateCardResponse {
-    id: string;
-    accessKey: string;
-    preregistrationData: string;
-    cardRegistrationUrl: string;
+export interface StartOrderBody {
+}
+export interface StartOrderResponse {
+    paymentId: string;
 }
 export interface PlaceOrderParams {
     orderId: string;
 }
 export interface PlaceOrderRequest {
-    cardId: string;
-    secureModeReturnUrl: string;
-    remember: boolean;
 }
-export declare type PlaceOrderResponse = {
-    secureMode: boolean;
-    secureModeUrl: string;
-};
-export interface GetCardsResponse {
-    cards: Array<Card>;
-}
+export declare type PlaceOrderResponse = {};
 export interface GetTransactionsResponse {
     transactions: Transaction[];
 }

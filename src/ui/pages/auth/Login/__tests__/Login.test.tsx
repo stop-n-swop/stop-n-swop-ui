@@ -68,9 +68,8 @@ beforeEach(() => {
         images: {
           url: '',
         },
-        mango: {
-          url: '',
-          id: '',
+        paypal: {
+          clientId: '',
         },
       });
     },

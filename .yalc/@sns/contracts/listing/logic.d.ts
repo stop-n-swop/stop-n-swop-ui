@@ -7,12 +7,16 @@ export declare const getPostage: (listing: Listing) => number;
 export declare const getListedPrice: (listing: Listing) => number;
 /** Returns the amount of order protection that will be deducted from the listed price */
 export declare const getProtectionCharge: (listing: Listing) => number;
-/** Returns the platform charge that will be deducted from the listed price */
+/** Returns the total platform charge that will be deducted from the listed price */
 export declare const getPlatformCharge: (listing: Listing) => number;
 /** Returns the actual price the customer will pay i.e. price + postage */
 export declare const getFinalPrice: (listing: Listing) => number;
 /** Returns the price that will show on the storefront. This is like getFinalPrice but without postage */
 export declare const getDisplayPrice: (listing: Listing) => number;
+/** The amount paypal charges on pay in */
+export declare const getProviderPayInCharge: (listing: Listing) => number;
+/** the amount paypal charges on pay out */
+export declare const getProviderPayOutCharge: (listing: Listing) => number;
 /** Returns the amount we expect the payment provider to charge */
 export declare const getProviderCharges: (listing: Listing) => number;
 /** Returns the amount sns will charge the seller (i.e. order protection + platform charge) */

@@ -1,79 +1,73 @@
-import { PaymentFailedError, hydrate, UnknownError } from '@sns/abyss';
-import { Order, Status } from '@sns/contracts/order';
-import { useAuthGuard } from 'application/auth';
-import { useListing } from 'application/listings';
-import { useMyOrder, usePlaceOrder } from 'application/orders';
-import { useCards } from 'application/payments';
-import React, { useEffect, useMemo, useState } from 'react';
+import React from 'react';
+import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js';
 import { useHistory, useParams } from 'react-router-dom';
-import {
-  makeCheckoutPaymentNewPath,
-  makeCheckoutProcessingPath,
-} from 'ui/constants/paths';
-import { useQueryParam } from 'ui/hooks';
-import PaymentScreen from 'ui/modules/checkout/payment/PaymentScreen';
-import Cards from 'ui/modules/checkout/payment/Cards';
-import NewCard from 'ui/modules/checkout/payment/NewCard';
-import SubmitCard from 'ui/modules/checkout/payment/SubmitCard/SubmitCard';
-
-const getError = (error: any, order: Order, retry: boolean) => {
-  if (error) {
-    return error;
-  }
-  if (order.status === Status.NOT_PAID && order.errorCode) {
-    const error = hydrate(`M${order.errorCode}`);
-    if (error.constructor === UnknownError) {
-      return new PaymentFailedError();
-    }
-    return error;
-  }
-  if (retry) {
-    return new PaymentFailedError();
-  }
-  return null;
-};
+import { useCompletePayment, useStartPayment } from 'application/payments';
+import LoadingPage from 'ui/pages/Loading';
+import { makeCheckoutCompletePath } from 'ui/constants/paths';
+import { getFinalPrice } from '@sns/contracts/listing';
+import { useGetCurrency, useGetMessage } from 'ui/intl';
+import { useMyOrder } from 'application/orders';
+import { useListing } from 'application/listings';
+import FormError from 'ui/elements/FormError';
+import background from 'ui/assets/bg-1.jpg';
+import { ids } from 'ui/messages';
 
 export default function Payment() {
-  useAuthGuard({
-    username: true,
-    details: true,
-  });
-  const retry = useQueryParam('retry') === 'true';
-  const { push } = useHistory();
   const { orderId } = useParams<{ orderId: string }>();
   const { data: order } = useMyOrder({ id: orderId });
   const { data: listing } = useListing({ id: order.listingId });
-  const { data: cards } = useCards();
-  const { action: placeOrder, status, error: placOrderError } = usePlaceOrder();
-  const error = useMemo(
-    () => getError(placOrderError, order, retry),
-    [order, placOrderError, retry],
-  );
+  const startAction = useStartPayment();
+  const completeAction = useCompletePayment();
+  const [{ isPending }] = usePayPalScriptReducer();
+  const { push } = useHistory();
+  const g = useGetMessage();
+  const getCurrency = useGetCurrency();
 
-  const [cardId, setCardId] = useState<string>(cards[0]?.id);
+  const { action: start } = startAction;
+  const { action: complete } = completeAction;
+  const error = startAction.error || completeAction.error;
 
-  const handleSubmit = async () => {
-    await placeOrder({
-      cardId,
-      orderId,
-    });
-    push(makeCheckoutProcessingPath({ orderId }));
-  };
-
-  useEffect(() => {
-    if (!cards.length) {
-      push(makeCheckoutPaymentNewPath({ orderId }));
-    }
-  }, [cards.length, orderId, push]);
+  if (isPending) {
+    return <LoadingPage />;
+  }
 
   return (
-    <PaymentScreen
-      error={error}
-      cards={<Cards cardId={cardId} setCardId={setCardId} cards={cards} />}
-      newCard={<NewCard orderId={orderId} />}
-      submitCard={
-        <SubmitCard listing={listing} status={status} onSubmit={handleSubmit} />
-      }
-    />
+    <div className="flex-grow flex justify-center items-center relative overflow-y-hidden">
+      <div
+        className="h-screen w-screen left-0 absolute bg-center pointer-events-none bg-cover filter blur-sm"
+        style={{
+          top: -45,
+          backgroundImage: `url(${background})`,
+          zIndex: 0,
+        }}
+      />
+      <div className="bg-white rounded-lg w-full max-w-screen-sm z-10">
+        <h1 className="text-gray-900 text-lg py-3 px-10 border-primary-darkest border-b-2">
+          {g(ids.checkout.payment.title, {
+            amount: getCurrency(getFinalPrice(listing), {
+              currency: listing.currency,
+            }),
+          })}
+        </h1>
+        <div className="p-10 space-y-12">
+          <FormError error={error} />
+          <p>{g(ids.checkout.payment.description)}</p>
+          <PayPalButtons
+            style={{
+              color: 'gold',
+              label: 'pay',
+            }}
+            createOrder={async () => {
+              const { paymentId } = await start({ orderId });
+              return paymentId;
+            }}
+            onApprove={async () => {
+              await complete({ orderId });
+              push(makeCheckoutCompletePath({ orderId }));
+            }}
+          />
+        </div>
+      </div>
+    </div>
   );
 }

@@ -18,14 +18,9 @@ import {
   MY_ORDERS,
   NEW_LISTING,
   MY_LISTING,
-  BILLING_ADDRESS,
-  DELIVERY_ADDRESS,
   NEW_LISTING_COMPLETE,
   CHECKOUT_COMPLETE,
   CHECKOUT_PAYMENT,
-  LEVEL_UP_DETAILS,
-  CHECKOUT_PROCESSING,
-  CHECKOUT_PAYMENT_NEW,
   BALANCE,
 } from 'ui/constants/paths';
 import Home from 'ui/pages/Home';
@@ -35,17 +30,12 @@ const Dashboard = lazy(() => import('ui/pages/account/Dashboard'));
 const Balance = lazy(() => import('ui/pages/account/Balance'));
 const LevelUpUsername = lazy(() => import('ui/pages/account/LevelUpUsername'));
 const LevelUpAddress = lazy(() => import('ui/pages/account/LevelUpAddress'));
-const LevelUpDetails = lazy(() => import('ui/pages/account/LevelUpDetails'));
 // Auth
 const Login = lazy(() => import('ui/pages/auth/Login'));
 const Logout = lazy(() => import('ui/pages/auth/Logout'));
 // Checkout
 const Checkout = lazy(() => import('ui/pages/checkout/Checkout'));
-const BillingAddress = lazy(() => import('ui/pages/checkout/BillingAddress'));
-const DeliveryAddress = lazy(() => import('ui/pages/checkout/DeliveryAddress'));
 const Payment = lazy(() => import('ui/pages/checkout/Payment'));
-const PaymentNew = lazy(() => import('ui/pages/checkout/PaymentNew'));
-const ProcessingPayment = lazy(() => import('ui/pages/checkout/Processing'));
 const Complete = lazy(() => import('ui/pages/checkout/Complete'));
 // Games
 const Games = lazy(() => import('ui/pages/games/Games'));
@@ -85,9 +75,6 @@ export default function Routes() {
       <Route path={LEVEL_UP_USERNAME} exact>
         <LevelUpUsername />
       </Route>
-      <Route path={LEVEL_UP_DETAILS} exact>
-        <LevelUpDetails />
-      </Route>
 
       {/* Auth */}
       <Route path={LOGIN} exact>
@@ -101,20 +88,8 @@ export default function Routes() {
       <Route path={CHECKOUT} exact>
         <Checkout />
       </Route>
-      <Route path={BILLING_ADDRESS} exact>
-        <BillingAddress />
-      </Route>
-      <Route path={DELIVERY_ADDRESS} exact>
-        <DeliveryAddress />
-      </Route>
       <Route path={CHECKOUT_PAYMENT} exact>
         <Payment />
-      </Route>
-      <Route path={CHECKOUT_PAYMENT_NEW} exact>
-        <PaymentNew />
-      </Route>
-      <Route path={CHECKOUT_PROCESSING} exact>
-        <ProcessingPayment />
       </Route>
       <Route path={CHECKOUT_COMPLETE} exact>
         <Complete />
