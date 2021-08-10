@@ -288,183 +288,8 @@ class OrderNotAvailableError extends ConflictError {
 
 exports.PaymentErrorCode = void 0;
 (function (PaymentErrorCode) {
-  PaymentErrorCode["MISSING_REGISTER_FIELDS"] = "MISSING_REGISTER_FIELDS";
-  PaymentErrorCode["FAILED_TO_REGISTER"] = "FAILED_TO_REGISTER";
-  PaymentErrorCode["BANK_ACCOUNT_FAIL"] = "BANK_ACCOUNT_FAIL";
-  PaymentErrorCode["KYC_DOCUMENT_FAILED"] = "KYC_DOCUMENT_FAILED";
-  PaymentErrorCode["KYC_PAGE_TOO_SMALL"] = "KYC_PAGE_TOO_SMALL";
-  PaymentErrorCode["KYC_PAGE_FAILED"] = "KYC_PAGE_FAILED";
-  PaymentErrorCode["KYC_SUBMIT_FAILED"] = "KYC_SUBMIT_FAILED";
-  PaymentErrorCode["PAYMENT_FAILED"] = "PAYMENT_FAILED";
-  PaymentErrorCode["INVALID_CARD_NUMBER"] = "M105101";
-  PaymentErrorCode["INVALID_CARD_NAME"] = "M105102";
-  PaymentErrorCode["DO_NOT_HONOUR"] = "M101101";
-  PaymentErrorCode["INACTIVE_CARD"] = "M101106";
-  PaymentErrorCode["MAX_CARD_ATTEMPTS"] = "M101111";
-  PaymentErrorCode["TRANSACTION_REFUSED"] = "M101199";
-  PaymentErrorCode["3DSECURE_SESSION_EXPIRED"] = "M101304";
-  PaymentErrorCode["3DSECURE_FAILED"] = "M101301";
-  PaymentErrorCode["CARD_NUMBER_FORMAT"] = "M105202";
-  PaymentErrorCode["PAST_EXPIRY_DATE"] = "M105203";
-  PaymentErrorCode["TXN_NOT_FOUND"] = "TXN_NOT_FOUND";
   PaymentErrorCode["PAY_OUT_NOT_READY"] = "PAY_OUT_NOT_READY";
 })(exports.PaymentErrorCode || (exports.PaymentErrorCode = {}));
-class MissingRegisterFieldsError extends BadRequestError {
-  constructor(...args) {
-    super(...args);
-    this.code = exports.PaymentErrorCode.MISSING_REGISTER_FIELDS;
-  }
-  toString() {
-    return 'You are missing some required data from your account. Please check the "details" and "address" sections of your account are completed...';
-  }
-}
-class FailedToRegisterError extends UnknownError {
-  constructor(...args) {
-    super(...args);
-    this.code = exports.PaymentErrorCode.FAILED_TO_REGISTER;
-  }
-  toString() {
-    return "Something went wrong trying to register your account as an active buyer/seller";
-  }
-}
-class BankAccountFailError extends UnknownError {
-  constructor(...args) {
-    super(...args);
-    this.code = exports.PaymentErrorCode.BANK_ACCOUNT_FAIL;
-  }
-}
-class KycDocumentFailedError extends UnknownError {
-  constructor(...args) {
-    super(...args);
-    this.code = exports.PaymentErrorCode.KYC_DOCUMENT_FAILED;
-  }
-}
-class KycPageTooSmallError extends BadRequestError {
-  constructor(...args) {
-    super(...args);
-    this.code = exports.PaymentErrorCode.KYC_PAGE_TOO_SMALL;
-  }
-  toString() {
-    return "The uploaded file is too small";
-  }
-}
-class KycPageFailedError extends UnknownError {
-  constructor(...args) {
-    super(...args);
-    this.code = exports.PaymentErrorCode.KYC_PAGE_FAILED;
-  }
-}
-class KycSubmitFailedError extends UnknownError {
-  constructor(...args) {
-    super(...args);
-    this.code = exports.PaymentErrorCode.KYC_SUBMIT_FAILED;
-  }
-}
-class PaymentFailedError extends UnknownError {
-  constructor(...args) {
-    super(...args);
-    this.code = exports.PaymentErrorCode.PAYMENT_FAILED;
-  }
-  toString() {
-    return "There was an issue trying to process your payment. Please try again";
-  }
-}
-class InvalidCardNumberError extends BadRequestError {
-  constructor(...args) {
-    super(...args);
-    this.code = exports.PaymentErrorCode.INVALID_CARD_NUMBER;
-  }
-  toString() {
-    return "You have entered an invalid card number";
-  }
-}
-class InvalidCardNameError extends BadRequestError {
-  constructor(...args) {
-    super(...args);
-    this.code = exports.PaymentErrorCode.INVALID_CARD_NAME;
-  }
-  toString() {
-    return "The given name doesn't match the card holder's name";
-  }
-}
-class DoNotHonourError extends BadRequestError {
-  constructor(...args) {
-    super(...args);
-    this.code = exports.PaymentErrorCode.DO_NOT_HONOUR;
-  }
-  toString() {
-    return 'The payment has failed with a "Do Not Honour" response';
-  }
-}
-class InvactiveCardError extends BadRequestError {
-  constructor(...args) {
-    super(...args);
-    this.code = exports.PaymentErrorCode.INACTIVE_CARD;
-  }
-  toString() {
-    return "This card has been flagged as being inactive by your bank";
-  }
-}
-class MaxCardAttemptsError extends BadRequestError {
-  constructor(...args) {
-    super(...args);
-    this.code = exports.PaymentErrorCode.MAX_CARD_ATTEMPTS;
-  }
-  toString() {
-    return "You have reached the maximum number of attempts for this card";
-  }
-}
-class TransactionRefusedError extends BadRequestError {
-  constructor(...args) {
-    super(...args);
-    this.code = exports.PaymentErrorCode.TRANSACTION_REFUSED;
-  }
-  toString() {
-    return "The transaction has been refused. Please contact your bank for more information";
-  }
-}
-class ThreeDSecureSessionExpiredError extends NotAuthorisedError {
-  constructor(...args) {
-    super(...args);
-    this.code = exports.PaymentErrorCode["3DSECURE_SESSION_EXPIRED"];
-  }
-  toString() {
-    return "Your 3D Secure session has expired";
-  }
-}
-class ThreeDSecureFailedError extends UnknownError {
-  constructor(...args) {
-    super(...args);
-    this.code = exports.PaymentErrorCode["3DSECURE_FAILED"];
-  }
-  toString() {
-    return "3D Secure authentication has failed";
-  }
-}
-class CardNumberFormatError extends BadRequestError {
-  constructor(...args) {
-    super(...args);
-    this.code = exports.PaymentErrorCode.CARD_NUMBER_FORMAT;
-  }
-  toString() {
-    return "The card number is not valid, please check and try again";
-  }
-}
-class PastExpryDateError extends BadRequestError {
-  constructor(...args) {
-    super(...args);
-    this.code = exports.PaymentErrorCode.PAST_EXPIRY_DATE;
-  }
-  toString() {
-    return "You have entered an expired date";
-  }
-}
-class TxnNotFoundError extends NotFoundError {
-  constructor(id) {
-    super("txn", id);
-    this.code = exports.PaymentErrorCode.TXN_NOT_FOUND;
-  }
-}
 class PayOutNotReadyError extends BadRequestError {
   constructor() {
     super("Attempted to pay out but user is not in a ready state");
@@ -556,44 +381,6 @@ const hydrate = (code, error = {}) => {
       return new ListingOwnedByUserError();
     case exports.OrderErrorCode.ORDER_NOT_AVAILABLE:
       return new OrderNotAvailableError();
-    case exports.PaymentErrorCode.MISSING_REGISTER_FIELDS:
-      return new MissingRegisterFieldsError();
-    case exports.PaymentErrorCode.FAILED_TO_REGISTER:
-      return new FailedToRegisterError();
-    case exports.PaymentErrorCode.BANK_ACCOUNT_FAIL:
-      return new BankAccountFailError();
-    case exports.PaymentErrorCode.KYC_DOCUMENT_FAILED:
-      return new KycDocumentFailedError();
-    case exports.PaymentErrorCode.KYC_PAGE_TOO_SMALL:
-      return new KycPageTooSmallError();
-    case exports.PaymentErrorCode.KYC_PAGE_FAILED:
-      return new KycPageFailedError();
-    case exports.PaymentErrorCode.KYC_SUBMIT_FAILED:
-      return new KycSubmitFailedError();
-    case exports.PaymentErrorCode.PAYMENT_FAILED:
-      return new PaymentFailedError();
-    case exports.PaymentErrorCode.INVALID_CARD_NUMBER:
-      return new InvalidCardNumberError();
-    case exports.PaymentErrorCode.INVALID_CARD_NAME:
-      return new InvalidCardNameError();
-    case exports.PaymentErrorCode.DO_NOT_HONOUR:
-      return new DoNotHonourError();
-    case exports.PaymentErrorCode.INACTIVE_CARD:
-      return new InvactiveCardError();
-    case exports.PaymentErrorCode.MAX_CARD_ATTEMPTS:
-      return new MaxCardAttemptsError();
-    case exports.PaymentErrorCode.TRANSACTION_REFUSED:
-      return new TransactionRefusedError();
-    case exports.PaymentErrorCode["3DSECURE_SESSION_EXPIRED"]:
-      return new ThreeDSecureSessionExpiredError();
-    case exports.PaymentErrorCode["3DSECURE_FAILED"]:
-      return new ThreeDSecureFailedError();
-    case exports.PaymentErrorCode.CARD_NUMBER_FORMAT:
-      return new CardNumberFormatError();
-    case exports.PaymentErrorCode.PAST_EXPIRY_DATE:
-      return new PastExpryDateError();
-    case exports.PaymentErrorCode.TXN_NOT_FOUND:
-      return new TxnNotFoundError(error.id);
     case exports.PaymentErrorCode.PAY_OUT_NOT_READY:
       return new PayOutNotReadyError();
   }
@@ -621,29 +408,16 @@ const responseToError = response => {
 };
 
 exports.BadRequestError = BadRequestError;
-exports.BankAccountFailError = BankAccountFailError;
 exports.BaseError = BaseError;
-exports.CardNumberFormatError = CardNumberFormatError;
 exports.ConflictError = ConflictError;
 exports.CreateListingError = CreateListingError;
-exports.DoNotHonourError = DoNotHonourError;
-exports.FailedToRegisterError = FailedToRegisterError;
 exports.GameNotFoundError = GameNotFoundError;
-exports.InvactiveCardError = InvactiveCardError;
-exports.InvalidCardNameError = InvalidCardNameError;
-exports.InvalidCardNumberError = InvalidCardNumberError;
 exports.InvalidGamePlatformError = InvalidGamePlatformError;
 exports.InvalidLoginError = InvalidLoginError;
 exports.InvalidStatusError = InvalidStatusError;
 exports.InvalidTokenError = InvalidTokenError;
-exports.KycDocumentFailedError = KycDocumentFailedError;
-exports.KycPageFailedError = KycPageFailedError;
-exports.KycPageTooSmallError = KycPageTooSmallError;
-exports.KycSubmitFailedError = KycSubmitFailedError;
 exports.ListingNotFoundError = ListingNotFoundError;
 exports.ListingOwnedByUserError = ListingOwnedByUserError;
-exports.MaxCardAttemptsError = MaxCardAttemptsError;
-exports.MissingRegisterFieldsError = MissingRegisterFieldsError;
 exports.NotAuthenticatedError = NotAuthenticatedError;
 exports.NotAuthorisedError = NotAuthorisedError;
 exports.NotFoundError = NotFoundError;
@@ -651,14 +425,8 @@ exports.OrderNotAvailableError = OrderNotAvailableError;
 exports.OrderNotFoundError = OrderNotFoundError;
 exports.OrderNotOwnedByUserError = OrderNotOwnedByUserError;
 exports.OutdatedTokenError = OutdatedTokenError;
-exports.PastExpryDateError = PastExpryDateError;
 exports.PayOutNotReadyError = PayOutNotReadyError;
-exports.PaymentFailedError = PaymentFailedError;
 exports.PlatformNotFoundError = PlatformNotFoundError;
-exports.ThreeDSecureFailedError = ThreeDSecureFailedError;
-exports.ThreeDSecureSessionExpiredError = ThreeDSecureSessionExpiredError;
-exports.TransactionRefusedError = TransactionRefusedError;
-exports.TxnNotFoundError = TxnNotFoundError;
 exports.UnknownError = UnknownError;
 exports.UpdateListingFailedError = UpdateListingFailedError;
 exports.UpdateListingProhibitedError = UpdateListingProhibitedError;

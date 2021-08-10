@@ -17,12 +17,12 @@ export const getListedPrice = (listing: Listing) => {
 
 /** Returns the amount of order protection that will be deducted from the listed price */
 export const getProtectionCharge = (listing: Listing) => {
-  return getListedPrice(listing) * 0.05;
+  return Math.ceil(getListedPrice(listing) * 0.05);
 };
 
 /** Returns the total platform charge that will be deducted from the listed price */
 export const getPlatformCharge = (listing: Listing) => {
-  return getListedPrice(listing) * 0.04 + 30;
+  return Math.ceil(getListedPrice(listing) * 0.04) + 30;
 };
 
 /** Returns the actual price the customer will pay i.e. price + postage */
@@ -33,21 +33,6 @@ export const getFinalPrice = (listing: Listing) => {
 /** Returns the price that will show on the storefront. This is like getFinalPrice but without postage */
 export const getDisplayPrice = (listing: Listing) => {
   return getBasePrice(listing);
-};
-
-/** The amount paypal charges on pay in */
-export const getProviderPayInCharge = (listing: Listing) => {
-  return getFinalPrice(listing) * 0.029 + 30;
-};
-
-/** the amount paypal charges on pay out */
-export const getProviderPayOutCharge = (listing: Listing) => {
-  return getListingProfit(listing) * 0.02;
-};
-
-/** Returns the amount we expect the payment provider to charge */
-export const getProviderCharges = (listing: Listing) => {
-  return getProviderPayInCharge(listing) + getProviderPayOutCharge(listing);
 };
 
 /** Returns the amount sns will charge the seller (i.e. order protection + platform charge) */
@@ -63,6 +48,22 @@ export const getListingProfit = (listing: Listing) => {
 /** Returns the total cut sns will take from the buyer and the seller */
 export const getTotalCharges = (listing: Listing) => {
   return getListingCharges(listing);
+};
+
+// These are all just speculative of course
+/** The amount paypal charges on pay in */
+export const getProviderPayInCharge = (listing: Listing) => {
+  return Math.ceil(getFinalPrice(listing) * 0.029) + 30;
+};
+
+/** the amount paypal charges on pay out */
+export const getProviderPayOutCharge = (listing: Listing) => {
+  return Math.ceil(getListingProfit(listing) * 0.02);
+};
+
+/** Returns the amount we expect the payment provider to charge */
+export const getProviderCharges = (listing: Listing) => {
+  return getProviderPayInCharge(listing) + getProviderPayOutCharge(listing);
 };
 
 /** Returns the amount sns will have after the payment provider has taken its cut */

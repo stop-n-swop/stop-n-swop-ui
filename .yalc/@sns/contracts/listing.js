@@ -27,25 +27,16 @@ const getListedPrice = listing => {
   return getBasePrice(listing) + getPostage(listing);
 };
 const getProtectionCharge = listing => {
-  return getListedPrice(listing) * 0.05;
+  return Math.ceil(getListedPrice(listing) * 0.05);
 };
 const getPlatformCharge = listing => {
-  return getListedPrice(listing) * 0.04 + 30;
+  return Math.ceil(getListedPrice(listing) * 0.04) + 30;
 };
 const getFinalPrice = listing => {
   return getListedPrice(listing);
 };
 const getDisplayPrice = listing => {
   return getBasePrice(listing);
-};
-const getProviderPayInCharge = listing => {
-  return getFinalPrice(listing) * 0.029 + 30;
-};
-const getProviderPayOutCharge = listing => {
-  return getListingProfit(listing) * 0.02;
-};
-const getProviderCharges = listing => {
-  return getProviderPayInCharge(listing) + getProviderPayOutCharge(listing);
 };
 const getListingCharges = listing => {
   return getProtectionCharge(listing) + getPlatformCharge(listing);
@@ -55,6 +46,15 @@ const getListingProfit = listing => {
 };
 const getTotalCharges = listing => {
   return getListingCharges(listing);
+};
+const getProviderPayInCharge = listing => {
+  return Math.ceil(getFinalPrice(listing) * 0.029) + 30;
+};
+const getProviderPayOutCharge = listing => {
+  return Math.ceil(getListingProfit(listing) * 0.02);
+};
+const getProviderCharges = listing => {
+  return getProviderPayInCharge(listing) + getProviderPayOutCharge(listing);
 };
 const getProfit = listing => {
   return getTotalCharges(listing) - getProviderCharges(listing);

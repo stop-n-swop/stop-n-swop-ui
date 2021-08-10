@@ -13,17 +13,17 @@ export declare const getPlatformCharge: (listing: Listing) => number;
 export declare const getFinalPrice: (listing: Listing) => number;
 /** Returns the price that will show on the storefront. This is like getFinalPrice but without postage */
 export declare const getDisplayPrice: (listing: Listing) => number;
-/** The amount paypal charges on pay in */
-export declare const getProviderPayInCharge: (listing: Listing) => number;
-/** the amount paypal charges on pay out */
-export declare const getProviderPayOutCharge: (listing: Listing) => number;
-/** Returns the amount we expect the payment provider to charge */
-export declare const getProviderCharges: (listing: Listing) => number;
 /** Returns the amount sns will charge the seller (i.e. order protection + platform charge) */
 export declare const getListingCharges: (listing: Listing) => number;
 /** Returns the amount the seller will receive for a listing */
 export declare const getListingProfit: (listing: Listing) => number;
 /** Returns the total cut sns will take from the buyer and the seller */
 export declare const getTotalCharges: (listing: Listing) => number;
+/** The amount paypal charges on pay in */
+export declare const getProviderPayInCharge: (listing: Listing) => number;
+/** the amount paypal charges on pay out */
+export declare const getProviderPayOutCharge: (listing: Listing) => number;
+/** Returns the amount we expect the payment provider to charge */
+export declare const getProviderCharges: (listing: Listing) => number;
 /** Returns the amount sns will have after the payment provider has taken its cut */
 export declare const getProfit: (listing: Listing) => number;
