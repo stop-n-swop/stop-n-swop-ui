@@ -56,9 +56,14 @@ export const getProviderPayInCharge = (listing: Listing) => {
   return Math.ceil(getFinalPrice(listing) * 0.029) + 30;
 };
 
+/** Calculates the payout charge of any amount */
+export const calculateProviderPayOutCharge = (amount: number) => {
+  return Math.ceil(amount * 0.02);
+};
+
 /** the amount paypal charges on pay out */
 export const getProviderPayOutCharge = (listing: Listing) => {
-  return Math.ceil(getListingProfit(listing) * 0.02);
+  return calculateProviderPayOutCharge(getListingProfit(listing));
 };
 
 /** Returns the amount we expect the payment provider to charge */

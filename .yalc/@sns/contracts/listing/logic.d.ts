@@ -21,6 +21,8 @@ export declare const getListingProfit: (listing: Listing) => number;
 export declare const getTotalCharges: (listing: Listing) => number;
 /** The amount paypal charges on pay in */
 export declare const getProviderPayInCharge: (listing: Listing) => number;
+/** Calculates the payout charge of any amount */
+export declare const calculateProviderPayOutCharge: (amount: number) => number;
 /** the amount paypal charges on pay out */
 export declare const getProviderPayOutCharge: (listing: Listing) => number;
 /** Returns the amount we expect the payment provider to charge */

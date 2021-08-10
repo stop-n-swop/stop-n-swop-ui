@@ -50,8 +50,11 @@ const getTotalCharges = listing => {
 const getProviderPayInCharge = listing => {
   return Math.ceil(getFinalPrice(listing) * 0.029) + 30;
 };
+const calculateProviderPayOutCharge = amount => {
+  return Math.ceil(amount * 0.02);
+};
 const getProviderPayOutCharge = listing => {
-  return Math.ceil(getListingProfit(listing) * 0.02);
+  return calculateProviderPayOutCharge(getListingProfit(listing));
 };
 const getProviderCharges = listing => {
   return getProviderPayInCharge(listing) + getProviderPayOutCharge(listing);
@@ -60,6 +63,7 @@ const getProfit = listing => {
   return getTotalCharges(listing) - getProviderCharges(listing);
 };
 
+exports.calculateProviderPayOutCharge = calculateProviderPayOutCharge;
 exports.getBasePrice = getBasePrice;
 exports.getDisplayPrice = getDisplayPrice;
 exports.getFinalPrice = getFinalPrice;
