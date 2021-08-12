@@ -26,7 +26,7 @@ export default forwardRef<HTMLDivElement, Props>(function Card(
         <div
           className={cx(
             'flex justify-between',
-            'text-lg font-bold',
+            'text-xl font-bold',
             'border-b-2 border-primary-lightest',
             'py-2 px-3 md:px-10 md:py-4 mb-3',
           )}

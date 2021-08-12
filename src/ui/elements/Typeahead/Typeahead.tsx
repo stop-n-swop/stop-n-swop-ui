@@ -14,6 +14,7 @@ interface Props {
   id: string;
   autoFocus?: boolean;
   error?: any;
+  isLoading?: boolean;
 }
 
 export default function Typeahead({
@@ -25,12 +26,15 @@ export default function Typeahead({
   id,
   autoFocus,
   error,
+  isLoading,
 }: Props) {
   return (
     <div>
-      <label htmlFor={id} className="block text-gray-200 text-sm py-6">
-        {label}
-      </label>
+      <If condition={label}>
+        <label htmlFor={id} className="block text-gray-200 text-sm py-6">
+          {label}
+        </label>
+      </If>
       <ReactSelect
         id="product_search"
         styles={{
@@ -73,6 +77,7 @@ export default function Typeahead({
         autoFocus={autoFocus}
         onInputChange={onSearch}
         inputId={id}
+        isLoading={isLoading}
       />
       <If condition={Boolean(error)}>
         <FieldError error={error} />

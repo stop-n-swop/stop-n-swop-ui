@@ -73,15 +73,26 @@
   @apply space-y-4;
 }
 .help h2 {
-  @apply text-lg font-semibold pb-4 border-secondary-darkest border-b-2;
+  @apply text-lg font-bold pb-4 border-primary-darkest border-b-2;
 }
 .help * ~ h2 {
   @apply pt-12;
 }
 .help h3 {
-  @apply font-semibold pb-4;
+  @apply font-semibold;
+}
+.help h3::after {
+  display: block;
+  content: '';
+  @apply border-secondary-darkest border-b pb-4 mr-8;
 }
 .help * ~ h3 {
+  @apply pt-8;
+}
+.help h4 {
+  @apply font-semibold pb-4;
+}
+.help * ~ h4 {
   @apply pt-8;
 }
 .help ol {

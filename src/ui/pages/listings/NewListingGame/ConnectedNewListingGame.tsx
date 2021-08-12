@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import { useGames } from 'application/games';
+import React, { useEffect, useState } from 'react';
+import { useGame, useGames } from 'application/games';
 import { useDebounce } from 'use-debounce';
 import { usePlatforms } from 'application/platforms';
+import { Status } from '@respite/core';
 import NewListing from './NewListingGame';
 
 export default function ConnectedNewListing() {
@@ -14,8 +15,20 @@ export default function ConnectedNewListing() {
     available: null,
     platforms: [],
   });
-  const { games } = gamesQuery.data;
+  const loaded = gamesQuery.status === Status.SUCCESS;
+  const loading = [Status.LOADING, Status.FETCHING].includes(gamesQuery.status);
+  // we only want to fetch the games when you've started searching
+  const games = loaded && debouncedSearch ? gamesQuery.data.games : [];
   const { data: platforms } = usePlatforms();
+  const gameQuery = useGame({ id: productId }, { suspendOnRefetch: true });
+
+  useEffect(() => {
+    // rather than causing the app to suspend, we want to silently trigger the fetch once you've started searching
+    if (debouncedSearch && gamesQuery.status === Status.IDLE) {
+      gamesQuery.resolve();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [debouncedSearch]);
 
   return (
     <NewListing
@@ -24,6 +37,8 @@ export default function ConnectedNewListing() {
       setProductId={setProductId}
       results={games}
       platforms={platforms}
+      gameQuery={gameQuery}
+      loading={loading}
     />
   );
 }
