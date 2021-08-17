@@ -29,8 +29,15 @@ export default function PriceStep({
   return (
     <>
       <div className={className}>
-        <h2 className="pb-4 font-semibold">
-          {getMessage(ids.listings.new.price.breakdown.title)}
+        <h2 className="pb-2 mb-2 font-semibold flex border-b">
+          <span className="w-1/2">
+            {getMessage(ids.listings.new.price.breakdown.earnings)}
+          </span>
+          <span className="w-1/2 text-right">
+            {getCurrency(Math.max(getListingProfit(listing), 0), {
+              currency,
+            })}
+          </span>
         </h2>
         <div className="flex flex-wrap text-sm font-light">
           <span className="w-1/2">
@@ -56,7 +63,7 @@ export default function PriceStep({
             </Button>
           </span>
           <span className="w-1/2 text-right">
-            {getCurrency(getPlatformCharge(listing), { currency })}
+            {getCurrency(0 - getPlatformCharge(listing), { currency })}
           </span>
           <span className="w-1/2">
             <Button
@@ -69,15 +76,7 @@ export default function PriceStep({
             </Button>
           </span>
           <span className="w-1/2 text-right">
-            {getCurrency(getProtectionCharge(listing), { currency })}
-          </span>
-          <span className="w-1/2">
-            {getMessage(ids.listings.new.price.breakdown.earnings)}
-          </span>
-          <span className="w-1/2 text-right">
-            {getCurrency(Math.max(getListingProfit(listing), 0), {
-              currency,
-            })}
+            {getCurrency(0 - getProtectionCharge(listing), { currency })}
           </span>
         </div>
       </div>

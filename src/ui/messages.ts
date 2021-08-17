@@ -187,12 +187,11 @@ const enMessages = {
           title: 'Platform fee',
         },
         breakdown: {
-          title: 'Price breakdown',
           price: 'Price:',
           postage: 'Postage:',
           platform: 'Platform fee:',
           protection: 'Order protection:',
-          earnings: 'Earnings:',
+          earnings: 'You will make:',
         },
       },
       region: {
