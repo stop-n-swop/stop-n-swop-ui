@@ -37,7 +37,7 @@ export default function NewListingCompete() {
           </div>
         }
         padding={false}
-        className="w-full xl:w-4/5 xl:mx-auto lg:my-8 xl:my-12"
+        className="w-full max-w-screen-lg mx-auto lg:my-8 xl:my-12"
       >
         <div className="p-6">
           <Tracker step="done" />

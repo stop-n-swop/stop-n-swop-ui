@@ -53,7 +53,7 @@ export default function ListingPage() {
       </PageTitle>
       <Card
         title={productName}
-        className="md:mt-3 lg:mt-4 xl:mt-8 xl:w-4/5 xl:mx-auto flex flex-col"
+        className="md:mt-3 lg:mt-4 xl:mt-8 lg:mx-auto flex flex-col max-w-screen-lg xl:max-w-screen-xl"
         padding="p-3 lg:p-8 xl:pt-12 xl:px-8 xl:pb-0"
       >
         <div className="lg:flex">

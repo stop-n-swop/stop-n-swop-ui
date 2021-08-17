@@ -19,13 +19,14 @@ export default function LevelUpUsername() {
     <div className="flex-grow flex flex-col justify-center lg:items-center">
       <Card
         title={getMessage(ids.account.aboutMe.username.title)}
-        className="flex-grow md:flex-grow-0 flex flex-col lg:w-2/3 xl:w-1/2"
+        className="flex-grow md:flex-grow-0 flex flex-col"
       >
         <Username
           description={getMessage(ids.auth.levelUp.username.description)}
           submitText={getMessage(ids.auth.levelUp.submitText)}
           onSubmit={() => push(redirect)}
           user={user}
+          fullWidth
         />
       </Card>
     </div>

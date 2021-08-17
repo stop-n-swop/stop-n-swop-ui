@@ -61,7 +61,7 @@ export default function Form({
     <Card
       title={useMessage(ids.listings.new[step]?.title)}
       padding={false}
-      className="w-full xl:w-4/5 xl:mx-auto lg:my-8 xl:my-12"
+      className="w-full max-w-screen-xl xl:mx-auto lg:my-8 xl:my-12"
     >
       <form
         className="p-6"

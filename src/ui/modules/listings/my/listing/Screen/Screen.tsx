@@ -16,7 +16,7 @@ export default function MyListingScreen({
   return (
     <Card
       title={game.name}
-      className="md:mt-3 lg:mt-4 xl:mt-8 xl:w-4/5 max-w-screen-lg mx-auto flex flex-col space-y-8"
+      className="md:mt-3 lg:mt-4 xl:mt-8 w-full max-w-screen-lg mx-auto flex flex-col space-y-8"
     >
       <If condition={error}>
         <FormError error={error} />

@@ -23,7 +23,7 @@ export default function AddressFields({
     <div
       className={cx(
         'space-y-4 flex-grow',
-        fullWidth || 'sm:w-1/2 sm:mx-auto',
+        fullWidth || 'md:w-1/2 sm:mx-auto',
         'lg:flex lg:flex-col lg:justify-center',
         className,
       )}

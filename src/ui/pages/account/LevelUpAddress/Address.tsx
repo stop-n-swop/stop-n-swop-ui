@@ -19,7 +19,7 @@ export default function LevelUpAddress() {
     <div className="flex-grow flex flex-col justify-center lg:items-center">
       <Card
         title={getMessage(ids.account.aboutMe.address.title)}
-        className="flex-grow flex flex-col md:flex-grow-0 lg:w-2/3 xl:w-1/2"
+        className="flex-grow flex flex-col md:flex-grow-0 w-full max-w-screen-md"
       >
         <Address
           description={getMessage(ids.auth.levelUp.address.description)

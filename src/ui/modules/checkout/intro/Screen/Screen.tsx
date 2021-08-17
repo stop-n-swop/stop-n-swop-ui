@@ -36,7 +36,7 @@ export default function Screen({
   return (
     <Card
       title={getMessage(ids.checkout.intro.title)}
-      className="flex-grow lg:w-2/3 lg:mx-auto lg:flex-grow-0 lg:mt-12"
+      className="flex-grow lg:mx-auto lg:flex-grow-0 lg:mt-12 w-full max-w-screen-lg"
     >
       <div className="space-y-8">
         <FormError error={error} />

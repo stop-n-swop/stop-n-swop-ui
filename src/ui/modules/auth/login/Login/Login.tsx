@@ -26,9 +26,9 @@ export default function LoginForm({
           <span>{intl.message(ids.auth.login.title)}</span>
         </div>
       }
-      className="relative flex-grow md:flex-grow-0 md:w-96 lg:w-auto xl:mx-auto"
+      className="relative flex-grow md:flex-grow-0 w-full max-w-screen-xs"
     >
-      <div className="space-y-6 sm:w-3/4 sm:mx-auto md:space-y-12 md:w-full xl:space-y-12">
+      <div className="space-y-6 sm:w-3/4 sm:mx-auto md:space-y-12 md:w-full xl:space-y-12 py-16">
         <If condition={Boolean(reason)}>
           <div className="lg:px-12 xl:px-0 text-center">
             {intl.message(ids.auth.levelUp.reason[reason])}

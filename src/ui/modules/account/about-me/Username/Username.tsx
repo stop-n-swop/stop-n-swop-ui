@@ -7,6 +7,7 @@ import { ids } from 'ui/messages';
 import FormError from 'ui/elements/FormError';
 import Submit from 'ui/elements/Submit';
 import { UsernameNotUniqueError } from '@sns/abyss';
+import cx from 'classnames';
 import Form from '../../dashboard/Form';
 import type { User } from '@sns/contracts/user';
 
@@ -16,8 +17,10 @@ export default function Username({
   description,
   submitText,
   user,
+  fullWidth,
 }: {
   title?: ReactNode;
+  fullWidth?: boolean;
   description: ReactNode;
   submitText: ReactNode;
   user: User;
@@ -55,7 +58,12 @@ export default function Username({
       <p className="text-sm text-gray-100 italic">{description}</p>
       <FormError error={error} />
       <div className="flex flex-col flex-grow">
-        <div className="flex-grow my-8 lg:my-20 w-full md:w-1/2 mx-auto">
+        <div
+          className={cx(
+            'flex-grow my-8 lg:my-20 w-full mx-auto',
+            fullWidth || 'md:w-1/2',
+          )}
+        >
           <InputController
             id="username"
             name="username"
