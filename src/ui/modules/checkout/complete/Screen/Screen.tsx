@@ -21,15 +21,15 @@ export default function CompleteScreen({ orderId }: { orderId: string }) {
             <Text orderId={orderId} />
           </div>
           <div className="flex justify-around">
+            <Button component={Link} to={GAMES} kind="secondary">
+              {getMessage(ids.checkout.complete.games)}
+            </Button>
             <Button
               component={Link}
               to={makeMyOrderPath({ orderId })}
               kind="primary"
             >
               {getMessage(ids.checkout.complete.myOrder)}
-            </Button>
-            <Button component={Link} to={GAMES} kind="secondary">
-              {getMessage(ids.checkout.complete.games)}
             </Button>
           </div>
         </div>

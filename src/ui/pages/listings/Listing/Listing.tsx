@@ -49,7 +49,7 @@ export default function ListingPage() {
       <PageTitle>
         <Link to={GAMES}>{getMessage(ids.games.title)}</Link>
         <Link to={makeGamePath({ productId })}>{productName}</Link>
-        <span>{listingId}</span>
+        <span>{getMessage(ids.listings.listing.title)}</span>
       </PageTitle>
       <Card
         title={productName}

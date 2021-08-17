@@ -85,7 +85,9 @@ const enMessages = {
       button: 'Create a listing',
     },
     listing: {
+      title: 'view listing',
       purchase: 'Buy now',
+      owned: 'Manage my listing',
       details: 'More details',
       seller: 'Seller',
       description: 'Description',
