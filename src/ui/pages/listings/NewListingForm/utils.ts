@@ -17,7 +17,7 @@ export const useOnSubmit = ({
     description,
     images,
     instructions,
-    postage,
+    postage = 0,
     price,
     region,
   }: Values) => {

@@ -8,7 +8,7 @@ type Options = ComponentProps<typeof Cleave>['options'];
 
 export default function CurrencyInput({
   className,
-  value,
+  value: actual,
   onChange,
   ...props
 }: Props) {
@@ -21,7 +21,15 @@ export default function CurrencyInput({
     numeralDecimalScale: 2,
     prefix: getCurrencySymbol(),
     rawValueTrimPrefix: true,
+    noImmediatePrefix: true,
   };
+
+  const value = (() => {
+    if (actual) {
+      return Number(actual) / 100;
+    }
+    return actual;
+  })();
 
   return (
     <Input
@@ -31,7 +39,7 @@ export default function CurrencyInput({
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       options={options}
-      value={Number(value) / 100}
+      value={value}
       onChange={(e) => {
         onChange?.({
           ...e,

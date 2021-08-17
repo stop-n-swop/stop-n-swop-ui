@@ -15,11 +15,9 @@ import PlatformFeeModal from './PlatformFeeModal';
 
 export default function PriceStep({
   listing,
-  showListedPrice = true,
   className,
 }: {
   listing: Listing;
-  showListedPrice?: boolean;
   className?: string;
 }) {
   const [showProtectionModal, setShowProtectionModal] = useState(false);
@@ -35,20 +33,18 @@ export default function PriceStep({
           {getMessage(ids.listings.new.price.breakdown.title)}
         </h2>
         <div className="flex flex-wrap text-sm font-light">
-          <If condition={showListedPrice}>
-            <span className="w-1/2">
-              {getMessage(ids.listings.new.price.breakdown.price)}
-            </span>
-            <span className="w-1/2 text-right">
-              {getCurrency(getBasePrice(listing), { currency })}
-            </span>
-            <span className="w-1/2">
+          <span className="w-1/2">
+            {getMessage(ids.listings.new.price.breakdown.price)}
+          </span>
+          <span className="w-1/2 text-right">
+            {getCurrency(getBasePrice(listing), { currency })}
+          </span>
+          {/* <span className="w-1/2">
               {getMessage(ids.listings.new.price.breakdown.postage)}
             </span>
             <span className="w-1/2 text-right">
               {getCurrency(getPostage(listing), { currency })}
-            </span>
-          </If>
+            </span> */}
           <span className="w-1/2">
             <Button
               className="font-light"

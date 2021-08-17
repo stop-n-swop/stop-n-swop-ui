@@ -30,11 +30,12 @@ export default function PriceStep({
     name: 'price',
     defaultValue: values.price ?? 0,
   });
-  const postage = useWatch({
-    control,
-    name: 'postage',
-    defaultValue: values.postage ?? 0,
-  });
+  const postage = 0;
+  // const postage = useWatch({
+  //   control,
+  //   name: 'postage',
+  //   defaultValue: values.postage ?? 0,
+  // });
   const currency = 'GBP';
   const listing = useMemo<Listing>(
     () => ({
@@ -116,7 +117,7 @@ export default function PriceStep({
               />
             )}
           />
-          <Controller
+          {/* <Controller
             name="postage"
             rules={{
               validate: {
@@ -143,13 +144,9 @@ export default function PriceStep({
                 autoComplete="off"
               />
             )}
-          />
+          /> */}
         </div>
-        <PriceBreakdown
-          className="lg:w-1/3 xl:w-1/4 pt-8"
-          listing={listing}
-          showListedPrice={false}
-        />
+        <PriceBreakdown className="lg:w-1/3 xl:w-1/4 pt-8" listing={listing} />
       </div>
       <Buttons previous={previous} />
     </div>

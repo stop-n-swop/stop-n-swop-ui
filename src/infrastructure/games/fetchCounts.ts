@@ -9,7 +9,7 @@ import type { Driver } from 'core/io';
 const fetchCounts =
   (driver: Driver): FetchCounts =>
   async ({ platforms, search, available }) => {
-    if (!platforms.length && !search) {
+    if (!platforms.length && !search && !available) {
       return {
         available: 0,
         platforms: {},

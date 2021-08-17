@@ -90,7 +90,8 @@ const enMessages = {
       seller: 'Seller',
       description: 'Description',
       postage: '+ {postage} delivery',
-      noPostage: 'Free delivery',
+      noPostage: '',
+      // noPostage: 'Free delivery',
     },
     filters: {
       features: {

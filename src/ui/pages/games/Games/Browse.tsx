@@ -135,7 +135,8 @@ export default function Browse() {
     search: latentSearch,
   });
   const listingsCountsQuery = useListingsCounts(gamesQuery);
-  const hasSearched = Boolean(latentSearch) || platformIds.length > 0;
+  const hasSearched =
+    Boolean(latentSearch) || platformIds.length > 0 || available;
 
   useResetParams({
     available,
