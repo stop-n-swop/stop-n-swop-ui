@@ -13,21 +13,26 @@ import { animated } from 'react-spring';
 import { ids } from 'ui/messages';
 import { LOGOUT, makeDashboardPath } from 'ui/constants/paths';
 import { useUser } from 'application/user';
-import { hasPayOutPermissions } from 'domain/selectors/user';
-import { useBalance } from 'application/payments';
 import { MIN_WITHDRAWAL_AMOUNT } from 'domain/constants/payments';
 import NavItem from './NavItem';
 
 interface Props {
+  balance: number;
+  currency: string;
   open: boolean;
   setOpen: (v: boolean) => void;
   onClose(): void;
 }
 
-export default function Account({ open, setOpen, onClose }: Props) {
+export default function Account({
+  open,
+  setOpen,
+  onClose,
+  balance,
+  currency,
+}: Props) {
   const [style, boop] = useBoop({ scale: 1.05, rotation: 10 });
   const { data: user } = useUser();
-  const balanceQuery = useBalance();
   const g = useGetMessage();
   const getCurrency = useGetCurrency();
 
@@ -59,35 +64,25 @@ export default function Account({ open, setOpen, onClose }: Props) {
             <div>{user.username}</div>
             <div className="text-xs font-thin">{user.email}</div>
           </li>
-          <If
-            condition={
-              hasPayOutPermissions(user) || balanceQuery.data.balance > 0
-            }
+          <NavItem
+            forceIcon
+            title="My balance"
+            to="/my/balance"
+            Icon={FaMoneyBillWave}
+            onClose={() => setOpen(false)}
+            styles={{
+              'md:hidden': balance >= MIN_WITHDRAWAL_AMOUNT,
+            }}
           >
-            <NavItem
-              forceIcon
-              title="My balance"
-              to="/my/balance"
-              Icon={FaMoneyBillWave}
-              onClose={() => setOpen(false)}
-            >
-              <div className="space-x-3 flex items-center">
-                <span className="md:hidden">{g(ids.nav.account.balance)}</span>
-                <span>
-                  {getCurrency(balanceQuery.data.balance, {
-                    currency: balanceQuery.data.currency,
-                  })}
-                </span>
-                <If
-                  condition={balanceQuery.data.balance >= MIN_WITHDRAWAL_AMOUNT}
-                >
-                  <span className="px-2 bg-secondary text-white rounded-lg">
-                    {g(ids.nav.account.balancePill)}
-                  </span>
-                </If>
-              </div>
-            </NavItem>
-          </If>
+            <div className="space-x-3 flex items-center">
+              <span className="md:hidden">{g(ids.nav.account.balance)}</span>
+              <span>
+                {getCurrency(balance, {
+                  currency,
+                })}
+              </span>
+            </div>
+          </NavItem>
         </If>
         <NavItem
           forceIcon

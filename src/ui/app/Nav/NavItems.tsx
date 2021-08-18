@@ -4,9 +4,10 @@ import {
   FaListAlt,
   FaUserCircle,
   FaShippingFast,
+  FaMoneyBillWave,
 } from 'react-icons/fa';
 import cx from 'classnames';
-import { useGetMessage } from 'ui/intl';
+import { useGetCurrency, useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 import {
   LOGIN,
@@ -15,6 +16,8 @@ import {
   NEW_LISTING,
   GAMES,
 } from 'ui/constants/paths';
+import { useBalance } from 'application/payments';
+import { MIN_WITHDRAWAL_AMOUNT } from 'domain/constants/payments';
 import NavItem from './NavItem';
 import Account from './Account';
 import Notices from './Notices';
@@ -53,6 +56,8 @@ export default function NavItems({
     return () => window.removeEventListener('click', fn);
   }, [accountOpen, close, open, setAccountOpen]);
   const getMessage = useGetMessage();
+  const getCurrency = useGetCurrency();
+  const balanceQuery = useBalance();
 
   return (
     <ul
@@ -88,8 +93,29 @@ export default function NavItems({
       </If>
       <Choose>
         <When condition={loggedIn}>
+          <NavItem
+            forceIcon
+            title="My balance"
+            to="/my/balance"
+            onClose={close}
+            styles={{
+              hidden: true,
+              'md:flex': balanceQuery.data.balance > MIN_WITHDRAWAL_AMOUNT,
+            }}
+            Icon={FaMoneyBillWave}
+          >
+            <div className="space-x-3 flex items-center">
+              <span>
+                {getCurrency(balanceQuery.data.balance, {
+                  currency: balanceQuery.data.currency,
+                })}
+              </span>
+            </div>
+          </NavItem>
           <Notices className="hidden md:block" />
           <Account
+            balance={balanceQuery.data.balance}
+            currency={balanceQuery.data.currency}
             open={accountOpen}
             setOpen={setAccountOpen}
             onClose={close}

@@ -21,7 +21,6 @@ const enMessages = {
       logout: 'log out',
       dashboard: 'my account',
       balance: 'balance',
-      balancePill: 'claim',
     },
   },
   elements: {
