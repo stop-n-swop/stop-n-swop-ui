@@ -252,6 +252,7 @@ const enMessages = {
   error: {
     unknown: 'An unknown error has ocurred',
     required: 'Required',
+    maxLength: 'Must be no more than {max} characters',
     title: "Uhoh this isn't right...",
     retryButton: 'Try again',
   },

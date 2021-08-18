@@ -63,6 +63,12 @@ export default function Account({
             type="email"
             defaultValue={user.clientEmail ?? user.email}
             label={getMessage(ids.account.billing.account.clientEmail.label)}
+            rules={{
+              maxLength: {
+                value: 50,
+                message: getMessage(ids.error.maxLength, { max: 50 }),
+              },
+            }}
           />
         </div>
       </div>

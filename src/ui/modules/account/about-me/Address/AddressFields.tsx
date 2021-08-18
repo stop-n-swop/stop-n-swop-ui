@@ -18,6 +18,10 @@ export default function AddressFields({
 }) {
   const getMessage = useGetMessage();
   const required = getMessage(ids.error.required);
+  const maxLength = (max: number) => ({
+    value: max,
+    message: getMessage(ids.error.maxLength, { max }),
+  });
 
   return (
     <div
@@ -34,7 +38,7 @@ export default function AddressFields({
           name="address.line1"
           label={getMessage(ids.account.aboutMe.address.line1.label)}
           defaultValue={address.line1 ?? ''}
-          rules={{ required }}
+          rules={{ required, maxLength: maxLength(50) }}
           autoComplete="address-line1"
         />
       </div>
@@ -45,6 +49,7 @@ export default function AddressFields({
           label={getMessage(ids.account.aboutMe.address.line2.label)}
           defaultValue={address.line2 ?? ''}
           autoComplete="address-line2"
+          rules={{ maxLength: maxLength(50) }}
         />
       </div>
       <div>
@@ -53,7 +58,7 @@ export default function AddressFields({
           name="address.city"
           label={getMessage(ids.account.aboutMe.address.city.label)}
           defaultValue={address.city ?? ''}
-          rules={{ required }}
+          rules={{ required, maxLength: maxLength(50) }}
           autoComplete="address-level2"
         />
       </div>
