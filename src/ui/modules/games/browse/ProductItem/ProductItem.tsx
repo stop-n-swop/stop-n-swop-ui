@@ -94,6 +94,7 @@ export default function ProductItem({
 
                   return (
                     <LinkButton
+                      key={productId}
                       to={makeGamePath({ productId })}
                       padding
                       className={cx(
