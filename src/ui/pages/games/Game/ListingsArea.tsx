@@ -19,7 +19,7 @@ export default function ListingsArea({ productId }: Props) {
     defaultValues: {
       condition: [],
       features: [],
-      priceRanges: [],
+      priceRange: [null, null],
       rating: 0,
       region: [],
     },
@@ -37,20 +37,14 @@ export default function ListingsArea({ productId }: Props) {
       instructions: values.features.includes('instructions') ? true : null,
       rating: values.rating ? values.rating : null,
       region: values.region.length ? values.region : null,
-      minPrice: values.priceRanges.reduce(
-        (min: number, [from]) => (min == null || from < min ? from : min),
-        null,
-      ),
-      maxPrice: values.priceRanges.reduce(
-        (max: number, [, to]) => (max == null || to > max ? to : max),
-        null,
-      ),
+      minPrice: values.priceRange[0],
+      maxPrice: values.priceRange[1] === Infinity ? null : values.priceRange[1],
     };
   }, [
     productId,
     values.condition,
     values.features,
-    values.priceRanges,
+    values.priceRange,
     values.rating,
     values.region,
   ]);

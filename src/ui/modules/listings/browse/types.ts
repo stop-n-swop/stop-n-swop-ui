@@ -4,6 +4,6 @@ export interface Values {
   features: Array<'boxed' | 'unboxed' | 'instructions'>;
   condition: Condition[];
   region: Region[];
-  priceRanges: Array<[number, number]>;
+  priceRange: [number, number];
   rating: number;
 }

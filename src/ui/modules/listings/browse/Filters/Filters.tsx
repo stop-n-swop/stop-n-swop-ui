@@ -1,16 +1,22 @@
 import { Condition, Region } from '@sns/contracts/listing';
 import React from 'react';
-import { useGetMessage } from 'ui/intl';
-import { CheckboxGroup, CheckboxGroupItem } from 'ui/elements/check';
+import { useGetCurrency, useGetMessage } from 'ui/intl';
+import { Checkbox, CheckboxGroup, CheckboxGroupItem } from 'ui/elements/check';
 import { ids } from 'ui/messages';
 import { Filter, Filters } from 'ui/modules/product/filters';
 import { Controller } from 'react-hook-form';
 // import StarFilter from './StarFilter';
 
-const priceRanges = [[0, 1000000]];
+const priceRanges = [
+  [0, 1000],
+  [1000, 5000],
+  [5000, 10000],
+  [10000, Infinity],
+];
 
 export default function ListingsFilters() {
   const getMessage = useGetMessage();
+  const getCurrency = useGetCurrency();
 
   return (
     <Filters>
@@ -70,19 +76,60 @@ export default function ListingsFilters() {
       </Filter>
       <Filter name="price" label={getMessage(ids.listings.filters.price.label)}>
         <Controller
-          name="priceRanges"
+          name="priceRange"
           defaultValue={[]}
-          render={({ field: { value, onChange } }) => (
-            <CheckboxGroup value={value} onChange={onChange}>
-              {priceRanges.map((range) => (
-                <CheckboxGroupItem
-                  key={`${range[0]}-${range[1]}`}
-                  label={`${range[0]} - ${range[1]}`}
-                  value={range}
-                />
-              ))}
-            </CheckboxGroup>
-          )}
+          render={({ field: { value, onChange } }) => {
+            const min = value[0] ?? Infinity;
+            const max = value[1] ?? -Infinity;
+            return (
+              <div className="space-y-3">
+                {priceRanges.map((range) => {
+                  const [from, to] = range;
+                  const label =
+                    to === Infinity
+                      ? `${getCurrency(from)}+`
+                      : `${getCurrency(from)} - ${getCurrency(to)}`;
+                  const checked = from >= min && to <= max;
+
+                  return (
+                    <Checkbox
+                      value={checked}
+                      label={label}
+                      onChange={(checked) => {
+                        const newValue = [min, max];
+                        if (checked) {
+                          if (from < min) {
+                            newValue[0] = from;
+                          }
+                          if (to > max) {
+                            newValue[1] = to;
+                          }
+                        } else {
+                          if (from === min) {
+                            if (to < max) {
+                              newValue[0] = to;
+                            } else {
+                              newValue[0] = null;
+                            }
+                          } else {
+                            newValue[0] = to;
+                          }
+                          if (to === max) {
+                            if (from > min) {
+                              newValue[1] = from;
+                            } else {
+                              newValue[1] = null;
+                            }
+                          }
+                        }
+                        onChange(newValue);
+                      }}
+                    />
+                  );
+                })}
+              </div>
+            );
+          }}
         />
       </Filter>
       <Filter
