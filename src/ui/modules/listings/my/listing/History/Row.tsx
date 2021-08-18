@@ -15,10 +15,8 @@ export default function HistoryRow({
   return (
     <tr className="border-b border-gray-600">
       <td className="py-3">{useDate(date)}</td>
-      <td className="hidden sm:table-cell">{username}</td>
-      <td className="text-right">
-        {useMessage(ids.order.status[status] ?? ids.order.status.open)}
-      </td>
+      <td>{useMessage(ids.order.status[status] ?? ids.order.status.open)}</td>
+      <td className="hidden sm:table-cell text-right">{username}</td>
     </tr>
   );
 }

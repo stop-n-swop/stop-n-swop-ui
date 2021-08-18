@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import {
   FaCheck,
   FaEnvelope,
@@ -12,7 +12,7 @@ import { Status as Action } from '@sns/contracts/order';
 import { Status } from '@respite/action';
 import { ids } from 'ui/messages';
 import Button, { Kind, State } from 'ui/elements/Button';
-import { useMessage } from 'ui/intl';
+import { useGetMessage } from 'ui/intl';
 
 const iconMatrix = {
   [Action.OPEN]: FaUnlock,
@@ -58,6 +58,7 @@ interface Props {
   state?: State;
   kind?: Kind;
   showIcon?: boolean;
+  children?: ReactNode;
 }
 
 const Nothing = () => null;
@@ -90,7 +91,9 @@ export default function ActionButton({
   kind: baseKind,
   state: baseState,
   showIcon = true,
+  children,
 }: Props) {
+  const g = useGetMessage();
   const Icon = (showIcon ? iconMatrix[action] : undefined) ?? Nothing;
   const kind = baseKind ?? kindMatrix[action];
   const state = getButtonState(active, status, action, baseState);
@@ -103,10 +106,15 @@ export default function ActionButton({
       state={state}
       onClick={() => onClick({ orderId, status: action })}
     >
-      <span>
-        <Icon />
-      </span>
-      <span>{useMessage(messageId)}</span>
+      <Choose>
+        <When condition={children}>{children}</When>
+        <Otherwise>
+          <span>
+            <Icon />
+          </span>
+          <span>{g(messageId)}</span>
+        </Otherwise>
+      </Choose>
     </Button>
   );
 }

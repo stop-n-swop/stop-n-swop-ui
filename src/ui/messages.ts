@@ -222,7 +222,9 @@ const enMessages = {
     },
     myListing: {
       listing: 'Listing',
-      order: 'order',
+      order: 'Order',
+      createdAt: 'Listing created',
+      placedAt: 'Order placed',
       multiOrders: {
         title: 'There are several active orders for this listing:',
       },
@@ -323,6 +325,7 @@ const enMessages = {
       [Status.DISPUTED]: "Something's wrong",
       [Status.NOT_RECEIVED]: "My order hasn't arrived yet",
       feedback: 'Leave feedback?',
+      unposted: "Actually I haven't posted it yet...",
     },
     status: {
       [Status.OPEN]: 'Listed',

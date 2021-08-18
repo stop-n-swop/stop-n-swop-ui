@@ -16,32 +16,25 @@ export default function History({
   username: string;
 }) {
   const getMessage = useGetMessage();
-  const [open, setOpen] = useState(false);
 
   return (
     <div>
-      <button
-        type="button"
-        className="w-full text-left mb-4 font-semibold border-secondary border-b"
-        onClick={() => setOpen(!open)}
-      >
+      <div className="w-full text-left mb-4 font-semibold border-secondary border-b">
         {getMessage(ids.listings.myListing.history.label)}
-      </button>
-      <If condition={open}>
-        <Suspense
-          fallback={
-            <div className="flex justify-center">
-              <Loader size="0.5rem" sensible />
-            </div>
-          }
-        >
-          <HistoryList
-            createdDate={createdDate}
-            username={username}
-            historyQuery={historyQuery}
-          />
-        </Suspense>
-      </If>
+      </div>
+      <Suspense
+        fallback={
+          <div className="flex justify-center">
+            <Loader size="0.5rem" sensible />
+          </div>
+        }
+      >
+        <HistoryList
+          createdDate={createdDate}
+          username={username}
+          historyQuery={historyQuery}
+        />
+      </Suspense>
     </div>
   );
 }

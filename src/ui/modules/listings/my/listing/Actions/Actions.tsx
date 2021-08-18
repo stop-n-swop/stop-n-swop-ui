@@ -146,5 +146,21 @@ export default function Actions({
       </div>
     );
   }
+
+  if (listing.status === Status.POSTED) {
+    return (
+      <div className={cx(wrapperClass, 'justify-center')}>
+        <ActionButton
+          orderId={order.id}
+          action={Status.APPROVED}
+          active={isActive(order.id, Status.APPROVED)}
+          status={status}
+          onClick={handleClick}
+        >
+          {getMessage(ids.order.actions.unposted)}
+        </ActionButton>
+      </div>
+    );
+  }
   return null;
 }

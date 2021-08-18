@@ -5,6 +5,7 @@ import { Status as ActionStatus } from '@respite/core';
 import { Provider as Intl } from 'ui/intl';
 import { en } from 'ui/messages';
 import { BrowserRouter } from 'react-router-dom';
+import History from 'ui/modules/listings/my/listing/History';
 import type { Listing } from '@sns/contracts/listing';
 import Overview from '../Overview';
 import Actions from '../Actions';
@@ -54,7 +55,13 @@ export const Basic = ({ status }: BasicProps) => {
               listing={listing}
               order={order}
               help={<Help status={status} />}
-              history={<div>history</div>}
+              history={
+                <History
+                  createdDate={new Date()}
+                  username="test"
+                  historyQuery={{ data: [] } as any}
+                />
+              }
               actions={
                 <Actions
                   onClick={() => null}

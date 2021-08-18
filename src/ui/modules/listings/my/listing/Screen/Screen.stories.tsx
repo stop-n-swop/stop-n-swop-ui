@@ -14,6 +14,7 @@ import BuyerAddress from '../BuyerAddress';
 import type { useAddress } from 'application/listings';
 import Help from '../Help';
 import type { User } from '@sns/contracts/user';
+import History from '../History';
 
 export default {
   title: 'modules / listings / my / listing / Screen',
@@ -49,6 +50,10 @@ export const Basic = ({ orderStatus, manualApproval }: BasicProps) => {
     id: 'order_id',
     listingId: listing.id,
     status: orderStatus,
+    created:
+      orderStatus !== Status.OPEN && orderStatus !== Status.CLOSED
+        ? new Date()
+        : null,
   } as Order;
   const user: User = {
     username: 'stoppy',
@@ -76,6 +81,7 @@ export const Basic = ({ orderStatus, manualApproval }: BasicProps) => {
                 orderId={order.id}
                 productId={game.id}
                 status={orderStatus}
+                placedAt={order.created}
                 help={<Help status={orderStatus} canApprove={manualApproval} />}
                 buyerAddress={
                   <BuyerAddress
@@ -96,7 +102,25 @@ export const Basic = ({ orderStatus, manualApproval }: BasicProps) => {
                     }
                   />
                 }
-                history={<div>history</div>}
+                history={
+                  <History
+                    createdDate={new Date()}
+                    username="test"
+                    historyQuery={
+                      {
+                        data: [
+                          {
+                            date: new Date(),
+                            listingId: '',
+                            orderId: '',
+                            username: 'test',
+                            status: Status.APPROVED,
+                          },
+                        ],
+                      } as any
+                    }
+                  />
+                }
                 actions={
                   <Actions
                     onChangeStatus={alert}

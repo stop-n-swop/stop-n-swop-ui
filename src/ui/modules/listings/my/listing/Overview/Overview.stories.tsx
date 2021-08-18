@@ -85,6 +85,7 @@ export const Basic = ({
             />
           }
           help={<Help status={orderStatus} canApprove={manualApproval} />}
+          placedAt={null}
           buyer="buyer_id"
           listing={listing}
           listingId={listing.id}

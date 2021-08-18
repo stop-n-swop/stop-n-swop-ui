@@ -2,7 +2,7 @@ import React, { ReactNode, Suspense } from 'react';
 import { Link } from 'react-router-dom';
 import { makeGameListingPath } from 'ui/constants/paths';
 import Button from 'ui/elements/Button';
-import { useGetMessage } from 'ui/intl';
+import { useGetDate, useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 import Loader from 'ui/modules/Loader';
 import PriceBreakdown from 'ui/modules/listings/PriceBreakdown';
@@ -18,6 +18,7 @@ interface Props {
   status: IStatus;
   buyer: string;
   listing: Listing;
+  placedAt: Date;
   history: ReactNode;
   actions: ReactNode;
   buyerAddress: ReactNode;
@@ -31,12 +32,14 @@ export default function Overview({
   status,
   buyer,
   listing,
+  placedAt,
   history,
   actions,
   buyerAddress,
   help,
 }: Props) {
   const getMessage = useGetMessage();
+  const getDate = useGetDate();
 
   return (
     <div className="space-y-8">
@@ -71,6 +74,22 @@ export default function Overview({
             </div>
             <If condition={buyer}>
               <Buyer username={buyer} />
+            </If>
+          </div>
+          <div className="flex">
+            <div className="w-1/2">
+              <h3 className="font-semibold">
+                {getMessage(ids.listings.myListing.createdAt)}
+              </h3>
+              <div className="text-sm">{getDate(listing.createdDate)}</div>
+            </div>
+            <If condition={placedAt}>
+              <div className="w-1/2">
+                <h3 className="font-semibold">
+                  {getMessage(ids.listings.myListing.placedAt)}
+                </h3>
+                <div className="text-sm">{getDate(placedAt)}</div>
+              </div>
             </If>
           </div>
         </div>
