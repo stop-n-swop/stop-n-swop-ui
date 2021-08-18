@@ -1,24 +1,22 @@
-import { CountryISO, CountryOptions } from 'domain/constants';
-import React from 'react';
-import Select, { Props as SelectProps } from '../Select';
+import { CountryOptions } from 'domain/constants';
+import React, { useState } from 'react';
+import fuzzy from 'fuzzy';
+import Typeahead, { Props as TProps } from '../Typeahead';
 
-type Props = Omit<SelectProps, 'options'>;
+type Props = Omit<TProps, 'options' | 'onSearch'>;
 
 export default function Country(props: Props) {
-  return (
-    <Select
-      {...props}
-      options={[
-        {
-          label: CountryISO.GB,
-          value: 'GB',
-        },
-        {
-          label: '------------',
-          value: '',
-        },
-        ...CountryOptions,
-      ]}
-    />
-  );
+  const [search, setSearch] = useState('');
+
+  const options = CountryOptions.filter((o) => {
+    if (!search) {
+      return true;
+    }
+    if (o.value === props.value) {
+      return true;
+    }
+    return fuzzy.test(search, o.label);
+  });
+
+  return <Typeahead {...props} options={options} onSearch={setSearch} />;
 }

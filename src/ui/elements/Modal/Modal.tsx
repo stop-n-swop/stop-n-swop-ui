@@ -28,6 +28,7 @@ export default function Modal({
       style={{ content: { fontSize: 20 } }}
     >
       <Card
+        glass={false}
         className="h-full border border-white overflow-y-auto flex flex-col flex-grow"
         innerClassName="flex-grow flex flex-col"
         title={

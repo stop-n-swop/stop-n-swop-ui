@@ -38,15 +38,15 @@ export default function AddressFields({
           autoComplete="address-line1"
         />
       </div>
-      {/* <div>
+      <div>
         <InputController
           id="address.line2"
           name="address.line2"
           label={getMessage(ids.account.aboutMe.address.line2.label)}
           defaultValue={address.line2 ?? ''}
-          autocomplete="address-line2"
+          autoComplete="address-line2"
         />
-      </div> */}
+      </div>
       <div>
         <InputController
           id="address.city"

@@ -63,18 +63,6 @@ export default function PriceStep({
 
   return (
     <div>
-      <div className="flex">
-        <Button
-          kind="tertiary"
-          component="a"
-          target="_blank"
-          href={makeGamePath({ productId })}
-          padding={false}
-          className="text-xs"
-        >
-          {getMessage(ids.listings.new.price.link)}
-        </Button>
-      </div>
       <div className="md:flex md:space-x-12 lg:space-x-0 lg:justify-around">
         <div className="mt-10 sm:w-2/3 lg:w-1/3 xl:w-1/4 space-y-4 mx-auto md:mx-0">
           <Controller

@@ -17,14 +17,15 @@ export default function DescriptionStep({ previous }: { previous(): void }) {
           rules={{
             maxLength: {
               value: 280,
-              // TODO: add to intl
-              message: 'Description must be no longer than a tweet',
+              message: getMessage(
+                ids.listings.new.description.description.maxLength,
+              ),
             },
           }}
           render={({ field: { ref, ...input }, fieldState: { error } }) => (
             <Textarea
               id="description"
-              label={getMessage(ids.listings.new.description.label)}
+              label={getMessage(ids.listings.new.description.description.label)}
               height={200}
               error={error}
               {...input}

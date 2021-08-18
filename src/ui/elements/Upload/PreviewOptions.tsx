@@ -19,7 +19,6 @@ export default function PreviewOptions({
       <Button
         className="w-3/4 sm:w-2/3 xl:w-1/2"
         kind="primary"
-        state="error"
         onClick={() => {
           setTimeout(() => {
             onClear();

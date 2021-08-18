@@ -9,27 +9,27 @@ const getColorClassNames = ({ state, kind }: { state: State; kind: Kind }) => {
     case 'primary':
       switch (state) {
         case 'error':
-          return 'bg-danger hover:bg-danger-light text-white';
+          return 'bg-danger hover:bg-danger-dark text-white';
         case 'disabled':
           return 'bg-primary-lightest text-gray-200';
         default:
-          return 'bg-primary hover:bg-primary-light text-white';
+          return 'bg-primary hover:bg-primary-darker text-white hover:text-gray-100';
       }
     case 'secondary':
       switch (state) {
         case 'error':
-          return 'bg-danger hover:bg-danger-light text-white';
+          return 'bg-danger hover:bg-danger-dark text-white';
         case 'disabled':
           return 'bg-secondary-lightest text-gray-500';
         default:
-          return 'bg-secondary hover:bg-secondary-light text-white';
+          return 'bg-secondary hover:bg-secondary-darker text-white hover:text-gray-100';
       }
     case 'tertiary':
       switch (state) {
         case 'disabled':
           return 'text-gray-300';
         case 'error':
-          return 'text-danger-light hover:text-danger-lighter';
+          return 'text-danger-light hover:text-danger-dark';
         case 'pending':
         case 'success':
           return 'text-transparent';
@@ -61,9 +61,9 @@ const getClassNames = ({
   return cx(
     'flex items-center justify-center rounded font-medium md:transition-colors relative',
     padding && 'px-4 py-3',
-    state === 'disabled' || state === 'pending' || state === 'success'
-      ? 'cursor-not-allowed'
-      : 'cursor-pointer',
+    state === 'disabled' && 'cursor-not-allowed',
+    (state === 'pending' || state === 'success') && 'cursor-wait',
+    (state === 'none' || state === 'error') && 'cursor-pointer',
   );
 };
 

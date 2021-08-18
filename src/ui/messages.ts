@@ -132,8 +132,11 @@ const enMessages = {
         required: 'Tell us what condition your game is in',
       },
       description: {
-        title: "You can add a description if you'd like",
-        label: 'Description',
+        title: 'Extras',
+        description: {
+          label: 'Additional notes',
+          maxLength: 'Your notes should be no longer than a tweet',
+        },
       },
       done: {
         title: "That's it, you're listed!",
@@ -180,7 +183,6 @@ const enMessages = {
       },
       price: {
         title: 'How much do you want to list this for?',
-        link: 'Check listing prices for this game',
         required: 'Please enter an amount',
         min: 'The minimum allowed price for a listing is {min}',
         label: 'Price',
@@ -197,7 +199,7 @@ const enMessages = {
         },
       },
       region: {
-        title: 'What region is your listing?',
+        title: 'What region code does your game have?',
         required: 'Please select a region',
       },
       review: {

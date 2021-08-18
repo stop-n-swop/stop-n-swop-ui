@@ -9,6 +9,7 @@ import {
   getProtectionCharge,
   getPostage,
 } from '@sns/contracts/listing';
+import { FaQuestionCircle } from 'react-icons/fa';
 
 export default function Price({
   listing,
@@ -46,9 +47,10 @@ export default function Price({
           title={getMessage(ids.help.whatsThis)}
           padding={false}
           onClick={openProtectionModal}
-          className="font-normal"
+          className="font-normal space-x-3"
         >
-          {getMessage(ids.checkout.intro.price.protection)}
+          <span>{getMessage(ids.checkout.intro.price.protection)}</span>
+          <FaQuestionCircle size="0.75em" />
         </Button>
       </span>
       <span className="w-1/2 text-right">

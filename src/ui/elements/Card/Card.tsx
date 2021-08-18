@@ -6,11 +6,19 @@ interface Props {
   className?: string;
   innerClassName?: string;
   title?: ReactNode;
+  glass?: boolean;
   children: ReactNode;
 }
 
 export default forwardRef<HTMLDivElement, Props>(function Card(
-  { title, padding = 'p-3 md:p-10', className, innerClassName, children },
+  {
+    title,
+    padding = 'p-3 md:p-10',
+    className,
+    innerClassName,
+    children,
+    glass = true,
+  },
   ref,
 ) {
   return (
@@ -18,8 +26,8 @@ export default forwardRef<HTMLDivElement, Props>(function Card(
       ref={ref}
       className={cx(
         className,
-        'bg-black sm:bg-opacity-75 rounded',
-        'backdrop-filter backdrop-blur',
+        'bg-black rounded',
+        glass && 'sm:bg-opacity-75 backdrop-filter backdrop-blur',
       )}
     >
       <If condition={title}>

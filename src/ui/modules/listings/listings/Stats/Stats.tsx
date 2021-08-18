@@ -19,6 +19,9 @@ export default function Statistics({ stats }: { stats: Stats }) {
 
   return (
     <div className="flex flex-wrap text-xs italic text-gray-300">
+      <If condition={ids.regions[stats.region]}>
+        <Pill>{getMessage(ids.regions[stats.region])}</Pill>
+      </If>
       <If condition={ids.conditions[stats.condition]}>
         <Pill>{getMessage(ids.conditions[stats.condition])}</Pill>
       </If>
@@ -27,9 +30,6 @@ export default function Statistics({ stats }: { stats: Stats }) {
       </If>
       <If condition={stats.instructions}>
         <Pill>{getMessage(ids.listings.filters.features.instructions)}</Pill>
-      </If>
-      <If condition={ids.regions[stats.region]}>
-        <Pill>{getMessage(ids.regions[stats.region])}</Pill>
       </If>
     </div>
   );

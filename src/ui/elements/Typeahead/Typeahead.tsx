@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react';
 import ReactSelect from 'react-select';
 import FieldError from '../FieldError';
 
-interface Props {
+export interface Props {
   label: ReactNode;
   value: any;
   onChange?(value: any): void;

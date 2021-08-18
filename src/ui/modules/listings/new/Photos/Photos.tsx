@@ -81,8 +81,8 @@ export default function PhotosStep({
         {getMessage(ids.listings.new.photos.description)}
       </div>
       <div className="flex flex-wrap">
-        {photos.map(({ key, required }) => (
-          <Row key={key} imageKey={key} required={required} />
+        {photos.map(({ key }) => (
+          <Row key={key} imageKey={key} required />
         ))}
       </div>
       <Buttons previous={previous} />

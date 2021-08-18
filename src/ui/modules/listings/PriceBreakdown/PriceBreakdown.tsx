@@ -10,6 +10,7 @@ import {
   // getPostage,
 } from '@sns/contracts/listing';
 import ProtectionModal from 'ui/modules/checkout/intro/ProtectionModal';
+import { FaQuestionCircle } from 'react-icons/fa';
 import type { Listing } from '@sns/contracts/listing';
 import PlatformFeeModal from './PlatformFeeModal';
 
@@ -54,12 +55,15 @@ export default function PriceStep({
             </span> */}
           <span className="w-1/2">
             <Button
-              className="font-light"
+              className="font-light space-x-3"
               title={getMessage(ids.help.whatsThis)}
               padding={false}
               onClick={() => setShowPlatformFeeModal(true)}
             >
-              {getMessage(ids.listings.new.price.breakdown.platform)}
+              <span>
+                {getMessage(ids.listings.new.price.breakdown.platform)}
+              </span>
+              <FaQuestionCircle size="0.75em" />
             </Button>
           </span>
           <span className="w-1/2 text-right">
@@ -67,12 +71,15 @@ export default function PriceStep({
           </span>
           <span className="w-1/2">
             <Button
-              className="font-light"
+              className="font-light space-x-3"
               title={getMessage(ids.help.whatsThis)}
               padding={false}
               onClick={() => setShowProtectionModal(true)}
             >
-              {getMessage(ids.listings.new.price.breakdown.protection)}
+              <span>
+                {getMessage(ids.listings.new.price.breakdown.protection)}
+              </span>
+              <FaQuestionCircle size="0.75em" />
             </Button>
           </span>
           <span className="w-1/2 text-right">

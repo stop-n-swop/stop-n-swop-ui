@@ -7,12 +7,13 @@ import {
   GiJapan,
   GiMapleLeaf,
 } from 'react-icons/gi';
-import { Controller } from 'react-hook-form';
+import { Controller, useFormContext } from 'react-hook-form';
 import OptionBox from 'ui/elements/OptionBox';
 import { useGetMessage, useMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 import useIsMounted from 'ui/hooks/useIsMounted';
 import FieldError from 'ui/elements/FieldError';
+import Button from 'ui/elements/Button';
 import Buttons from '../Buttons';
 
 const icons = {
@@ -45,9 +46,16 @@ function Option({
   );
 }
 
-export default function RegionStep({ previous }: { previous(): void }) {
+export default function RegionStep({
+  previous,
+  next,
+}: {
+  previous(): void;
+  next(): void;
+}) {
   const isMounted = useIsMounted();
   const getMessage = useGetMessage();
+  const { setValue } = useFormContext();
 
   return (
     <div>
@@ -76,7 +84,17 @@ export default function RegionStep({ previous }: { previous(): void }) {
           </div>
         )}
       />
-      <Buttons previous={previous} />
+      <Buttons previous={previous}>
+        <Button
+          className="text-sm font-light"
+          onClick={() => {
+            setValue('region', '');
+            next();
+          }}
+        >
+          I'm not sure
+        </Button>
+      </Buttons>
     </div>
   );
 }

@@ -47,7 +47,7 @@ export default function Form({
   requirementsQuery,
   error,
 }: Props) {
-  const { handleSubmit } = useFormContext<Values>();
+  const { handleSubmit, getValues } = useFormContext<Values>();
   const { push } = useHistory();
   const onPrevious = () => {
     if (step === firstStep) {
@@ -56,6 +56,9 @@ export default function Form({
       dispatch('previous');
     }
   };
+  const onNext = (values: Values = getValues()) => {
+    dispatch('next', values);
+  };
 
   return (
     <Card
@@ -63,12 +66,7 @@ export default function Form({
       padding={false}
       className="w-full max-w-screen-xl xl:mx-auto lg:my-8 xl:my-12"
     >
-      <form
-        className="p-6"
-        onSubmit={handleSubmit((values) => {
-          dispatch('next', values);
-        })}
-      >
+      <form className="p-6" onSubmit={handleSubmit(onNext)}>
         <Tracker step={step} />
         <Choose>
           <When condition={step === 'condition'}>
@@ -78,7 +76,7 @@ export default function Form({
             <Features previous={onPrevious} />
           </When>
           <When condition={step === 'region'}>
-            <Region previous={onPrevious} />
+            <Region previous={onPrevious} next={onNext} />
           </When>
           <When condition={step === 'price'}>
             <Price previous={onPrevious} productId={productId} />
