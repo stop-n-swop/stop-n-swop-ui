@@ -37,6 +37,7 @@ export interface SearchListingsRequest {
   minPrice?: number;
   maxPrice?: number;
   status?: Status;
+  username?: string;
 }
 export interface SearchListingsResponse {
   listings: Listing[];
@@ -57,6 +58,13 @@ export interface GetProductsListingCountResponse {
     productId: string;
     count: number;
   }>;
+}
+
+export interface GetCompletedListingCountParams {
+  userId: string;
+}
+export interface GetCompletedListingCountResponse {
+  count: number;
 }
 
 export interface GetHistoryParams {

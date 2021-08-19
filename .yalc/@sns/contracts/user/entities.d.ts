@@ -15,7 +15,9 @@ export interface User {
         city: string;
         postcode: string;
         country: string;
+        location: string;
     };
+    created: Date;
     preferences: {
         manualApproval: boolean;
     };

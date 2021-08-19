@@ -19,6 +19,7 @@ export const useListings = encase(
       rating,
       region,
       status,
+      username,
     } = args;
     const cache = useCache();
 
@@ -41,6 +42,7 @@ export const useListings = encase(
         status,
         [...(condition || [])].join(','),
         [...(region || [])].join(','),
+        username,
       ],
       {
         ttl: SHORT_TTL,

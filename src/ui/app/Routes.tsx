@@ -22,6 +22,7 @@ import {
   CHECKOUT_COMPLETE,
   CHECKOUT_PAYMENT,
   BALANCE,
+  USER,
 } from 'ui/constants/paths';
 import Home from 'ui/pages/Home';
 
@@ -30,6 +31,7 @@ const Dashboard = lazy(() => import('ui/pages/account/Dashboard'));
 const Balance = lazy(() => import('ui/pages/account/Balance'));
 const LevelUpUsername = lazy(() => import('ui/pages/account/LevelUpUsername'));
 const LevelUpAddress = lazy(() => import('ui/pages/account/LevelUpAddress'));
+const User = lazy(() => import('ui/pages/account/User'));
 // Auth
 const Login = lazy(() => import('ui/pages/auth/Login'));
 const Logout = lazy(() => import('ui/pages/auth/Logout'));
@@ -74,6 +76,9 @@ export default function Routes() {
       </Route>
       <Route path={LEVEL_UP_USERNAME} exact>
         <LevelUpUsername />
+      </Route>
+      <Route path={USER} exact>
+        <User />
       </Route>
 
       {/* Auth */}

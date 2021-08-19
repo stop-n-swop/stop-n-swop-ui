@@ -19,8 +19,9 @@ const enMessages = {
     account: {
       login: 'log in',
       logout: 'log out',
-      dashboard: 'my account',
+      dashboard: 'settings',
       balance: 'balance',
+      profile: 'profile',
     },
   },
   elements: {
@@ -86,7 +87,7 @@ const enMessages = {
     listing: {
       title: 'view listing',
       purchase: 'Buy now',
-      owned: 'Manage my listing',
+      owned: 'Manage',
       details: 'More details',
       seller: 'Seller',
       description: 'Description',
@@ -460,6 +461,12 @@ const enMessages = {
           label: 'fees',
         },
       },
+    },
+    user: {
+      created: 'Joined',
+      completedCount: 'Sold items',
+      location: 'Location',
+      listings: 'Current listings',
     },
   },
   checkout: {

@@ -16,8 +16,8 @@ const searchListings =
     } = await driver<SearchListingsRequest, SearchListingsResponse>({
       url: '/listings',
       data: {
-        ...omitNullProperties(data),
         status: Status.OPEN,
+        ...omitNullProperties(data),
       },
     });
 

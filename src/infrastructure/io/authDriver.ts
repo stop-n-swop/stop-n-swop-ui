@@ -21,11 +21,7 @@ const authDriver = (
 ): AuthDriver =>
   async function authDriver(args, tries = 1) {
     const { headers, ...rest } = args;
-    const { authToken, refreshToken } = await getTokens();
-
-    if (authToken == null && refreshToken == null) {
-      return navigate(makeLoginPath({ reason: Reason.LOGIN_REQUIRED }));
-    }
+    const { authToken } = await getTokens();
 
     try {
       return await driver({

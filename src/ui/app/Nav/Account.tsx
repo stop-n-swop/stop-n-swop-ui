@@ -2,8 +2,9 @@ import React from 'react';
 import {
   FaMoneyBillWave,
   FaSignOutAlt,
-  FaUserCheck,
+  FaUser,
   FaUserCircle,
+  FaUserCog,
 } from 'react-icons/fa';
 import cx from 'classnames';
 import { useBoop } from 'ui/hooks';
@@ -11,7 +12,7 @@ import Button from 'ui/elements/Button';
 import { useGetCurrency, useGetMessage } from 'ui/intl';
 import { animated } from 'react-spring';
 import { ids } from 'ui/messages';
-import { LOGOUT, makeDashboardPath } from 'ui/constants/paths';
+import { LOGOUT, makeDashboardPath, makeUserPath } from 'ui/constants/paths';
 import { useUser } from 'application/user';
 import { MIN_WITHDRAWAL_AMOUNT } from 'domain/constants/payments';
 import NavItem from './NavItem';
@@ -69,7 +70,10 @@ export default function Account({
             title="My balance"
             to="/my/balance"
             Icon={FaMoneyBillWave}
-            onClose={() => setOpen(false)}
+            onClose={() => {
+              setOpen(false);
+              onClose();
+            }}
             styles={{
               'md:hidden': balance >= MIN_WITHDRAWAL_AMOUNT,
             }}
@@ -86,8 +90,19 @@ export default function Account({
         </If>
         <NavItem
           forceIcon
+          to={makeUserPath({ username: user.username })}
+          Icon={FaUser}
+          onClose={() => {
+            setOpen(false);
+            onClose();
+          }}
+        >
+          {g(ids.nav.account.profile)}
+        </NavItem>
+        <NavItem
+          forceIcon
           to={makeDashboardPath()}
-          Icon={FaUserCheck}
+          Icon={FaUserCog}
           onClose={() => {
             setOpen(false);
             onClose();
