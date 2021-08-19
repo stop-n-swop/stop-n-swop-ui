@@ -46,3 +46,10 @@ export interface Config {
     clientId: string;
   };
 }
+
+export type Track = (
+  evt: string,
+  data?: { value?: number; unit?: string },
+) => void;
+
+export type TrackEvents = () => void;

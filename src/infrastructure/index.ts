@@ -1,4 +1,5 @@
 import './auth';
+import './events';
 import './games';
 import './images';
 import './io';

@@ -10,6 +10,7 @@ import type {
 } from 'core/auth';
 import type { AuthDriver, Driver } from 'core/io';
 import type { Navigate } from 'core/navigation';
+import type { Emit } from 'core/events';
 
 const authDriver = (
   driver: Driver,
@@ -18,6 +19,7 @@ const authDriver = (
   saveTokens: SaveTokens,
   clearTokens: ClearTokens,
   navigate: Navigate,
+  emit: Emit,
 ): AuthDriver =>
   async function authDriver(args, tries = 1) {
     const { headers, ...rest } = args;
@@ -49,6 +51,7 @@ const authDriver = (
     }
 
     await clearTokens();
+    emit('session_expired', {});
     return navigate(makeLoginPath({ reason: Reason.SESSION_EXPRED }));
   };
 

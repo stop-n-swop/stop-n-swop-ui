@@ -5,9 +5,10 @@ import type { Navigate } from 'core/navigation';
 import type { LogOut } from 'core/auth';
 import { useTokens } from './useTokens';
 import { useRefreshTokens } from './useRefreshTokens';
+import type { Emit } from 'core/events';
 
 export const useAuth = encase(
-  (logOut: LogOut, navigate: Navigate, console: Console) => () => {
+  (logOut: LogOut, navigate: Navigate, console: Console, emit: Emit) => () => {
     const { data: tokens } = useTokens();
 
     const { action } = useRefreshTokens();
@@ -17,6 +18,7 @@ export const useAuth = encase(
         action().catch(async (e) => {
           console.error(e);
           await logOut();
+          emit('session_expired', {});
           await navigate(LOGIN);
         });
       }

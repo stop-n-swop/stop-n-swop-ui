@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Overview from 'ui/modules/games/view/Overview';
 import QuickActions from 'ui/modules/games/view/QuickActions';
 import { Link, useParams } from 'react-router-dom';
@@ -8,9 +8,12 @@ import PageTitle from 'ui/elements/PageTitle';
 import { GAMES } from 'ui/constants/paths';
 import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
+import { useResolve } from 'react-jpex';
+import type { Emit } from 'core/events';
 import ListingsArea from './ListingsArea';
 
 export default function View() {
+  const emit = useResolve<Emit>();
   const [favourite, setFavourite] = useState(false);
   const { productId } =
     useParams<{
@@ -19,6 +22,14 @@ export default function View() {
   const { data: game } = useGame({ id: productId });
   const { data: platform } = usePlatform({ id: game.platformId });
   const getMessage = useGetMessage();
+
+  useEffect(() => {
+    emit('game_viewed', {
+      gameId: game.gameId,
+      platformId: game.platformId,
+      productId: game.id,
+    });
+  }, [emit, game.gameId, game.id, game.platformId]);
 
   return (
     <>
