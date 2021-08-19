@@ -2,7 +2,6 @@ import React from 'react';
 import { screen, act, render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import createWrapper from '__tests__/createWrapper';
-import 'infrastructure';
 import { ids } from 'ui/messages';
 import { createMemoryHistory } from 'history';
 import { makeDashboardPath } from 'ui/constants/paths';
