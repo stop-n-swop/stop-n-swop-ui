@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import background from 'ui/assets/bg-1.jpg';
 import Button from 'ui/elements/Button';
 import { Link } from 'react-router-dom';
@@ -10,6 +10,13 @@ import { GAMES, NEW_LISTING } from 'ui/constants/paths';
 
 export default function Home() {
   const getMessage = useGetMessage();
+
+  useEffect(() => {
+    window.pa.track({
+      name: 'test',
+      value: 'test value',
+    });
+  }, []);
 
   return (
     <div className="flex-grow flex flex-col relative overflow-y-hidden">
