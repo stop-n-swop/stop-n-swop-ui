@@ -557,12 +557,21 @@ const enMessages = {
       },
     },
   },
+  guide: {
+    title: 'Guide',
+  },
 };
 
 // this just creates us a deeply nested object of ids
 // i.e. ids.signin.title === 'signin.title'
-export const ids: typeof enMessages = unflatten(
-  Object.fromEntries(Object.keys(flatten(enMessages)).map((key) => [key, key])),
-);
+export const unflattenKeys = (obj: Record<string, any>): any => {
+  return unflatten(
+    Object.fromEntries(
+      Object.keys(flatten(obj)).map((key): [string, string] => [key, key]),
+    ),
+  );
+};
+
+export const ids: typeof enMessages = unflattenKeys(enMessages);
 
 export const en: Record<string, string> = flatten(enMessages);

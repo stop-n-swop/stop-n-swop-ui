@@ -86,6 +86,7 @@ const Button: ButtonComponent = forwardRef<HTMLButtonElement, Props>(
       ref={ref}
       type="button"
       className={cx(
+        'button',
         className,
         getColorClassNames({ kind, state }),
         getClassNames({ state, padding }),

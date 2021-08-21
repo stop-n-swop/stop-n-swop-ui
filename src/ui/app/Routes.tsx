@@ -25,6 +25,7 @@ import {
   USER,
 } from 'ui/constants/paths';
 import Home from 'ui/pages/Home';
+import TermsScreen from 'ui/modules/terms/Screen';
 
 // Account
 const Dashboard = lazy(() => import('ui/pages/account/Dashboard'));
@@ -55,6 +56,11 @@ const MyListing = lazy(() => import('ui/pages/listings/MyListing'));
 // Orders
 const MyOrders = lazy(() => import('ui/pages/orders/MyOrders'));
 const MyOrder = lazy(() => import('ui/pages/orders/MyOrder'));
+// Guide
+const Guide = lazy(() => import('ui/pages/Guide'));
+const Privacy = lazy(() => import('ui/help/terms/privacy.mdx'));
+const Terms = lazy(() => import('ui/help/terms/terms.mdx'));
+const Credits = lazy(() => import('ui/help/terms/credits.mdx'));
 
 export default function Routes() {
   return (
@@ -137,6 +143,25 @@ export default function Routes() {
       </Route>
       <Route path={MY_ORDER} exact>
         <MyOrder />
+      </Route>
+
+      <Route path="/privacy" exact>
+        <TermsScreen>
+          <Privacy />
+        </TermsScreen>
+      </Route>
+      <Route path="/terms" exact>
+        <TermsScreen>
+          <Terms />
+        </TermsScreen>
+      </Route>
+      <Route path="/credits" exact>
+        <TermsScreen>
+          <Credits />
+        </TermsScreen>
+      </Route>
+      <Route path="/guide">
+        <Guide />
       </Route>
     </>
   );

@@ -12,14 +12,35 @@ import Footer from './Footer';
 import Nav from './Nav';
 import Routes from './Routes';
 
-export default function Core() {
-  useExchanges();
-  const { pathname } = useLocation();
+const useScrolling = () => {
+  const { pathname, hash } = useLocation();
   const window = useResolve<Window>();
-  const navigate = useResolve<Navigate>();
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname, window]);
+  useEffect(() => {
+    if (hash) {
+      const handle = setInterval(() => {
+        const el = document.querySelector(hash);
+        if (el) {
+          clearInterval(handle);
+          setTimeout(() => {
+            el.scrollIntoView({ behavior: 'smooth' });
+          }, 100);
+        }
+      }, 100);
+      return () => clearInterval(handle);
+    }
+    return null;
+  }, [hash]);
+};
+
+export default function Core() {
+  useExchanges();
+  useScrolling();
+  const { pathname } = useLocation();
+  const window = useResolve<Window>();
+  const navigate = useResolve<Navigate>();
   const ready = useAuth();
 
   if (!ready) {

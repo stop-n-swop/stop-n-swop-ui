@@ -4,8 +4,11 @@ https://www.deviantart.com/fiercethebandit/art/Crash-Bandicoot-Running-Pixel-Dol
 https://imgur.com/6U0yrq5
 https://www.deviantart.com/jestloo/art/Pikachu-Running-481246636
 
+Sources
+https://rawg.io
+
 payments powered by
-https://www.paypal.com/
+https://www.paypal.com
 
 hosting / infrastructure
 https://www.digitalocean.com
@@ -15,6 +18,8 @@ https://www.mongodb.com
 development resources
 https://reactjs.org
 https://vitejs.dev
+https://mongoosejs.com
+https://nodejs.org
 https://fontawesome.com
 https://game-icons.net
 

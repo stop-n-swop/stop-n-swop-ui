@@ -1,3 +1,11 @@
+/*
+we make use of several import.meta properties exposed by vite
+when testing we might need to implement / polyfill these
+take a look at these resources:
+'babel-plugin-transform-import-meta'
+https://www.npmjs.com/package/vite-jest
+*/
+
 module.exports = {
   collectCoverage: false,
   collectCoverageFrom: [

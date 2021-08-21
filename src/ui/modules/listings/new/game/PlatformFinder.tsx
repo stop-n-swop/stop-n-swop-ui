@@ -3,6 +3,8 @@ import Select from 'ui/elements/Select';
 import type { Query } from '@respite/core';
 import type { Game, Platform } from '@sns/contracts/product';
 
+// FIXME: the search aliases should also have variants without 's
+
 interface Props {
   productId: string;
   platformId: string;
@@ -46,8 +48,13 @@ export default function PlatformFinder({
         value={platformId}
         onChange={(e) => {
           const { value } = e.target;
-          setPlatformId(value);
-          setProductId(`${value}-${game.gameId}`);
+          if (value) {
+            setPlatformId(value);
+            setProductId(`${value}-${game.gameId}`);
+          } else {
+            setPlatformId(null);
+            setProductId(game.id);
+          }
         }}
         options={platformOptions}
         disabled={platforms.length <= 1}

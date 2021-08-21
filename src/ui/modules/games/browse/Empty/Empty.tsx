@@ -9,11 +9,10 @@ export default function Empty() {
   return (
     <div className={cx('flex-grow flex justify-center items-center w-full')}>
       <Card
-        className={cx(
-          'w-full flex justify-center items-center space-x-4',
-          'md:w-auto px-12',
-          'lg:w-1/2',
-          'xl:w-1/3',
+        className={cx('w-full', 'md:w-auto', 'lg:w-1/2', 'xl:w-1/3')}
+        innerClassName={cx(
+          'flex justify-center items-center space-x-4',
+          'px-12',
         )}
       >
         <GiGameConsole size="8rem" className="text-primary" />
