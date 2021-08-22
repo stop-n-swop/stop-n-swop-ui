@@ -559,6 +559,16 @@ const enMessages = {
   guide: {
     title: 'Guide',
   },
+  footer: {
+    title: 'Stop N Swop',
+    games: 'Games',
+    list: 'Create a listing',
+    guide: 'Guide',
+    terms: 'Terms & conditions',
+    privacy: 'Privacy policy',
+    credits: 'Credits',
+    legal: '© {year} Stop N Swop',
+  },
 };
 
 // this just creates us a deeply nested object of ids
