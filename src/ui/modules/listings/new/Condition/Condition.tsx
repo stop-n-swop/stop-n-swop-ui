@@ -2,13 +2,14 @@ import React from 'react';
 import cx from 'classnames';
 import { Condition } from '@sns/contracts/listing';
 import { FaGrinBeam, FaGrinStars, FaMeh, FaSmile } from 'react-icons/fa';
-import { Controller } from 'react-hook-form';
+import { Controller, useFormContext } from 'react-hook-form';
 import OptionBox from 'ui/elements/OptionBox';
 import { useMessage, useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 import useIsMounted from 'ui/hooks/useIsMounted';
 import FieldError from 'ui/elements/FieldError';
 import Buttons from '../Buttons';
+import type { Values } from '../types';
 
 const icons = [FaMeh, FaSmile, FaGrinBeam, FaGrinStars];
 
@@ -40,6 +41,7 @@ function Option({
 export default function ConditionStep({ previous }: { previous(): void }) {
   const getMessage = useGetMessage();
   const isMounted = useIsMounted();
+  const { setValue } = useFormContext<Values>();
 
   return (
     <div>
@@ -69,7 +71,18 @@ export default function ConditionStep({ previous }: { previous(): void }) {
                     key={id}
                     id={id}
                     index={i}
-                    onChange={onChange}
+                    onChange={(value) => {
+                      onChange(value);
+                      switch (value) {
+                        case Condition.MINT:
+                        case Condition.LIKE_NEW:
+                          setValue('boxed', true);
+                          setValue('instructions', true);
+                          break;
+                        default:
+                          break;
+                      }
+                    }}
                     value={value}
                   />
                 ))}

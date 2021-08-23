@@ -39,9 +39,21 @@ export const sortBy = <T>(list: T[], fn: (t: T) => any, asc = true) => {
     const y = fn(b);
 
     if (asc) {
-      return x > y ? 1 : -1;
+      if (x > y) {
+        return 1;
+      }
+      if (x < y) {
+        return -1;
+      }
+      return 0;
     }
-    return x > y ? -1 : 1;
+    if (x > y) {
+      return -1;
+    }
+    if (x < y) {
+      return 1;
+    }
+    return 0;
   });
 };
 

@@ -4,6 +4,8 @@ import { useGetMessage } from 'ui/intl';
 import Upload from 'ui/elements/Upload';
 import { ids } from 'ui/messages';
 import useIsMounted from 'ui/hooks/useIsMounted';
+import { Condition } from '@sns/contracts/listing';
+import { sortBy } from 'crosscutting/utils';
 import Buttons from '../Buttons';
 import type { Values } from '../types';
 
@@ -58,21 +60,33 @@ export default function PhotosStep({
   requiredPhotos: Array<{ key: string; required: boolean }>;
 }) {
   const getMessage = useGetMessage();
+  const condition = useWatch<Values>({ name: 'condition' }) as Condition;
   const boxed = Boolean(useWatch<Values>({ name: 'boxed' }));
   const instructions = Boolean(useWatch<Values>({ name: 'instructions' }));
 
-  const photos = requiredPhotos.filter(({ key, required }) => {
-    if (required) {
-      return true;
-    }
+  let photos = requiredPhotos.filter(({ key, required }) => {
     if (boxKeys.includes(key)) {
       return boxed;
     }
     if (instructionKeys.includes(key)) {
       return instructions;
     }
-    return true;
+    return required;
   });
+  if (condition === Condition.MINT) {
+    photos = sortBy(photos, (photo) => {
+      if (boxKeys.includes(photo.key)) {
+        const i = boxKeys.slice().reverse().indexOf(photo.key);
+        return -1 - i;
+      }
+      return 0;
+    }).map((photo) => {
+      return {
+        ...photo,
+        required: boxKeys.includes(photo.key),
+      };
+    });
+  }
 
   return (
     <div>
@@ -81,8 +95,8 @@ export default function PhotosStep({
         {getMessage(ids.listings.new.photos.description)}
       </div>
       <div className="flex flex-wrap">
-        {photos.map(({ key }) => (
-          <Row key={key} imageKey={key} required />
+        {photos.map(({ key, required }) => (
+          <Row key={key} imageKey={key} required={required} />
         ))}
       </div>
       <Buttons previous={previous} />

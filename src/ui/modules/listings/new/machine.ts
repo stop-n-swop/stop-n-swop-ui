@@ -1,6 +1,15 @@
+import { Condition } from '@sns/contracts/listing';
 import { useMemo, useRef } from 'react';
 import { useMachine } from 'react-robot';
-import { createMachine, invoke, reduce, state, transition } from 'robot3';
+import {
+  createMachine,
+  invoke,
+  reduce,
+  state,
+  transition,
+  guard,
+} from 'robot3';
+import type { Values } from './types';
 
 type Action = 'next' | 'previous';
 export type Step =
@@ -16,16 +25,14 @@ export type Step =
   | 'error';
 
 interface Context {
-  values?: Record<string, any>;
+  values?: Values;
   onSubmit(values: Record<string, any>): Promise<unknown>;
 }
 
-const saveValues = reduce(
-  (ctx: Context, evt: { data: Record<string, any> }) => ({
-    ...ctx,
-    values: evt.data,
-  }),
-);
+const saveValues = reduce((ctx: Context, evt: { data: Values }) => ({
+  ...ctx,
+  values: evt.data,
+}));
 
 export const firstStep: Step = 'region';
 
@@ -45,6 +52,14 @@ const makeMachine = (initial: Step) =>
     {
       region: state(transition('next', 'condition', saveValues)),
       condition: state(
+        transition(
+          'next',
+          'photos',
+          guard((_context: Context, evt: { data: Values }) => {
+            return evt.data.condition === Condition.MINT;
+          }),
+          saveValues,
+        ),
         transition('next', 'features', saveValues),
         transition('previous', 'region'),
       ),
@@ -53,6 +68,13 @@ const makeMachine = (initial: Step) =>
         transition('next', 'photos', saveValues),
       ),
       photos: state(
+        transition(
+          'previous',
+          'condition',
+          guard((context: Context) => {
+            return context.values.condition === Condition.MINT;
+          }),
+        ),
         transition('previous', 'features'),
         transition('next', 'price', saveValues),
       ),
