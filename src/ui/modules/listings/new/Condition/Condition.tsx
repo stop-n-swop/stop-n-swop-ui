@@ -2,7 +2,7 @@ import React from 'react';
 import cx from 'classnames';
 import { Condition } from '@sns/contracts/listing';
 import { FaGrinBeam, FaGrinStars, FaMeh, FaSmile } from 'react-icons/fa';
-import { Controller, useFormContext } from 'react-hook-form';
+import { Controller, useFormContext, useWatch } from 'react-hook-form';
 import OptionBox from 'ui/elements/OptionBox';
 import { useMessage, useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
@@ -42,6 +42,7 @@ export default function ConditionStep({ previous }: { previous(): void }) {
   const getMessage = useGetMessage();
   const isMounted = useIsMounted();
   const { setValue } = useFormContext<Values>();
+  const value = useWatch<Values>({ name: 'condition' }) as Condition;
 
   return (
     <div>
@@ -91,6 +92,22 @@ export default function ConditionStep({ previous }: { previous(): void }) {
           );
         }}
       />
+      <div className="italic max-w-screen-sm mx-auto">
+        <Choose>
+          <When condition={value === Condition.MINT}>
+            {getMessage(ids.listings.new.condition.descriptions.mint)}
+          </When>
+          <When condition={value === Condition.LIKE_NEW}>
+            {getMessage(ids.listings.new.condition.descriptions.likeNew)}
+          </When>
+          <When condition={value === Condition.USED}>
+            {getMessage(ids.listings.new.condition.descriptions.used)}
+          </When>
+          <When condition={value === Condition.POOR}>
+            {getMessage(ids.listings.new.condition.descriptions.poor)}
+          </When>
+        </Choose>
+      </div>
       <Buttons showNext previous={previous} />
     </div>
   );

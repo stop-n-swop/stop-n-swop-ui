@@ -4,6 +4,8 @@ import likeNew from '../../../assets/guide/like-new.png';
 import mint from '../../../assets/guide/mint.png';
 import guide03 from '../../../assets/guide/guide03.png';
 import { LinkButton, AnchorButton } from '../../../elements/Button';
+import { useMessage } from '../../../intl';
+import { ids } from '../../../messages';
 
 ## Create your listing
 
@@ -27,19 +29,19 @@ Condition is a highly subjective property so hopefully these descriptions can he
 
 <img src={mint} alt="mint condition" />
 
-A mint condition game is sealed in the box, never been used. The holy grail of game conditions 🏆
+<p>{useMessage(ids.listings.new.condition.descriptions.mint)}</p>
 
 #### Like new
 
 <img src={likeNew} alt="like new condition" />
 
-The game is boxed with instructions, there is no visible wear on the game or box. This is often referred to as CIB or "Complete In Box"
+<p>{useMessage(ids.listings.new.condition.descriptions.likeNew)}</p>
 
 #### Used
 
 <img src={used} alt="used condition" />
 
-Good condition. The game may have a few marks, the instructions are looking a bit dog-eared, your mum threw the box away 10 years ago.
+<p>{useMessage(ids.listings.new.condition.descriptions.used)}</p>
 
 This is the most common state for older games.
 
@@ -47,7 +49,7 @@ This is the most common state for older games.
 
 <img src={poor} alt="poor condition" />
 
-A poor condition game has suffered some severe wear. The game itself should still work, however.
+<p>{useMessage(ids.listings.new.condition.descriptions.poor)}</p>
 
 Keep in mind that there might be some cross over. A "used" game might be unboxed without instructions, but a "poor" game might have both but in poor condition. Keep this in mind when deciding what condition to pick.
 

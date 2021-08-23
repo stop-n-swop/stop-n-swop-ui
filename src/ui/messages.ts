@@ -129,6 +129,13 @@ const enMessages = {
       condition: {
         title: 'What condition is your game in?',
         required: 'Tell us what condition your game is in',
+        descriptions: {
+          mint: 'A mint condition game is sealed in the box, never been used. The holy grail of game conditions 🏆',
+          likeNew:
+            'The game is boxed with instructions, there is no visible wear on the game or box. This is often referred to as CIB or "Complete In Box"',
+          used: 'Good condition. The game may have a few marks, the instructions are looking a bit dog-eared, your mum threw the box away 10 years ago.',
+          poor: `A poor condition game has suffered some severe wear. The game itself should still work, however.`,
+        },
       },
       description: {
         title: 'Extras',
