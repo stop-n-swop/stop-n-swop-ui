@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { useGames } from 'application/games';
 import Thumb from 'ui/modules/home/common/reel/Thumb';
 import useReel from 'ui/modules/home/common/reel/useReel';
@@ -7,6 +7,7 @@ import BlockHeading from 'ui/modules/home/common/BlockHeading';
 import Reel from 'ui/modules/home/common/reel/Reel';
 import { useMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
+import Loader from 'ui/modules/Loader';
 
 export default function Popular() {
   const {
@@ -19,22 +20,23 @@ export default function Popular() {
     platforms: [],
     search: 'zelda',
   });
-  const { size } = useReel();
+  const { items, page } = useReel(games);
 
   return (
     <Block className="px-2 sm:px-4 md:px-6 lg:px-8 xl:px-12">
       <BlockHeading>{useMessage(ids.home.listings.popular)}</BlockHeading>
-      <Reel>
-        {games.slice(0, size).map((game) => {
-          return (
+      <Reel
+        page={page}
+        items={items}
+        render={(game) => (
+          <Suspense key={game.id} fallback={<Loader />}>
             <Thumb
-              key={game.id}
               image={game.cover}
               label={<span className="text-xs">{game.name}</span>}
             />
-          );
-        })}
-      </Reel>
+          </Suspense>
+        )}
+      />
     </Block>
   );
 }

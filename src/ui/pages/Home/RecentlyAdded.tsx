@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { useGetCurrency, useMessage } from 'ui/intl';
 import { Status } from '@sns/contracts/order';
 import { useListings } from 'application/listings';
@@ -9,6 +9,7 @@ import BlockHeading from 'ui/modules/home/common/BlockHeading';
 import Thumb from 'ui/modules/home/common/reel/Thumb';
 import useReel from 'ui/modules/home/common/reel/useReel';
 import { ids } from 'ui/messages';
+import Loader from 'ui/modules/Loader';
 import type { Listing } from '@sns/contracts/listing';
 
 const Item = ({
@@ -38,23 +39,30 @@ const Item = ({
 
 export default function RecentlyAdded() {
   const getCurrency = useGetCurrency();
-  const { data: listings } = useListings({ status: Status.OPEN });
-  const { size } = useReel();
+  const { data: allListings } = useListings(
+    {
+      status: Status.OPEN,
+      sortBy: 'createdAt:desc',
+      limit: 20,
+    },
+    {
+      ttl: null,
+    },
+  );
+  const { items, page } = useReel(allListings);
 
   return (
     <Block className="px-2 sm:px-4 md:px-6 lg:px-8 xl:px-12">
       <BlockHeading>{useMessage(ids.home.listings.recent)}</BlockHeading>
-      <Reel>
-        {listings.slice(0, size).map((listing) => {
-          return (
-            <Item
-              key={listing.id}
-              getCurrency={getCurrency}
-              listing={listing}
-            />
-          );
-        })}
-      </Reel>
+      <Reel
+        page={page}
+        items={items}
+        render={(listing) => (
+          <Suspense key={listing.id} fallback={<Loader sensible />}>
+            <Item getCurrency={getCurrency} listing={listing} />
+          </Suspense>
+        )}
+      />
     </Block>
   );
 }

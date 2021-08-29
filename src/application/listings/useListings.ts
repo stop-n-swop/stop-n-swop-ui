@@ -20,6 +20,8 @@ export const useListings = encase(
       region,
       status,
       username,
+      limit,
+      sortBy,
     } = args;
     const cache = useCache();
 
@@ -43,6 +45,8 @@ export const useListings = encase(
         [...(condition || [])].join(','),
         [...(region || [])].join(','),
         username,
+        limit,
+        sortBy,
       ],
       {
         ttl: SHORT_TTL,

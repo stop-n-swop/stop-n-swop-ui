@@ -16,7 +16,9 @@ export default function Dash({
       <BlockHeading className="border-b-2 border-primary pb-4">
         {useMessage(ids.home.existing.dash.title, { username })}
       </BlockHeading>
-      <div className="flex justify-around pt-8">{children}</div>
+      <div className="flex flex-col flex-wrap space-y-4 md:space-y-0 md:flex-row md:justify-around pt-8">
+        {children}
+      </div>
     </Block>
   );
 }

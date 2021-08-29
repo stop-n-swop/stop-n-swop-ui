@@ -29,6 +29,8 @@ export interface SearchListingsRequest {
     maxPrice?: number;
     status?: Status;
     username?: string;
+    sortBy?: string;
+    limit?: number;
 }
 export interface SearchListingsResponse {
     listings: Listing[];
