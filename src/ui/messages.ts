@@ -39,12 +39,91 @@ const enMessages = {
     },
   },
   home: {
-    title: 'Buy, sell, expand your retro collection',
-    text: `
-      Here is some introductory text about the site and the stuff it awesomely does
-    `,
-    browse: 'Find stuff',
-    list: 'Sell stuff',
+    new: {
+      intro: {
+        title:
+          'We are a dedicated marketplace for trading retro games with other gamers',
+        haveAnAccount: 'have an account?',
+        logIn: 'log in',
+      },
+      buying: {
+        title: 'Buying?',
+        reasons: [
+          [
+            'Find what you want',
+            'no clutter, no trash, just true and honest searching',
+          ],
+          [
+            'Buy with confidence',
+            "we protect your purchases so you don't lose out to couterfeits",
+          ],
+          ['For gamers, by gamers 🎮', ''],
+        ],
+      },
+      selling: {
+        title: 'Selling?',
+        reasons: [
+          ['Selling is quick and easy', 'list your game in just a few steps'],
+          [
+            'Transparent fees',
+            'we keep things simple and show you exact how much you will make',
+          ],
+          [
+            'Dedicated to retro gaming',
+            'we want trading video games to be easy and straight forward',
+          ],
+        ],
+        cta: 'Get selling',
+        help: 'How it works',
+      },
+      protection: {
+        title: 'Trade with confidence',
+        text: [
+          'We protect your orders with {link}.',
+          'Funds are not released until both the buyer and seller are happy with the exchange',
+          'Which means you can buy and sell safely',
+        ],
+        linkText: 'Order Protection',
+      },
+      search: {
+        title: 'Find what you want',
+        text: [
+          "Don't you love searching a particular game and finding nothing but vaguely related games, coasters, keyrings, hand towels?",
+          'No?',
+          "Our listings are all neatly categorised and grouped by platform/game so you can make sure you're only searching for stuff you actually want!",
+        ],
+        cta: 'Get started',
+      },
+    },
+    existing: {
+      dash: {
+        title: 'Hi {username}',
+      },
+      balance: {
+        title: 'Your balance',
+        cta: 'My balance',
+      },
+      listings: {
+        title: 'Your listings',
+        cta: 'My listings',
+        open: '{count} open {count === 1 ? "listing" : "listings"}',
+        progress: '{count} {count === 1 ? "listing" : "listings"} in progress',
+        action:
+          '{count} {count === 1 ? "listing requires" : "listings require"} action',
+      },
+      orders: {
+        title: 'Your orders',
+        cta: 'My orders',
+        active: '{count} active {count === 1 ? "order" : "orders"}',
+        action:
+          '{count} {count === 1 ? "order requires" : "orders require"} action',
+      },
+    },
+    listings: {
+      popular: 'Popular',
+      recent: 'Recently added',
+      suggested: 'Suggested for you',
+    },
   },
   games: {
     title: 'Games',

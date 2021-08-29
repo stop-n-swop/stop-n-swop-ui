@@ -9,6 +9,7 @@ export default function Photo({ src: path, ...props }: Props) {
 
   const src = useMemo(() => {
     if (
+      !path ||
       path.startsWith('https://') ||
       path.startsWith('http://') ||
       path.startsWith('/')

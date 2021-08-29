@@ -13,7 +13,7 @@ export default function CompleteScreen({ orderId }: { orderId: string }) {
   return (
     <div className="flex-grow flex flex-col justify-center lg:items-center">
       <Card
-        className="flex-grow flex flex-col md:flex-grow-0 max-w-screen-lg"
+        className="flex-grow flex flex-col md:flex-grow-0 container xl:max-w-screen-lg mx-auto"
         title={getMessage(ids.checkout.complete.title)}
       >
         <div className="space-y-8">

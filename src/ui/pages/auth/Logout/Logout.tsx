@@ -1,7 +1,7 @@
 import { useLogOut } from 'application/auth';
 import { useEffect } from 'react';
 import { useResolve } from 'react-jpex';
-import { LOGIN } from 'ui/constants/paths';
+import { HOME } from 'ui/constants/paths';
 import type { Navigate } from 'core/navigation';
 
 export default function Logout() {
@@ -11,7 +11,7 @@ export default function Logout() {
   useEffect(() => {
     (async () => {
       await logOut();
-      navigate(LOGIN);
+      navigate(HOME);
     })();
   }, [logOut, navigate]);
 

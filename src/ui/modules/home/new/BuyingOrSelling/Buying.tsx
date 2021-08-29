@@ -1,0 +1,52 @@
+import React, { useState } from 'react';
+import { FaSearch } from 'react-icons/fa';
+import { useHistory } from 'react-router-dom';
+import { GAMES } from 'ui/constants/paths';
+import Button from 'ui/elements/Button';
+import Input from 'ui/elements/Input';
+import { useGetMessage } from 'ui/intl';
+import { ids } from 'ui/messages';
+import Block from '../../common/Block';
+import BlockHeading from '../../common/BlockHeading';
+import Reason from './Reason';
+import Reasons from './Reasons';
+
+export default function Buying() {
+  const [search, setSearch] = useState('');
+  const { push } = useHistory();
+  const g = useGetMessage();
+
+  return (
+    <Block className="bg-opacity-80 flex flex-col">
+      <BlockHeading>{g(ids.home.new.buying.title)}</BlockHeading>
+      <Reasons>
+        {ids.home.new.buying.reasons.map(([text, description]) => (
+          <Reason key={text} text={g(text)} description={g(description)} />
+        ))}
+      </Reasons>
+      <div className="flex flex-col items-start">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            push(`${GAMES}?q=${encodeURIComponent(search)}`);
+          }}
+          className="w-full max-w-screen-xs"
+        >
+          <Input
+            id="search"
+            name="q"
+            placeholder="Find a game"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            suffix={
+              <Button type="submit" aria-label="Search" kind="primary">
+                <FaSearch />
+              </Button>
+            }
+          />
+        </form>
+      </div>
+    </Block>
+  );
+}

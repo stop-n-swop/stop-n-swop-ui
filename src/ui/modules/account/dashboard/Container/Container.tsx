@@ -13,7 +13,7 @@ export default function Container({
   return (
     <Card
       title={useMessage(ids.account.dashboard.welcome, { name })}
-      className="w-full flex-grow lg:my-4 xl:w-4/5 mx-auto flex flex-col"
+      className="w-full flex-grow lg:my-4 mx-auto container xl:max-w-screen-xl flex flex-col"
       innerClassName="flex-grow flex flex-col"
     >
       {children}
