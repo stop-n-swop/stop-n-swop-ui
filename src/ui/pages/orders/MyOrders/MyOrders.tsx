@@ -32,7 +32,7 @@ export default function MyOrders() {
   return (
     <div>
       <PageTitle>{getMessage(ids.order.myOrders.title)}</PageTitle>
-      <div className="xl:w-4/5 xl:mx-auto mt-6">
+      <div className="mt-6 container mx-auto">
         <If condition={hasInactive}>
           <div className="flex justify-end my-6">
             <Toggle

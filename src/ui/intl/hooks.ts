@@ -1,4 +1,4 @@
-import { useCallback, useContext, useMemo } from 'react';
+import { ReactNode, useCallback, useContext, useMemo } from 'react';
 import { useResolve } from 'react-jpex';
 import { context } from './context';
 
@@ -7,19 +7,47 @@ export const useGetMessage = () => {
   const { messages } = useContext(context);
 
   return useCallback(
-    (id: string, values?: Record<string, any>) => {
-      let message = messages[id];
+    <R extends string | ReactNode = string>(
+      id: string,
+      values?: Record<string, any>,
+    ): R => {
+      const message = messages[id];
+      let hasJsx = false;
+
+      if (message == null) {
+        if (process.env.NODE_ENV !== 'production') {
+          warn(`Could not find a message for id ${id}`);
+        }
+        return id as unknown as R;
+      }
+
+      let parts = [message];
       if (message && values && message.includes('{')) {
-        message = Object.entries(values).reduce((message, [key, value]) => {
-          return message.replace(`{${key}}`, value);
-        }, message);
+        parts = message.split(/[{}]/).map((part, i) => {
+          if (i % 2 === 0) {
+            return part;
+          }
+
+          const value = values[part];
+          if (value) {
+            if (typeof value === 'object') {
+              hasJsx = true;
+            }
+            return value;
+          }
+          // eslint-disable-next-line no-new-func
+          const fn = new Function('props', `with(props) { return ${part} }`);
+          const result = fn(values);
+          if (typeof result === 'object') {
+            hasJsx = true;
+          }
+          return result;
+        });
       }
 
-      if (process.env.NODE_ENV !== 'production' && message == null) {
-        warn(`Could not find a message for id ${id}`);
-      }
+      const result = (hasJsx ? parts : parts.join('')) as unknown as R;
 
-      return message ?? id;
+      return result;
     },
     [messages, warn],
   );

@@ -30,7 +30,7 @@ export default function MyListings() {
   return (
     <div>
       <PageTitle>{getMessage(ids.listings.myListings.title)}</PageTitle>
-      <div className="xl:w-4/5 xl:mx-auto">
+      <div className="mx-auto container">
         <div className="flex justify-end my-6 space-x-8">
           <If condition={hasInactive}>
             <Toggle

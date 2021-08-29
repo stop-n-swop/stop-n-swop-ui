@@ -41,7 +41,7 @@ export default function Payment() {
           zIndex: 0,
         }}
       />
-      <div className="bg-white rounded-lg w-full max-w-screen-sm z-10">
+      <div className="bg-white rounded-lg container max-w-screen-sm z-10">
         <h1 className="text-gray-900 text-lg py-3 px-10 border-primary-darkest border-b-2">
           {g(ids.checkout.payment.title, {
             amount: getCurrency(getFinalPrice(listing), {

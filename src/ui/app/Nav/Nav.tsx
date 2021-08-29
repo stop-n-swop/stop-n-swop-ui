@@ -2,11 +2,13 @@ import React, { useCallback, useState } from 'react';
 import { FaChevronDown } from 'react-icons/fa';
 import cx from 'classnames';
 import Button from 'ui/elements/Button';
-import { useMessage } from 'ui/intl';
+import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 import { useIsLoggedIn } from 'application/auth';
 import { useMyListings } from 'application/listings';
 import { useMyOrders } from 'application/orders';
+import { useLocation } from 'react-router-dom';
+import { HOME } from 'ui/constants/paths';
 import Title from './Title';
 import NavItems from './NavItems';
 import Notices from './Notices';
@@ -18,6 +20,12 @@ export default function Nav() {
   const close = useCallback(() => setOpen(false), []);
   const myListingsQuery = useMyListings();
   const myOrdersQuery = useMyOrders();
+  const location = useLocation();
+  const g = useGetMessage();
+
+  if (location.pathname === HOME && !loggedIn) {
+    return null;
+  }
 
   return (
     <nav className="md:flex lg:px-4 border-b-2 border-primary bg-black">
@@ -30,7 +38,7 @@ export default function Nav() {
           </ul>
         </If>
         <Button
-          title={useMessage(ids.nav.menu)}
+          title={g(ids.nav.menu)}
           className="md:hidden"
           onClick={() => setOpen(!open)}
         >

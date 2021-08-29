@@ -15,7 +15,9 @@ export default function Footer() {
     <footer className="border-t-2 border-gray-700 lg:bg-opacity-90 bg-black text-sm">
       <div className="p-4 md:px-12 lg:px-20 md:flex md:justify-between space-y-4 md:space-y-0">
         <div className="md:flex md:flex-col md:space-y-6">
-          <div className="font-logo">{g(ids.footer.title)}</div>
+          <AnchorButton to="/" className="font-logo">
+            {g(ids.footer.title)}
+          </AnchorButton>
           <div className="flex space-x-4 md:space-x-8 md:text-lg">
             <AnchorButton target="_blank" href="https://twitter.com">
               <FaTwitter />

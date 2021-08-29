@@ -48,26 +48,28 @@ export default function BrowseScreen({
   return (
     <div className="flex-grow flex flex-col">
       <PageTitle>{useMessage(ids.games.title)}</PageTitle>
-      <Search value={search} onChange={onSearch} />
-      <Suspense fallback={<LoadingPage />}>
-        <Results
-          gamesQuery={gamesQuery}
-          listingsCountsQuery={listingsCountsQuery}
-          hasSearched={hasSearched}
-          platformIds={platformIds}
-          platformsQuery={platformsQuery}
-          gamesCountsQuery={gamesCountsQuery}
-          setPage={setPage}
-          setPlatformIds={setPlatformIds}
-          available={available}
-          setAvailable={setAvailable}
-          favourites={favourites}
-          isLoggedIn={isLoggedIn}
-          setFavourites={setFavourites}
-        >
-          {children}
-        </Results>
-      </Suspense>
+      <div className="flex-grow flex flex-col container mx-auto">
+        <Search value={search} onChange={onSearch} />
+        <Suspense fallback={<LoadingPage />}>
+          <Results
+            gamesQuery={gamesQuery}
+            listingsCountsQuery={listingsCountsQuery}
+            hasSearched={hasSearched}
+            platformIds={platformIds}
+            platformsQuery={platformsQuery}
+            gamesCountsQuery={gamesCountsQuery}
+            setPage={setPage}
+            setPlatformIds={setPlatformIds}
+            available={available}
+            setAvailable={setAvailable}
+            favourites={favourites}
+            isLoggedIn={isLoggedIn}
+            setFavourites={setFavourites}
+          >
+            {children}
+          </Results>
+        </Suspense>
+      </div>
     </div>
   );
 }

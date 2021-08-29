@@ -37,7 +37,7 @@ export default function View() {
         <Link to={GAMES}>{getMessage(ids.games.title)}</Link>
         <span>{game.name}</span>
       </PageTitle>
-      <div className="xl:w-4/5 xl:mx-auto flex-grow flex flex-col">
+      <div className="mx-auto container flex-grow flex flex-col">
         <Overview
           banner={game.banner}
           cover={game.cover}
