@@ -21,7 +21,7 @@ export default function Reel<T extends any>({ items, render, page }: Props<T>) {
     leave: {
       transform: 'translateX(-100%)',
     },
-    config: config.molasses,
+    config: config.slow,
   });
 
   return (

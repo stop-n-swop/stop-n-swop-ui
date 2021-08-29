@@ -2,6 +2,9 @@ import { useEffect, useMemo, useState } from 'react';
 import { useBreakpoints } from 'ui/breakpoints';
 
 export default function useReel<T extends { id: any }>(data: T[]) {
+  const offset = useMemo(() => {
+    return 3000 * Math.random();
+  }, []);
   const bp = useBreakpoints();
   const size = (() => {
     if (bp.xl) {
@@ -37,9 +40,9 @@ export default function useReel<T extends { id: any }>(data: T[]) {
       if (next !== page) {
         setPage(next);
       }
-    }, 10000);
+    }, 10000 + offset);
     return () => clearTimeout(h);
-  }, [page, totalPages]);
+  }, [page, totalPages, offset]);
 
   useEffect(() => {
     setPage(0);
