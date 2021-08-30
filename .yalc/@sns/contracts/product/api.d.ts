@@ -11,6 +11,10 @@ export interface SearchGamesResponse {
     nextPage: number;
     games: Game[];
 }
+export declare type GetPopularGamesRequest = {};
+export declare type GetPopularGamesResponse = {
+    games: Game[];
+};
 export declare type GetGameParams = {
     gameId: string;
 };
@@ -26,3 +30,8 @@ export interface GetSearchCountsResponse {
     total: number;
     platforms: Record<string, number>;
 }
+export declare type GameViwedParams = {
+    productId: string;
+};
+export declare type GameViewedRequest = void;
+export declare type GameViewedResponse = {};

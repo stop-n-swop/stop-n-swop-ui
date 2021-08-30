@@ -10,6 +10,7 @@ import Thumb from 'ui/modules/home/common/reel/Thumb';
 import useReel from 'ui/modules/home/common/reel/useReel';
 import { ids } from 'ui/messages';
 import Loader from 'ui/modules/Loader';
+import { makeGameListingPath } from 'ui/constants/paths';
 import type { Listing } from '@sns/contracts/listing';
 
 const Item = ({
@@ -24,6 +25,10 @@ const Item = ({
 
   return (
     <Thumb
+      to={makeGameListingPath({
+        productId: listing.productIds[0],
+        listingId: listing.id,
+      })}
       image={image}
       label={
         <>

@@ -22,4 +22,8 @@ export type FetchCounts = (args: {
   platforms: Record<string, number>;
 }>;
 
+export type FetchPopularGames = () => Promise<Game[]>;
+
 export type FetchGame = (args: { id: string }) => Promise<Game>;
+
+export type TrackGameView = (args: { id: string }) => Promise<void>;

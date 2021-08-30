@@ -8,11 +8,15 @@ export interface SearchGamesRequest {
   group?: boolean;
   favourites?: boolean;
 }
-
 export interface SearchGamesResponse {
   nextPage: number;
   games: Game[];
 }
+
+export type GetPopularGamesRequest = {};
+export type GetPopularGamesResponse = {
+  games: Game[];
+};
 
 export type GetGameParams = { gameId: string };
 export type GetGameRequest = void;
@@ -28,3 +32,7 @@ export interface GetSearchCountsResponse {
   total: number;
   platforms: Record<string, number>;
 }
+
+export type GameViwedParams = { productId: string };
+export type GameViewedRequest = void;
+export type GameViewedResponse = {};
