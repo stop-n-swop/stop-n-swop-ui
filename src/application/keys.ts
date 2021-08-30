@@ -31,6 +31,7 @@ export const ListingCountKey = Symbol('count');
 export const MyListingsKey = Symbol('my listings');
 export const HistoryKey = Symbol('history');
 export const AddressKey = Symbol('address');
+export const SuggestionsKey = Symbol('suggestions');
 // Actions
 export const CreateListingKey = Symbol('create listing');
 export const UpdateListingKey = Symbol('update listing');

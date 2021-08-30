@@ -52,3 +52,5 @@ export type FetchHistory = (args: {
 export type FetchAddress = (args: {
   listingId: string;
 }) => Promise<{ name: string; address: Address }>;
+
+export type FetchSuggestions = () => Promise<Listing[]>;

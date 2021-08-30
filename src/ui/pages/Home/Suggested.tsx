@@ -1,7 +1,6 @@
 import React, { Suspense } from 'react';
 import { useGetCurrency, useMessage } from 'ui/intl';
-import { Status } from '@sns/contracts/order';
-import { useListings } from 'application/listings';
+import { useSuggestions } from 'application/listings';
 import { useGame } from 'application/games';
 import Block from 'ui/modules/home/common/Block';
 import Reel from 'ui/modules/home/common/reel/Reel';
@@ -44,7 +43,7 @@ const Item = ({
 
 export default function Suggested() {
   const getCurrency = useGetCurrency();
-  const { data: listings } = useListings({ status: Status.OPEN });
+  const { data: listings } = useSuggestions();
   const { page, items } = useReel(listings);
 
   return (
