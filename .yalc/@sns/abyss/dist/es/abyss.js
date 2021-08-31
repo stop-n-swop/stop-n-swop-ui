@@ -1,3 +1,32 @@
+import crypto from 'crypto';
+
+let urlAlphabet =
+  'ModuleSymbhasOwnPr-0123456789ABCDEFGHNRVfgctiUvz_KqYTJkLxpZXIjQW';
+
+const POOL_SIZE_MULTIPLIER = 32;
+let pool, poolOffset;
+let random = bytes => {
+  if (!pool || pool.length < bytes) {
+    pool = Buffer.allocUnsafe(bytes * POOL_SIZE_MULTIPLIER);
+    crypto.randomFillSync(pool);
+    poolOffset = 0;
+  } else if (poolOffset + bytes > pool.length) {
+    crypto.randomFillSync(pool);
+    poolOffset = 0;
+  }
+  let res = pool.subarray(poolOffset, poolOffset + bytes);
+  poolOffset += bytes;
+  return res
+};
+let nanoid = (size = 21) => {
+  let bytes = random(size);
+  let id = '';
+  while (size--) {
+    id += urlAlphabet[bytes[size] & 63];
+  }
+  return id
+};
+
 let CommonErrorCode;
 (function (CommonErrorCode) {
   CommonErrorCode["UNKNOWN"] = "UNKNOWN";
@@ -9,16 +38,19 @@ let CommonErrorCode;
   CommonErrorCode["VALIDATION"] = "VALIDATION";
 })(CommonErrorCode || (CommonErrorCode = {}));
 class BaseError extends Error {
-  constructor(...args) {
-    super(...args);
+  constructor(message) {
+    super(message);
     this.code = CommonErrorCode.UNKNOWN;
     this.status = 500;
+    this.id = void 0;
+    this.id = nanoid();
   }
   toHttpResponse() {
     return {
       status: this.status,
       body: {
-        code: this.code
+        code: this.code,
+        id: this.id
       }
     };
   }
@@ -28,16 +60,19 @@ class BaseError extends Error {
 }
 class UnknownError extends BaseError {}
 class NotFoundError extends BaseError {
-  constructor(entity, id) {
-    super(`Could not find requested ${entity} ${id}`);
+  constructor(entity, entityId) {
+    super(`Could not find requested ${entity} ${entityId}`);
     this.entity = entity;
-    this.id = id;
+    this.entityId = entityId;
     this.code = CommonErrorCode.NOT_FOUND;
     this.status = 404;
   }
   toString() {
-    if (this.entity && this.id) {
-      return `Hmm, we couldn't find a ${this.entity} for ${this.id}`;
+    if (this.entity && this.entityId) {
+      return `Hmm, we couldn't find a ${this.entity} for ${this.entityId}`;
+    }
+    if (this.entity) {
+      return `Hmm, we couldn't find a ${this.entity}`;
     }
     return "Requested resource could not be found";
   }
@@ -45,8 +80,9 @@ class NotFoundError extends BaseError {
     return {
       status: this.status,
       body: {
-        code: this.code,
         id: this.id,
+        code: this.code,
+        entityId: this.entityId,
         entity: this.entity
       }
     };
@@ -102,6 +138,7 @@ class ValidationError extends BadRequestError {
     return {
       status: this.status,
       body: {
+        id: this.id,
         code: this.code,
         errors: this.errors
       }
@@ -151,7 +188,7 @@ class GameNotFoundError extends NotFoundError {
     this.code = GameErrorCode.GAME_NOT_FOUND;
   }
   toString() {
-    return `Hmm, we couldn't find a game with the id ${this.id}`;
+    return `Hmm, we couldn't find a game with the id ${this.entityId}`;
   }
 }
 class InvalidGamePlatformError extends BadRequestError {
@@ -168,6 +205,7 @@ class InvalidGamePlatformError extends BadRequestError {
     return {
       status: this.status,
       body: {
+        id: this.id,
         code: this.code,
         platformId: this.platformId,
         gameId: this.gameId
@@ -332,7 +370,7 @@ const hydrate = (code, error = {}) => {
     case CommonErrorCode.UNKNOWN:
       return new UnknownError();
     case CommonErrorCode.NOT_FOUND:
-      return new NotFoundError(error.entity, error.id);
+      return new NotFoundError(error.entity, error.entityId);
     case CommonErrorCode.NOT_AUTHENTICATED:
       return new NotAuthenticatedError();
     case CommonErrorCode.NOT_AUTHORISED:
@@ -346,7 +384,7 @@ const hydrate = (code, error = {}) => {
     case UserErrorCode.USERNAME_NOT_UNIQUE:
       return new UsernameNotUniqueError();
     case UserErrorCode.USER_NOT_FOUND:
-      return new UserNotFoundError(error.id);
+      return new UserNotFoundError(error.entityId);
     case AuthErrorCode.INVALID_LOGIN:
       return new InvalidLoginError();
     case AuthErrorCode.OUTDATED_TOKEN:
@@ -354,23 +392,23 @@ const hydrate = (code, error = {}) => {
     case ImageErrorCode.UPLOAD_FAILED:
       return new UploadFailedError();
     case GameErrorCode.GAME_NOT_FOUND:
-      return new GameNotFoundError(error.id);
+      return new GameNotFoundError(error.entityId);
     case GameErrorCode.INVALID_GAME_PLATFORM:
       return new InvalidGamePlatformError(error.platformId, error.gameId);
     case ListingErrorCode.CREATE_LISTING:
       return new CreateListingError();
     case ListingErrorCode.LISTING_NOT_FOUND:
-      return new ListingNotFoundError(error.id);
+      return new ListingNotFoundError(error.entityId);
     case ListingErrorCode.UPDATE_FAILED:
       return new UpdateListingFailedError();
     case ListingErrorCode.UPDATE_LISTING_PROHIBITED:
       return new UpdateListingProhibitedError();
     case PlatformErrorCode.PLATFORM_NOT_FOUND:
-      return new PlatformNotFoundError(error.id);
+      return new PlatformNotFoundError(error.entityId);
     case OrderErrorCode.INVALID_TRANSITION:
       return new InvalidStatusError();
     case OrderErrorCode.ORDER_NOT_FOUND:
-      return new OrderNotFoundError(error.id);
+      return new OrderNotFoundError(error.entityId);
     case OrderErrorCode.ORDER_NOT_OWNED_BY_USER:
       return new OrderNotOwnedByUserError("", "");
     case OrderErrorCode.LISTING_OWNED_BY_USER:

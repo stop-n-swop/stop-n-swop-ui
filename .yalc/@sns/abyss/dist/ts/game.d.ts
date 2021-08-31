@@ -17,6 +17,7 @@ export declare class InvalidGamePlatformError extends BadRequestError {
     toHttpResponse(): {
         status: number;
         body: {
+            id: string;
             code: GameErrorCode;
             platformId: string;
             gameId: string;

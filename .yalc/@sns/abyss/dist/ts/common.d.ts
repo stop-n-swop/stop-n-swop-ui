@@ -10,9 +10,11 @@ export declare enum CommonErrorCode {
 export interface IError {
     code: string;
     status: number;
+    id: string;
     toHttpResponse(): {
         status: number;
         body: {
+            id: string;
             code: string;
         };
     };
@@ -21,10 +23,13 @@ export interface IError {
 export declare abstract class BaseError extends Error implements IError {
     code: string;
     status: number;
+    id: string;
+    constructor(message?: string);
     toHttpResponse(): {
         status: number;
         body: {
             code: string;
+            id: string;
         };
     };
     toString(): string;
@@ -33,16 +38,17 @@ export declare class UnknownError extends BaseError {
 }
 export declare class NotFoundError extends BaseError {
     entity: string;
-    id: string;
+    entityId: string;
     code: string;
     status: number;
-    constructor(entity: string, id: string);
+    constructor(entity: string, entityId: string);
     toString(): string;
     toHttpResponse(): {
         status: number;
         body: {
-            code: string;
             id: string;
+            code: string;
+            entityId: string;
             entity: string;
         };
     };
@@ -74,6 +80,7 @@ export declare class ValidationError extends BadRequestError {
     toHttpResponse(): {
         status: number;
         body: {
+            id: string;
             code: string;
             errors: Record<string, string>;
         };
