@@ -20,7 +20,7 @@ export default function Selling() {
         ))}
       </Reasons>
       <div className="flex items-center justify-between">
-        <LinkButton kind="primary" to={NEW_LISTING} padding className="text-xl">
+        <LinkButton kind="primary" to={NEW_LISTING} padding className="text-lg">
           {g(ids.home.new.selling.cta)}
         </LinkButton>
         <AnchorButton

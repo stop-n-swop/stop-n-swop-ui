@@ -8,7 +8,10 @@ export default function Intro() {
   const g = useGetMessage();
 
   return (
-    <Block className="bg-opacity-80 backdrop-blur-sm backdrop-filter relative">
+    <Block
+      className="bg-opacity-80 backdrop-blur-sm backdrop-filter relative"
+      flush
+    >
       <div className="text-2xl text-center pb-4">
         {g(ids.home.new.intro.title)}
       </div>

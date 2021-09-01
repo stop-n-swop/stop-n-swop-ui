@@ -36,12 +36,20 @@ export default function Buying() {
           <Input
             id="search"
             name="q"
-            placeholder="Find a game"
+            placeholder="Search"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             suffix={
-              <Button type="submit" aria-label="Search" kind="primary">
+              <Button
+                type="submit"
+                aria-label="Search"
+                kind="primary"
+                className="rounded-l-none space-x-3"
+              >
                 <FaSearch />
+                <span className="hidden sm:inline md:hidden lg:inline">
+                  {g(ids.home.new.buying.cta)}
+                </span>
               </Button>
             }
           />

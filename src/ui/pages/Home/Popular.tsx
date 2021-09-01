@@ -5,18 +5,23 @@ import useReel from 'ui/modules/home/common/reel/useReel';
 import Block from 'ui/modules/home/common/Block';
 import BlockHeading from 'ui/modules/home/common/BlockHeading';
 import Reel from 'ui/modules/home/common/reel/Reel';
-import { useMessage } from 'ui/intl';
+import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
 import Loader from 'ui/modules/Loader';
 import { makeGamePath } from 'ui/constants/paths';
 
 export default function Popular() {
+  const getMessage = useGetMessage();
   const { data: games } = usePopularGames();
-  const { items, page } = useReel(games);
+  const { items, page, size } = useReel(games);
+
+  if (items.length < size) {
+    return null;
+  }
 
   return (
     <Block className="px-2 sm:px-4 md:px-6 lg:px-8 xl:px-12">
-      <BlockHeading>{useMessage(ids.home.listings.popular)}</BlockHeading>
+      <BlockHeading>{getMessage(ids.home.listings.popular)}</BlockHeading>
       <Reel
         page={page}
         items={items}

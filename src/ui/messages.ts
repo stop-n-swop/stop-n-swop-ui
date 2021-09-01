@@ -59,6 +59,7 @@ const enMessages = {
           ],
           ['For gamers, by gamers 🎮', ''],
         ],
+        cta: 'Find a game',
       },
       selling: {
         title: 'Selling?',

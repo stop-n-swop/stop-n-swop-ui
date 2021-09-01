@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react';
-import { useGetCurrency, useMessage } from 'ui/intl';
+import { useGetCurrency, useGetMessage } from 'ui/intl';
 import { useSuggestions } from 'application/listings';
 import { useGame } from 'application/games';
 import Block from 'ui/modules/home/common/Block';
@@ -42,13 +42,18 @@ const Item = ({
 };
 
 export default function Suggested() {
+  const getMessage = useGetMessage();
   const getCurrency = useGetCurrency();
   const { data: listings } = useSuggestions();
-  const { page, items } = useReel(listings);
+  const { page, items, size } = useReel(listings);
+
+  if (items.length < size) {
+    return null;
+  }
 
   return (
     <Block className="px-2 sm:px-4 md:px-6 lg:px-8 xl:px-12">
-      <BlockHeading>{useMessage(ids.home.listings.suggested)}</BlockHeading>
+      <BlockHeading>{getMessage(ids.home.listings.suggested)}</BlockHeading>
       <Reel
         page={page}
         items={items}

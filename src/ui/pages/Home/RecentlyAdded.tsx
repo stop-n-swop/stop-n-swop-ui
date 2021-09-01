@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react';
-import { useGetCurrency, useMessage } from 'ui/intl';
+import { useGetCurrency, useGetMessage } from 'ui/intl';
 import { Status } from '@sns/contracts/order';
 import { useListings } from 'application/listings';
 import { useGame } from 'application/games';
@@ -44,6 +44,7 @@ const Item = ({
 
 export default function RecentlyAdded() {
   const getCurrency = useGetCurrency();
+  const getMessage = useGetMessage();
   const { data: allListings } = useListings(
     {
       status: Status.OPEN,
@@ -54,11 +55,15 @@ export default function RecentlyAdded() {
       ttl: null,
     },
   );
-  const { items, page } = useReel(allListings);
+  const { items, page, size } = useReel(allListings);
+
+  if (items.length < size) {
+    return null;
+  }
 
   return (
     <Block className="px-2 sm:px-4 md:px-6 lg:px-8 xl:px-12">
-      <BlockHeading>{useMessage(ids.home.listings.recent)}</BlockHeading>
+      <BlockHeading>{getMessage(ids.home.listings.recent)}</BlockHeading>
       <Reel
         page={page}
         items={items}
