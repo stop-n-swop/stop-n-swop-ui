@@ -3,6 +3,7 @@ import { useGetMessage } from 'ui/intl';
 import { Checkbox, CheckboxGroup, CheckboxGroupItem } from 'ui/elements/check';
 import { ids } from 'ui/messages';
 import { Filter } from 'ui/modules/product/filters';
+import { sortBy } from 'crosscutting/utils';
 import type { Platform } from '@sns/contracts/product';
 import type { useCounts } from 'application/games';
 
@@ -70,7 +71,12 @@ export default function BrowseFilters({
         label={getMessage(ids.games.filters.platform.label)}
       >
         <CheckboxGroup value={platformIds} onChange={setPlatformIds} limit={5}>
-          {platforms
+          {sortBy(platforms, (platform) => {
+            if (platformIds.includes(platform.id)) {
+              return `000000${platform.name}`;
+            }
+            return platform.name;
+          })
             .filter(({ id }) => {
               const count = platformCounts[id] ?? 0;
 
@@ -95,7 +101,12 @@ export default function BrowseFilters({
             onChange={setDeveloperIds}
             limit={4}
           >
-            {Object.values(developers).map(({ id, count, name }) => {
+            {sortBy(Object.values(developers), (developer) => {
+              if (developerIds.includes(developer.id)) {
+                return `00000000${developer.name}`;
+              }
+              return developer.name;
+            }).map(({ id, count, name }) => {
               const label = `${name} (${count})`;
 
               return <CheckboxGroupItem key={id} label={label} value={id} />;
@@ -113,7 +124,12 @@ export default function BrowseFilters({
             onChange={setPublisherIds}
             limit={4}
           >
-            {Object.values(publishers).map(({ id, count, name }) => {
+            {sortBy(Object.values(publishers), (publisher) => {
+              if (publisherIds.includes(publisher.id)) {
+                return `000000${publisher.name}`;
+              }
+              return publisher.name;
+            }).map(({ id, count, name }) => {
               const label = `${name} (${count})`;
 
               return <CheckboxGroupItem key={id} label={label} value={id} />;
