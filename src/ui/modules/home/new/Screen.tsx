@@ -1,6 +1,4 @@
-/* eslint-disable react/jsx-no-literals */
 import React, { ReactNode } from 'react';
-import Block from '../common/Block';
 import BuyingOrSelling from './BuyingOrSelling';
 import Header from './Header';
 import Intro from './Intro';
@@ -19,9 +17,6 @@ export default function Screen({
       <div className="sm:space-y-8 xl:space-y-12">
         <div>
           <Header />
-          <Block className="bg-white text-gray-600 text-sm text-center" flush>
-            This site is currently still in active development
-          </Block>
           <Intro />
           <BuyingOrSelling />
         </div>

@@ -4,7 +4,7 @@ import Selling from './Selling';
 
 export default function BuyingOrSelling() {
   return (
-    <div className="md:flex md:justify-around md:bg-black">
+    <div className="md:flex">
       <Selling />
       <Buying />
     </div>

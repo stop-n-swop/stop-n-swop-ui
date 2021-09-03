@@ -27,7 +27,7 @@ export default forwardRef<HTMLDivElement, Props>(function Card(
       className={cx(
         className,
         'bg-black rounded',
-        glass && 'sm:bg-opacity-75 backdrop-filter backdrop-blur',
+        glass && 'sm:bg-opacity-90 backdrop-filter backdrop-blur',
       )}
     >
       <If condition={title}>

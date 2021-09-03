@@ -13,7 +13,7 @@ interface Props {
 
 export default function Search({ onChange, value, children }: Props) {
   return (
-    <div className="lg:w-2/3 xl:w-1/2 lg:mx-auto mb-4 lg:mb-8 xl:my-12 flex mx-6">
+    <div className="w-full xl:w-1/2 lg:mx-auto mb-4 flex bg-black lg:bg-opacity-70 px-8 pb-4">
       <Input
         id="browse_search"
         type="search"

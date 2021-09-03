@@ -4,15 +4,12 @@ import { Provider as Intl } from 'ui/intl';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider as Respite } from '@respite/core';
 import { en } from 'ui/messages';
-import background from 'ui/assets/bg-1.jpg';
 import LoadingPage from 'ui/pages/Loading';
 import { BreakpointProvider } from 'ui/breakpoints';
 import { Breakpoints } from 'ui/constants/breakpoints';
 import StuffNation from 'ui/pages/StuffNation';
 import Core from './Core';
-
-// TODO: get this
-// https://www.dreamstime.com/taipei-taiwan-february-studio-shot-pile-different-nintendo-games-shot-above-large-pile-retro-nintendo-games-image113236003#_
+import Background from './Background';
 
 export default function App() {
   if (
@@ -32,12 +29,7 @@ export default function App() {
                 className="flex-grow flex flex-col"
                 style={{ zIndex: 0, fontSize: 20 }}
               >
-                <div
-                  style={{
-                    backgroundImage: `url(${background})`,
-                  }}
-                  className="h-screen w-screen top-0 left-0 fixed bg-center pointer-events-none bg-cover filter grayscale md:blur-sm brightness-50"
-                />
+                <Background />
                 <Suspense fallback={<LoadingPage />}>
                   <Core />
                 </Suspense>

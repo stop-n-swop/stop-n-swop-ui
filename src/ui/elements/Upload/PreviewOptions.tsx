@@ -13,7 +13,7 @@ export default function PreviewOptions({
 }) {
   return (
     <div
-      className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-75 flex flex-col items-center justify-around"
+      className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-80 flex flex-col items-center justify-around"
       onMouseLeave={onClose}
     >
       <Button

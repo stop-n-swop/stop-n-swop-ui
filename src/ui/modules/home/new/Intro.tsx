@@ -9,7 +9,7 @@ export default function Intro() {
 
   return (
     <Block
-      className="bg-opacity-80 backdrop-blur-sm backdrop-filter relative"
+      className="backdrop-blur-sm backdrop-filter relative bg-primary-dark"
       flush
     >
       <div className="text-2xl text-center pb-4">

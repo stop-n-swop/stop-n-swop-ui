@@ -9,7 +9,6 @@ import { useGetCurrency, useGetMessage } from 'ui/intl';
 import { useMyOrder } from 'application/orders';
 import { useListing } from 'application/listings';
 import FormError from 'ui/elements/FormError';
-import background from 'ui/assets/bg-1.jpg';
 import { ids } from 'ui/messages';
 
 export default function Payment() {
@@ -33,14 +32,6 @@ export default function Payment() {
 
   return (
     <div className="flex-grow flex justify-center items-center relative overflow-y-hidden">
-      <div
-        className="h-screen w-screen left-0 absolute bg-center pointer-events-none bg-cover filter blur-sm"
-        style={{
-          top: -45,
-          backgroundImage: `url(${background})`,
-          zIndex: 0,
-        }}
-      />
       <div className="bg-white rounded-lg container max-w-screen-sm z-10">
         <h1 className="text-gray-900 text-lg py-3 px-10 border-primary-darkest border-b-2">
           {g(ids.checkout.payment.title, {

@@ -20,7 +20,7 @@ export default function OrderProtection() {
   );
 
   return (
-    <Block className="bg-opacity-80 md:bg-opacity-100">
+    <Block className="bg-opacity-90 md:bg-opacity-100">
       <BlockHeading>{g(ids.home.new.protection.title)}</BlockHeading>
       <div className="space-y-8">
         {ids.home.new.protection.text.map((id) => (
