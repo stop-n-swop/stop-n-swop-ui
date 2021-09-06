@@ -20,6 +20,7 @@ export interface User {
     created: Date;
     preferences: {
         manualApproval: boolean;
+        noticeEmails: boolean;
     };
     verified: boolean;
 }

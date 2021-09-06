@@ -18,6 +18,14 @@ export const sections: Section[] = [
         to: makeDashboardPath({ section: 'about-me', subSection: 'address' }),
         label: ids.account.dashboard.sections.aboutMe.address,
       },
+      {
+        key: 'preferences',
+        to: makeDashboardPath({
+          section: 'about-me',
+          subSection: 'preferences',
+        }),
+        label: ids.account.dashboard.sections.aboutMe.preferences,
+      },
     ],
   },
   {

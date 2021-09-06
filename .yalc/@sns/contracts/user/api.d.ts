@@ -17,6 +17,7 @@ export declare type LoginResponse = RefreshTokenResponse;
 export interface UpdateUserRequest extends Pick<Partial<User>, "username"> {
     address?: Partial<User["address"]>;
     clientEmail?: string;
+    preferences?: Pick<Partial<User["preferences"]>, "noticeEmails">;
 }
 export declare type UpdateUserResponse = void;
 export interface FetchFavouritesResponse {

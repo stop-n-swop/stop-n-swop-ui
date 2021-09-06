@@ -462,6 +462,7 @@ const enMessages = {
           label: 'About me',
           username: 'Username',
           address: 'Address',
+          preferences: 'Preferences',
         },
         billing: {
           label: 'Billing',
@@ -482,9 +483,11 @@ const enMessages = {
             'Your username should be no longer than {maxLength} characters',
         },
       },
-      email: {
-        email: {
-          label: 'Your email address',
+      preferences: {
+        title: 'Preferences',
+        description: 'Set up your personal preferences for your account',
+        noticeEmails: {
+          label: 'Receive emails for notifications',
         },
       },
       address: {

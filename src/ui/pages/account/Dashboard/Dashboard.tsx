@@ -12,6 +12,7 @@ import { ids } from 'ui/messages';
 import { useAuthGuard } from 'application/auth';
 import { useUser } from 'application/user';
 import Account from 'ui/modules/account/billing/Account';
+import Preferences from 'ui/modules/account/about-me/Preferences';
 
 export default function Dashboard() {
   useAuthGuard();
@@ -50,6 +51,21 @@ export default function Dashboard() {
             <Address
               title={getMessage(ids.account.aboutMe.address.title)}
               description={getMessage(ids.account.aboutMe.address.description)}
+              submitText={getMessage(ids.account.saveButton)}
+              user={user}
+            />
+          </Route>
+          <Route
+            path={makeDashboardPath({
+              section: 'about-me',
+              subSection: 'preferences',
+            })}
+          >
+            <Preferences
+              title={getMessage(ids.account.aboutMe.preferences.title)}
+              description={getMessage(
+                ids.account.aboutMe.preferences.description,
+              )}
               submitText={getMessage(ids.account.saveButton)}
               user={user}
             />
