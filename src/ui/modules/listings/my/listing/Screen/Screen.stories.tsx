@@ -69,6 +69,7 @@ export const Basic = ({ orderStatus, manualApproval }: BasicProps) => {
     verified: true,
     preferences: {
       manualApproval,
+      noticeEmails: false,
     },
     created: new Date(),
   };

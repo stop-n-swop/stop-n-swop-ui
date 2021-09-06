@@ -62,6 +62,7 @@ export const Basic = ({
     verified: true,
     preferences: {
       manualApproval: manualApprove,
+      noticeEmails: false,
     },
     created: new Date(),
   };

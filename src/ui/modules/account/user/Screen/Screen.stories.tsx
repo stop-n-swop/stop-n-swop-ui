@@ -42,7 +42,7 @@ export const Basic = () => {
                   } as any,
                   clientEmail: '',
                   email: '',
-                  preferences: { manualApproval: false },
+                  preferences: { manualApproval: false, noticeEmails: false },
                   username: 'jb',
                   verified: true,
                   created: new Date(),
