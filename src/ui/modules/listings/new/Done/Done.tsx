@@ -1,7 +1,6 @@
 import React from 'react';
 import { LinkButton } from 'ui/elements/Button';
 import {
-  makeDashboardPath,
   makeGameListingPath,
   makeMyListingPath,
   NEW_LISTING,
@@ -36,28 +35,6 @@ export default function Done({
             {getMessage(ids.listings.new.done.description2[1])}
           </LinkButton>
           {getMessage(ids.listings.new.done.description2[2])}
-        </p>
-        <p>
-          {getMessage(ids.listings.new.done.description3[0])}
-          <LinkButton
-            kind="tertiary"
-            className="inline-flex"
-            to={makeDashboardPath({
-              section: 'billing',
-              subSection: 'account',
-            })}
-          >
-            {getMessage(ids.listings.new.done.description3[1])}
-          </LinkButton>
-          {getMessage(ids.listings.new.done.description3[2])}
-          <LinkButton
-            kind="tertiary"
-            className="inline-flex"
-            to={makeDashboardPath({ section: 'billing', subSection: 'verify' })}
-          >
-            {getMessage(ids.listings.new.done.description3[3])}
-          </LinkButton>
-          {getMessage(ids.listings.new.done.description3[4])}
         </p>
       </div>
       <div className="text-right mt-10 flex justify-around flex-col md:flex-row md:space-x-6 space-y-4 md:space-y-0">

@@ -55,7 +55,7 @@ const enMessages = {
           ],
           [
             'Buy with confidence',
-            "we protect your purchases so you don't lose out to couterfeits",
+            "we protect your purchases so you don't lose out to counterfeits",
           ],
           ['For gamers, by gamers 🎮', ''],
         ],
@@ -240,13 +240,6 @@ const enMessages = {
           'You can then track and update the order from your ',
           'manage listing',
           ' page',
-        ],
-        description3: [
-          'Before you can withdraw your earnings from a sold listing you will need to set up your ',
-          'bank account',
-          ' for the funds to be credited to. You will also need to ',
-          'verify your identity',
-          " so we know you're a real person!",
         ],
         viewListing: 'View your listing',
         newListing: 'Create another listing',
