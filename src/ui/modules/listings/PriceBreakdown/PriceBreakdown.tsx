@@ -7,6 +7,7 @@ import {
   getProtectionCharge,
   getListingProfit,
   getBasePrice,
+  getListedPrice,
   // getPostage,
 } from '@sns/contracts/listing';
 import ProtectionModal from 'ui/modules/checkout/intro/ProtectionModal';
@@ -67,7 +68,10 @@ export default function PriceStep({
             </Button>
           </span>
           <span className="w-1/2 text-right">
-            {getCurrency(0 - getPlatformCharge(listing), { currency })}
+            {getCurrency(
+              0 - (getListedPrice(listing) ? getPlatformCharge(listing) : 0),
+              { currency },
+            )}
           </span>
           <span className="w-1/2">
             <Button

@@ -61,6 +61,8 @@ const Guide = lazy(() => import('ui/pages/Guide'));
 const Privacy = lazy(() => import('ui/help/terms/privacy.mdx'));
 const Terms = lazy(() => import('ui/help/terms/terms.mdx'));
 const Credits = lazy(() => import('ui/help/terms/credits.mdx'));
+// ...
+const StuffNation = lazy(() => import('ui/pages/StuffNation'));
 
 export default function Routes() {
   return (
@@ -163,6 +165,12 @@ export default function Routes() {
       <Route path="/guide">
         <Guide />
       </Route>
+
+      <If condition={window.contra}>
+        <Route path="/stuff/nation">
+          <StuffNation />
+        </Route>
+      </If>
     </>
   );
 }

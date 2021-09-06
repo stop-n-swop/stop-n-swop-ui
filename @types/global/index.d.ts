@@ -6,4 +6,5 @@ interface Window {
       unit?: string;
     }) => void;
   };
+  contra: boolean;
 }

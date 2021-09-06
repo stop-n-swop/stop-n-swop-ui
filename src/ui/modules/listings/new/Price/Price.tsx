@@ -6,6 +6,7 @@ import { ids } from 'ui/messages';
 import useIsMounted from 'ui/hooks/useIsMounted';
 import { Condition, Region } from '@sns/contracts/listing';
 import { Status } from '@sns/contracts/order';
+import { useDebounce } from 'use-debounce';
 import Buttons from '../Buttons';
 import type { Listing } from '@sns/contracts/listing';
 import type { Values } from '../types';
@@ -23,11 +24,14 @@ export default function PriceStep({
   const getCurrency = useGetCurrency();
   const { control, getValues } = useFormContext<Values>();
   const values = getValues();
-  const price = useWatch({
-    control,
-    name: 'price',
-    defaultValue: values.price ?? 0,
-  });
+  const [price] = useDebounce(
+    useWatch({
+      control,
+      name: 'price',
+      defaultValue: values.price ?? 0,
+    }),
+    500,
+  );
   const postage = 0;
   // const postage = useWatch({
   //   control,
@@ -35,8 +39,8 @@ export default function PriceStep({
   //   defaultValue: values.postage ?? 0,
   // });
   const currency = 'GBP';
-  const listing = useMemo<Listing>(
-    () => ({
+  const listing = useMemo<Listing>(() => {
+    return {
       currency,
       postage,
       price,
@@ -55,9 +59,8 @@ export default function PriceStep({
         instructions: false,
         region: Region.PAL,
       },
-    }),
-    [postage, price],
-  );
+    };
+  }, [postage, price]);
 
   return (
     <div>

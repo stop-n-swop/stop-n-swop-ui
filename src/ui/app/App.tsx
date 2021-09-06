@@ -7,18 +7,10 @@ import { en } from 'ui/messages';
 import LoadingPage from 'ui/pages/Loading';
 import { BreakpointProvider } from 'ui/breakpoints';
 import { Breakpoints } from 'ui/constants/breakpoints';
-import StuffNation from 'ui/pages/StuffNation';
 import Core from './Core';
 import Background from './Background';
 
 export default function App() {
-  if (
-    process.env.NODE_ENV !== 'production' &&
-    window.location.pathname === '/stuff/nation'
-  ) {
-    return <StuffNation />;
-  }
-
   return (
     <Jpex>
       <Intl locale={navigator.language} messages={en} currency="GBP">

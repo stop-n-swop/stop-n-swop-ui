@@ -64,14 +64,14 @@ export default function PhotosStep({
   const boxed = Boolean(useWatch<Values>({ name: 'boxed' }));
   const instructions = Boolean(useWatch<Values>({ name: 'instructions' }));
 
-  let photos = requiredPhotos.filter(({ key, required }) => {
+  let photos = requiredPhotos.filter(({ key }) => {
     if (boxKeys.includes(key)) {
       return boxed;
     }
     if (instructionKeys.includes(key)) {
       return instructions;
     }
-    return required;
+    return true;
   });
   if (condition === Condition.MINT) {
     photos = sortBy(photos, (photo) => {

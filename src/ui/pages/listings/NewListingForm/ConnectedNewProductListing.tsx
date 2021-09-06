@@ -33,6 +33,7 @@ export default function ConnectedNewProductListing() {
   const onSubmit = useOnSubmit({ create, productId, push });
   const formProps = useForm<Values>({
     mode: 'onBlur',
+    reValidateMode: 'onChange',
     defaultValues: {
       postage: 0,
     },

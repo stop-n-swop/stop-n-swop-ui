@@ -26,6 +26,9 @@ export default function Nav() {
   if (location.pathname === HOME && !loggedIn) {
     return null;
   }
+  if (location.pathname === '/stuff/nation') {
+    return null;
+  }
 
   return (
     <nav className="md:flex pl-4 lg:px-4 border-b-2 border-primary bg-black">
