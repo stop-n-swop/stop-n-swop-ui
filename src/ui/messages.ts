@@ -146,8 +146,9 @@ Set up your account`,
     search: {
       label: 'Search',
       results: {
-        available: '{count} available',
+        available: '({count} available)',
         platformAvailable: '{count} platforms',
+        platforModalTitle: 'Select a platform',
         owner: '{developer} / {publisher}',
         empty: 'Start searching to find your game',
         noResults: [
