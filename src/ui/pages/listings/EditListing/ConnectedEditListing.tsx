@@ -6,6 +6,8 @@ import { useAuthGuard } from 'application/auth';
 import { useRequirements } from 'application/listings';
 import { useMyListing } from 'application/listings/useMyListing';
 import { useGame } from 'application/games';
+import { useQuery } from '@respite/query';
+import { DiscountKey } from 'application/keys';
 import type { Values } from 'ui/modules/listings/new/types';
 import EditListing from './EditListing';
 import { getDefaultValues, useOnSubmit, useRedirectOnDone } from './utils';
@@ -22,6 +24,9 @@ export default function ConnectedEditListing() {
     productId: game.id,
     platformId: game.platformId,
   });
+  const discountQuery = useQuery(DiscountKey, () => listing.discount, [
+    listing,
+  ]);
 
   const [onSubmit, error] = useOnSubmit({ listingId, productId: game.id });
 
@@ -43,6 +48,7 @@ export default function ConnectedEditListing() {
         location={listing.location}
         username={listing.username}
         requirementsQuery={requirementsQuery}
+        discountQuery={discountQuery}
         error={error}
       />
     </FormProvider>

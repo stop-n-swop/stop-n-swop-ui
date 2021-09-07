@@ -12,6 +12,7 @@ import {
 import { Link } from 'react-router-dom';
 import type useMachine from 'ui/modules/listings/new/machine';
 import type { Query } from '@respite/core';
+import type { Discount } from '@sns/contracts/listing';
 
 type Step = ReturnType<typeof useMachine>[0];
 type Dispatch = ReturnType<typeof useMachine>[1];
@@ -30,6 +31,7 @@ interface Props {
       required: boolean;
     }>;
   }>;
+  discountQuery: Query<Discount>;
   error: any;
 }
 
@@ -42,6 +44,7 @@ export default function EditListing({
   username,
   location,
   requirementsQuery,
+  discountQuery,
   error,
 }: Props) {
   const getMessage = useGetMessage();
@@ -65,6 +68,7 @@ export default function EditListing({
         step={step}
         username={username}
         requirementsQuery={requirementsQuery}
+        discountQuery={discountQuery}
       />
     </div>
   );
