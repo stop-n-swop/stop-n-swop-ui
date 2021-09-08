@@ -1,28 +1,18 @@
-import React, { useEffect, useRef } from 'react';
-import {
-  FaSearch,
-  FaListAlt,
-  FaUserCircle,
-  FaShippingFast,
-  FaMoneyBillWave,
-} from 'react-icons/fa';
+import React, { Suspense, useEffect, useRef } from 'react';
+import { FaSearch, FaUserCircle } from 'react-icons/fa';
 import cx from 'classnames';
-import { useGetCurrency, useGetMessage } from 'ui/intl';
+import { useGetMessage } from 'ui/intl';
 import { ids } from 'ui/messages';
-import {
-  LOGIN,
-  MY_LISTINGS,
-  MY_ORDERS,
-  NEW_LISTING,
-  GAMES,
-} from 'ui/constants/paths';
-import { useBalance } from 'application/payments';
-import { MIN_WITHDRAWAL_AMOUNT } from 'domain/constants/payments';
+import { LOGIN, GAMES } from 'ui/constants/paths';
+import type { useBalance } from 'application/payments';
 import NavItem from './NavItem';
 import Account from './Account';
 import Notices from './Notices';
 import type { useMyListings } from 'application/listings';
 import type { useMyOrders } from 'application/orders';
+import ListNavItem from './ListNavItem';
+import OrdersNavItem from './OrdersNavItem';
+import BalanceNavItem from './BalanceNavItem';
 
 interface Props {
   open: boolean;
@@ -32,6 +22,7 @@ interface Props {
   setAccountOpen: (v: boolean) => void;
   myListingsQuery: ReturnType<typeof useMyListings>;
   myOrdersQuery: ReturnType<typeof useMyOrders>;
+  balanceQuery: ReturnType<typeof useBalance>;
 }
 
 export default function NavItems({
@@ -42,8 +33,10 @@ export default function NavItems({
   setAccountOpen,
   myListingsQuery,
   myOrdersQuery,
+  balanceQuery,
 }: Props) {
   const ref = useRef<HTMLUListElement>(null);
+
   useEffect(() => {
     const fn = (e: any) => {
       if ((open || accountOpen) && !ref.current.contains(e.target)) {
@@ -55,9 +48,8 @@ export default function NavItems({
 
     return () => window.removeEventListener('click', fn);
   }, [accountOpen, close, open, setAccountOpen]);
+
   const getMessage = useGetMessage();
-  const getCurrency = useGetCurrency();
-  const balanceQuery = useBalance();
 
   return (
     <ul
@@ -71,55 +63,36 @@ export default function NavItems({
       <NavItem to={GAMES} Icon={FaSearch} onClose={close}>
         {getMessage(ids.nav.games)}
       </NavItem>
-      <Choose>
-        <When condition={loggedIn && myListingsQuery.data.length}>
-          {/* <NavItem to={MY_COLLECTIONS} Icon={FaBoxOpen} onClose={close}>
-            <FormattedMessage id={ids.nav.collections} />
-          </NavItem> */}
-          <NavItem to={MY_LISTINGS} Icon={FaListAlt} onClose={close}>
-            {getMessage(ids.nav.listings)}
-          </NavItem>
-        </When>
-        <Otherwise>
-          <NavItem Icon={FaListAlt} to={NEW_LISTING} onClose={close}>
-            {getMessage(ids.nav.list)}
-          </NavItem>
-        </Otherwise>
-      </Choose>
-      <If condition={loggedIn && myOrdersQuery.data.length}>
-        <NavItem to={MY_ORDERS} Icon={FaShippingFast} onClose={close}>
-          {getMessage(ids.nav.orders)}
-        </NavItem>
-      </If>
+      <Suspense fallback={null}>
+        <ListNavItem
+          close={close}
+          loggedIn={loggedIn}
+          myListingsQuery={myListingsQuery}
+        />
+      </Suspense>
+      <Suspense fallback={null}>
+        <OrdersNavItem
+          close={close}
+          loggedIn={loggedIn}
+          myOrdersQuery={myOrdersQuery}
+        />
+      </Suspense>
       <Choose>
         <When condition={loggedIn}>
-          <NavItem
-            forceIcon
-            title="My balance"
-            to="/my/balance"
-            onClose={close}
-            styles={{
-              hidden: true,
-              'md:flex': balanceQuery.data.balance > MIN_WITHDRAWAL_AMOUNT,
-            }}
-            Icon={FaMoneyBillWave}
-          >
-            <div className="space-x-3 flex items-center">
-              <span>
-                {getCurrency(balanceQuery.data.balance, {
-                  currency: balanceQuery.data.currency,
-                })}
-              </span>
-            </div>
-          </NavItem>
-          <Notices className="hidden md:block" />
-          <Account
-            balance={balanceQuery.data.balance}
-            currency={balanceQuery.data.currency}
-            open={accountOpen}
-            setOpen={setAccountOpen}
-            onClose={close}
-          />
+          <Suspense fallback={null}>
+            <BalanceNavItem balanceQuery={balanceQuery} close={close} />
+          </Suspense>
+          <Suspense fallback={null}>
+            <Notices className="hidden md:block" />
+          </Suspense>
+          <Suspense fallback={null}>
+            <Account
+              balanceQuery={balanceQuery}
+              open={accountOpen}
+              setOpen={setAccountOpen}
+              onClose={close}
+            />
+          </Suspense>
         </When>
         <Otherwise>
           <NavItem to={LOGIN} Icon={FaUserCircle} onClose={close}>

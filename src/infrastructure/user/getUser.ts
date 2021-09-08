@@ -1,17 +1,25 @@
 import jpex from 'jpex';
 import type { User } from '@sns/contracts/user';
-import type { AuthDriver } from 'core/io';
+import type { AuthDriver, Persist } from 'core/io';
 import type { GetUser } from 'core/user';
 
 const getUser =
-  (driver: AuthDriver): GetUser =>
+  (driver: AuthDriver, persist: Persist): GetUser =>
   async ({ username = 'my' } = {}) => {
-    const response = await driver<void, User>({
-      url: '/users/{username}',
-      params: { username },
-    });
+    let user = await persist.get<User>('user');
 
-    return response.data;
+    if (!user) {
+      const response = await driver<void, User>({
+        url: '/users/{username}',
+        params: { username },
+      });
+
+      user = response.data;
+
+      await persist.set('user', user);
+    }
+
+    return user;
   };
 
 jpex.factory<GetUser>(getUser);

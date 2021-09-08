@@ -1,5 +1,5 @@
 import { useUser } from 'application/user';
-import React from 'react';
+import React, { Suspense } from 'react';
 import Dash from 'ui/modules/home/existing/Dash';
 import Screen from 'ui/modules/home/existing/Screen';
 import Search from 'ui/modules/home/new/Search';
@@ -20,16 +20,36 @@ export default function ExistingHome() {
     <Screen
       dash={
         <Dash username={username ?? email}>
-          <NewUserPanel />
-          <ListingsPanel />
-          <OrdersPanel />
-          <BalancePanel />
+          <Suspense fallback={null}>
+            <NewUserPanel />
+          </Suspense>
+          <Suspense fallback={null}>
+            <ListingsPanel />
+          </Suspense>
+          <Suspense fallback={null}>
+            <OrdersPanel />
+          </Suspense>
+          <Suspense fallback={null}>
+            <BalancePanel />
+          </Suspense>
         </Dash>
       }
       search={<Search />}
-      popular={<Popular />}
-      recentlyAdded={<RecentlyAdded />}
-      suggested={<Suggested />}
+      popular={
+        <Suspense fallback={null}>
+          <Popular />
+        </Suspense>
+      }
+      recentlyAdded={
+        <Suspense fallback={null}>
+          <RecentlyAdded />
+        </Suspense>
+      }
+      suggested={
+        <Suspense fallback={null}>
+          <Suggested />
+        </Suspense>
+      }
     />
   );
 }

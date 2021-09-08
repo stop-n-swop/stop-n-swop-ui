@@ -16,21 +16,22 @@ import { LOGOUT, makeDashboardPath, makeUserPath } from 'ui/constants/paths';
 import { useUser } from 'application/user';
 import { MIN_WITHDRAWAL_AMOUNT } from 'domain/constants/payments';
 import NavItem from './NavItem';
+import type { useBalance } from 'application/payments';
 
 interface Props {
-  balance: number;
-  currency: string;
   open: boolean;
   setOpen: (v: boolean) => void;
   onClose(): void;
+  balanceQuery: ReturnType<typeof useBalance>;
 }
 
 export default function Account({
   open,
   setOpen,
   onClose,
-  balance,
-  currency,
+  balanceQuery: {
+    data: { balance, currency },
+  },
 }: Props) {
   const [style, boop] = useBoop({ scale: 1.05, rotation: 10 });
   const { data: user } = useUser();

@@ -1,4 +1,4 @@
-import React, { CSSProperties, ReactNode } from 'react';
+import React, { CSSProperties, memo, ReactNode } from 'react';
 import grasstl from 'ui/assets/tiles/grass-t-l.png';
 import grasst from 'ui/assets/tiles/grass-t.png';
 import grasstr from 'ui/assets/tiles/grass-t-r.png';
@@ -27,13 +27,7 @@ interface Props {
   className?: string;
 }
 
-export default function Grass({
-  edges,
-  className,
-  height = 1,
-  style,
-  width = 1,
-}: Props) {
+function Grass({ edges, className, height = 1, style, width = 1 }: Props) {
   let top: ReactNode;
   let middle: ReactNode;
   let bottom: ReactNode;
@@ -284,3 +278,5 @@ export default function Grass({
     </div>
   );
 }
+
+export default memo(Grass);

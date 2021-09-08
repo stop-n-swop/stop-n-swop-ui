@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { Suspense, useCallback, useState } from 'react';
 import { FaChevronDown } from 'react-icons/fa';
 import cx from 'classnames';
 import Button from 'ui/elements/Button';
@@ -9,6 +9,7 @@ import { useMyListings } from 'application/listings';
 import { useMyOrders } from 'application/orders';
 import { useLocation } from 'react-router-dom';
 import { HOME } from 'ui/constants/paths';
+import { useBalance } from 'application/payments';
 import Title from './Title';
 import NavItems from './NavItems';
 import Notices from './Notices';
@@ -20,6 +21,7 @@ export default function Nav() {
   const close = useCallback(() => setOpen(false), []);
   const myListingsQuery = useMyListings();
   const myOrdersQuery = useMyOrders();
+  const balanceQuery = useBalance();
   const location = useLocation();
   const g = useGetMessage();
 
@@ -37,7 +39,9 @@ export default function Nav() {
         <div className="flex-grow" />
         <If condition={loggedIn}>
           <ul className="md:hidden relative">
-            <Notices />
+            <Suspense fallback={null}>
+              <Notices />
+            </Suspense>
           </ul>
         </If>
         <Button
@@ -61,6 +65,7 @@ export default function Nav() {
         setAccountOpen={setAccountOpen}
         myListingsQuery={myListingsQuery}
         myOrdersQuery={myOrdersQuery}
+        balanceQuery={balanceQuery}
       />
     </nav>
   );

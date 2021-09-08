@@ -17,3 +17,4 @@ export type RemoveFavouriteLocal = RemoveFavourite;
 export type RemoveFavouriteApi = RemoveFavourite;
 
 export type ClearFavouritesLocal = () => Promise<void>;
+export type ClearUser = () => Promise<void>;

@@ -33,6 +33,7 @@ export default function Search({ onChange, value, children }: Props) {
         onFocus={() => setFocus(true)}
         onBlur={() => setFocus(false)}
         label={useMessage(ids.games.search.label)}
+        autoComplete="off"
         suffix={
           <Button aria-label="Search">
             <FaSearch />

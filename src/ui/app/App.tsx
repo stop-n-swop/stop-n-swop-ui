@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React, { lazy, Suspense } from 'react';
 import { Provider as Jpex } from 'react-jpex';
 import { Provider as Intl } from 'ui/intl';
 import { BrowserRouter } from 'react-router-dom';
@@ -8,7 +8,8 @@ import LoadingPage from 'ui/pages/Loading';
 import { BreakpointProvider } from 'ui/breakpoints';
 import { Breakpoints } from 'ui/constants/breakpoints';
 import Core from './Core';
-import Background from './Background';
+
+const Background = lazy(() => import('./Background'));
 
 export default function App() {
   return (
@@ -21,7 +22,9 @@ export default function App() {
                 className="flex-grow flex flex-col"
                 style={{ zIndex: 0, fontSize: 20 }}
               >
-                <Background />
+                <Suspense fallback={null}>
+                  <Background />
+                </Suspense>
                 <Suspense fallback={<LoadingPage />}>
                   <Core />
                 </Suspense>

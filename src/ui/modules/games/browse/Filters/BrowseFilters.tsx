@@ -6,11 +6,12 @@ import { Filter } from 'ui/modules/product/filters';
 import { sortBy } from 'crosscutting/utils';
 import type { Platform } from '@sns/contracts/product';
 import type { useCounts } from 'application/games';
+import type { Query } from '@respite/core';
 
 interface Props {
   available: boolean;
   setAvailable(value: boolean): void;
-  platforms: Platform[];
+  platformsQuery: Query<Platform[]>;
   platformIds: string[];
   setPlatformIds(value: string[]): void;
   hasSearched: boolean;
@@ -28,7 +29,7 @@ export default function BrowseFilters({
   hasSearched,
   available,
   setAvailable,
-  platforms,
+  platformsQuery,
   platformIds,
   setPlatformIds,
   developerIds,
@@ -44,6 +45,7 @@ export default function BrowseFilters({
   const {
     data: { platforms: platformCounts, developers, publishers },
   } = gamesCountsQuery;
+  const { data: platforms } = platformsQuery;
 
   return (
     <>

@@ -4,7 +4,6 @@ import jpex from '@jpex-js/vite-plugin';
 import svg from 'vite-plugin-react-svg';
 import { visualizer } from 'rollup-plugin-visualizer';
 import mdx from 'vite-plugin-mdx';
-import importToCDN, { autoComplete } from 'vite-plugin-cdn-import';
 import jsxControl from './vite-plugin-jsx-control';
 
 // https://vitejs.dev/config/
@@ -45,9 +44,6 @@ export default defineConfig({
   },
   plugins: [
     mdx(),
-    importToCDN({
-      modules: [autoComplete('react'), autoComplete('react-dom')],
-    }),
     jpex({
       pathAlias: {
         infrastructure: '/src/infrastructure',

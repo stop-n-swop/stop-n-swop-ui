@@ -53,7 +53,6 @@ export default function Results({
   setPublisherIds,
 }: Props) {
   const { status } = gamesQuery;
-  const { data: platforms } = platformsQuery;
   const loading = (() => {
     if (status === Status.FETCHING || status === Status.LOADING) {
       return true;
@@ -73,7 +72,7 @@ export default function Results({
       <Filters>
         <Suspense fallback={<LoadingPage />}>
           <BrowseFilters
-            platforms={platforms}
+            platformsQuery={platformsQuery}
             platformIds={platformIds}
             setPlatformIds={setPlatformIds}
             hasSearched={hasSearched}

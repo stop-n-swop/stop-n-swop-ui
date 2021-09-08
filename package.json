@@ -134,7 +134,6 @@
     "tailwindcss": "^2.1.2",
     "typescript": "~4.2.4",
     "vite": "^2.0.5",
-    "vite-plugin-cdn-import": "^0.3.2",
     "vite-plugin-mdx": "^3.5.6",
     "vite-plugin-react-svg": "^0.2.0"
   }

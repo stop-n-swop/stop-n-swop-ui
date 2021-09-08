@@ -1,4 +1,5 @@
-import React, { useMemo } from 'react';
+/* eslint-disable react/no-array-index-key */
+import React, { memo } from 'react';
 import Cloud from './Cloud';
 import Flowers from './Flowers';
 import Grass from './Grass';
@@ -6,15 +7,11 @@ import Platform from './Platform';
 import Sky from './Sky';
 import Water from './Water';
 
-export default function Background() {
-  const { clouds, platforms, flowers } = useMemo(() => {
-    const clouds = Math.round(Math.random() * 6);
-    const platforms = Math.round(Math.random() * 4);
-    const flowers = Math.round(Math.random() * 6);
+const clouds = Math.round(Math.random() * 6);
+const platforms = Math.round(Math.random() * 4);
+const flowers = Math.round(Math.random() * 6);
 
-    return { clouds, platforms, flowers };
-  }, []);
-
+function Background() {
   return (
     <div
       className="fixed w-full h-full flex flex-col  filter"
@@ -26,11 +23,11 @@ export default function Background() {
       }}
     >
       <Sky>
-        {new Array(clouds).fill(null).map(() => (
-          <Cloud />
+        {new Array(clouds).fill(null).map((_, i) => (
+          <Cloud key={i} />
         ))}
-        {new Array(platforms).fill(null).map(() => (
-          <Platform />
+        {new Array(platforms).fill(null).map((_, i) => (
+          <Platform key={i} />
         ))}
       </Sky>
 
@@ -64,3 +61,5 @@ export default function Background() {
     </div>
   );
 }
+
+export default memo(Background);

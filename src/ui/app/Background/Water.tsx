@@ -1,4 +1,4 @@
-import React, { CSSProperties, ReactNode } from 'react';
+import React, { CSSProperties, memo, ReactNode } from 'react';
 import watertl from 'ui/assets/tiles/water-t-l.png';
 import watert from 'ui/assets/tiles/water-t.png';
 import watert2 from 'ui/assets/tiles/water-t-2.png';
@@ -17,7 +17,7 @@ interface Props {
   className?: string;
 }
 
-export default function Water({
+function Water({
   edges,
   open = false,
   className,
@@ -168,3 +168,5 @@ export default function Water({
     </div>
   );
 }
+
+export default memo(Water);
