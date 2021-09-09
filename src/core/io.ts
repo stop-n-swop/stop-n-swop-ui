@@ -1,3 +1,5 @@
+import type cookies from 'browser-cookies';
+
 export interface Response<T> {
   status: number;
   data: T;
@@ -25,11 +27,12 @@ export type Temp = {
   delete(key: string): Promise<void>;
 };
 
-export type Storage = Window['localStorage'];
+export type Storage = typeof cookies;
 
 export interface Config {
   api: {
     url: string;
+    domain: string;
   };
   oauth: Record<
     string,

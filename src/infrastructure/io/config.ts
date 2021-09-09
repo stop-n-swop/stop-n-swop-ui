@@ -5,6 +5,7 @@ import type { Config } from 'core/io';
 jpex.factory<Config>((): Config => {
   const env = cleanEnv(import.meta.env, {
     VITE_API_URL: str(),
+    VITE_DOMAIN: str(),
     VITE_OAUTH_GOOGLE_URL: str(),
     VITE_OAUTH_GOOGLE_CLIENT_ID: str(),
     VITE_OAUTH_GOOGLE_SCOPE: str(),
@@ -15,6 +16,7 @@ jpex.factory<Config>((): Config => {
   return {
     api: {
       url: env.VITE_API_URL,
+      domain: env.VITE_DOMAIN,
     },
     oauth: {
       google: {

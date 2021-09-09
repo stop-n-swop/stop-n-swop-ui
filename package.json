@@ -32,6 +32,7 @@
     "@respite/select": "^4.0.0",
     "@sns/abyss": "file:.yalc/@sns/abyss",
     "@sns/contracts": "file:.yalc/@sns/contracts",
+    "browser-cookies": "^1.2.0",
     "canvas-confetti": "^1.4.0",
     "classnames": "^2.2.6",
     "cleave.js": "^1.6.0",
