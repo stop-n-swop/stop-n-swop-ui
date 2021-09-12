@@ -2,7 +2,7 @@
   "version": "v1",
   "packages": {
     "@sns/contracts": {
-      "signature": "1e80431b9526c4990c2ab3d8796d32dc",
+      "signature": "8974d75c634f66ec2d51526f251722c7",
       "file": true
     },
     "@sns/abyss": {

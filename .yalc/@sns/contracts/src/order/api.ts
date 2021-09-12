@@ -1,5 +1,4 @@
 import { AuditItem } from "../listing";
-import { DeepPartial } from "../utils";
 import { Order } from "./entities";
 
 export interface SearchOrdersRequest {

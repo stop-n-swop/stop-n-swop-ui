@@ -31,6 +31,7 @@ export interface SearchListingsRequest {
     username?: string;
     sortBy?: string;
     limit?: number;
+    ids?: string[];
 }
 export interface SearchListingsResponse {
     listings: Listing[];

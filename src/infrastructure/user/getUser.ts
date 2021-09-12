@@ -6,7 +6,10 @@ import type { GetUser } from 'core/user';
 const getUser =
   (driver: AuthDriver, persist: Persist): GetUser =>
   async ({ username = 'my' } = {}) => {
-    let user = await persist.get<User>('user');
+    let user: User;
+    if (username === 'my') {
+      user = await persist.get<User>('user');
+    }
 
     if (!user) {
       const response = await driver<void, User>({
@@ -16,7 +19,9 @@ const getUser =
 
       user = response.data;
 
-      await persist.set('user', user);
+      if (username === 'my') {
+        await persist.set('user', user);
+      }
     }
 
     return user;

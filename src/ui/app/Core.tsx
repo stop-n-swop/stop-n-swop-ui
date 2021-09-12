@@ -84,21 +84,29 @@ export default function Core() {
 
   return (
     <div className="relative flex-grow flex flex-col">
-      <Nav />
-      <Content>
-        <ErrorBoundary
-          FallbackComponent={ErrorPage}
-          onReset={() => {
-            navigate(window.location.href);
-          }}
-          resetKeys={[pathname]}
-        >
-          <Suspense fallback={<LoadingPage />}>
-            <Routes />
-          </Suspense>
-        </ErrorBoundary>
-      </Content>
-      <Footer />
+      <ErrorBoundary
+        FallbackComponent={ErrorPage}
+        onReset={() => {
+          navigate(window.location.href);
+        }}
+        resetKeys={[pathname]}
+      >
+        <Nav />
+        <Content>
+          <ErrorBoundary
+            FallbackComponent={ErrorPage}
+            onReset={() => {
+              navigate(window.location.href);
+            }}
+            resetKeys={[pathname]}
+          >
+            <Suspense fallback={<LoadingPage />}>
+              <Routes />
+            </Suspense>
+          </ErrorBoundary>
+        </Content>
+        <Footer />
+      </ErrorBoundary>
     </div>
   );
 }

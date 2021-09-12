@@ -1,4 +1,4 @@
-import { UserLevel } from ".";
+import { UserLevel } from "./enums";
 
 export interface Address {
   line1: string;
