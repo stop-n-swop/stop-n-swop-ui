@@ -9,7 +9,7 @@
     "build:ts": "tsc --emitDeclarationOnly --outDir ./",
     "build": "yarn build:js && yarn build:ts",
     "prepublishOnly": "yarn build",
-    "start": "concurrently -k \"cd ../api && yarn dev\" \"cd ../api && yarn tunnel\" \"cd ../ui && yarn dev\" \"cd ../admin && yarn dev\"",
+    "start": "concurrently -k \"cd ../api && yarn dev\" \"cd ../ui && yarn dev\" \"cd ../admin && yarn dev\"",
     "pow": "yalc publish --push && cd ../abyss && yalc publish --push && cd ../ui && rm -rf node_modules && yarn && cd ../api && rm -rf node_modules && yarn && cd ../admin && rm -rf node_modules && yarn",
     "lint:all": "cd ../ui && yarn lint && cd ../api && yarn lint && cd ../admin && yarn lint"
   },

@@ -21,7 +21,7 @@
     "ci": "rm -rf node_modules && yarn install && yarn lint && yarn test && yarn build && rm -rf node_modules",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "start": "concurrently -k \"cd ../api && yarn dev\" \"cd ../api && yarn tunnel\" \"yarn dev\""
+    "start": "concurrently -k \"cd ../api && yarn dev\" \"yarn dev\""
   },
   "dependencies": {
     "@paypal/react-paypal-js": "^7.2.1",
