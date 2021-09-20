@@ -1,3 +1,5 @@
+// TODO: most of these crosscutting methods in ui/api/admin can probably be shared in a common package
+
 export type PromiseType<T> = T extends PromiseLike<infer U> ? U : T;
 
 export const never = () =>
