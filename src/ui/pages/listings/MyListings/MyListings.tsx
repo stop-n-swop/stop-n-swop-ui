@@ -9,8 +9,8 @@ import { ids } from 'ui/messages';
 import { useMyListings } from 'application/listings';
 import { useAuthGuard } from 'application/auth';
 import { sortBy } from 'crosscutting/utils';
-import { Status } from '@sns/contracts/order';
 import Toggle from 'ui/elements/Toggle';
+import { isListingComplete } from 'domain/selectors/listings';
 import Listing from './Listing';
 
 export default function MyListings() {
@@ -19,7 +19,7 @@ export default function MyListings() {
   const { data: allListings } = useMyListings();
 
   const activeListings = allListings.filter((listing) => {
-    return [Status.CLOSED, Status.COMPLETE].includes(listing.status) === false;
+    return !isListingComplete(listing);
   });
   const hasInactive = allListings.length !== activeListings.length;
   const [showAll, setShowAll] = useState(

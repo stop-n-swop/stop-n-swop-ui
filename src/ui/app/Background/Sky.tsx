@@ -5,14 +5,5 @@ interface Props {
 }
 
 export default function Sky({ children }: Props) {
-  return (
-    <div
-      className="relative flex-grow w-full"
-      style={{
-        backgroundColor: 'skyblue',
-      }}
-    >
-      {children}
-    </div>
-  );
+  return <div className="relative flex-grow w-full">{children}</div>;
 }

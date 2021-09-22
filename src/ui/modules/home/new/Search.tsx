@@ -76,6 +76,7 @@ export default function Search() {
           id="search"
           name="q"
           placeholder={placeholder}
+          autoComplete="off"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           suffix={

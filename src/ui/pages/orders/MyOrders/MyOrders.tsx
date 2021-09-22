@@ -8,7 +8,7 @@ import { useMyOrders } from 'application/orders';
 import Card from 'ui/elements/Card';
 import { sortBy } from 'crosscutting/utils';
 import Toggle from 'ui/elements/Toggle';
-import { Status } from '@sns/contracts/order';
+import { isOrderComplete } from 'domain/selectors/orders';
 import Order from './Order';
 
 export default function MyOrders() {
@@ -17,11 +17,7 @@ export default function MyOrders() {
 
   const { data: allOrders } = useMyOrders();
   const activeOrders = allOrders.filter((order) => {
-    return (
-      [Status.CANCELLED, Status.COMPLETE, Status.DECLINED].includes(
-        order.status,
-      ) === false
-    );
+    return !isOrderComplete(order);
   });
   const hasInactive = activeOrders.length !== allOrders.length;
   const [showAll, setShowAll] = useState(

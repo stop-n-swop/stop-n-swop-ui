@@ -9,6 +9,8 @@ import { FaUser } from 'react-icons/fa';
 import type { Order } from '@sns/contracts/order';
 import type { Listing } from '@sns/contracts/listing';
 
+const Unknown = () => null;
+
 interface Props {
   order: Order;
   listing: Listing;
@@ -30,7 +32,7 @@ export default function Overview({
   order: { id: orderId, status },
 }: Props) {
   const getMessage = useGetMessage();
-  const Icon = iconMatrix[status];
+  const Icon = iconMatrix[status] ?? Unknown;
   const color = colorMatrix[status];
   const image = Object.values(images)[0];
 

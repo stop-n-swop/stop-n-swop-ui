@@ -4,9 +4,11 @@ import { ids } from 'ui/messages';
 import { colorMatrix, iconMatrix } from 'ui/modules/listings/utils';
 import type { Status } from '@sns/contracts/order';
 
+const Unknown = () => null;
+
 export default function ListingStatus({ status }: { status: Status }) {
   const getMessage = useGetMessage();
-  const Icon = iconMatrix[status];
+  const Icon = iconMatrix[status] ?? Unknown;
   const color = colorMatrix[status];
 
   return (

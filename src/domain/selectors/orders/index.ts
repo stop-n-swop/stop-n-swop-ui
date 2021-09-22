@@ -6,6 +6,8 @@ export const isOrderComplete = (order: Order) =>
     Status.CANCELLED,
     Status.DECLINED,
     Status.COMPLETE,
+    Status.REFUNDED,
+    Status.RESOLVED,
   ].includes(order.status);
 
 export const doesOrderHaveActions = (order: Order) =>

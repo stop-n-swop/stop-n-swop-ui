@@ -8,12 +8,14 @@ interface Props {
 export default function Flowers({ count }: Props) {
   const flowers = useMemo(() => {
     const maxMarginPerc = 50 / count;
-    return new Array(count).fill(null).map(() => {
+    return new Array(count).fill(null).map((_, i) => {
       const marginLeft = `${Math.round(Math.random() * maxMarginPerc)}%`;
       const marginRight = `${Math.round(Math.random() * maxMarginPerc)}%`;
 
       return (
         <div
+          // eslint-disable-next-line react/no-array-index-key
+          key={i}
           style={{
             marginLeft,
             marginRight,

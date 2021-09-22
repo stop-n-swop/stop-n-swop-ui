@@ -14,6 +14,8 @@ export declare enum Status {
     DISPUTED = "disputed",
     NOT_RECEIVED = "notReceived",
     NO_RESPONSE = "noResponse",
+    RESOLVED = "resolved",
+    REFUNDED = "refunded",
     COMPLETE = "complete",
     CANCELLED = "cancelled"
 }

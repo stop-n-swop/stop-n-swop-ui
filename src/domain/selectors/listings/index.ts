@@ -10,7 +10,9 @@ export const isListingClosed = (listing: Listing) => {
 };
 
 export const isListingComplete = (listing: Listing) => {
-  return [Status.COMPLETE, Status.CLOSED].includes(listing.status);
+  return [Status.COMPLETE, Status.CLOSED, Status.REFUNDED].includes(
+    listing.status,
+  );
 };
 
 export const isListingInProgress = (listing: Listing) => {

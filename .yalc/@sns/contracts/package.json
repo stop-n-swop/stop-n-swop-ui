@@ -13,5 +13,5 @@
     "pow": "yarn && yalc publish --push && cd ../abyss && yarn && yalc publish --push && cd ../ui && rm -rf node_modules && yarn && cd ../api && rm -rf node_modules && yarn && cd ../admin && rm -rf node_modules && yarn",
     "lint:all": "cd ../ui && yarn lint && cd ../api && yarn lint && cd ../admin && yarn lint"
   },
-  "yalcSig": "03cb9a7e8b11eaabf4ac924a2abea79c"
+  "yalcSig": "4ead92a9bb4de35f3f2f6dba966dcbe7"
 }

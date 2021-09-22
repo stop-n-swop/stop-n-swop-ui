@@ -31,6 +31,7 @@ export const iconMatrix = {
   [Status.NOT_RECEIVED]: FaQuestion,
   [Status.NO_RESPONSE]: FaQuestion,
   [Status.COMPLETE]: FaCheckCircle,
+  [Status.REFUNDED]: FaTimes,
 };
 
 export const colorMatrix = {
@@ -48,4 +49,5 @@ export const colorMatrix = {
   [Status.DISPUTED]: 'text-warning-lighter',
   [Status.NOT_RECEIVED]: 'text-warning-lighter',
   [Status.COMPLETE]: 'text-primary',
+  [Status.REFUNDED]: 'text-danger',
 };
